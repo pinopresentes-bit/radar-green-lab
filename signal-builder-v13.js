@@ -1,0 +1,140 @@
+/* Green Lab PRO v13: eight-field assembled study, no automatic bet */
+(()=>{
+"use strict";
+const section=document.createElement("section");section.className="signalhub";section.id="assembledHub";
+section.innerHTML='<div class="signalhead"><div><span class="eyebrow">🧩 GREEN LAB • SINAL MONTADO</span><h2>Qual mercado analisar?</h2></div><span class="signalstatus" id="assembledStatus">Montando</span></div><p>Gols, escanteios, ambas marcam e jogadores em um só lugar. <strong>Sem aposta validada e sem odds verificadas.</strong></p><div id="assembledContent"><div class="empty">Analisando histórico...</div></div>';
+document.getElementById("notice")?.insertAdjacentElement("afterend",section);
+const style=document.createElement("style");
+style.textContent='#assembledContent .am-card{background:#10291b;border:1px solid #467958;border-radius:12px;padding:13px;margin:10px 0}#assembledContent .am-card h3{font-size:15px;color:#e5d39d;line-height:1.5;margin:6px 0}#assembledContent .am-rows{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}#assembledContent .am-row{border-top:1px solid #3d6046;padding:9px 0;display:flex;flex-direction:column;gap:4px}#assembledContent .am-row strong{font-size:11px;color:#f3f8ee}#assembledContent .am-value{font-size:12px;font-weight:850;color:#9afaaf;line-height:1.5}#assembledContent .am-value.off{color:#bbcfbd}#assembledContent .am-row small{font-size:10px;line-height:1.5;color:#b8cfbd}#assembledContent .am-cta{background:#7febae;color:#0b2517;font-size:12px;font-weight:850;border:0;border-radius:8px;padding:11px;margin-top:11px}#assembledContent .am-warning{border:1px solid #746b3d;border-radius:8px;background:#293422;padding:9px;font-size:11px;color:#f7d9a1;line-height:1.5;margin:10px 0}#assembledContent .am-footer{font-size:10px;color:#b5cfba;line-height:1.5;margin-top:9px}@media(max-width:460px){#assembledContent .am-rows{grid-template-columns:1fr}}';
+document.head.append(style);
+const studies=new Map(),rosters=new Map();
+const toRow=(name,value,reason,yes)=>'<div class="am-row"><strong>'+esc(name)+'</strong><span class="am-value'+(yes?'':' off')+'">'+esc(value)+'</span><small>'+esc(reason)+'</small></div>';
+const candidate=()=>{const g=preCandidates();return g.find(x=>pregameStudyCache.get(preKey(x))?.findings?.length)||g[0]||null};
+function hMarket(h,a,rule,min,market){
+ const p=h.filter(rule).length,q=a.filter(rule).length,ready=h.length>=5&&a.length>=5;
+ const ok=ready&&p>=min&&q>=min;
+ return {ok,value:ok?"🟡 "+market:ready?"⚪ Critério não atingido":"⏳ Histórico insuficiente",explain:p+"/"+h.length+" jogos do mandante e "+q+"/"+a.length+" do visitante. Não é probabilidade de acerto."};
+}
+function cornerPick(h,a,type,lines){
+ if(h.length<4||a.length<4)return null;
+ for(const t of [...lines].reverse()){
+  const p=h.filter(x=>x[type]>t).length,q=a.filter(x=>x[type]>t).length;
+  if(p>=Math.ceil(h.length*.75)&&q>=Math.ceil(a.length*.75))return {label:"Mais de "+t.toFixed(1).replace(".",",")+" escanteios",info:p+"/"+h.length+" e "+q+"/"+a.length+" jogos da amostra."};
+ }
+ return null;
+}
+function minutePeriod(p){
+ if(p?.period?.number!=null)return Number(p.period.number);
+ if(typeof p?.period==="number")return p.period;
+ const m=String(p?.clock?.displayValue??p?.clock?.value??p?.time??"").match(/^(\d+)/);
+ return m?(Number(m[1])<=45?1:2):null;
+}
+function firstCorners(s,tot){
+ if(!s||tot===null)return null;
+ for(const list of [s?.plays,s?.keyEvents,s?.details?.plays]){
+  if(!Array.isArray(list))continue;
+  const found=list.filter(p=>/corner(?:-|\s*)kick|(?:^|\s)corner(?:\s|$)/.test([p?.type?.text,p?.type?.slug,p?.description,p?.text].filter(Boolean).join(" ").toLowerCase()));
+  if(found.length!==tot)continue;
+  const halves=found.map(minutePeriod);
+  if(halves.some(x=>x!==1&&x!==2))continue;
+  return halves.filter(x=>x===1).length;
+ }
+ return null;
+}
+function addStat(players,p){
+ const k=normTeam(p.name);if(!k)return;
+ if(!players[k])players[k]={name:p.name,goal:{n:0,total:0,hits:0},assist:{n:0,total:0,hits:0},shot:{n:0,total:0,hits:0}};
+ for(const [type,aliases] of [["goal",["goals","goal"]],["assist",["goalAssists","assists","assist"]],["shot",["shotsOnTarget","shotsOnGoal","shots on target"]]]){
+  const v=statNumber(p.stats,aliases);
+  if(v===null||v<0||v>60||!Number.isFinite(v))continue;
+  const entry=players[k][type];entry.n++;entry.total+=v;if(v>0)entry.hits++;
+ }
+}
+function pickPlayer(d,r,kind){
+ if(!d?.done||!r?.home||!r?.away)return null;
+ if(r.home.starters?.length!==11||r.away.starters?.length!==11)return null;
+ const names=[...r.home.starters,...r.away.starters].map(x=>normTeam(x.name));
+ const eligible=[...new Set(names)].map(k=>d.players[k]).filter(x=>{
+  const m=x?.[kind];return m?.n>=3&&(kind==="shot"?m.hits>=2:m.total>=2);
+ }).sort((a,b)=>b[kind].total-a[kind].total);
+ return eligible[0]||null;
+}
+function render(){
+ const status=document.getElementById("assembledStatus"),out=document.getElementById("assembledContent");
+ if(!state.loaded){status.textContent="Carregando";return}
+ const g=candidate();
+ if(!g){status.textContent="Sem pré-jogo";out.innerHTML='<div class="empty">Nenhuma partida futura entre as competições consultadas. Confira os estudos ao vivo abaixo.</div>';return}
+ const key=preKey(g),d=studies.get(key);
+ if(!d)loadStudy(g);
+ const h=d?.home||[],a=d?.away||[],r=rosters.get(key);
+ const one=hMarket(h,a,x=>x.total>=2,4,"Mais de 1,5 gols");
+ const two=hMarket(h,a,x=>x.total>=3,4,"Mais de 2,5 gols");
+ const both=hMarket(h,a,x=>x.btts,3,"Ambas marcam: SIM");
+ const ct=d?.done?cornerPick(d.hCorners,d.aCorners,"total",[7.5,8.5,9.5,10.5]):null;
+ const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
+ const cornerRow=(label,x,s1,s2)=>{
+  return toRow(label,x?"🟡 "+x.label:d?.done?"⚪ Sem linha verificada":"⏳ Consultando registros",
+   x?x.info:d?.done?"Cobertura histórica: "+s1+" e "+s2+" jogos. Não extrapolar dados faltantes.":"Verificando registros dos últimos jogos.",!!x);
+ };
+ const playerRow=(label,kind)=>{
+  const p=pickPlayer(d,r,kind);
+  return toRow(label,p?"🟡 "+p.name:"⚪ Sem jogador indicado",
+   p?p[kind].total+" eventos em "+p[kind].n+" jogos com dados individuais; apenas um nome em observação.":
+   r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"Nenhum titular tem histórico individual suficiente publicado.":"Aguardando titulares listados na ESPN e histórico individual de 3+ jogos.",!!p);
+ };
+ const has=one.ok||two.ok||both.ok||!!ct||!!cf;
+ status.textContent=d?.done?"8 campos analisados":"Montando 8 campos";
+ out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
+ '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
+ '<div class="am-rows">'+
+ toRow("⚽ Gols: 1,5",one.value,one.explain,one.ok)+
+ toRow("⚽ Gols: 2,5",two.value,two.explain,two.ok)+
+ cornerRow("🚩 Escanteios 1º tempo",cf,d?.hHalves?.length||0,d?.aHalves?.length||0)+
+ cornerRow("🚩 Escanteios totais",ct,d?.hCorners?.length||0,d?.aCorners?.length||0)+
+ toRow("🤝 Ambas marcam",both.value,both.explain,both.ok)+
+ playerRow("🥅 Marcador (somente 1)","goal")+
+ playerRow("🎯 Chute no gol (1 jogador)","shot")+
+ playerRow("🅰 Assistência (1 jogador)","assist")+
+ '</div><div class="am-footer">Cada mercado é avaliado separadamente. Não combinar automaticamente. Confirmar escalações oficiais e odds. A ESPN pode não disponibilizar estatísticas de jogadores nem escanteios por tempo.</div>'+
+ '<button class="am-cta" id="assembledOpen">Ver análise completa e titulares</button></div>';
+ document.getElementById("assembledOpen").onclick=()=>openDetail(key);
+ const prior=rosters.get(key),remain=new Date(g.start).getTime()-Date.now();
+ if(remain<=7200000&&remain>0&&(!prior||(!prior.pending&&Date.now()-prior.checkedAt>300000)))checkRoster(g);
+}
+async function loadStudy(g){
+ const key=preKey(g);if(studies.has(key))return;
+ studies.set(key,{pending:true});
+ try{
+  const [home,away]=await Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]);
+  studies.set(key,{home,away,pending:true});render();
+  const todo=[...home.map(m=>({m,side:"h",team:g.home})),...away.map(m=>({m,side:"a",team:g.away}))];
+  const all=await mapWithLimit(todo,3,async x=>{
+   try{
+    const summary=await getEventSummary(g.code,x.m.id);
+    const corners=summary?getCornerTotals(summary,x.team.id):null;
+    const first=corners?firstCorners(summary,corners.total):null;
+    const lineup=summary?teamLineup(summary,x.team):null;
+    return {...x,corners,first,players:[...(lineup?.starters||[]),...(lineup?.reserves||[])]};
+   }catch{return {...x,corners:null,first:null,players:[]}}
+  });
+  const sample=(side,field)=>all.filter(x=>x.side===side&&x[field]!==null).map(x=>field==="first"?{first:x.first}:x.corners);
+  const players={};for(const x of all)for(const p of x.players)addStat(players,p);
+  studies.set(key,{home,away,done:true,hCorners:sample("h","corners"),aCorners:sample("a","corners"),hHalves:sample("h","first"),aHalves:sample("a","first"),players});
+ }catch{studies.set(key,{home:[],away:[],done:true,hCorners:[],aCorners:[],hHalves:[],aHalves:[],players:{}})}
+ render();
+}
+async function checkRoster(g){
+ const key=preKey(g);rosters.set(key,{pending:true,checkedAt:Date.now()});
+ try{
+  const summary=await api(matchSummaryUrl(g));
+  rosters.set(key,{home:teamLineup(summary,g.home),away:teamLineup(summary,g.away),checkedAt:Date.now()});
+ }catch{rosters.set(key,{home:null,away:null,checkedAt:Date.now()})}
+ render();
+}
+const originalPreCards=renderPreCards;
+renderPreCards=function(){const r=originalPreCards.apply(this,arguments);render();return r};
+const originalMonitor=renderLineupMonitor;
+renderLineupMonitor=function(){const r=originalMonitor.apply(this,arguments);render();return r};
+render();
+setInterval(()=>{if(!document.hidden)render()},60000);
+})();
