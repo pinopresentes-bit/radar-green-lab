@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v10">
+<meta name="green-lab-build" content="2026-11-16-v11">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -61,7 +61,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v10</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v11</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="actionHub">
@@ -70,7 +70,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="decision-stats" id="actionStats">Aguardando dados...</div><div id="actionList"><div class="empty">Analisando os jogos...</div></div>
 <p>Próximos passos: conferir escalações oficiais, cotação real e risco. <strong>O radar não confirma vantagem estatística.</strong></p>
 </section>
-<section class="signalhub" id="liveHub"><div class="signalhead"><div><span class="eyebrow">🤖 RADAR AO VIVO • ESTUDOS</span><h2>Jogos e mercados ao vivo</h2></div><span id="signalStatus" class="signalstatus">Consultando</span></div><p>Placar, minuto e estatísticas quando a fonte publicar. <strong>Observação de mercado não é aposta confirmada.</strong></p><label class="alert-opt"><input type="checkbox" id="liveAlerts"> Avisos de novas observações nesta tela (somente com app aberto)</label><details class="alert-history"><summary id="alertCount">Últimos avisos (0)</summary><div id="alertFeed"><p>Os avisos surgem quando novos critérios de observação são atendidos.</p></div></details><div id="signalList" aria-live="polite"><div class="empty">Verificando partidas...</div></div><div class="signalfoot" id="signalFoot">Atualizações apenas enquanto o aplicativo estiver aberto.</div></section>
+<section class="signalhub" id="liveHub"><div class="signalhead"><div><span class="eyebrow">🤖 RADAR AO VIVO • ESTUDOS</span><h2>Jogos e mercados ao vivo</h2></div><span id="signalStatus" class="signalstatus">Consultando</span></div><div class="controls"><button id="refreshLive" type="button" class="btn primary">↻ Atualizar ao vivo agora</button><span id="liveFreshness" class="muted" role="status">Aguardando primeira consulta</span></div><p>Consulta automática aproximadamente a cada 30 segundos com a página aberta. Placar, minuto e estatísticas quando a fonte publicar. <strong>Observação de mercado não é aposta confirmada.</strong></p><label class="alert-opt"><input type="checkbox" id="liveAlerts"> Avisos de novas observações nesta tela (somente com app aberto)</label><details class="alert-history"><summary id="alertCount">Últimos avisos (0)</summary><div id="alertFeed"><p>Os avisos surgem quando novos critérios de observação são atendidos.</p></div></details><div id="signalList" aria-live="polite"><div class="empty">Verificando partidas...</div></div><div class="signalfoot" id="signalFoot">Atualizações apenas enquanto o aplicativo estiver aberto.</div></section>
 <section class="signalhub" id="lineupHub"><div class="signalhead"><div><span class="eyebrow">👥 MONITOR DE ESCALAÇÕES</span><h2>Titulares dos próximos jogos</h2></div><span id="lineupMonitorCount" class="signalstatus">Consultando</span></div><p>Consulta partidas que começam nas próximas 2 horas, até 4 por rodada. A ESPN pode publicar escalações incompletas. <strong>Dados desta fonte não substituem confirmação oficial.</strong></p><label class="alert-opt"><input type="checkbox" id="lineupAlerts"> Avisar nesta tela quando houver 11 titulares informados para os dois times (app aberto)</label><details class="alert-history"><summary id="lineupAlertCount">Avisos de escalações (0)</summary><div id="lineupAlertFeed"><p>Nenhum aviso ainda.</p></div></details><div id="lineupMonitorList" aria-live="polite"><div class="empty">Verificando próximos jogos...</div></div><div class="signalfoot" id="lineupMonitorFoot">Consultas no máximo a cada 5 minutos por jogo com a página aberta. Toque em uma equipe para ver os nomes listados.</div></section>
 <section class="signalhub" id="studyHub"><div class="signalhead"><div><span class="eyebrow">📊 PRÉ-SINAIS • ESTUDO HISTÓRICO</span><h2>Mercados em observação</h2></div><span id="studyCount" class="signalstatus">Consultando</span></div><p>Estudos de partidas futuras que passaram pelos filtros históricos. <strong>Não são entradas confirmadas: faltam escalações e odds para validar cada mercado.</strong></p><div id="studyList" aria-live="polite"><div class="empty">Analisando próximos jogos...</div></div></section>
 <section class="signalhub" id="preHub"><div class="signalhead"><div><span class="eyebrow">📅 AGENDA AUTOMÁTICA</span><h2>Próximos jogos em observação</h2></div><span class="signalstatus" id="preCount">Verificando</span></div><p>O radar seleciona os próximos confrontos pelo horário para preparar a análise. <strong>Estar nesta lista não significa um sinal validado.</strong></p><div id="preList"><div class="empty">Consultando a agenda...</div></div><div class="pre-controls"><label for="preMarket">Mercado para estudar</label><select id="preMarket" aria-label="Filtrar mercado"><option value="all">Todos os mercados</option><option value="goals">Total de gols</option><option value="btts">Ambas marcam</option><option value="corners">Escanteios por tempo e total</option><option value="half">1º tempo</option><option value="players">Jogadores: gol, assistência, chute no gol</option></select><button class="btn" id="preSort" type="button">Ordem: horário</button></div><div class="signalfoot" id="preFoot">Escalações, chutes no gol e odds ainda precisam ser verificados.</div></section>
@@ -95,7 +95,7 @@ function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-16-v10";
+const APP_BUILD="2026-11-16-v11";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -114,7 +114,7 @@ await Promise.allSettled(LEAGUES.map(async ([code,label])=>{try{const url="https
 state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar jogos";if(date!==state.date){load();return}
 state.games=[...new Map(all.map(g=>[g.code+"-"+g.id,g])).values()].sort((a,b)=>new Date(a.start)-new Date(b.start));state.loaded=true;$("checked").textContent=clock(new Date());
 const msg=state.success===0?"Não foi possível acessar a fonte de placares. Tente mais tarde ou verifique sua internet.":"Consultar fontes: "+state.success+" de "+LEAGUES.length+" competições. "+(state.fails?"Parte das ligas não respondeu.":"Cobertura limitada às ligas consultadas.")+" Dados podem estar atrasados.";
-$("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals();renderPreGame();renderHighlights();monitorUpcomingLineups();lastFetchAt=Date.now();const opened=state.games.find(g=>g.code+"-"+g.id===active);if(opened)updateExtraMatchData(opened)}
+$("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals();renderPreGame();renderHighlights();monitorUpcomingLineups();if(state.success>0)lastFetchAt=Date.now();const opened=state.games.find(g=>g.code+"-"+g.id===active);if(opened)updateExtraMatchData(opened)}
 
 function statNumber(row,names){
  if(!Array.isArray(row))return null;
@@ -166,7 +166,7 @@ async function mapWithLimit(arr,n,fn){
  return result;
 }
 
-let signalSeq=0;
+let signalSeq=0, lastLiveSignalAt=0;
 const observedLiveAlerts=new Set();
 const liveAlertArchive=[];
 let liveAlertEnabled=false;
@@ -194,7 +194,7 @@ function registerLiveAlerts(entries){
  }
  if(added){liveAlertArchive.splice(8);renderLiveAlerts();}
 }
-function renderLiveMatch(g,stats,items){
+function renderLiveMatch(g,stats,items,consultedAt){
  const key=preKey(g),score=esc(g.home.score)+" × "+esc(g.away.score);
  const statLine=stats?[
   stats.shots===null?"Chutes: —":"Chutes: "+stats.shots,
@@ -204,19 +204,27 @@ function renderLiveMatch(g,stats,items){
  const marketHtml=items.length
   ?items.map(item=>'<div class="live-market"><strong>🟡 '+esc(item.name)+'</strong><small>'+esc(item.why)+'</small><small>Risco: '+esc(item.risk)+'</small></div>').join("")
   :'<p class="live-no-data">Nenhum mercado passou pelos filtros deste jogo nesta consulta.</p>';
- return '<div class="signalitem"><div class="live-game-title">🔴 '+esc(g.home.name)+' × '+esc(g.away.name)+'</div><div class="live-game-meta">'+score+' · '+esc(g.detail||"Ao vivo")+' · '+esc(g.label)+'</div><div class="facts">'+esc(statLine)+'</div>'+marketHtml+'<button class="sigbutton" data-sig="'+esc(key)+'">Ver partida</button></div>';
+ return '<div class="signalitem"><div class="live-game-title">🔴 '+esc(g.home.name)+' × '+esc(g.away.name)+'</div><div class="live-game-meta">'+score+' · '+esc(g.detail||"Ao vivo")+' · '+esc(g.label)+' · Consultado às '+esc(clock(consultedAt))+'</div><div class="facts">'+esc(statLine)+'</div>'+marketHtml+'<button class="sigbutton" data-sig="'+esc(key)+'">Ver partida</button></div>';
 }
 async function checkSignals(){
- const seq=++signalSeq,live=state.games.filter(g=>g.status==="live");
+ const seq=++signalSeq,live=state.games.filter(g=>g.status==="live"),consultedAt=new Date();
  const status=$("signalStatus"),list=$("signalList"),foot=$("signalFoot");
+ if(state.success===0){
+  status.textContent="⚠️ Sem atualização";
+  $("liveFreshness").textContent="Fonte indisponível; dados anteriores podem estar atrasados";
+  foot.textContent="Falha na consulta de placares. Sem novos sinais até recuperar a conexão.";
+  return;
+ }
  if(!live.length){
+  lastLiveSignalAt=Date.now();
+  $("liveFreshness").textContent="Consulta às "+clock(new Date())+" · sem partidas ao vivo";
   status.textContent="0 ao vivo";
   list.innerHTML='<div class="empty">Nenhuma partida ao vivo disponível nas competições consultadas neste momento. Consulte os pré-sinais abaixo.</div>';
   foot.textContent="Última consulta às "+clock(new Date())+" · monitoramento apenas com app aberto.";
   return;
  }
  status.textContent=live.length+" em consulta";
- list.innerHTML='<div class="empty">Consultando '+live.length+' partidas ao vivo...</div>';
+ $("liveFreshness").textContent="Atualizando jogos e estatísticas...";
  const all=await mapWithLimit(live,4,async g=>{
   try{
    const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/summary?event="+encodeURIComponent(g.id);
@@ -226,8 +234,10 @@ async function checkSignals(){
  });
  if(seq!==signalSeq)return;
  const observed=all.flatMap(r=>r.items.map(item=>({g:r.g,item})));
+ lastLiveSignalAt=Date.now();
  status.textContent=observed.length?observed.length+" em observação":live.length+" ao vivo";
- list.innerHTML=all.map(({g,stats,items})=>renderLiveMatch(g,stats,items)).join("");
+ $("liveFreshness").textContent="Conferido às "+clock(new Date())+" · atualização aprox. 30 s";
+ list.innerHTML=all.map(({g,stats,items})=>renderLiveMatch(g,stats,items,consultedAt)).join("");
  list.querySelectorAll("[data-sig]").forEach(b=>b.onclick=()=>openDetail(b.dataset.sig));
  registerLiveAlerts(observed);
  const missing=all.filter(x=>!x.stats).length,failed=all.filter(x=>x.failure).length;
@@ -235,6 +245,12 @@ async function checkSignals(){
 }
 renderLiveAlerts();
 
+$("refreshLive").onclick=()=>{if(!state.busy)load()};
+setInterval(()=>{
+ if(document.hidden||!lastLiveSignalAt||state.date!==ymd(new Date()))return;
+ const age=Math.floor((Date.now()-lastLiveSignalAt)/1000),label=$("liveFreshness");
+ if(age>90){label.textContent="⚠️ Último sinal há "+Math.floor(age/60)+" min — dados possivelmente atrasados";$("signalStatus").textContent="⚠️ Atrasado";}
+},15000);
 // Monitor leve de escalações: somente jogos próximos, sem notificações push.
 const lineupCheckCache=new Map();
 const announcedLineups=new Set();
@@ -852,7 +868,7 @@ async function verifyVersion(silent){
   }else if(match[1]!==APP_BUILD){
    node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
    $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
-  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v10.</div>';
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v11.</div>';
  }catch{
   if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
  }finally{
@@ -869,12 +885,12 @@ function refreshWhenReturning(){
   lastVisibleDay=day;setDay(day);return;
  }
  lastVisibleDay=day;
- if(!state.busy&&Date.now()-lastFetchAt>120000&&state.date===day)load();
+ if(!state.busy&&Date.now()-lastFetchAt>40000&&state.date===day)load();
   if(Date.now()-lastBuildCheck>300000)verifyVersion(true);
 }
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshWhenReturning()});
 window.addEventListener("pageshow",()=>{if(!document.hidden&&state.loaded)refreshWhenReturning()});
-setInterval(()=>{if(!document.hidden&&state.date===ymd(new Date()))load()},60000);
+setInterval(()=>{if(!document.hidden&&state.date===ymd(new Date()))load()},30000);
 render();load();verifyVersion(true);
 </script>
 <script src="./corners-v10.js"></script>
