@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v13">
+<meta name="green-lab-build" content="2026-11-16-v14">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -71,7 +71,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v13</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v14</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="quickHub">
@@ -97,7 +97,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v13 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v14 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -111,7 +111,7 @@ function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-16-v13";
+const APP_BUILD="2026-11-16-v14";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -445,7 +445,7 @@ function renderQuickSignals(){
   rows.push('<article class="quick-card"><div class="quick-top">🕒 PRÉ-JOGO · '+esc(dateTime(g.start))+'</div>'+
    '<h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
    '<div class="quick-market">Mercado em estudo: '+esc(item.name)+'</div>'+
-   '<div class="quick-info">Últimos 5 jogos: '+esc(g.home.name)+' '+item.home+'/5 · '+esc(g.away.name)+' '+item.away+'/5.<br>'+esc(lineup)+'</div>'+
+   '<div class="quick-info">Últimos 5 jogos: '+esc(g.home.name)+' '+item.home+'/5 · '+esc(g.away.name)+' '+item.away+'/5.<br>Classificação: '+esc(item.level||"observação preliminar")+' · '+esc(lineup)+'</div>'+
    '<div class="quick-risk">⚠️ Histórico curto, não é probabilidade de acerto. Sem odd verificada e sem vantagem estatística calculada.</div>'+
    '<button class="quick-button" data-quick="'+esc(preKey(g))+'">Ver análise completa</button></article>');
  }
@@ -468,7 +468,7 @@ function pregameStudies(home,away){
   return definitions.map(x=>{
     const h=home.filter(x.rule).length,a=away.filter(x.rule).length;
     return {...x,home:h,away:a};
-  }).filter(x=>x.home>=x.min&&x.away>=x.min).map(({type,name,home,away})=>({type,name,home,away}));
+  }).filter(x=>x.home>=3&&x.away>=3).map(({type,name,home,away,min})=>({type,name,home,away,level:home>=min&&away>=min?"histórico forte":"observação preliminar"}));
 }
 
 const manualOdds=new Map();
@@ -487,7 +487,7 @@ function renderActionHub(){
   const roster=ready(g)?"🟢 11 titulares por time listados na ESPN, ainda não confirmados oficialmente":l?.error?"⚠️ Consulta de titulares falhou":l?.duplicate?"⚠️ Lista inconsistente":l?"🟡 Lista parcial":"⌛ Escalação ainda não consultada pelo monitor";
   const odd=q?"🧮 Odd anotada manualmente: "+q.market+" @ "+Number(q.odd).toFixed(2).replace(".",","):"🧮 Odd da casa não informada";
   const next=!ready(g)?"Conferir titulares em fonte oficial":!q?"Confirmar titulares oficiais e anotar a odd real":"Avaliar probabilidade e riscos; odd anotada não indica vantagem";
-  return '<div class="signalitem"><h3>'+esc(dateTime(g.start))+' · '+esc(g.label)+'</h3><div class="market">'+esc(g.home.name)+' × '+esc(g.away.name)+'</div><div class="facts">📊 '+esc(d.findings.map(f=>f.name+" "+f.home+"/5 e "+f.away+"/5").join(" · "))+'<div>'+esc(roster)+'</div><div>'+esc(odd)+'</div></div><p class="decision-next">Próximo passo: '+esc(next)+'</p><button class="sigbutton" data-action="'+esc(key)+'">Analisar</button> <button class="sigbutton" data-odd="'+esc(key)+'">Anotar odd</button></div>';
+  return '<div class="signalitem"><h3>'+esc(dateTime(g.start))+' · '+esc(g.label)+'</h3><div class="market">'+esc(g.home.name)+' × '+esc(g.away.name)+'</div><div class="facts">📊 '+esc(d.findings.map(f=>f.name+" "+f.home+"/5 e "+f.away+"/5 ("+(f.level||"preliminar")+")").join(" · "))+'<div>'+esc(roster)+'</div><div>'+esc(odd)+'</div></div><p class="decision-next">Próximo passo: '+esc(next)+'</p><button class="sigbutton" data-action="'+esc(key)+'">Analisar</button> <button class="sigbutton" data-odd="'+esc(key)+'">Anotar odd</button></div>';
  }).join("");
  list.querySelectorAll("[data-action]").forEach(b=>b.onclick=()=>openDetail(b.dataset.action));
  list.querySelectorAll("[data-odd]").forEach(b=>b.onclick=()=>openDetail(b.dataset.odd,"oddsPanel"));
