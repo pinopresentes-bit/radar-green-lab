@@ -30,6 +30,9 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 
 - Verificação de versão do aplicativo: indica atualizações de código e oferece botão para carregar a nova versão
 - Atalhos no detalhe da partida para escalações, estatísticas e cotação manual
+- Radar ao vivo por partida, com placar, minuto, chutes, chutes no alvo e escanteios quando disponíveis
+- Hipóteses de observação para gol e escanteios no primeiro tempo, gols no segundo tempo e escanteios totais, sujeitas a dados suficientes
+- Avisos de novas hipóteses no painel, com opt-in, apenas enquanto a página estiver aberta. Não são notificações push e não confirmam apostas
 
 ## Importante
 - A fonte é a interface pública **não oficial** da ESPN. Cobertura, CORS, estabilidade e atualização não são garantidos. Sem resposta, o aplicativo exibirá aviso em vez de inventar resultados.
