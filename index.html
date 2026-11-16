@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v14">
+<meta name="green-lab-build" content="2026-11-16-v15">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -71,9 +71,10 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v14</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v15</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
+<section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Sinal final: o que está confirmado?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Esta é a primeira tela para decidir o que investigar. <strong>Um estudo histórico não é um sinal validado.</strong></p><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
 <section class="signalhub" id="quickHub">
  <div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • LEITURA RÁPIDA</span><h2>Qual mercado o radar encontrou?</h2></div><span id="quickCount" class="signalstatus">Consultando</span></div>
  <p>Aqui aparecem as linhas exatas dos mercados identificados. <strong>São hipóteses de estudo, não apostas confirmadas.</strong> Confira a cotação e o risco antes de decidir.</p>
@@ -97,7 +98,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v14 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v15 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -111,7 +112,7 @@ function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-16-v14";
+const APP_BUILD="2026-11-16-v15";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -403,6 +404,34 @@ renderLineupMonitor();
 
 // Market labels below are derived only from the same published ESPN snapshots used by the other panels.
 // This is a readable shortlist of hypotheses, NOT a probability estimate or a bet recommendation.
+function renderFinalHub(){
+ const box=$("finalList"),status=$("finalStatus"),foot=$("finalFoot");
+ if(!box)return;
+ if(!state.loaded){status.textContent="Aguardando";box.innerHTML='<div class="empty">Carregando os jogos...</div>';return}
+ if(state.success===0){status.textContent="Fonte indisponível";box.innerHTML='<div class="empty">Sem sinais: consulta à fonte falhou.</div>';return}
+ const games=preCandidates();
+ const pending=games.filter(g=>!pregameStudyCache.has(preKey(g)));
+ const ranked=games.flatMap(g=>(pregameStudyCache.get(preKey(g))?.findings||[]).map(f=>({g,f,score:Math.min(f.home,f.away)*10+f.home+f.away})))
+  .sort((a,b)=>b.score-a.score||new Date(a.g.start)-new Date(b.g.start));
+ status.textContent=ranked.length?ranked.length+" tendências":"Sem tendência";
+ if(!ranked.length){
+  box.innerHTML='<div class="empty">'+(pending.length?"Analisando históricos de "+pending.length+" jogos. ":"Nenhum mercado passou no filtro histórico disponível. ")+'Nenhuma entrada validada.</div>';
+ }else{
+  box.innerHTML=ranked.slice(0,3).map(({g,f},idx)=>{
+   const l=lineupCheckCache.get(preKey(g)),roster=l&&!l.error&&!l.duplicate&&l.home===11&&l.away===11;
+   const strength=f.level==="histórico forte"?"Histórico mais consistente":"Observação preliminar";
+   return '<div class="signalitem"><h3>📊 '+(idx+1)+'º ESTUDO · '+esc(dateTime(g.start))+'</h3>'+
+     '<div class="market">'+esc(g.home.name)+' × '+esc(g.away.name)+'</div>'+
+     '<p><strong>Mercado: '+esc(f.name)+'</strong></p>'+
+     '<div class="facts">'+esc(g.home.name)+': '+f.home+'/5 · '+esc(g.away.name)+': '+f.away+'/5 · '+esc(strength)+'.</div>'+
+     '<p>👥 '+(roster?'11 nomes por equipe na ESPN — confirmar em fonte oficial':'Escalações ainda não verificadas integralmente')+'.<br>🧮 Odds: não verificadas. <strong>Status: NÃO VALIDADO.</strong></p>'+
+     '<button class="sigbutton" data-final="'+esc(preKey(g))+'">Abrir análise e fontes</button></div>';
+  }).join("");
+  box.querySelectorAll("[data-final]").forEach(b=>b.onclick=()=>openDetail(b.dataset.final));
+ }
+ const uncovered=games.length-ranked.length;
+ foot.textContent="Mostra até 3 estudos (não é ranking de probabilidade). "+games.length+" partidas futuras; "+pending.length+" aguardando histórico. Mercados de jogador e escanteios só aparecem com dados suficientes. Atualizado: "+clock(new Date())+".";
+}
 function renderQuickSignals(){
  const list=$("quickList"),counter=$("quickCount"),foot=$("quickFoot");
  if(!list)return;
@@ -536,7 +565,7 @@ function renderBestStudies(){
  list.querySelectorAll("[data-study]").forEach(b=>b.onclick=()=>openDetail(b.dataset.study));
 }
 
-function renderPreCards(){renderBestStudies();renderActionHub();renderQuickSignals();
+function renderPreCards(){renderFinalHub();renderBestStudies();renderActionHub();renderQuickSignals();
  if(!state.loaded){$("preList").innerHTML='<div class="empty">Consultando a agenda...</div>';return}
  const upcoming=preCandidates();
  const completed=upcoming.filter(g=>pregameStudyCache.has(preKey(g))).length;
@@ -943,7 +972,7 @@ async function verifyVersion(silent){
   }else if(match[1]!==APP_BUILD){
    node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
    $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
-  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v13.</div>';
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v15.</div>';
  }catch{
   if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
  }finally{
