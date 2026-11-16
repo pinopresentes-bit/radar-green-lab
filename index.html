@@ -28,6 +28,7 @@ main{padding:25px 16px 70px;max-width:960px;margin:auto}h1{font-size:clamp(29px,
 footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--border);margin-top:24px;padding-top:15px}
 .overlay{position:fixed;inset:0;z-index:9;background:#020802dd;display:flex;align-items:flex-end}.overlay.hidden{display:none}.sheet{background:#102019;border:1px solid #436049;border-radius:20px 20px 0 0;max-height:88vh;overflow-y:auto;width:100%;max-width:730px;margin:auto;padding:17px 17px 35px}.sheettop{display:flex;justify-content:space-between;gap:8px;align-items:center}.sheettop h2{font-size:18px;margin:0}.close{background:#26402e;color:white;border:1px solid #47654a;border-radius:8px;padding:7px 11px}
 .panel{border:1px solid var(--border);border-radius:13px;padding:13px;background:#1b3022;margin:12px 0}.panel h3{font-size:13px;color:var(--gold);margin:0 0 9px}.panel p{font-size:12px;line-height:1.55;color:#d9e7d8;margin:6px 0}.insight{background:#112318;border:1px solid #345741;padding:10px;border-radius:9px;margin:8px 0;font-size:12px}.insight small{display:block;color:#b5ceba;font-size:11px;line-height:1.5;margin-top:5px}
+.signalhub{background:#143520;border:1px solid #40835a;border-radius:16px;padding:15px;margin:16px 0}.signalhead{display:flex;justify-content:space-between;align-items:center;gap:8px}.signalhead h2{margin:4px 0;font-size:19px}.eyebrow{font-size:10px;color:#8af7ad;font-weight:900;letter-spacing:1.3px}.signalstatus{font-size:10px;background:#1e4930;color:#b7f8c8;border-radius:22px;padding:7px 9px;white-space:nowrap}.signalhub p{font-size:12px;color:#b9d2c0;line-height:1.6;margin:10px 0}.signalhub strong{color:#e6ffea}.signalitem{background:#12271a;border:1px solid #6c6736;border-radius:12px;padding:12px;margin:9px 0}.signalitem h3{color:#eacb86;margin:0 0 8px;font-size:13px}.signalitem .market{font-size:14px;color:#aff2c4;font-weight:850}.signalitem .facts{font-size:11px;color:#c4dec7;line-height:1.5;margin-top:6px}.signalfoot{font-size:10px;color:#9dbba4;margin-top:12px}.sigbutton{background:#244530;color:#c9f6d0;border:1px solid #508260;border-radius:8px;padding:8px 12px;font-size:11px;margin-top:10px;font-weight:800}
 @media(min-width:720px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}.overlay{align-items:center}.sheet{border-radius:20px}}
 </style>
 </head>
@@ -39,6 +40,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
+<section class="signalhub"><div class="signalhead"><div><span class="eyebrow">🤖 MODO SINAL • BETA</span><h2>Sinais ao vivo</h2></div><span id="signalStatus" class="signalstatus">Consultando</span></div><p>Critérios baseados em estatísticas disponíveis, não em previsão de lucro. <strong>Hipótese de mercado não é entrada confirmada.</strong></p><div id="signalList" aria-live="polite"><div class="empty">Verificando partidas...</div></div><div class="signalfoot" id="signalFoot">Atualizações apenas enquanto o aplicativo estiver aberto.</div></section>
 <div class="heading"><h2>⚽ Jogos do dia</h2><span id="count" class="muted">Carregando</span></div>
 <div class="tabs">
 <button class="tab on" data-tab="all">Todos</button><button class="tab" data-tab="live">🔴 Ao vivo</button><button class="tab" data-tab="upcoming">Próximos</button><button class="tab" data-tab="done">Encerrados</button><button class="tab" data-tab="favorites">★ Favoritos</button>
@@ -75,7 +77,53 @@ await Promise.allSettled(LEAGUES.map(async ([code,label])=>{try{const url="https
 state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar";if(date!==state.date)return;
 state.games=[...new Map(all.map(g=>[g.code+"-"+g.id,g])).values()].sort((a,b)=>new Date(a.start)-new Date(b.start));state.loaded=true;$("checked").textContent=clock(new Date());
 const msg=state.success===0?"Não foi possível acessar a fonte de placares. Tente mais tarde ou verifique sua internet.":"Consultar fontes: "+state.success+" de "+LEAGUES.length+" competições. "+(state.fails?"Parte das ligas não respondeu.":"Cobertura limitada às ligas consultadas.")+" Dados podem estar atrasados.";
-$("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render()}
+$("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals()}
+
+function statNumber(row,names){
+ if(!Array.isArray(row))return null;
+ const accepted=names.map(x=>x.toLowerCase().replace(/[^a-z0-9]/g,""));
+ for(const v of row){const keys=[v.name,v.label,v.abbreviation,v.displayName].filter(Boolean).map(x=>String(x).toLowerCase().replace(/[^a-z0-9]/g,""));if(!keys.some(k=>accepted.includes(k)))continue;
+   const n=Number(String(v.value??v.displayValue??"").replace(",","."));if(Number.isFinite(n))return n;
+ }return null
+}
+function liveStats(obj){
+ const teams=obj?.boxscore?.teams;
+ if(!Array.isArray(teams)||teams.length<2)return null;
+ const sum=names=>{const v=teams.slice(0,2).map(t=>statNumber(t.statistics,names));return v.some(x=>x===null)?null:v[0]+v[1]};
+ return {shots:sum(["totalShots","shots","SHOTS"]),sot:sum(["shotsOnTarget","shotsOnGoal","SHOTSONTARGET"]),corners:sum(["cornerKicks","corners","CORNERS"])}
+}
+function currentMinute(s){const m=String(s||"").match(/(\d{1,3})\s*['’:]/);return m?Number(m[1]):null}
+function findHypotheses(g,st){
+ if(!st)return[];const min=currentMinute(g.detail);if(min===null||min>80)return[];
+ const x=parseResultScore(g.home.score),y=parseResultScore(g.away.score);if(!Number.isFinite(x)||!Number.isFinite(y))return[];
+ const out=[];
+ if(min>=45&&min<=75&&st.shots!==null&&st.sot!==null&&st.shots>=14&&st.sot>=5){
+ out.push({name:"Mais de "+(x+y)+",5 gols",why:st.shots+" chutes e "+st.sot+" no alvo em "+min+" minutos",risk:"Não é garantido que saia outro gol."})}
+ if(min>=35&&min<=78&&st.corners!==null&&st.shots!==null&&st.corners>=6&&st.shots>=12){
+ out.push({name:"Mais de "+st.corners+",5 escanteios",why:st.corners+" escanteios e "+st.shots+" chutes em "+min+" minutos",risk:"A frequência de escanteios pode cair."})}
+ return out
+}
+let signalSeq=0;
+async function checkSignals(){
+ const seq=++signalSeq,live=state.games.filter(g=>g.status==="live").slice(0,6);
+ const status=$("signalStatus"),list=$("signalList"),foot=$("signalFoot");
+ if(!live.length){status.textContent="Sem sinal";list.innerHTML='<div class="empty">Nenhuma partida ao vivo disponível nas competições consultadas. Sem sinal agora.</div>';foot.textContent="Verificado às "+clock(new Date())+" · app aberto";return}
+ status.textContent="Verificando "+live.length;list.innerHTML='<div class="empty">Buscando estatísticas atuais...</div>';
+ const all=await Promise.all(live.map(async g=>{try{const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/summary?event="+encodeURIComponent(g.id);
+  const stats=liveStats(await api(url));return {g,stats,items:findHypotheses(g,stats)}}catch{return {g,stats:null,items:[]}}}));
+ if(seq!==signalSeq)return;
+ const items=all.flatMap(r=>r.items.map(item=>({g:r.g,item})));
+ status.textContent=items.length?items.length+" em observação":"Sem sinal";
+ if(!items.length){
+ const missing=all.filter(x=>!x.stats).length;
+ list.innerHTML='<div class="empty">Nenhuma hipótese passou pelos critérios agora.'+(missing?" Sem estatísticas completas em "+missing+" de "+live.length+" jogos.":"")+' Não vou inventar sinais.</div>';
+ }else{
+ list.innerHTML=items.slice(0,6).map(({g,item})=>'<div class="signalitem"><h3>📡 OBSERVAÇÃO • '+esc(g.home.name)+' x '+esc(g.away.name)+'</h3><div class="market">'+esc(item.name)+'</div><div class="facts">'+esc(item.why)+'</div><p>Risco: '+esc(item.risk)+' Odd e disponibilidade não verificadas.</p><button class="sigbutton" data-sig="'+esc(g.code+"-"+g.id)+'">Ver jogo</button></div>').join("");
+ list.querySelectorAll("[data-sig]").forEach(b=>b.onclick=()=>openDetail(b.dataset.sig))
+ }
+ foot.textContent="Última consulta: "+clock(new Date())+" · até 6 jogos ao vivo · não funciona com app fechado.";
+}
+
 function logo(t){return /^https:\/\//.test(t.logo)?'<img src="'+esc(t.logo)+'" alt="" loading="lazy">':'<span class="initial">'+esc(t.abbr||t.name.slice(0,2))+'</span>'}
 function card(g){const key=g.code+"-"+g.id,isFav=state.favs.has(key);const st=g.status==="live"?"🔴 "+(g.detail||"AO VIVO"):g.status==="done"?"Final":clock(g.start);
 return '<article class="game '+(g.status==="live"?"live":"")+'"><div class="ghead"><b>'+esc(g.label)+'</b><span class="status '+g.status+'">'+esc(st)+'</span></div><div class="match"><div class="team">'+logo(g.home)+'<strong>'+esc(g.home.name)+'</strong></div><div class="score">'+(g.status==="upcoming"?"×":esc(g.home.score)+" : "+esc(g.away.score))+'<small>'+(g.status==="upcoming"?"Pré-jogo":"Placar")+'</small></div><div class="team">'+logo(g.away)+'<strong>'+esc(g.away.name)+'</strong></div></div><div class="gfoot"><button class="fav '+(isFav?"on":"")+'" data-fav="'+esc(key)+'">'+(isFav?"★":"☆")+'</button><small class="muted">'+esc(dateTime(g.start))+'</small><button class="detailbtn" data-detail="'+esc(key)+'">Analisar →</button></div></article>'}
