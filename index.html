@@ -39,6 +39,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 .market-check p{font-size:11px;line-height:1.5;margin:7px 0 0;color:#bed1c1}
 .panel .mini-disclaimer{font-size:10px;color:#a1bca7}
 .today-highlights{margin:16px 0;border:1px solid #355b43;border-radius:15px;padding:14px;background:#12291c}.today-highlights h2{margin:4px 0;font-size:19px}.today-highlights>.muted{font-size:11px}.highlight-games{display:grid;gap:8px;margin-top:12px}.highlight-game{display:flex;align-items:center;justify-content:space-between;gap:9px;border:1px solid #365943;border-radius:10px;background:#0d2115;padding:11px}.highlight-game b{font-size:12px;display:block;line-height:1.5}.highlight-game small{color:#ebce85;font-size:11px}.highlight-game button{color:#122518;background:#88eeb2;border:0;border-radius:8px;padding:9px;font-weight:800;font-size:11px;white-space:nowrap}
+.pre-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 4px}.pre-controls label{font-size:11px;color:#b8d3bf;font-weight:800}.pre-controls select{flex:1;min-width:140px;background:#22422e;color:#f1f8f0;border:1px solid #55715a;border-radius:9px;padding:10px;font-size:12px}.pre-controls button{font-size:11px}.preitem .prestatus{font-size:10px;color:#bce4c4;margin-top:3px}.preitem .name{font-size:12px}.preitem .predata{margin-top:4px;line-height:1.5}.preitem .predata small{display:block;color:#a7c3ad;font-size:10px}.preitem .predata b{color:#f0d08d;font-size:11px}.preitem.studyfound{border-color:#779257}.queue-report{font-size:11px;color:#b7d2bd;margin:10px 0}.preitem .preopen{flex-shrink:0}.pre-sample{font-size:10px;color:#c0d1c2;line-height:1.45}
 @media(min-width:720px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}.overlay{align-items:center}.sheet{border-radius:20px}}
 </style>
 </head>
@@ -51,7 +52,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub"><div class="signalhead"><div><span class="eyebrow">🤖 MODO SINAL • BETA</span><h2>Sinais ao vivo</h2></div><span id="signalStatus" class="signalstatus">Consultando</span></div><p>Critérios baseados em estatísticas disponíveis, não em previsão de lucro. <strong>Hipótese de mercado não é entrada confirmada.</strong></p><div id="signalList" aria-live="polite"><div class="empty">Verificando partidas...</div></div><div class="signalfoot" id="signalFoot">Atualizações apenas enquanto o aplicativo estiver aberto.</div></section>
-<section class="signalhub" id="preHub"><div class="signalhead"><div><span class="eyebrow">📅 AGENDA AUTOMÁTICA</span><h2>Próximos jogos em observação</h2></div><span class="signalstatus" id="preCount">Verificando</span></div><p>O radar seleciona os próximos confrontos pelo horário para preparar a análise. <strong>Estar nesta lista não significa um sinal validado.</strong></p><div id="preList"><div class="empty">Consultando a agenda...</div></div><div class="signalfoot" id="preFoot">Escalações, chutes no gol e odds ainda precisam ser verificados.</div></section>
+<section class="signalhub" id="preHub"><div class="signalhead"><div><span class="eyebrow">📅 AGENDA AUTOMÁTICA</span><h2>Próximos jogos em observação</h2></div><span class="signalstatus" id="preCount">Verificando</span></div><p>O radar seleciona os próximos confrontos pelo horário para preparar a análise. <strong>Estar nesta lista não significa um sinal validado.</strong></p><div id="preList"><div class="empty">Consultando a agenda...</div></div><div class="pre-controls"><label for="preMarket">Mercado para estudar</label><select id="preMarket" aria-label="Filtrar mercado"><option value="all">Todos os mercados</option><option value="goals">Total de gols</option><option value="btts">Ambas marcam</option><option value="corners">Escanteios</option><option value="half">1º tempo</option><option value="players">Jogadores: gol, assistência, chute no gol</option></select><button class="btn" id="preSort" type="button">Ordem: horário</button></div><div class="signalfoot" id="preFoot">Escalações, chutes no gol e odds ainda precisam ser verificados.</div></section>
 <section id="highlights" class="today-highlights" aria-label="Partidas em destaque"><div class="signalhead"><div><span class="eyebrow">🌍 SELEÇÕES INTERNACIONAIS</span><h2>Jogos em destaque</h2></div><span class="signalstatus">Agenda de hoje</span></div><p class="muted">Destaques da programação, não sinais de aposta.</p><div id="highlightGames" class="highlight-games"><div class="empty">Consultando programação...</div></div></section>
 <div class="heading"><h2>⚽ Jogos do dia</h2><span id="count" class="muted">Carregando</span></div>
 <div class="tabs">
@@ -77,7 +78,7 @@ $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
 $("day").onchange=e=>{if(e.target.value)setDay(e.target.value)};
 $("refresh").onclick=()=>load();
-function setDay(x){state.date=x;$("day").value=x;state.games=[];state.loaded=false;render();load()}
+function setDay(x){state.date=x;$("day").value=x;state.games=[];state.loaded=false;pregameBatch="";pregameBatchToken++;render();renderPreCards();load()}
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{state.filter=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(t=>t.classList.toggle("on",t===b));render()});
 $("league").onchange=e=>{state.league=e.target.value;render()};
 function parseGame(e,code,label){const co=e.competitions?.[0]?.competitors||[];const home=co.find(x=>x.homeAway==="home")||co[0],away=co.find(x=>x.homeAway==="away")||co[1];if(!home||!away)return null;
@@ -138,25 +139,21 @@ async function checkSignals(){
 }
 
 
+// Status and evidence are deliberately descriptive. They are not odds or estimated probabilities.
 const pregameStudyCache=new Map();
-let pregameSeq=0;
+let pregameBatch="",pregameBatchToken=0,pregameInProgress=false,preMarket="all",preOrder="time";
 function pregameStudies(home,away){
-  if(home.length!==5||away.length!==5)return [];
-  const candidates=[
-   {name:"Mais de 1,5 gols",rule:r=>r.total>=2,minimum:4},
-   {name:"Ambas marcam",rule:r=>r.btts,minimum:3},
-   {name:"Mais de 2,5 gols",rule:r=>r.total>=3,minimum:4}
+  if(home.length<5||away.length<5)return [];
+  const definitions=[
+    {type:"goals",name:"Mais de 1,5 gols",rule:r=>r.total>=2,min:4},
+    {type:"goals",name:"Mais de 2,5 gols",rule:r=>r.total>=3,min:4},
+    {type:"btts",name:"Ambas marcam",rule:r=>r.btts,min:3}
   ];
-  const findings=[];
-  for(const c of candidates){
-    const h=home.filter(c.rule).length,v=away.filter(c.rule).length;
-    if(h>=c.minimum&&v>=c.minimum){
-      findings.push({name:c.name,home:h,away:v});
-    }
-  }
-  return findings;
+  return definitions.map(x=>{
+    const h=home.filter(x.rule).length,a=away.filter(x.rule).length;
+    return {...x,home:h,away:a};
+  }).filter(x=>x.home>=x.min&&x.away>=x.min).map(({type,name,home,away})=>({type,name,home,away}));
 }
-
 function normTeam(x){return String(x||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
 function renderHighlights(){
  const league=state.games.filter(g=>g.code==="uefa.nations");
@@ -172,47 +169,75 @@ function renderHighlights(){
  list.innerHTML=today.map(g=>'<div class="highlight-game"><div><small>'+esc(clock(g.start))+' • '+esc(g.label)+'</small><b>'+esc(g.home.name)+' × '+esc(g.away.name)+'</b></div><button data-hi="'+esc(g.code+"-"+g.id)+'">Analisar</button></div>').join("");
  list.querySelectorAll("[data-hi]").forEach(b=>b.onclick=()=>openDetail(b.dataset.hi));
 }
-
-function renderPreGame(){
- const upcoming=state.games.filter(g=>g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000).sort((x,y)=>new Date(x.start)-new Date(y.start));
- const top=upcoming.slice(0,5),list=$("preList");
- $("preCount").textContent=upcoming.length+" agendados";
- if(!state.loaded){list.innerHTML='<div class="empty">Carregando a agenda...</div>';return}
- if(!top.length){list.innerHTML='<div class="empty">Sem partidas futuras confirmadas nesta data e nas ligas consultadas. Escolha outra data ou atualize.</div>';return}
- list.innerHTML=top.map(g=>{
-  const key=g.code+"-"+g.id;
-  return '<div class="preitem"><div><div class="stamp">'+esc(dateTime(g.start))+" • "+esc(g.label)+'</div><div class="name">'+esc(g.home.name)+" x "+esc(g.away.name)+'</div><div class="sub" id="pre-study-'+esc(key)+'">📊 Conferindo histórico para estudar mercados...</div></div><button data-pre="'+esc(key)+'">Analisar</button></div>'
- }).join("");
- list.querySelectorAll("[data-pre]").forEach(b=>b.onclick=()=>openDetail(b.dataset.pre));
- $("preFoot").textContent="Estudos baseados em cinco jogos por equipe, quando disponíveis. Não incluem odds ou escalações.";
- updatePreGameStudies(top);
+function preKey(g){return g.code+"-"+g.id}
+function preCandidates(){return state.games.filter(g=>g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000).sort((a,b)=>new Date(a.start)-new Date(b.start))}
+function preDisplay(g,data){
+ if(!data)return'<div class="predata"><small>📊 Aguardando análise do histórico…</small></div>';
+ if(data.error)return'<div class="predata"><small>⚠️ Dados indisponíveis na consulta. Tente atualizar.</small></div>';
+ if(preMarket==="corners")return'<div class="predata"><small>🚩 Escanteios totais, por equipe e comparação: abra Analisar para consultar dados.</small></div>';
+ if(preMarket==="half")return'<div class="predata"><small>⏱️ Gol no 1º tempo: abra Analisar para consultar minutos dos gols. Escanteios por período pendentes.</small></div>';
+ if(preMarket==="players")return'<div class="predata"><small>🥅 Gols, assistências e chutes no gol por jogador: escalações e estatísticas individuais ainda não integradas.</small></div>';
+ if(data.hCount<5||data.aCount<5)return'<div class="predata"><small>⚪ Histórico insuficiente: '+data.hCount+'/5 e '+data.aCount+'/5 jogos. Sem estudo comparativo.</small></div>';
+ const facts=data.findings.filter(f=>preMarket==="all"||f.type===preMarket);
+ if(!facts.length)return'<div class="predata"><small>⚪ Nenhum mercado deste filtro atingiu os critérios históricos.</small></div>';
+ return'<div class="predata">'+facts.map(f=>'<div><b>📊 '+esc(f.name)+'</b><small>'+esc(g.home.name)+': '+f.home+'/5 · '+esc(g.away.name)+': '+f.away+'/5</small></div>').join("")+'<small>Amostra curta; não é entrada validada. Faltam odds e escalações.</small></div>';
 }
-async function updatePreGameStudies(top){
- const seq=++pregameSeq;
- const evaluations=await Promise.all(top.map(async g=>{
-   const key=g.code+"-"+g.id;
-   if(pregameStudyCache.has(key))return{g,data:pregameStudyCache.get(key)};
-   const [h,a]=await Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]);
-   const data={hCount:h.length,aCount:a.length,findings:pregameStudies(h,a)};
-   pregameStudyCache.set(key,data);
-   return{g,data};
- }));
- if(seq!==pregameSeq)return;
- for(const {g,data} of evaluations){
-  const el=$("pre-study-"+g.code+"-"+g.id);
-  if(!el)continue;
-  if(data.hCount<5||data.aCount<5){
-   el.textContent="⚪ Histórico insuficiente ("+data.hCount+"/5 e "+data.aCount+"/5). Sem hipótese pré-jogo.";
-   continue;
-  }
-  if(data.findings.length===0){
-   el.textContent="⚪ Cinco jogos por equipe disponíveis; sem condição histórica atendida.";
-   continue;
-  }
-  const f=data.findings[0];
-  el.innerHTML='<span class="prestudy">📊 ESTUDO: '+esc(f.name)+'</span><span class="studyevidence">'+esc(g.home.name)+": "+f.home+"/5 • "+esc(g.away.name)+": "+f.away+'/5</span><span class="studywarning">Amostra pequena; não é entrada validada. Odds e escalações pendentes.</span>';
+function renderPreCards(){
+ if(!state.loaded){$("preList").innerHTML='<div class="empty">Consultando a agenda...</div>';return}
+ const upcoming=preCandidates();
+ const completed=upcoming.filter(g=>pregameStudyCache.has(preKey(g))).length;
+ const observed=upcoming.filter(g=>pregameStudyCache.get(preKey(g))?.findings?.length).length;
+ $("preCount").textContent=completed+"/"+upcoming.length+" estudados";
+ if(!upcoming.length){
+ $("preList").innerHTML='<div class="empty">Nenhuma partida futura nesta data e nas competições consultadas.</div>';
+ $("preFoot").textContent="Selecione outra data ou atualize para consultar os jogos.";
+ return;
+ }
+ if(preOrder==="study"){
+  upcoming.sort((a,b)=>{
+    const da=pregameStudyCache.get(preKey(a)),db=pregameStudyCache.get(preKey(b));
+    const quality=d=>d?.findings?.length?Math.max(...d.findings.map(f=>Math.min(f.home,f.away))):0;
+    return quality(db)-quality(da)||new Date(a.start)-new Date(b.start);
+  });
+ }
+ $("preList").innerHTML='<div class="queue-report">📋 '+upcoming.length+' confrontos na fila · '+completed+' analisados · '+observed+' com pelo menos um estudo histórico. A classificação não mede chance de vitória.</div>'
+ +upcoming.map(g=>{
+   const key=preKey(g),data=pregameStudyCache.get(key);
+   return '<div class="preitem '+(data?.findings?.length?"studyfound":"")+'"><div><div class="stamp">'+esc(dateTime(g.start))+' • '+esc(g.label)+'</div><div class="name">'+esc(g.home.name)+' × '+esc(g.away.name)+'</div>'+preDisplay(g,data)+'</div><button class="preopen" data-pre="'+esc(key)+'">Analisar</button></div>'
+ }).join("");
+ $("preList").querySelectorAll("[data-pre]").forEach(btn=>btn.onclick=()=>openDetail(btn.dataset.pre));
+ $("preFoot").textContent="Fila completa da data selecionada. Mercado: "+($("preMarket").selectedOptions[0]?.textContent||"Todos")+". Estudos históricos não substituem cotação, escalações e análise de risco. Dados fornecidos pela ESPN (não oficial).";
+}
+function renderPreGame(){
+ renderPreCards();
+ const matches=preCandidates();
+ const signature=state.date+":"+matches.map(preKey).join("|");
+ if(signature!==pregameBatch){
+  pregameBatch=signature;
+  runPregameQueue(matches,++pregameBatchToken);
  }
 }
+async function runPregameQueue(matches,token){
+ if(!matches.length)return;
+ let index=0;
+ const worker=async()=>{
+   while(token===pregameBatchToken&&index<matches.length){
+     const g=matches[index++],key=preKey(g);
+     if(pregameStudyCache.has(key))continue;
+     try{
+       const [h,a]=await Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]);
+       if(token!==pregameBatchToken)return;
+       pregameStudyCache.set(key,{hCount:h.length,aCount:a.length,findings:pregameStudies(h,a)});
+     }catch{if(token!==pregameBatchToken)return;pregameStudyCache.set(key,{error:true,hCount:0,aCount:0,findings:[]})}
+     if(token===pregameBatchToken)renderPreCards();
+   }
+ };
+ // Limit simultaneous historical queries, especially on mobile networks.
+ await Promise.all(Array.from({length:Math.min(3,matches.length)},()=>worker()));
+ if(token===pregameBatchToken)renderPreCards();
+}
+$("preMarket").onchange=e=>{preMarket=e.target.value;renderPreCards()};
+$("preSort").onclick=()=>{preOrder=preOrder==="time"?"study":"time";$("preSort").textContent="Ordem: "+(preOrder==="time"?"horário":"histórico");renderPreCards()};
 
 function logo(t){return /^https:\/\//.test(t.logo)?'<img src="'+esc(t.logo)+'" alt="" loading="lazy">':'<span class="initial">'+esc(t.abbr||t.name.slice(0,2))+'</span>'}
 function card(g){const key=g.code+"-"+g.id,isFav=state.favs.has(key);const st=g.status==="live"?"🔴 "+(g.detail||"AO VIVO"):g.status==="done"?"Final":clock(g.start);
