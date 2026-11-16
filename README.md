@@ -38,6 +38,9 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 - Mostra os estados: sem titulares, parcial, 11 titulares por equipe ou falha da fonte. Escalações da ESPN não substituem confirmação oficial.
 - Avisos de escalações disponíveis opcionalmente **dentro da página**; sem notificações quando o aplicativo está fechado.
 
+- No monitor v8, os nomes dos titulares podem ser expandidos diretamente, com aviso da origem ESPN e detecção de listas repetidas/inconsistentes.
+- Ao ativar avisos, escalações completas já consultadas são mostradas como disponíveis anteriormente, sem parecer novo alerta.
+
 ## Importante
 - A fonte é a interface pública **não oficial** da ESPN. Cobertura, CORS, estabilidade e atualização não são garantidos. Sem resposta, o aplicativo exibirá aviso em vez de inventar resultados.
 - Este é um projeto experimental, não um sistema de monitoramento ininterrupto. **Não envia notificações com o app fechado.**
