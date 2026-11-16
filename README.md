@@ -34,6 +34,10 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 - Hipóteses de observação para gol e escanteios no primeiro tempo, gols no segundo tempo e escanteios totais, sujeitas a dados suficientes
 - Avisos de novas hipóteses no painel, com opt-in, apenas enquanto a página estiver aberta. Não são notificações push e não confirmam apostas
 
+- Monitor de escalações pré-jogo para até 4 partidas iniciando nas próximas 2 horas, com consultas da ESPN no máximo a cada 5 minutos por jogo (com página aberta).
+- Mostra os estados: sem titulares, parcial, 11 titulares por equipe ou falha da fonte. Escalações da ESPN não substituem confirmação oficial.
+- Avisos de escalações disponíveis opcionalmente **dentro da página**; sem notificações quando o aplicativo está fechado.
+
 ## Importante
 - A fonte é a interface pública **não oficial** da ESPN. Cobertura, CORS, estabilidade e atualização não são garantidos. Sem resposta, o aplicativo exibirá aviso em vez de inventar resultados.
 - Este é um projeto experimental, não um sistema de monitoramento ininterrupto. **Não envia notificações com o app fechado.**
