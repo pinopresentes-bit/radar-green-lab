@@ -28,6 +28,9 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 - Os mercados individuais mostram quando faltam titulares, além de identificar histórico individual indisponível
 - Campos estatísticos não publicados são tratados como ausentes, não como zero
 
+- Verificação de versão do aplicativo: indica atualizações de código e oferece botão para carregar a nova versão
+- Atalhos no detalhe da partida para escalações, estatísticas e cotação manual
+
 ## Importante
 - A fonte é a interface pública **não oficial** da ESPN. Cobertura, CORS, estabilidade e atualização não são garantidos. Sem resposta, o aplicativo exibirá aviso em vez de inventar resultados.
 - Este é um projeto experimental, não um sistema de monitoramento ininterrupto. **Não envia notificações com o app fechado.**
