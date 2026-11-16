@@ -9,6 +9,16 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 4. Após a publicação, o endereço será parecido com: `https://pinopresentes-bit.github.io/radar-green-lab/`
 5. Abra o link publicado no Safari do iPhone e toque em **Compartilhar** → **Adicionar à Tela de Início**.
 
+## Versão 10 — Histórico detalhado de escanteios (em revisão)
+- Novo painel de **escanteios do primeiro tempo, segundo tempo e total de 90 minutos** na análise de cada partida.
+- Histórico de **até 10 jogos anteriores por equipe**, com escanteios cobrados, cedidos, total, média, mediana e frequência de linhas de 3,5/4,5 por tempo e 7,5/8,5/9,5 no jogo.
+- Divisão por mando: últimos jogos do mandante em casa e do visitante fora, quando existir amostra suficiente.
+- Cada partida examinada oferece um link para seu registro da ESPN e indica a cobertura real da amostra.
+- A separação por tempo só aparece quando todos os eventos de escanteio e respectivos períodos puderem ser comprovados e somarem exatamente o total final. Caso contrário, aparece **indisponível**: não inferimos 1º tempo dividindo a média por dois.
+- A consulta da v10 segue utilizando somente a **ESPN pública não oficial**. Outros serviços, como FootyStats, Sofascore ou Flashscore, **não são consultados automaticamente**; integração confiável exigirá fonte de dados com acesso permitido, esquema comprovado e, dependendo do serviço, credenciais/contrato.
+- A atualização mantém o código anterior do painel e acrescenta um arquivo modular \`corners-v10.js\`, facilitando testes e rollback.
+- O aplicativo não calcula probabilidade de acerto, não verifica odds e não faz apostas.
+
 ## Versão 9 — Central pré-jogo
 - Nova central na abertura com até seis jogos que passaram pelos filtros históricos.
 - A central mostra o status real da lista de titulares na ESPN, sem confundir com confirmação oficial.

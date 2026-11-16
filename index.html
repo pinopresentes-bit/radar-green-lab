@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v9">
+<meta name="green-lab-build" content="2026-11-16-v10">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -53,7 +53,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 .detailjump{display:flex;gap:7px;flex-wrap:wrap;padding:8px 0 12px}.detailjump .btn{font-size:11px;padding:9px 10px}.panel[id]{scroll-margin-top:10px}
 .alert-opt{display:flex;gap:9px;align-items:flex-start;font-size:12px;color:#d4ead6;line-height:1.45;margin:13px 0}.alert-opt input{margin-top:2px;width:17px;height:17px;accent-color:#72eea8}.alert-history{margin:12px 0;border:1px solid #386047;border-radius:9px;background:#10271a;padding:10px;font-size:11px}.alert-history summary{cursor:pointer;color:#a8efbe;font-weight:800}.alert-history .alert-line{border-top:1px solid #355941;padding:7px 0;color:#d5e9d7;line-height:1.5}.alert-history p{font-size:11px}.live-game-meta{font-size:11px;color:#c6e3ce;margin:5px 0 10px;line-height:1.55}.live-market{padding:8px 0;border-top:1px solid #375a40;font-size:12px;color:#b9f4ca}.live-market strong{font-size:12px;color:#f2d49b}.live-market small{display:block;font-size:11px;color:#b3cab9;line-height:1.4;padding-top:4px}.live-no-data{font-size:11px;color:#adc8b3;line-height:1.45}.live-game-title{font-weight:900;color:#f0d08d}
 .lineup-team-preview{margin:7px 0;background:#10251a;border:1px solid #3b5c45;border-radius:10px;padding:9px 11px}.lineup-team-preview summary{cursor:pointer;font-size:12px;color:#e2eedd;font-weight:700}.lineup-team-preview ol{margin:9px 0 0;padding-left:22px}.lineup-team-preview li{font-size:11px;line-height:1.65;color:#d4e3d3}.lineup-team-preview small{color:#9ebcab;font-size:10px}.lineup-team-preview .missing{font-size:11px;color:#b9cbb7;margin:8px 0 0}
-</style>
+.corner-source{color:#b5d0ba;font-size:10px;line-height:1.6;margin:13px 0}.corner-rows{display:grid;gap:8px;margin:10px 0}.corner-row{padding:9px;border:1px solid #3a5b44;border-radius:9px;background:#10251a;font-size:11px;line-height:1.6}.corner-row strong{color:#f0d08d}.corner-row small{font-size:10px;color:#b2ceba}.corner-row a{color:#8df4b4;text-decoration:underline}</style>
 </head>
 <body>
 <header><div class="top"><div class="brand"><img src="./icon.svg" alt=""><div><small>RADAR DE FUTEBOL</small><strong>GREEN LAB <em>PRO</em></strong></div></div><span class="chip">● PAINEL ESPORTIVO</span></div></header>
@@ -61,7 +61,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v9</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v10</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="actionHub">
@@ -73,7 +73,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <section class="signalhub" id="liveHub"><div class="signalhead"><div><span class="eyebrow">🤖 RADAR AO VIVO • ESTUDOS</span><h2>Jogos e mercados ao vivo</h2></div><span id="signalStatus" class="signalstatus">Consultando</span></div><p>Placar, minuto e estatísticas quando a fonte publicar. <strong>Observação de mercado não é aposta confirmada.</strong></p><label class="alert-opt"><input type="checkbox" id="liveAlerts"> Avisos de novas observações nesta tela (somente com app aberto)</label><details class="alert-history"><summary id="alertCount">Últimos avisos (0)</summary><div id="alertFeed"><p>Os avisos surgem quando novos critérios de observação são atendidos.</p></div></details><div id="signalList" aria-live="polite"><div class="empty">Verificando partidas...</div></div><div class="signalfoot" id="signalFoot">Atualizações apenas enquanto o aplicativo estiver aberto.</div></section>
 <section class="signalhub" id="lineupHub"><div class="signalhead"><div><span class="eyebrow">👥 MONITOR DE ESCALAÇÕES</span><h2>Titulares dos próximos jogos</h2></div><span id="lineupMonitorCount" class="signalstatus">Consultando</span></div><p>Consulta partidas que começam nas próximas 2 horas, até 4 por rodada. A ESPN pode publicar escalações incompletas. <strong>Dados desta fonte não substituem confirmação oficial.</strong></p><label class="alert-opt"><input type="checkbox" id="lineupAlerts"> Avisar nesta tela quando houver 11 titulares informados para os dois times (app aberto)</label><details class="alert-history"><summary id="lineupAlertCount">Avisos de escalações (0)</summary><div id="lineupAlertFeed"><p>Nenhum aviso ainda.</p></div></details><div id="lineupMonitorList" aria-live="polite"><div class="empty">Verificando próximos jogos...</div></div><div class="signalfoot" id="lineupMonitorFoot">Consultas no máximo a cada 5 minutos por jogo com a página aberta. Toque em uma equipe para ver os nomes listados.</div></section>
 <section class="signalhub" id="studyHub"><div class="signalhead"><div><span class="eyebrow">📊 PRÉ-SINAIS • ESTUDO HISTÓRICO</span><h2>Mercados em observação</h2></div><span id="studyCount" class="signalstatus">Consultando</span></div><p>Estudos de partidas futuras que passaram pelos filtros históricos. <strong>Não são entradas confirmadas: faltam escalações e odds para validar cada mercado.</strong></p><div id="studyList" aria-live="polite"><div class="empty">Analisando próximos jogos...</div></div></section>
-<section class="signalhub" id="preHub"><div class="signalhead"><div><span class="eyebrow">📅 AGENDA AUTOMÁTICA</span><h2>Próximos jogos em observação</h2></div><span class="signalstatus" id="preCount">Verificando</span></div><p>O radar seleciona os próximos confrontos pelo horário para preparar a análise. <strong>Estar nesta lista não significa um sinal validado.</strong></p><div id="preList"><div class="empty">Consultando a agenda...</div></div><div class="pre-controls"><label for="preMarket">Mercado para estudar</label><select id="preMarket" aria-label="Filtrar mercado"><option value="all">Todos os mercados</option><option value="goals">Total de gols</option><option value="btts">Ambas marcam</option><option value="corners">Escanteios</option><option value="half">1º tempo</option><option value="players">Jogadores: gol, assistência, chute no gol</option></select><button class="btn" id="preSort" type="button">Ordem: horário</button></div><div class="signalfoot" id="preFoot">Escalações, chutes no gol e odds ainda precisam ser verificados.</div></section>
+<section class="signalhub" id="preHub"><div class="signalhead"><div><span class="eyebrow">📅 AGENDA AUTOMÁTICA</span><h2>Próximos jogos em observação</h2></div><span class="signalstatus" id="preCount">Verificando</span></div><p>O radar seleciona os próximos confrontos pelo horário para preparar a análise. <strong>Estar nesta lista não significa um sinal validado.</strong></p><div id="preList"><div class="empty">Consultando a agenda...</div></div><div class="pre-controls"><label for="preMarket">Mercado para estudar</label><select id="preMarket" aria-label="Filtrar mercado"><option value="all">Todos os mercados</option><option value="goals">Total de gols</option><option value="btts">Ambas marcam</option><option value="corners">Escanteios por tempo e total</option><option value="half">1º tempo</option><option value="players">Jogadores: gol, assistência, chute no gol</option></select><button class="btn" id="preSort" type="button">Ordem: horário</button></div><div class="signalfoot" id="preFoot">Escalações, chutes no gol e odds ainda precisam ser verificados.</div></section>
 <section id="highlights" class="today-highlights" aria-label="Partidas em destaque"><div class="signalhead"><div><span class="eyebrow">🌍 SELEÇÕES INTERNACIONAIS</span><h2>Jogos em destaque</h2></div><span class="signalstatus">Agenda de hoje</span></div><p class="muted">Destaques da programação, não sinais de aposta.</p><div id="highlightGames" class="highlight-games"><div class="empty">Consultando programação...</div></div></section>
 <div class="heading"><h2>⚽ Jogos do dia</h2><span id="count" class="muted">Carregando</span></div>
 <div class="tabs">
@@ -81,7 +81,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v9 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v10 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -95,7 +95,7 @@ function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-16-v9";
+const APP_BUILD="2026-11-16-v10";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -417,7 +417,7 @@ function preCandidates(){return state.games.filter(g=>g.status==="upcoming"&&new
 function preDisplay(g,data){
  if(!data)return'<div class="predata"><small>📊 Aguardando análise do histórico…</small></div>';
  if(data.error)return'<div class="predata"><small>⚠️ Dados indisponíveis na consulta. Tente atualizar.</small></div>';
- if(preMarket==="corners")return'<div class="predata"><small>🚩 Escanteios totais, por equipe e comparação: abra Analisar para consultar dados.</small></div>';
+ if(preMarket==="corners")return'<div class="predata"><small>🚩 Abra Analisar para conferir até 10 jogos, cantos por tempo (quando disponíveis), médias, medianas e casa/fora.</small></div>';
  if(preMarket==="half")return'<div class="predata"><small>⏱️ Gol no 1º tempo: abra Analisar para consultar minutos dos gols. Escanteios por período pendentes.</small></div>';
  if(preMarket==="players")return'<div class="predata"><small>🥅 Jogadores: abra Analisar para consultar titulares e estatísticas que a ESPN disponibilizar. Histórico recente individual e odds permanecem pendentes.</small></div>';
  if(data.hCount<5||data.aCount<5)return'<div class="predata"><small>⚪ Histórico insuficiente: '+data.hCount+'/5 e '+data.aCount+'/5 jogos. Sem estudo comparativo.</small></div>';
@@ -834,7 +834,7 @@ if(g.status==="upcoming"){
 }
 if(a.length>=3&&b.length>=3){str+='<div class="panel"><h3>Frequências históricas — não são previsões</h3>';for(const [name,fn] of [["2+ gols na partida",x=>x.total>=2],["3+ gols na partida",x=>x.total>=3],["Ambos marcam",x=>x.btts]]){str+='<div class="insight"><b>'+esc(name)+'</b><small>'+esc(g.home.name)+": "+a.filter(fn).length+"/"+a.length+" • "+esc(g.away.name)+": "+b.filter(fn).length+"/"+b.length+" na amostra recente. Não é cotação nem probabilidade de vitória.</small></div>"}str+='</div>'}else str+='<div class="notice">Histórico insuficiente na fonte. Não podemos calcular uma tendência confiável.</div>';
 if(g.status==="upcoming"){str+=extraMarketPanel(g);str+=cornerMarketPanel()}
-str+='<div class="notice">Escalações e estatísticas podem ser consultadas quando a ESPN as publica, mas não são verificadas como oficiais. Odds só podem ser inseridas manualmente. Nenhuma aposta é feita.</div>';str+=extraDataPanels(g);str='<div class="detailjump"><button class="btn" data-jump="lineupPanel" type="button">👥 Escalações</button><button class="btn" data-jump="statsPanel" type="button">📊 Estatísticas</button><button class="btn" data-jump="oddsPanel" type="button">🧮 Odds</button></div>'+str;$("gameBody").innerHTML=str;$("gameBody").querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>$(b.dataset.jump)?.scrollIntoView({behavior:"smooth",block:"start"}));bindOddCalculator();const q=manualOdds.get(key);if(q){$("oddInput").value=String(q.odd).replace(".",",");if([...$("oddMarket").options].some(o=>o.value===q.market))$("oddMarket").value=q.market;}if(focusPanel)setTimeout(()=>$(focusPanel)?.scrollIntoView({behavior:"smooth",block:"start"}),60);$("retryMatchData").onclick=()=>{const latest=state.games.find(x=>preKey(x)===active);if(latest)updateExtraMatchData(latest)};updateExtraMatchData(g);if(g.status==="upcoming"){updateFirstHalfPanel(g,a,b);updateCornerPanel(g,a,b)}}
+str+='<div class="notice">Escalações e estatísticas podem ser consultadas quando a ESPN as publica, mas não são verificadas como oficiais. Odds só podem ser inseridas manualmente. Nenhuma aposta é feita.</div>';str+=extraDataPanels(g);str='<div class="detailjump"><button class="btn" data-jump="lineupPanel" type="button">👥 Escalações</button><button class="btn" data-jump="statsPanel" type="button">📊 Estatísticas</button><button class="btn" data-jump="cornersPanel" type="button">🚩 Escanteios</button><button class="btn" data-jump="oddsPanel" type="button">🧮 Odds</button></div>'+str;$("gameBody").innerHTML=str;$("gameBody").querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>$(b.dataset.jump)?.scrollIntoView({behavior:"smooth",block:"start"}));bindOddCalculator();const q=manualOdds.get(key);if(q){$("oddInput").value=String(q.odd).replace(".",",");if([...$("oddMarket").options].some(o=>o.value===q.market))$("oddMarket").value=q.market;}if(focusPanel)setTimeout(()=>$(focusPanel)?.scrollIntoView({behavior:"smooth",block:"start"}),60);$("retryMatchData").onclick=()=>{const latest=state.games.find(x=>preKey(x)===active);if(latest)updateExtraMatchData(latest)};updateExtraMatchData(g);if(g.status==="upcoming"){updateFirstHalfPanel(g,a,b);updateCornerPanel(g,a,b)}}
 $("close").onclick=()=>{active="";$("overlay").classList.add("hidden")};$("overlay").onclick=e=>{if(e.target===$("overlay"))$("close").click()};
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js").catch(()=>{});
 
@@ -852,7 +852,7 @@ async function verifyVersion(silent){
   }else if(match[1]!==APP_BUILD){
    node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
    $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
-  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v9.</div>';
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v10.</div>';
  }catch{
   if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
  }finally{
@@ -877,5 +877,6 @@ window.addEventListener("pageshow",()=>{if(!document.hidden&&state.loaded)refres
 setInterval(()=>{if(!document.hidden&&state.date===ymd(new Date()))load()},60000);
 render();load();verifyVersion(true);
 </script>
+<script src="./corners-v10.js"></script>
 </body>
 </html>
