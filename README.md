@@ -9,6 +9,13 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 4. Após a publicação, o endereço será parecido com: `https://pinopresentes-bit.github.io/radar-green-lab/`
 5. Abra o link publicado no Safari do iPhone e toque em **Compartilhar** → **Adicionar à Tela de Início**.
 
+## Versão 13 — Estudo montado com oito mercados
+- Uma nova seção no início do site mostra **um jogo de cada vez**, selecionando a próxima partida com observação histórica quando há dados.
+- Exibe separadamente **mais de 1,5 gols, mais de 2,5 gols, escanteios do primeiro tempo, escanteios totais, ambas marcam, um possível marcador, chute no gol e assistência**.
+- Gols e ambas marcam usam frequências de cinco partidas por equipe; escanteios totais usam dados efetivamente publicados e limiares por histórico. Escanteios de primeiro tempo são exibidos apenas quando um log completo confirma os cantos por período.
+- Mercados individuais exibem **no máximo um titular** por categoria, apenas quando a ESPN traz listas completas de 11 titulares por time e ao menos três jogos com estatísticas individuais suficientes. Sem dados, mostra explicitamente **sem jogador indicado**.
+- As linhas são **hipóteses independentes, não um bilhete validado ou múltipla automaticamente montada**. O site continua sem cotações automáticas ou notificações push com a página fechada.
+
 ## Versão 12 — Painel de mercados identificados
 - Nova seção no topo **Qual mercado o radar encontrou?** para reunir até quatro hipóteses de estudo pré-jogo ou ao vivo, sem exigir abrir várias partidas.
 - Cada cartão exibe **partida, horário/minuto, mercado e linha exatos, placar, estatísticas (quando disponíveis), justificativa, riscos e pendências**.
