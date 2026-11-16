@@ -377,16 +377,17 @@ async function firstHalfGoalMatches(game,matches){
  }));
  return {found:per.filter(v=>v!==null).length,yes:per.filter(v=>v!==null&&v>0).length,total:sample.length};
 }
-function marketRow(emoji,title,desc,kind){
- return '<div class="market-check"><div class="market-top"><b>'+emoji+" "+esc(title)+'</b><span class="market-state">'+esc(kind)+'</span></div><p>'+esc(desc)+'</p></div>';
+function marketRow(emoji,title,desc,kind,id){
+ const mark=id?' id="'+id+'-status"':'',details=id?' id="'+id+'-detail"':'';
+ return '<div class="market-check"><div class="market-top"><b>'+emoji+' '+esc(title)+'</b><span class="market-state"'+mark+'>'+esc(kind)+'</span></div><p'+details+'>'+esc(desc)+'</p></div>';
 }
 function extraMarketPanel(game){
  let str='<div class="panel"><h3>⚽ Radar de mercados • pré-jogo</h3><p>Cada mercado tem seu próprio requisito de dados. Status pendente não significa sinal de entrada.</p>';
- str+=marketRow("🥅","Jogador para marcar","Precisa da escalação confirmada e histórico recente de gols e minutos do jogador. Não vamos escolher um nome sem essas informações.","Dados pendentes");
- str+=marketRow("🎯","Assistência de jogador","Precisa dos titulares e números individuais de assistências e criação de chances.","Dados pendentes");
+ str+=marketRow("🥅","Jogador para marcar","Precisa da escalação confirmada e histórico recente de gols e minutos do jogador. Não vamos escolher um nome sem essas informações.","Dados pendentes","player-goal");
+ str+=marketRow("🎯","Assistência de jogador","Precisa dos titulares e números individuais de assistências e criação de chances.","Dados pendentes","player-assist");
  str+='<p class="mini-disclaimer">O radar de escanteios (total, por equipe, 1º tempo e mais opções) aparece em um painel próprio, logo abaixo.</p>';
  str+='<div class="market-check"><div class="market-top"><b>⚽ Gol no 1º tempo</b><span class="market-state" id="half-status">Verificando</span></div><p id="half-study">Consultando o minuto dos gols nos jogos anteriores, quando disponível...</p></div>';
- str+=marketRow("🥅","Chute no gol de jogador","Precisa da confirmação do jogador e de estatísticas individuais de finalizações no alvo.","Dados pendentes");
+ str+=marketRow("🥅","Chute no gol de jogador","Precisa da confirmação do jogador e de estatísticas individuais de finalizações no alvo.","Dados pendentes","player-shot");
  str+='<p class="mini-disclaimer">Sinais individuais e de primeiro tempo só serão classificados como observação quando houver dados do mercado específico. Nenhuma odd foi consultada.</p></div>';
  return str;
 }
@@ -508,31 +509,66 @@ function liveStatTable(summary,game){
 }
 function extraDataPanels(game){
  const matchType=game.status==="live"?"Partida ao vivo":"Pré-jogo / registro da partida";
- return '<div class="panel"><h3>👥 Escalações e estatísticas individuais</h3><p>Fonte: ESPN (não oficial). Publicação não garante escalação oficial. Confira os titulares antes do jogo.</p><div id="lineupStatus" class="studywarning">Consultando escalações…</div><div id="lineupTeams"></div></div>'+
+ return '<div class="panel"><h3>👥 Escalações e estatísticas individuais</h3><p>Fonte: ESPN (não oficial). Publicação não garante escalação oficial. Confira os titulares antes do jogo.</p><p id="lineupNext" class="studywarning">Verificando o horário da partida...</p><button id="retryMatchData" class="btn" type="button">⟳ Conferir dados agora</button><div id="lineupStatus" class="studywarning">Consultando escalações…</div><div id="lineupTeams"></div></div>'+
  '<div class="panel"><h3>📈 Estatísticas por equipe</h3><p>'+esc(matchType)+' · fonte ESPN, sujeita a atraso.</p><div id="liveTeamStats" class="studywarning">Consultando dados da partida…</div><div id="liveDataTime" class="studywarning"></div></div>'+
  '<div class="panel"><h3>🧮 Conferir odd do mercado</h3><p>Digite a cotação decimal que aparece na sua casa de apostas. Este campo <b>não busca odds automaticamente</b>.</p>'+
  '<label class="oddslabel" for="oddMarket">Mercado</label><select id="oddMarket"><option>Mais de 1,5 gols</option><option>Mais de 2,5 gols</option><option>Ambos marcam</option><option>Gol no 1º tempo</option><option>Mais de 8,5 escanteios</option><option>Mais de 9,5 escanteios</option><option>Outro mercado</option></select>'+
  '<label class="oddslabel" for="oddInput">Odd decimal</label><div class="oddsrow"><input id="oddInput" type="text" inputmode="decimal" autocomplete="off" placeholder="Ex.: 2,10"><button class="btn primary" id="oddCalculate" type="button">Calcular</button></div>'+
  '<p id="oddResult" role="status">A odd precisa ser maior que 1,00.</p><p class="mini-disclaimer">O resultado informa somente a taxa de acerto necessária para equilíbrio teórico, antes de custos. Não prevê a chance real nem recomenda apostar.</p></div>';
 }
+function matchCheckMessage(game){
+ if(game.status==="live")return "🔴 Ao vivo: nova consulta a cada 60 segundos enquanto o app estiver aberto.";
+ if(game.status==="done")return "🏁 Encerrado. Os registros podem ser completados pela fonte mais tarde.";
+ const left=new Date(game.start).getTime()-Date.now();
+ if(!Number.isFinite(left))return "Horário indisponível; consulte novamente para conferir as escalações.";
+ if(left<=0)return "⏳ Aguardando atualização do início do jogo na fonte.";
+ const minutes=Math.ceil(left/60000);
+ const fmt=minutes>=60?Math.floor(minutes/60)+"h "+String(minutes%60).padStart(2,"0")+"min":minutes+"min";
+ return "⏳ Faltam aproximadamente "+fmt+" para o jogo. A escalação pode aparecer perto do início. Nova consulta em até 60 segundos com o app aberto.";
+}
+function updatePlayerMarketAvailability(home,away){
+ const total=(home?.starters?.length||0)+(away?.starters?.length||0);
+ const complete=home?.starters?.length===11&&away?.starters?.length===11;
+ const needs=[["player-goal","gols e minutos jogados"],["player-assist","assistências e chances criadas"],["player-shot","chutes no alvo"]];
+ for(const [id,metric] of needs){
+  const status=$(id+"-status"),detail=$(id+"-detail");
+  if(!status||!detail)continue;
+  status.textContent=complete?"Sem histórico individual":total>0?"Escalação parcial":"Escalação pendente";
+  detail.textContent=complete
+   ?"Há 11 titulares por equipe listados na ESPN. Ainda faltam histórico recente de "+metric+" e odds para avaliar este mercado."
+   :total>0?"Jogadores identificados na ESPN: "+total+"/22. Ainda faltam dados de "+metric+"; não há indicação individual validada."
+   :"A fonte ainda não informou os titulares. Sem histórico recente de "+metric+", o radar não escolhe um jogador.";
+ }
+}
+let matchDataSequence=0;
 async function updateExtraMatchData(game){
- const key=preKey(game);
+ const key=preKey(game),sequence=++matchDataSequence;
  if(active!==key||!$("lineupTeams"))return;
+ const button=$("retryMatchData");
+ if(button){button.disabled=true;button.textContent="Consultando...";}
+ if($("lineupNext"))$("lineupNext").textContent=matchCheckMessage(game);
  try{
   const response=await api(matchSummaryUrl(game));
-  if(active!==key||!$("lineupTeams"))return;
+  if(active!==key||sequence!==matchDataSequence||!$("lineupTeams"))return;
   const home=teamLineup(response,game.home),away=teamLineup(response,game.away);
   $("lineupTeams").innerHTML=rosterMarkup(game.home,home)+rosterMarkup(game.away,away);
   const both=home?.starters.length===11&&away?.starters.length===11;
-  $("lineupStatus").textContent=both?"Ambas as equipes têm 11 titulares informados pela ESPN.":"Lista ainda parcial ou indisponível: não considerar escalação confirmada.";
+  $("lineupStatus").textContent=both?"11 titulares de cada lado listados pela ESPN. Confirme em fonte oficial.":"Lista parcial ou indisponível. Não considerar escalação confirmada.";
   $("liveTeamStats").innerHTML=liveStatTable(response,game);
-  $("liveDataTime").textContent="Consulta realizada às "+clock(new Date())+" · dados da ESPN podem atrasar.";
+  $("liveDataTime").textContent="Consulta realizada às "+clock(new Date())+" · a ESPN pode atrasar os dados.";
+  updatePlayerMarketAvailability(home,away);
  }catch{
-  if(active!==key||!$("lineupTeams"))return;
-  $("lineupStatus").textContent="Não foi possível consultar as escalações. Tente atualizar.";
+  if(active!==key||sequence!==matchDataSequence||!$("lineupTeams"))return;
+  $("lineupStatus").textContent="Falha ao consultar a fonte. Não sabemos se houve publicação dos titulares. Tente novamente.";
   $("lineupTeams").innerHTML="";
-  $("liveTeamStats").textContent="Estatísticas indisponíveis na consulta.";
-  $("liveDataTime").textContent="";
+  $("liveTeamStats").textContent="Falha ao consultar estatísticas. Tente novamente.";
+  $("liveDataTime").textContent="Última tentativa às "+clock(new Date())+".";
+  updatePlayerMarketAvailability(null,null);
+ }finally{
+  if(active===key&&sequence===matchDataSequence&&$("retryMatchData")){
+   $("retryMatchData").disabled=false;
+   $("retryMatchData").textContent="⟳ Conferir dados agora";
+  }
  }
 }
 function bindOddCalculator(){
@@ -566,7 +602,7 @@ if(g.status==="upcoming"){
 }
 if(a.length>=3&&b.length>=3){str+='<div class="panel"><h3>Frequências históricas — não são previsões</h3>';for(const [name,fn] of [["2+ gols na partida",x=>x.total>=2],["3+ gols na partida",x=>x.total>=3],["Ambos marcam",x=>x.btts]]){str+='<div class="insight"><b>'+esc(name)+'</b><small>'+esc(g.home.name)+": "+a.filter(fn).length+"/"+a.length+" • "+esc(g.away.name)+": "+b.filter(fn).length+"/"+b.length+" na amostra recente. Não é cotação nem probabilidade de vitória.</small></div>"}str+='</div>'}else str+='<div class="notice">Histórico insuficiente na fonte. Não podemos calcular uma tendência confiável.</div>';
 if(g.status==="upcoming"){str+=extraMarketPanel(g);str+=cornerMarketPanel()}
-str+='<div class="notice">Escalações e estatísticas podem ser consultadas quando a ESPN as publica, mas não são verificadas como oficiais. Odds só podem ser inseridas manualmente. Nenhuma aposta é feita.</div>';str+=extraDataPanels(g);$("gameBody").innerHTML=str;bindOddCalculator();updateExtraMatchData(g);if(g.status==="upcoming"){updateFirstHalfPanel(g,a,b);updateCornerPanel(g,a,b)}}
+str+='<div class="notice">Escalações e estatísticas podem ser consultadas quando a ESPN as publica, mas não são verificadas como oficiais. Odds só podem ser inseridas manualmente. Nenhuma aposta é feita.</div>';str+=extraDataPanels(g);$("gameBody").innerHTML=str;bindOddCalculator();$("retryMatchData").onclick=()=>{const latest=state.games.find(x=>preKey(x)===active);if(latest)updateExtraMatchData(latest)};updateExtraMatchData(g);if(g.status==="upcoming"){updateFirstHalfPanel(g,a,b);updateCornerPanel(g,a,b)}}
 $("close").onclick=()=>{active="";$("overlay").classList.add("hidden")};$("overlay").onclick=e=>{if(e.target===$("overlay"))$("close").click()};
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js").catch(()=>{});
 
