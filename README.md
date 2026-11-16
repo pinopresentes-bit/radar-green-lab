@@ -9,6 +9,13 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 4. Após a publicação, o endereço será parecido com: `https://pinopresentes-bit.github.io/radar-green-lab/`
 5. Abra o link publicado no Safari do iPhone e toque em **Compartilhar** → **Adicionar à Tela de Início**.
 
+## Versão 12 — Painel de mercados identificados
+- Nova seção no topo **Qual mercado o radar encontrou?** para reunir até quatro hipóteses de estudo pré-jogo ou ao vivo, sem exigir abrir várias partidas.
+- Cada cartão exibe **partida, horário/minuto, mercado e linha exatos, placar, estatísticas (quando disponíveis), justificativa, riscos e pendências**.
+- Leituras ao vivo são exibidas só enquanto a consulta registrada tiver até 90 segundos; com dados velhos, não há hipótese ao vivo na seção rápida.
+- Estudos pré-jogo continuam marcados como observação histórica: escalações listadas na ESPN não equivalem a confirmação oficial, e o app ainda não verifica odds ou calcula vantagem.
+- O painel apenas apresenta mercados em estudo: **não indica apostas garantidas, não executa apostas nem envia notificações quando fechado**.
+
 ## Versão 11 — Sincronização do radar ao vivo (com app aberto)
 - Placar e estatísticas ao vivo consultados automaticamente aproximadamente a cada **30 segundos** em primeiro plano, sujeitos a atraso da ESPN e conectividade.
 - Novo botão **Atualizar ao vivo agora** para solicitar uma consulta imediata.
