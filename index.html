@@ -38,6 +38,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 .market-state{font-size:10px;font-weight:800;white-space:nowrap;border-radius:10px;color:#c4ddcb;background:#244331;padding:5px 7px}
 .market-check p{font-size:11px;line-height:1.5;margin:7px 0 0;color:#bed1c1}
 .panel .mini-disclaimer{font-size:10px;color:#a1bca7}
+.today-highlights{margin:16px 0;border:1px solid #355b43;border-radius:15px;padding:14px;background:#12291c}.today-highlights h2{margin:4px 0;font-size:19px}.today-highlights>.muted{font-size:11px}.highlight-games{display:grid;gap:8px;margin-top:12px}.highlight-game{display:flex;align-items:center;justify-content:space-between;gap:9px;border:1px solid #365943;border-radius:10px;background:#0d2115;padding:11px}.highlight-game b{font-size:12px;display:block;line-height:1.5}.highlight-game small{color:#ebce85;font-size:11px}.highlight-game button{color:#122518;background:#88eeb2;border:0;border-radius:8px;padding:9px;font-weight:800;font-size:11px;white-space:nowrap}
 @media(min-width:720px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}.overlay{align-items:center}.sheet{border-radius:20px}}
 </style>
 </head>
@@ -51,6 +52,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub"><div class="signalhead"><div><span class="eyebrow">🤖 MODO SINAL • BETA</span><h2>Sinais ao vivo</h2></div><span id="signalStatus" class="signalstatus">Consultando</span></div><p>Critérios baseados em estatísticas disponíveis, não em previsão de lucro. <strong>Hipótese de mercado não é entrada confirmada.</strong></p><div id="signalList" aria-live="polite"><div class="empty">Verificando partidas...</div></div><div class="signalfoot" id="signalFoot">Atualizações apenas enquanto o aplicativo estiver aberto.</div></section>
 <section class="signalhub" id="preHub"><div class="signalhead"><div><span class="eyebrow">📅 AGENDA AUTOMÁTICA</span><h2>Próximos jogos em observação</h2></div><span class="signalstatus" id="preCount">Verificando</span></div><p>O radar seleciona os próximos confrontos pelo horário para preparar a análise. <strong>Estar nesta lista não significa um sinal validado.</strong></p><div id="preList"><div class="empty">Consultando a agenda...</div></div><div class="signalfoot" id="preFoot">Escalações, chutes no gol e odds ainda precisam ser verificados.</div></section>
+<section id="highlights" class="today-highlights" aria-label="Partidas em destaque"><div class="signalhead"><div><span class="eyebrow">🌍 SELEÇÕES INTERNACIONAIS</span><h2>Jogos em destaque</h2></div><span class="signalstatus">Agenda de hoje</span></div><p class="muted">Destaques da programação, não sinais de aposta.</p><div id="highlightGames" class="highlight-games"><div class="empty">Consultando programação...</div></div></section>
 <div class="heading"><h2>⚽ Jogos do dia</h2><span id="count" class="muted">Carregando</span></div>
 <div class="tabs">
 <button class="tab on" data-tab="all">Todos</button><button class="tab" data-tab="live">🔴 Ao vivo</button><button class="tab" data-tab="upcoming">Próximos</button><button class="tab" data-tab="done">Encerrados</button><button class="tab" data-tab="favorites">★ Favoritos</button>
@@ -70,6 +72,7 @@ function clock(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,hour:"2-di
 function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}).format(new Date(x))}
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
+let lastFetchAt=0, lastVisibleDay=state.date;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
 $("day").onchange=e=>{if(e.target.value)setDay(e.target.value)};
@@ -87,7 +90,7 @@ await Promise.allSettled(LEAGUES.map(async ([code,label])=>{try{const url="https
 state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar";if(date!==state.date)return;
 state.games=[...new Map(all.map(g=>[g.code+"-"+g.id,g])).values()].sort((a,b)=>new Date(a.start)-new Date(b.start));state.loaded=true;$("checked").textContent=clock(new Date());
 const msg=state.success===0?"Não foi possível acessar a fonte de placares. Tente mais tarde ou verifique sua internet.":"Consultar fontes: "+state.success+" de "+LEAGUES.length+" competições. "+(state.fails?"Parte das ligas não respondeu.":"Cobertura limitada às ligas consultadas.")+" Dados podem estar atrasados.";
-$("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals();renderPreGame()}
+$("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals();renderPreGame();renderHighlights();lastFetchAt=Date.now()}
 
 function statNumber(row,names){
  if(!Array.isArray(row))return null;
@@ -153,6 +156,23 @@ function pregameStudies(home,away){
   }
   return findings;
 }
+
+function normTeam(x){return String(x||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
+function renderHighlights(){
+ const league=state.games.filter(g=>g.code==="uefa.nations");
+ const favored=["germany|netherlands","greece|serbia","switzerland|scotland"];
+ const today=league.filter(g=>favored.some(pair=>{
+  const n=[normTeam(g.home.name),normTeam(g.away.name)];
+  return pair.split("|").every(t=>n.some(y=>y.includes(t)));
+ })).sort((a,b)=>new Date(a.start)-new Date(b.start));
+ const section=$("highlights"),list=$("highlightGames");
+ if(!state.loaded){list.innerHTML='<div class="empty">Buscando os destaques do dia...</div>';return}
+ if(!today.length){section.hidden=true;return}
+ section.hidden=false;
+ list.innerHTML=today.map(g=>'<div class="highlight-game"><div><small>'+esc(clock(g.start))+' • '+esc(g.label)+'</small><b>'+esc(g.home.name)+' × '+esc(g.away.name)+'</b></div><button data-hi="'+esc(g.code+"-"+g.id)+'">Analisar</button></div>').join("");
+ list.querySelectorAll("[data-hi]").forEach(b=>b.onclick=()=>openDetail(b.dataset.hi));
+}
+
 function renderPreGame(){
  const upcoming=state.games.filter(g=>g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000).sort((x,y)=>new Date(x.start)-new Date(y.start));
  const top=upcoming.slice(0,5),list=$("preList");
@@ -411,6 +431,19 @@ if(g.status==="upcoming"){str+=extraMarketPanel(g);str+=cornerMarketPanel()}
 str+='<div class="notice">Escalações, chutes no gol, assistências e odds NÃO são confirmados por este aplicativo. Os dados da ESPN são fornecidos sem garantia de atualização. Nenhuma aposta é feita.</div>';$("gameBody").innerHTML=str;if(g.status==="upcoming"){updateFirstHalfPanel(g,a,b);updateCornerPanel(g,a,b)}}
 $("close").onclick=()=>{active="";$("overlay").classList.add("hidden")};$("overlay").onclick=e=>{if(e.target===$("overlay"))$("close").click()};
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js").catch(()=>{});
+
+function refreshWhenReturning(){
+ const day=ymd(new Date());
+ if(state.date===lastVisibleDay&&day!==lastVisibleDay){
+  // When a new day begins, the home screen should not keep showing yesterday's matches.
+  if(state.busy){location.reload();return}
+  lastVisibleDay=day;setDay(day);return;
+ }
+ lastVisibleDay=day;
+ if(!state.busy&&Date.now()-lastFetchAt>120000&&state.date===day)load();
+}
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshWhenReturning()});
+window.addEventListener("pageshow",()=>{if(!document.hidden&&state.loaded)refreshWhenReturning()});
 setInterval(()=>{if(!document.hidden&&state.date===ymd(new Date()))load()},60000);
 render();load();
 </script>
