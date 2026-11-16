@@ -3,7 +3,7 @@
 "use strict";
 const section=document.createElement("section");section.className="signalhub";section.id="assembledHub";
 section.innerHTML='<div class="signalhead"><div><span class="eyebrow">🧩 GREEN LAB • SINAL MONTADO</span><h2>Qual mercado analisar?</h2></div><span class="signalstatus" id="assembledStatus">Montando</span></div><p>Gols, escanteios, ambas marcam e jogadores em um só lugar. <strong>Sem aposta validada e sem odds verificadas.</strong></p><div id="assembledContent"><div class="empty">Analisando histórico...</div></div>';
-document.getElementById("notice")?.insertAdjacentElement("afterend",section);
+(document.getElementById("finalHub")||document.getElementById("notice"))?.insertAdjacentElement("afterend",section);
 const style=document.createElement("style");
 style.textContent='#assembledContent .am-card{background:#10291b;border:1px solid #467958;border-radius:12px;padding:13px;margin:10px 0}#assembledContent .am-card h3{font-size:15px;color:#e5d39d;line-height:1.5;margin:6px 0}#assembledContent .am-rows{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}#assembledContent .am-row{border-top:1px solid #3d6046;padding:9px 0;display:flex;flex-direction:column;gap:4px}#assembledContent .am-row strong{font-size:11px;color:#f3f8ee}#assembledContent .am-value{font-size:12px;font-weight:850;color:#9afaaf;line-height:1.5}#assembledContent .am-value.off{color:#bbcfbd}#assembledContent .am-row small{font-size:10px;line-height:1.5;color:#b8cfbd}#assembledContent .am-cta{background:#7febae;color:#0b2517;font-size:12px;font-weight:850;border:0;border-radius:8px;padding:11px;margin-top:11px}#assembledContent .am-warning{border:1px solid #746b3d;border-radius:8px;background:#293422;padding:9px;font-size:11px;color:#f7d9a1;line-height:1.5;margin:10px 0}#assembledContent .am-footer{font-size:10px;color:#b5cfba;line-height:1.5;margin-top:9px}@media(max-width:460px){#assembledContent .am-rows{grid-template-columns:1fr}}';
 document.head.append(style);
@@ -73,8 +73,8 @@ function render(){
  const ct=d?.done?cornerPick(d.hCorners,d.aCorners,"total",[7.5,8.5,9.5,10.5]):null;
  const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
  const cornerRow=(label,x,s1,s2)=>{
-  return toRow(label,x?"🟡 "+x.label:d?.done?"⚪ Sem linha verificada":"⏳ Consultando registros",
-   x?x.info:d?.done?"Cobertura histórica: "+s1+" e "+s2+" jogos. Não extrapolar dados faltantes.":"Verificando registros dos últimos jogos.",!!x);
+  return toRow(label,x?"🟡 "+x.label:d?.done?"⚪ Sem tendência com critério suficiente":"⏳ Consultando registros",
+   x?x.info:d?.done?"Amostra com dados: "+s1+" e "+s2+" jogos. Dados existentes não garantem linha qualificada (exige 75% em cada equipe e pelo menos 4 jogos).":"Verificando registros dos últimos jogos.",!!x);
  };
  const playerRow=(label,kind)=>{
   const p=pickPlayer(d,r,kind);
@@ -83,7 +83,7 @@ function render(){
    r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"Nenhum titular tem histórico individual suficiente publicado.":"Aguardando titulares listados na ESPN e histórico individual de 3+ jogos.",!!p);
  };
  const has=one.ok||two.ok||both.ok||!!ct||!!cf;
- status.textContent=d?.done?"8 campos analisados":"Montando 8 campos";
+ status.textContent=d?.done?"8 campos verificados":"Verificando 8 campos";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
  '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
  '<div class="am-rows">'+
