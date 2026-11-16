@@ -117,14 +117,23 @@ function findHypotheses(g,st){
  out.push({name:"Mais de "+st.corners+",5 escanteios",why:st.corners+" escanteios e "+st.shots+" chutes em "+min+" minutos",risk:"A frequência de escanteios pode cair."})}
  return out
 }
+
+async function mapWithLimit(arr,n,fn){
+ const result=new Array(arr.length);let current=0;
+ await Promise.all(Array.from({length:Math.min(n,arr.length)},async()=>{
+  while(current<arr.length){const i=current++;result[i]=await fn(arr[i],i)}
+ }));
+ return result;
+}
+
 let signalSeq=0;
 async function checkSignals(){
- const seq=++signalSeq,live=state.games.filter(g=>g.status==="live").slice(0,6);
+ const seq=++signalSeq,live=state.games.filter(g=>g.status==="live");
  const status=$("signalStatus"),list=$("signalList"),foot=$("signalFoot");
  if(!live.length){status.textContent="Sem sinal";list.innerHTML='<div class="empty">Nenhuma partida ao vivo disponível nas competições consultadas. Sem sinal agora.</div>';foot.textContent="Verificado às "+clock(new Date())+" · app aberto";return}
  status.textContent="Verificando "+live.length;list.innerHTML='<div class="empty">Buscando estatísticas atuais...</div>';
- const all=await Promise.all(live.map(async g=>{try{const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/summary?event="+encodeURIComponent(g.id);
-  const stats=liveStats(await api(url));return {g,stats,items:findHypotheses(g,stats)}}catch{return {g,stats:null,items:[]}}}));
+ const all=await mapWithLimit(live,4,async g=>{try{const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/summary?event="+encodeURIComponent(g.id);
+  const stats=liveStats(await api(url));return {g,stats,items:findHypotheses(g,stats)}}catch{return {g,stats:null,items:[]}}});
  if(seq!==signalSeq)return;
  const items=all.flatMap(r=>r.items.map(item=>({g:r.g,item})));
  status.textContent=items.length?items.length+" em observação":"Sem sinal";
@@ -135,7 +144,7 @@ async function checkSignals(){
  list.innerHTML=items.slice(0,6).map(({g,item})=>'<div class="signalitem"><h3>📡 OBSERVAÇÃO • '+esc(g.home.name)+' x '+esc(g.away.name)+'</h3><div class="market">'+esc(item.name)+'</div><div class="facts">'+esc(item.why)+'</div><p>Risco: '+esc(item.risk)+' Odd e disponibilidade não verificadas.</p><button class="sigbutton" data-sig="'+esc(g.code+"-"+g.id)+'">Ver jogo</button></div>').join("");
  list.querySelectorAll("[data-sig]").forEach(b=>b.onclick=()=>openDetail(b.dataset.sig))
  }
- foot.textContent="Última consulta: "+clock(new Date())+" · até 6 jogos ao vivo · não funciona com app fechado.";
+ foot.textContent="Última consulta: "+clock(new Date())+" · todas as partidas ao vivo encontradas · não funciona com app fechado.";
 }
 
 
