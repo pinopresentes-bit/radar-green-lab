@@ -7,6 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
+<meta name="green-lab-build" content="2026-11-16-v5">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -48,14 +49,16 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 .playerrow{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #34513b;align-items:flex-start;font-size:11px}
 .playerrow small{font-size:10px;color:#b5d1b8;text-align:right;max-width:52%}.playerlist{padding-top:8px}.market-check summary{cursor:pointer;font-size:12px;color:#eacc90;padding:4px 0}
 .stat-grid{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px}.stat-grid th,.stat-grid td{padding:9px 5px;border-bottom:1px solid #34513b;text-align:center}.stat-grid th{color:#d9e8da}.stat-grid td:nth-child(2){color:#e5c888}
+.detailjump{display:flex;gap:7px;flex-wrap:wrap;padding:8px 0 12px}.detailjump .btn{font-size:11px;padding:9px 10px}.panel[id]{scroll-margin-top:10px}
 </style>
 </head>
 <body>
 <header><div class="top"><div class="brand"><img src="./icon.svg" alt=""><div><small>RADAR DE FUTEBOL</small><strong>GREEN LAB <em>PRO</em></strong></div></div><span class="chip">● PAINEL ESPORTIVO</span></div></header>
 <main>
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
-<div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar</button></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div></div>
+<div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
+<div id="versionNotice" role="status" aria-live="polite"></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v5</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub"><div class="signalhead"><div><span class="eyebrow">🤖 MODO SINAL • BETA</span><h2>Sinais ao vivo</h2></div><span id="signalStatus" class="signalstatus">Consultando</span></div><p>Critérios baseados em estatísticas disponíveis, não em previsão de lucro. <strong>Hipótese de mercado não é entrada confirmada.</strong></p><div id="signalList" aria-live="polite"><div class="empty">Verificando partidas...</div></div><div class="signalfoot" id="signalFoot">Atualizações apenas enquanto o aplicativo estiver aberto.</div></section>
@@ -68,7 +71,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não oferece odds, apostas ou notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v5 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não oferece odds, apostas ou notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -82,6 +85,8 @@ function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
+const APP_BUILD="2026-11-16-v5";
+let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
 $("day").onchange=e=>{if(e.target.value)setDay(e.target.value)};
@@ -96,7 +101,7 @@ return {id:String(e.id),code,label,home:t(home),away:t(away),start:e.date||e.com
 async function api(url){const c=new AbortController(),timer=setTimeout(()=>c.abort(),10500);try{const r=await fetch(url,{cache:"no-store",signal:c.signal});if(!r.ok)throw Error("HTTP "+r.status);return await r.json()}finally{clearTimeout(timer)}}
 async function load(){if(state.busy)return;state.busy=true;$("refresh").disabled=true;$("refresh").textContent="Buscando...";$("notice").innerHTML='<div class="notice">🔎 Consultando competições e placares.</div>';const date=state.date;let all=[];state.success=0;state.fails=0;
 await Promise.allSettled(LEAGUES.map(async ([code,label])=>{try{const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/scoreboard?dates="+date.replace(/-/g,"")+"&limit=200";const json=await api(url);state.success++;(json.events||[]).forEach(e=>{const g=parseGame(e,code,label);if(g&&ymd(new Date(g.start))===date)all.push(g)})}catch{state.fails++}}));
-state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar";if(date!==state.date){load();return}
+state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar jogos";if(date!==state.date){load();return}
 state.games=[...new Map(all.map(g=>[g.code+"-"+g.id,g])).values()].sort((a,b)=>new Date(a.start)-new Date(b.start));state.loaded=true;$("checked").textContent=clock(new Date());
 const msg=state.success===0?"Não foi possível acessar a fonte de placares. Tente mais tarde ou verifique sua internet.":"Consultar fontes: "+state.success+" de "+LEAGUES.length+" competições. "+(state.fails?"Parte das ligas não respondeu.":"Cobertura limitada às ligas consultadas.")+" Dados podem estar atrasados.";
 $("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals();renderPreGame();renderHighlights();lastFetchAt=Date.now();const opened=state.games.find(g=>g.code+"-"+g.id===active);if(opened)updateExtraMatchData(opened)}
@@ -509,9 +514,9 @@ function liveStatTable(summary,game){
 }
 function extraDataPanels(game){
  const matchType=game.status==="live"?"Partida ao vivo":"Pré-jogo / registro da partida";
- return '<div class="panel"><h3>👥 Escalações e estatísticas individuais</h3><p>Fonte: ESPN (não oficial). Publicação não garante escalação oficial. Confira os titulares antes do jogo.</p><p id="lineupNext" class="studywarning">Verificando o horário da partida...</p><button id="retryMatchData" class="btn" type="button">⟳ Conferir dados agora</button><div id="lineupStatus" class="studywarning">Consultando escalações…</div><div id="lineupTeams"></div></div>'+
- '<div class="panel"><h3>📈 Estatísticas por equipe</h3><p>'+esc(matchType)+' · fonte ESPN, sujeita a atraso.</p><div id="liveTeamStats" class="studywarning">Consultando dados da partida…</div><div id="liveDataTime" class="studywarning"></div></div>'+
- '<div class="panel"><h3>🧮 Conferir odd do mercado</h3><p>Digite a cotação decimal que aparece na sua casa de apostas. Este campo <b>não busca odds automaticamente</b>.</p>'+
+ return '<div class="panel" id="lineupPanel"><h3>👥 Escalações e estatísticas individuais</h3><p>Fonte: ESPN (não oficial). Publicação não garante escalação oficial. Confira os titulares antes do jogo.</p><p id="lineupNext" class="studywarning">Verificando o horário da partida...</p><button id="retryMatchData" class="btn" type="button">⟳ Conferir dados agora</button><div id="lineupStatus" class="studywarning">Consultando escalações…</div><div id="lineupTeams"></div></div>'+
+ '<div class="panel" id="statsPanel"><h3>📈 Estatísticas por equipe</h3><p>'+esc(matchType)+' · fonte ESPN, sujeita a atraso.</p><div id="liveTeamStats" class="studywarning">Consultando dados da partida…</div><div id="liveDataTime" class="studywarning"></div></div>'+
+ '<div class="panel" id="oddsPanel"><h3>🧮 Conferir odd do mercado</h3><p>Digite a cotação decimal que aparece na sua casa de apostas. Este campo <b>não busca odds automaticamente</b>.</p>'+
  '<label class="oddslabel" for="oddMarket">Mercado</label><select id="oddMarket"><option>Mais de 1,5 gols</option><option>Mais de 2,5 gols</option><option>Ambos marcam</option><option>Gol no 1º tempo</option><option>Mais de 8,5 escanteios</option><option>Mais de 9,5 escanteios</option><option>Outro mercado</option></select>'+
  '<label class="oddslabel" for="oddInput">Odd decimal</label><div class="oddsrow"><input id="oddInput" type="text" inputmode="decimal" autocomplete="off" placeholder="Ex.: 2,10"><button class="btn primary" id="oddCalculate" type="button">Calcular</button></div>'+
  '<p id="oddResult" role="status">A odd precisa ser maior que 1,00.</p><p class="mini-disclaimer">O resultado informa somente a taxa de acerto necessária para equilíbrio teórico, antes de custos. Não prevê a chance real nem recomenda apostar.</p></div>';
@@ -602,9 +607,32 @@ if(g.status==="upcoming"){
 }
 if(a.length>=3&&b.length>=3){str+='<div class="panel"><h3>Frequências históricas — não são previsões</h3>';for(const [name,fn] of [["2+ gols na partida",x=>x.total>=2],["3+ gols na partida",x=>x.total>=3],["Ambos marcam",x=>x.btts]]){str+='<div class="insight"><b>'+esc(name)+'</b><small>'+esc(g.home.name)+": "+a.filter(fn).length+"/"+a.length+" • "+esc(g.away.name)+": "+b.filter(fn).length+"/"+b.length+" na amostra recente. Não é cotação nem probabilidade de vitória.</small></div>"}str+='</div>'}else str+='<div class="notice">Histórico insuficiente na fonte. Não podemos calcular uma tendência confiável.</div>';
 if(g.status==="upcoming"){str+=extraMarketPanel(g);str+=cornerMarketPanel()}
-str+='<div class="notice">Escalações e estatísticas podem ser consultadas quando a ESPN as publica, mas não são verificadas como oficiais. Odds só podem ser inseridas manualmente. Nenhuma aposta é feita.</div>';str+=extraDataPanels(g);$("gameBody").innerHTML=str;bindOddCalculator();$("retryMatchData").onclick=()=>{const latest=state.games.find(x=>preKey(x)===active);if(latest)updateExtraMatchData(latest)};updateExtraMatchData(g);if(g.status==="upcoming"){updateFirstHalfPanel(g,a,b);updateCornerPanel(g,a,b)}}
+str+='<div class="notice">Escalações e estatísticas podem ser consultadas quando a ESPN as publica, mas não são verificadas como oficiais. Odds só podem ser inseridas manualmente. Nenhuma aposta é feita.</div>';str+=extraDataPanels(g);str='<div class="detailjump"><button class="btn" data-jump="lineupPanel" type="button">👥 Escalações</button><button class="btn" data-jump="statsPanel" type="button">📊 Estatísticas</button><button class="btn" data-jump="oddsPanel" type="button">🧮 Odds</button></div>'+str;$("gameBody").innerHTML=str;$("gameBody").querySelectorAll("[data-jump]").forEach(b=>b.onclick=()=>$(b.dataset.jump)?.scrollIntoView({behavior:"smooth",block:"start"}));bindOddCalculator();$("retryMatchData").onclick=()=>{const latest=state.games.find(x=>preKey(x)===active);if(latest)updateExtraMatchData(latest)};updateExtraMatchData(g);if(g.status==="upcoming"){updateFirstHalfPanel(g,a,b);updateCornerPanel(g,a,b)}}
 $("close").onclick=()=>{active="";$("overlay").classList.add("hidden")};$("overlay").onclick=e=>{if(e.target===$("overlay"))$("close").click()};
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js").catch(()=>{});
+
+async function verifyVersion(silent){
+ const btn=$("checkVersion");if(btn&&!silent){btn.disabled=true;btn.textContent="Verificando...";}
+ lastBuildCheck=Date.now();
+ try{
+  const req=await fetch("./index.html?build-check="+Date.now(),{cache:"no-store"});
+  if(!req.ok)throw new Error("HTTP "+req.status);
+  const page=await req.text();
+  const match=page.match(/<meta name="green-lab-build" content="([^"]+)"/);
+  const node=$("versionNotice");
+  if(!match){
+   if(!silent)node.innerHTML='<div class="notice">Ainda não foi possível confirmar qual versão está publicada. Consulte novamente.</div>';
+  }else if(match[1]!==APP_BUILD){
+   node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
+   $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v5.</div>';
+ }catch{
+  if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
+ }finally{
+  if(btn&&!silent){btn.disabled=false;btn.textContent="↻ Versão do app";}
+ }
+}
+$("checkVersion").onclick=()=>verifyVersion(false);
 
 function refreshWhenReturning(){
  const day=ymd(new Date());
@@ -615,11 +643,12 @@ function refreshWhenReturning(){
  }
  lastVisibleDay=day;
  if(!state.busy&&Date.now()-lastFetchAt>120000&&state.date===day)load();
+  if(Date.now()-lastBuildCheck>300000)verifyVersion(true);
 }
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshWhenReturning()});
 window.addEventListener("pageshow",()=>{if(!document.hidden&&state.loaded)refreshWhenReturning()});
 setInterval(()=>{if(!document.hidden&&state.date===ymd(new Date()))load()},60000);
-render();load();
+render();load();verifyVersion(true);
 </script>
 </body>
 </html>
