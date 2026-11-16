@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v16">
+<meta name="green-lab-build" content="2026-11-16-v17">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -16,7 +16,7 @@
 *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse 90% 28% at 70% -6%,#326e444d,transparent),var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}
 button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
 header{position:sticky;top:0;z-index:4;background:#08130ef1;backdrop-filter:blur(13px);border-bottom:1px solid #294431}.top{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:13px 16px;gap:9px}.brand{display:flex;align-items:center;gap:10px}.brand img{width:44px;height:44px;border-radius:12px}.brand small{display:block;color:var(--mint);letter-spacing:1.8px;font-size:10px;font-weight:800}.brand strong{font-size:19px;white-space:nowrap}.brand em{color:var(--gold);font-style:normal}.chip{border:1px solid #3e6e4b;color:var(--mint);background:#183522;padding:7px 10px;border-radius:40px;font-size:10px;font-weight:800;white-space:nowrap}
-main{padding:25px 16px 70px;max-width:960px;margin:auto}h1{font-size:clamp(29px,7vw,45px);line-height:1.12;letter-spacing:-1px;margin:0 0 9px}h1 span{color:var(--mint)}.intro p{font-size:13px;line-height:1.6;color:var(--muted);margin:0 0 20px;max-width:650px}
+html{scroll-behavior:smooth}#finalHub{scroll-margin-top:100px}.go-signals{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;background:#72eea8;color:#092616;text-decoration:none;border:1px solid #72eea8;border-radius:10px;padding:11px 13px;font-size:12px;font-weight:900;white-space:nowrap;min-height:44px}.go-signals:focus-visible{outline:2px solid #f0d08d;outline-offset:3px}@media(max-width:390px){.brand img{width:36px;height:36px}.brand strong{font-size:16px}.brand small{font-size:9px}.go-signals{font-size:11px;padding:10px 8px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}main{padding:25px 16px 70px;max-width:960px;margin:auto}h1{font-size:clamp(29px,7vw,45px);line-height:1.12;letter-spacing:-1px;margin:0 0 9px}h1 span{color:var(--mint)}.intro p{font-size:13px;line-height:1.6;color:var(--muted);margin:0 0 20px;max-width:650px}
 .controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:14px}.controls label{color:var(--muted);font-size:11px;font-weight:900}.controls input{flex:1;min-width:130px;background:#203827;color:var(--txt);border:1px solid #3c5743;border-radius:9px;padding:10px;color-scheme:dark}.btn{color:var(--txt);background:#245038;border:1px solid #437453;border-radius:9px;font-weight:800;font-size:12px;padding:10px 12px}.btn.primary{color:#0a2416;background:var(--mint);border-color:var(--mint)}.btn:disabled{opacity:.5}
 .tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}.tag{color:#b7d0bc;border:1px solid var(--border);background:#16281c;border-radius:9px;padding:7px 9px;font-size:11px}.tag strong{color:white}
 .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:17px 0}.metric{background:linear-gradient(140deg,#1a3223,#101f16);border:1px solid var(--border);border-radius:13px;padding:12px}.metric b{display:block;font-size:27px;letter-spacing:-.8px}.metric:nth-child(2) b{color:var(--mint)}.metric small{font-size:10px;color:var(--muted)}
@@ -66,12 +66,12 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </style>
 </head>
 <body>
-<header><div class="top"><div class="brand"><img src="./icon.svg" alt=""><div><small>RADAR DE FUTEBOL</small><strong>GREEN LAB <em>PRO</em></strong></div></div><span class="chip">● PAINEL ESPORTIVO</span></div></header>
+<header><div class="top"><div class="brand"><img src="./icon.svg" alt=""><div><small>RADAR DE FUTEBOL</small><strong>GREEN LAB <em>PRO</em></strong></div></div><a class="go-signals" href="#finalHub" aria-label="Ir para o painel de sinais">🎯 VER SINAIS</a></div></header>
 <main>
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v16</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v17</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Sinal final: o que está confirmado?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Esta é a primeira tela para decidir o que investigar. <strong>Um estudo histórico não é um sinal validado.</strong></p><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
@@ -98,7 +98,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v16 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v17 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -112,7 +112,7 @@ function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-16-v16";
+const APP_BUILD="2026-11-16-v17";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -972,7 +972,7 @@ async function verifyVersion(silent){
   }else if(match[1]!==APP_BUILD){
    node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
    $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
-  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v16.</div>';
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v17.</div>';
  }catch{
   if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
  }finally{
