@@ -39,7 +39,7 @@
   const sides=raw?.competitions?.[0]?.competitors||[];
   const me=sides.find(s=>String(s.team?.id)===String(team.id));
   const other=sides.find(s=>String(s.team?.id)!==String(team.id));
-  return {venue:me?.homeAway==="home"?"casa":me?.homeAway==="away"?"fora":"não informado",opponent:other?.team?.shortDisplayName||other?.team?.displayName||"Adversário"};
+  return {venue:me?.homeAway==="home"?"casa":me?.homeAway==="away"?"fora":"não informado",opponentName:other?.team?.shortDisplayName||other?.team?.displayName||"Adversário"};
  }
  async function tenMatches(game,team){
   const key=game.code+":"+game.id+":"+team.id;
@@ -47,7 +47,7 @@
    let original=[];
    try{original=(await api(seasonUrl(game,team))).events||[]}catch{}
    // Placar de liga como segunda consulta da mesma ESPN, não segunda fonte independente.
-   if(original.length<MAX_GAMES){
+   if(matchHistory(original,game,team).length<MAX_GAMES){
     try{original=[...original,...await leagueSchedule(game)]}catch{}
    }
    const events=new Map(original.filter(x=>x?.id).map(x=>[String(x.id),x]));
@@ -84,7 +84,7 @@
  function historyRows(game,team,result){
   let markup='<div class="corner-row"><strong>'+esc(team.name)+'</strong> · '+result.available.length+'/'+result.checked+' partidas com escanteios publicados (até 10)</div>';
   if(!result.available.length)return markup+'<div class="corner-row">Esta competição não disponibilizou registros completos para a amostra.</div>';
-  markup+=result.available.map(x=>'<div class="corner-row"><strong>'+esc(dateTime(x.date))+' · '+esc(x.venue)+' contra '+esc(x.opponent)+'</strong><div>Cobrados: '+x.own+' · Cedidos: '+x.opponent+' · Total: '+x.total+' · 1ºT: '+(x.first===null?"—":x.first)+' · 2ºT: '+(x.second===null?"—":x.second)+'</div><small>— significa divisão não comprovada</small> · <a target="_blank" rel="noopener noreferrer" href="'+esc(summaryUrl(game,x.id))+'">Fonte ESPN</a></div>').join("");
+  markup+=result.available.map(x=>'<div class="corner-row"><strong>'+esc(dateTime(x.date))+' · '+esc(x.venue)+' contra '+esc(x.opponentName)+'</strong><div>Cobrados: '+x.own+' · Cedidos: '+x.opponent+' · Total: '+x.total+' · 1ºT: '+(x.first===null?"—":x.first)+' · 2ºT: '+(x.second===null?"—":x.second)+'</div><small>— significa divisão não comprovada</small> · <a target="_blank" rel="noopener noreferrer" href="'+esc(summaryUrl(game,x.id))+'">Fonte ESPN</a></div>').join("");
   return markup;
  }
  function panel(){
