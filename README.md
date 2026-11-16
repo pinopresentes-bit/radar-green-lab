@@ -18,11 +18,16 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 - Painel de pré-sinais de estudo, com até seis partidas futuras priorizadas pela frequência histórica
 - Destaques dinâmicos para partidas futuras da Liga das Nações
 - Nova tentativa de dados históricos após falhas temporárias
+- Consulta de escalações e reservas quando disponíveis na ESPN (não constitui confirmação oficial)
+- Estatísticas por equipe em análise individual: chutes, chutes no alvo, escanteios e faltas
+- Alguns números individuais exibidos quando o jogo/atleta possui dados na ESPN
+- Calculadora manual para odds decimais e taxa de equilíbrio teórico (não é previsão de chance)
+- Atualização das estatísticas do jogo aberto a cada ciclo de atualização com o aplicativo em primeiro plano
 
 ## Importante
 - A fonte é a interface pública **não oficial** da ESPN. Cobertura, CORS, estabilidade e atualização não são garantidos. Sem resposta, o aplicativo exibirá aviso em vez de inventar resultados.
 - Este é um projeto experimental, não um sistema de monitoramento ininterrupto. **Não envia notificações com o app fechado.**
-- Não acessa apostas, odds, contas de usuários, pagamentos ou escalações oficiais. Frequências históricas **não garantem resultados**.
+- Não acessa casas de apostas, contas de usuários, pagamentos, odds em tempo real ou escalações oficiais. É possível inserir uma odd manualmente para estudo matemático; a ferramenta **não valida uma entrada nem estima chance real**. Frequências históricas **não garantem resultados**.
 - A publicação pelo GitHub Pages é pública: não adicione dados particulares ou chaves de API nos arquivos.
 
 Versão inicial criada para uso em smartphones.
