@@ -9,6 +9,15 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 4. Após a publicação, o endereço será parecido com: `https://pinopresentes-bit.github.io/radar-green-lab/`
 5. Abra o link publicado no Safari do iPhone e toque em **Compartilhar** → **Adicionar à Tela de Início**.
 
+## Versão 9 — Central pré-jogo
+- Nova central na abertura com até seis jogos que passaram pelos filtros históricos.
+- A central mostra o status real da lista de titulares na ESPN, sem confundir com confirmação oficial.
+- Botão de acesso direto ao estudo de cada confronto e à anotação de uma odd de mercado.
+- Odds digitadas são guardadas apenas no navegador deste aparelho; não são cotações automáticas.
+- Incluídos campos manuais para escanteios no primeiro tempo, escanteios por equipe, chutes no alvo, marcadores, assistências e cartões.
+- O painel explicita zero entradas validadas: frequência histórica e odds anotadas não estimam probabilidade nem garantem vantagem.
+- A central acompanha as mudanças enquanto a página está aberta; não envia push com o app fechado.
+
 ## Recursos
 - Calendário de várias ligas nacionais e internacionais
 - Placar e status ao vivo, quando a fonte oferece
