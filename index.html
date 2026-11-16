@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#08130e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Green Lab">
+<meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<title>Radar Green Lab PRO</title>
+<style>
+:root{color-scheme:dark;--bg:#08130e;--surface:#14231a;--surface2:#1a2f21;--border:#304637;--mint:#72eea8;--gold:#f0d08d;--txt:#f1f7f0;--muted:#a5bda9}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse 90% 28% at 70% -6%,#326e444d,transparent),var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+header{position:sticky;top:0;z-index:4;background:#08130ef1;backdrop-filter:blur(13px);border-bottom:1px solid #294431}.top{max-width:960px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:13px 16px;gap:9px}.brand{display:flex;align-items:center;gap:10px}.brand img{width:44px;height:44px;border-radius:12px}.brand small{display:block;color:var(--mint);letter-spacing:1.8px;font-size:10px;font-weight:800}.brand strong{font-size:19px;white-space:nowrap}.brand em{color:var(--gold);font-style:normal}.chip{border:1px solid #3e6e4b;color:var(--mint);background:#183522;padding:7px 10px;border-radius:40px;font-size:10px;font-weight:800;white-space:nowrap}
+main{padding:25px 16px 70px;max-width:960px;margin:auto}h1{font-size:clamp(29px,7vw,45px);line-height:1.12;letter-spacing:-1px;margin:0 0 9px}h1 span{color:var(--mint)}.intro p{font-size:13px;line-height:1.6;color:var(--muted);margin:0 0 20px;max-width:650px}
+.controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:14px}.controls label{color:var(--muted);font-size:11px;font-weight:900}.controls input{flex:1;min-width:130px;background:#203827;color:var(--txt);border:1px solid #3c5743;border-radius:9px;padding:10px;color-scheme:dark}.btn{color:var(--txt);background:#245038;border:1px solid #437453;border-radius:9px;font-weight:800;font-size:12px;padding:10px 12px}.btn.primary{color:#0a2416;background:var(--mint);border-color:var(--mint)}.btn:disabled{opacity:.5}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0 0}.tag{color:#b7d0bc;border:1px solid var(--border);background:#16281c;border-radius:9px;padding:7px 9px;font-size:11px}.tag strong{color:white}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:17px 0}.metric{background:linear-gradient(140deg,#1a3223,#101f16);border:1px solid var(--border);border-radius:13px;padding:12px}.metric b{display:block;font-size:27px;letter-spacing:-.8px}.metric:nth-child(2) b{color:var(--mint)}.metric small{font-size:10px;color:var(--muted)}
+.heading{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin:23px 0 11px}.heading h2{font-size:20px;margin:0}.muted{color:var(--muted);font-size:11px}
+.tabs{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:9px}.tab{white-space:nowrap;color:#c2d7c5;background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:10px 12px;font-size:12px;font-weight:800}.tab.on{color:#14271b;background:var(--gold);border-color:var(--gold)}
+.selectrow{display:flex;gap:9px;align-items:center;margin:8px 0 13px}.selectrow label{font-size:11px;color:var(--muted)}.selectrow select{min-width:0;max-width:100%;color:var(--txt);background:#1d3425;border:1px solid var(--border);border-radius:8px;padding:9px;font-size:12px}
+.notice{border:1px solid #697846;color:#f6e1b4;background:#2d3322;border-radius:12px;padding:11px 13px;font-size:12px;line-height:1.55;margin:13px 0}.notice.error{background:#36231f;border-color:#8b5248;color:#ffdbd3}
+.games{display:grid;grid-template-columns:1fr;gap:10px}.game{background:linear-gradient(120deg,#17291d,#111d16);border:1px solid var(--border);border-radius:15px;padding:14px}.game.live{border-left:3px solid var(--mint)}.ghead,.gfoot{display:flex;justify-content:space-between;align-items:center;gap:9px}.ghead{margin-bottom:14px}.ghead b{font-size:11px;color:#c9dec9}.status{font-size:11px;font-weight:900;color:var(--mint);text-align:right}.status.done{color:#9cb7a1}.status.upcoming{color:#d6e0cf}
+.match{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}.team{text-align:center;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0}.team img{width:35px;height:35px;object-fit:contain}.initial{border-radius:9px;background:#305339;width:36px;height:36px;display:grid;place-items:center;font-size:10px;font-weight:900;color:var(--gold)}.team strong{font-size:12px;overflow-wrap:anywhere;line-height:1.25}.score{font-size:23px;font-weight:950;text-align:center;min-width:75px}.score small{display:block;font-size:10px;font-weight:500;color:var(--muted)}.gfoot{border-top:1px solid #2e4534;margin-top:13px;padding-top:10px}.fav{color:#98a99b;background:none;border:0;font-size:24px;padding:4px 9px}.fav.on{color:var(--gold)}.detailbtn{border:0;background:transparent;font-size:12px;color:var(--gold);font-weight:900;padding:9px 4px}.empty{padding:25px 15px;text-align:center;color:var(--muted);font-size:13px;line-height:1.6;border:1px dashed var(--border);border-radius:14px}
+footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--border);margin-top:24px;padding-top:15px}
+.overlay{position:fixed;inset:0;z-index:9;background:#020802dd;display:flex;align-items:flex-end}.overlay.hidden{display:none}.sheet{background:#102019;border:1px solid #436049;border-radius:20px 20px 0 0;max-height:88vh;overflow-y:auto;width:100%;max-width:730px;margin:auto;padding:17px 17px 35px}.sheettop{display:flex;justify-content:space-between;gap:8px;align-items:center}.sheettop h2{font-size:18px;margin:0}.close{background:#26402e;color:white;border:1px solid #47654a;border-radius:8px;padding:7px 11px}
+.panel{border:1px solid var(--border);border-radius:13px;padding:13px;background:#1b3022;margin:12px 0}.panel h3{font-size:13px;color:var(--gold);margin:0 0 9px}.panel p{font-size:12px;line-height:1.55;color:#d9e7d8;margin:6px 0}.insight{background:#112318;border:1px solid #345741;padding:10px;border-radius:9px;margin:8px 0;font-size:12px}.insight small{display:block;color:#b5ceba;font-size:11px;line-height:1.5;margin-top:5px}
+@media(min-width:720px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}.overlay{align-items:center}.sheet{border-radius:20px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="brand"><img src="./icon.svg" alt=""><div><small>RADAR DE FUTEBOL</small><strong>GREEN LAB <em>PRO</em></strong></div></div><span class="chip">● PAINEL ESPORTIVO</span></div></header>
+<main>
+<div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
+<div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar</button></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div></div>
+<div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
+<div id="notice" aria-live="polite"></div>
+<div class="heading"><h2>⚽ Jogos do dia</h2><span id="count" class="muted">Carregando</span></div>
+<div class="tabs">
+<button class="tab on" data-tab="all">Todos</button><button class="tab" data-tab="live">🔴 Ao vivo</button><button class="tab" data-tab="upcoming">Próximos</button><button class="tab" data-tab="done">Encerrados</button><button class="tab" data-tab="favorites">★ Favoritos</button>
+</div>
+<div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
+<div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
+<footer>Green Lab PRO — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não oferece odds, apostas ou notificações com o navegador fechado.</footer>
+</main>
+<div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
+<script>
+"use strict";
+const TZ="America/Sao_Paulo";
+const LEAGUES=[["uefa.nations","Liga das Nações"],["concacaf.nations.league","CONCACAF Nations"],["fifa.friendly","Amistosos"],["bra.1","Brasileirão A"],["bra.2","Brasileirão B"],["conmebol.libertadores","Libertadores"],["eng.1","Premier League"],["esp.1","LaLiga"],["ita.1","Serie A"],["ger.1","Bundesliga"],["fra.1","Ligue 1"],["uefa.champions","Champions League"],["uefa.europa","Europa League"],["mex.1","Liga MX"],["mex.w.1","Liga MX Feminina"],["usa.1","MLS"],["usa.nwsl","NWSL"],["arg.1","Argentina"],["uru.1","Uruguai"]];
+const $=id=>document.getElementById(id),esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function ymd(d){const parts=new Intl.DateTimeFormat("en-US",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d);const z={};parts.forEach(x=>z[x.type]=x.value);return z.year+"-"+z.month+"-"+z.day}
+function clock(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,hour:"2-digit",minute:"2-digit"}).format(new Date(x))}
+function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}).format(new Date(x))}
+let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
+const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
+$("day").value=state.date;
+$("today").onclick=()=>setDay(ymd(new Date()));
+$("day").onchange=e=>{if(e.target.value)setDay(e.target.value)};
+$("refresh").onclick=()=>load();
+function setDay(x){state.date=x;$("day").value=x;state.games=[];state.loaded=false;render();load()}
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{state.filter=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(t=>t.classList.toggle("on",t===b));render()});
+$("league").onchange=e=>{state.league=e.target.value;render()};
+function parseGame(e,code,label){const co=e.competitions?.[0]?.competitors||[];const home=co.find(x=>x.homeAway==="home")||co[0],away=co.find(x=>x.homeAway==="away")||co[1];if(!home||!away)return null;
+const typ=e.status?.type||{},status=typ.state==="in"?"live":typ.state==="post"||typ.completed?"done":"upcoming";
+const t=c=>({id:String(c.team?.id||""),name:c.team?.shortDisplayName||c.team?.displayName||"Equipe",logo:c.team?.logo||"",abbr:c.team?.abbreviation||"",score:c.score??"—"});
+return {id:String(e.id),code,label,home:t(home),away:t(away),start:e.date||e.competitions[0].date,status,detail:typ.shortDetail||typ.detail||""}}
+async function api(url){const c=new AbortController(),timer=setTimeout(()=>c.abort(),10500);try{const r=await fetch(url,{cache:"no-store",signal:c.signal});if(!r.ok)throw Error("HTTP "+r.status);return await r.json()}finally{clearTimeout(timer)}}
+async function load(){if(state.busy)return;state.busy=true;$("refresh").disabled=true;$("refresh").textContent="Buscando...";$("notice").innerHTML='<div class="notice">🔎 Consultando competições e placares.</div>';const date=state.date;let all=[];state.success=0;state.fails=0;
+await Promise.allSettled(LEAGUES.map(async ([code,label])=>{try{const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/scoreboard?dates="+date.replace(/-/g,"")+"&limit=200";const json=await api(url);state.success++;(json.events||[]).forEach(e=>{const g=parseGame(e,code,label);if(g&&ymd(new Date(g.start))===date)all.push(g)})}catch{state.fails++}}));
+state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar";if(date!==state.date)return;
+state.games=[...new Map(all.map(g=>[g.code+"-"+g.id,g])).values()].sort((a,b)=>new Date(a.start)-new Date(b.start));state.loaded=true;$("checked").textContent=clock(new Date());
+const msg=state.success===0?"Não foi possível acessar a fonte de placares. Tente mais tarde ou verifique sua internet.":"Consultar fontes: "+state.success+" de "+LEAGUES.length+" competições. "+(state.fails?"Parte das ligas não respondeu.":"Cobertura limitada às ligas consultadas.")+" Dados podem estar atrasados.";
+$("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render()}
+function logo(t){return /^https:\/\//.test(t.logo)?'<img src="'+esc(t.logo)+'" alt="" loading="lazy">':'<span class="initial">'+esc(t.abbr||t.name.slice(0,2))+'</span>'}
+function card(g){const key=g.code+"-"+g.id,isFav=state.favs.has(key);const st=g.status==="live"?"🔴 "+(g.detail||"AO VIVO"):g.status==="done"?"Final":clock(g.start);
+return '<article class="game '+(g.status==="live"?"live":"")+'"><div class="ghead"><b>'+esc(g.label)+'</b><span class="status '+g.status+'">'+esc(st)+'</span></div><div class="match"><div class="team">'+logo(g.home)+'<strong>'+esc(g.home.name)+'</strong></div><div class="score">'+(g.status==="upcoming"?"×":esc(g.home.score)+" : "+esc(g.away.score))+'<small>'+(g.status==="upcoming"?"Pré-jogo":"Placar")+'</small></div><div class="team">'+logo(g.away)+'<strong>'+esc(g.away.name)+'</strong></div></div><div class="gfoot"><button class="fav '+(isFav?"on":"")+'" data-fav="'+esc(key)+'">'+(isFav?"★":"☆")+'</button><small class="muted">'+esc(dateTime(g.start))+'</small><button class="detailbtn" data-detail="'+esc(key)+'">Analisar →</button></div></article>'}
+function render(){const all=state.games,filtered=all.filter(g=>(state.league==="all"||g.code===state.league)&&(state.filter==="all"||g.status===state.filter||(state.filter==="favorites"&&state.favs.has(g.code+"-"+g.id))));
+$("total").textContent=state.loaded?all.length:"—";$("live").textContent=state.loaded?all.filter(g=>g.status==="live").length:"—";$("next").textContent=state.loaded?all.filter(g=>g.status==="upcoming").length:"—";$("count").textContent=state.loaded?filtered.length+" exibidos":"Buscando";
+const available=LEAGUES.filter(l=>all.some(g=>g.code===l[0]));if(!available.some(l=>l[0]===state.league))state.league="all";$("league").innerHTML='<option value="all">Todas as disponíveis</option>'+available.map(l=>'<option value="'+esc(l[0])+'">'+esc(l[1])+'</option>').join("");$("league").value=state.league;
+$("games").innerHTML=filtered.length?filtered.map(card).join(""):'<div class="empty">'+(state.loaded?"Nenhuma partida encontrada neste filtro e data. Experimente outra data ou liga.":"📡 Carregando jogos...")+"</div>";
+document.querySelectorAll("[data-fav]").forEach(b=>b.onclick=()=>{const k=b.dataset.fav;state.favs.has(k)?state.favs.delete(k):state.favs.add(k);try{localStorage.setItem("gl-favs",JSON.stringify([...state.favs]))}catch{}render()});
+document.querySelectorAll("[data-detail]").forEach(b=>b.onclick=()=>openDetail(b.dataset.detail))}
+async function teamHistory(g,t){if(!t.id)return[];try{const u="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/teams/"+encodeURIComponent(t.id)+"/schedule?season="+new Date(g.start).getUTCFullYear();const j=await api(u);return (j.events||[]).filter(e=>e.status?.type?.state==="post"&&new Date(e.date)<new Date(g.start)&&String(e.id)!==g.id).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5).map(e=>{const co=e.competitions?.[0]?.competitors||[],me=co.find(c=>String(c.team?.id)===t.id),op=co.find(c=>String(c.team?.id)!==t.id);const a=Number(me?.score),b=Number(op?.score);return{a,b,total:a+b,btts:a>0&&b>0}}).filter(x=>Number.isFinite(x.total))}catch{return[]}}
+let active="";
+async function openDetail(key){const g=state.games.find(x=>x.code+"-"+x.id===key);if(!g)return;active=key;$("overlay").classList.remove("hidden");$("gameTitle").textContent=g.home.name+" x "+g.away.name;$("gameBody").innerHTML='<div class="panel"><p>Buscando histórico recente das equipes...</p></div>';const [a,b]=await Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]);if(active!==key)return;
+let str='<div class="panel"><h3>'+esc(g.label)+'</h3><p>'+esc(dateTime(g.start))+' • '+esc(g.detail||g.status)+'</p><p>'+esc(g.home.name)+' x '+esc(g.away.name)+'</p></div><div class="panel"><h3>Histórico disponível nesta competição</h3><p>'+esc(g.home.name)+': '+a.length+' partidas • '+esc(g.away.name)+': '+b.length+' partidas.</p></div>';
+if(a.length>=3&&b.length>=3){str+='<div class="panel"><h3>Frequências históricas — não são previsões</h3>';for(const [name,fn] of [["2+ gols na partida",x=>x.total>=2],["3+ gols na partida",x=>x.total>=3],["Ambos marcam",x=>x.btts]]){str+='<div class="insight"><b>'+esc(name)+'</b><small>'+esc(g.home.name)+": "+a.filter(fn).length+"/"+a.length+" • "+esc(g.away.name)+": "+b.filter(fn).length+"/"+b.length+" na amostra recente. Não é cotação nem probabilidade de vitória.</small></div>"}str+='</div>'}else str+='<div class="notice">Histórico insuficiente na fonte. Não podemos calcular uma tendência confiável.</div>';
+str+='<div class="notice">Escalações, chutes no gol, assistências e odds NÃO são confirmados por este aplicativo. Os dados da ESPN são fornecidos sem garantia de atualização. Nenhuma aposta é feita.</div>';$("gameBody").innerHTML=str}
+$("close").onclick=()=>{active="";$("overlay").classList.add("hidden")};$("overlay").onclick=e=>{if(e.target===$("overlay"))$("close").click()};
+if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js").catch(()=>{});
+setInterval(()=>{if(!document.hidden&&state.date===ymd(new Date()))load()},60000);
+render();load();
+</script>
+</body>
+</html>
