@@ -85,7 +85,50 @@ const available=LEAGUES.filter(l=>all.some(g=>g.code===l[0]));if(!available.some
 $("games").innerHTML=filtered.length?filtered.map(card).join(""):'<div class="empty">'+(state.loaded?"Nenhuma partida encontrada neste filtro e data. Experimente outra data ou liga.":"📡 Carregando jogos...")+"</div>";
 document.querySelectorAll("[data-fav]").forEach(b=>b.onclick=()=>{const k=b.dataset.fav;state.favs.has(k)?state.favs.delete(k):state.favs.add(k);try{localStorage.setItem("gl-favs",JSON.stringify([...state.favs]))}catch{}render()});
 document.querySelectorAll("[data-detail]").forEach(b=>b.onclick=()=>openDetail(b.dataset.detail))}
-async function teamHistory(g,t){if(!t.id)return[];try{const u="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/teams/"+encodeURIComponent(t.id)+"/schedule?season="+new Date(g.start).getUTCFullYear();const j=await api(u);return (j.events||[]).filter(e=>e.status?.type?.state==="post"&&new Date(e.date)<new Date(g.start)&&String(e.id)!==g.id).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5).map(e=>{const co=e.competitions?.[0]?.competitors||[],me=co.find(c=>String(c.team?.id)===t.id),op=co.find(c=>String(c.team?.id)!==t.id);const a=Number(me?.score),b=Number(op?.score);return{a,b,total:a+b,btts:a>0&&b>0}}).filter(x=>Number.isFinite(x.total))}catch{return[]}}
+
+function parseResultScore(raw){
+  if(raw===undefined||raw===null||raw==="")return NaN;
+  const value=typeof raw==="object"?(raw.value??raw.displayValue):raw;
+  return value==null||value===""?NaN:Number(value);
+}
+function matchHistory(events,g,team){
+  return (events||[]).filter(e=>e?.date&&new Date(e.date)<new Date(g.start)&&String(e.id)!==g.id)
+  .filter(e=>e.status?.type?.completed||e.status?.type?.state==="post"||e.competitions?.[0]?.status?.type?.completed)
+  .map(e=>{
+    const sides=e.competitions?.[0]?.competitors||[];
+    const me=sides.find(c=>String(c.team?.id)===team.id);
+    const opponent=sides.find(c=>String(c.team?.id)!==team.id);
+    if(!me||!opponent)return null;
+    const a=parseResultScore(me.score),b=parseResultScore(opponent.score);
+    if(!Number.isFinite(a)||!Number.isFinite(b))return null;
+    return {id:String(e.id),date:e.date,a,b,total:a+b,btts:a>0&&b>0};
+  }).filter(Boolean).sort((x,y)=>new Date(y.date)-new Date(x.date));
+}
+const historyCache=new Map();
+async function leagueSchedule(g){
+  const begin=new Date(new Date(g.start).getTime()-75*86400000);
+  const dates=ymd(begin).replace(/-/g,"")+"-"+ymd(new Date(g.start)).replace(/-/g,"");
+  const key=g.code+":"+dates;
+  if(!historyCache.has(key)){
+    const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/scoreboard?dates="+dates+"&limit=300";
+    historyCache.set(key,api(url).then(j=>j.events||[]).catch(()=>[]));
+  }
+  return historyCache.get(key);
+}
+async function teamHistory(g,t){
+  if(!t.id)return [];
+  let games=[];
+  try{
+    const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/teams/"+encodeURIComponent(t.id)+"/schedule?season="+new Date(g.start).getUTCFullYear();
+    games=matchHistory((await api(url)).events,g,t);
+  }catch{}
+  if(games.length<3){
+    const extras=matchHistory(await leagueSchedule(g),g,t);
+    games=Array.from(new Map([...games,...extras].map(x=>[x.id,x])).values())
+      .sort((x,y)=>new Date(y.date)-new Date(x.date));
+  }
+  return games.slice(0,5);
+}
 let active="";
 async function openDetail(key){const g=state.games.find(x=>x.code+"-"+x.id===key);if(!g)return;active=key;$("overlay").classList.remove("hidden");$("gameTitle").textContent=g.home.name+" x "+g.away.name;$("gameBody").innerHTML='<div class="panel"><p>Buscando histórico recente das equipes...</p></div>';const [a,b]=await Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]);if(active!==key)return;
 let str='<div class="panel"><h3>'+esc(g.label)+'</h3><p>'+esc(dateTime(g.start))+' • '+esc(g.detail||g.status)+'</p><p>'+esc(g.home.name)+' x '+esc(g.away.name)+'</p></div><div class="panel"><h3>Histórico disponível nesta competição</h3><p>'+esc(g.home.name)+': '+a.length+' partidas • '+esc(g.away.name)+': '+b.length+' partidas.</p></div>';
