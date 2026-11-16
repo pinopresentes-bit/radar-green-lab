@@ -99,7 +99,7 @@ await Promise.allSettled(LEAGUES.map(async ([code,label])=>{try{const url="https
 state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar";if(date!==state.date){load();return}
 state.games=[...new Map(all.map(g=>[g.code+"-"+g.id,g])).values()].sort((a,b)=>new Date(a.start)-new Date(b.start));state.loaded=true;$("checked").textContent=clock(new Date());
 const msg=state.success===0?"Não foi possível acessar a fonte de placares. Tente mais tarde ou verifique sua internet.":"Consultar fontes: "+state.success+" de "+LEAGUES.length+" competições. "+(state.fails?"Parte das ligas não respondeu.":"Cobertura limitada às ligas consultadas.")+" Dados podem estar atrasados.";
-$("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals();renderPreGame();renderHighlights();lastFetchAt=Date.now()}
+$("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals();renderPreGame();renderHighlights();lastFetchAt=Date.now();const opened=state.games.find(g=>g.code+"-"+g.id===active);if(opened)updateExtraMatchData(opened)}
 
 function statNumber(row,names){
  if(!Array.isArray(row))return null;
