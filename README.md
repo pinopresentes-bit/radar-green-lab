@@ -15,6 +15,9 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 - Filtros: todos / ao vivo / próximos / encerrados / favoritos
 - Atualização a cada 60 segundos com a página aberta
 - Histórico amostral de gols e ambas marcam (até cinco jogos por time) quando disponível
+- Painel de pré-sinais de estudo, com até seis partidas futuras priorizadas pela frequência histórica
+- Destaques dinâmicos para partidas futuras da Liga das Nações
+- Nova tentativa de dados históricos após falhas temporárias
 
 ## Importante
 - A fonte é a interface pública **não oficial** da ESPN. Cobertura, CORS, estabilidade e atualização não são garantidos. Sem resposta, o aplicativo exibirá aviso em vez de inventar resultados.
