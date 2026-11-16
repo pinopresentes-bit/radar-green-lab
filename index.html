@@ -238,12 +238,21 @@ $("lineupAlerts").checked=lineupNotify;
 $("lineupAlerts").onchange=e=>{
  lineupNotify=Boolean(e.target.checked);
  try{localStorage.setItem("gl-lineup-alerts",lineupNotify?"yes":"no")}catch{}
+ if(lineupNotify){
+  for(const g of lineupCandidates()){
+   const data=lineupCheckCache.get(preKey(g));
+   if(!data||data.error||data.duplicate||data.home!==11||data.away!==11)continue;
+   const name=g.home.name+" × "+g.away.name;
+   if(!lineupAlertArchive.some(a=>a.name===name))lineupAlertArchive.unshift({when:clock(new Date()),name,existing:true});
+  }
+  lineupAlertArchive.splice(6);
+ }
  renderLineupAlertArchive();
 };
 function renderLineupAlertArchive(){
  $("lineupAlertCount").textContent="Avisos de escalações ("+lineupAlertArchive.length+")";
  $("lineupAlertFeed").innerHTML=lineupAlertArchive.length
- ?lineupAlertArchive.map(e=>'<div class="alert-line"><b>'+esc(e.when)+' · '+esc(e.name)+'</b><div>11 titulares de cada lado listados pela ESPN. Confira a escalação oficial.</div></div>').join("")
+ ?lineupAlertArchive.map(e=>'<div class="alert-line"><b>'+esc(e.when)+' · '+esc(e.name)+'</b><div>'+(e.existing?'Escalação completa já estava disponível na última consulta. ':'Nova lista de titulares detectada. ')+'Confirme os nomes com a fonte oficial.</div></div>').join("")
  :'<p>Nenhum aviso registrado neste acesso. Não há alertas com o app fechado.</p>';
 }
 function lineupCandidates(){
