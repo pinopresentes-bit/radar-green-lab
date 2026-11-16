@@ -105,7 +105,7 @@ function statNumber(row,names){
  if(!Array.isArray(row))return null;
  const accepted=names.map(x=>x.toLowerCase().replace(/[^a-z0-9]/g,""));
  for(const v of row){const keys=[v.name,v.label,v.abbreviation,v.displayName].filter(Boolean).map(x=>String(x).toLowerCase().replace(/[^a-z0-9]/g,""));if(!keys.some(k=>accepted.includes(k)))continue;
-   const n=Number(String(v.value??v.displayValue??"").replace(",","."));if(Number.isFinite(n))return n;
+   const raw=v.value??v.displayValue;if(raw===null||raw===undefined||String(raw).trim()==="")continue;const n=Number(String(raw).replace(",","."));if(Number.isFinite(n))return n;
  }return null
 }
 function liveStats(obj){
