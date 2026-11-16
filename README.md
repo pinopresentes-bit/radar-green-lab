@@ -24,6 +24,10 @@ Aplicativo web para iPhone com agenda de futebol, resultados, filtros por compet
 - Calculadora manual para odds decimais e taxa de equilíbrio teórico (não é previsão de chance)
 - Atualização das estatísticas do jogo aberto a cada ciclo de atualização com o aplicativo em primeiro plano
 
+- Painel do jogo com contagem até a partida e botão de verificação manual de escalações e estatísticas
+- Os mercados individuais mostram quando faltam titulares, além de identificar histórico individual indisponível
+- Campos estatísticos não publicados são tratados como ausentes, não como zero
+
 ## Importante
 - A fonte é a interface pública **não oficial** da ESPN. Cobertura, CORS, estabilidade e atualização não são garantidos. Sem resposta, o aplicativo exibirá aviso em vez de inventar resultados.
 - Este é um projeto experimental, não um sistema de monitoramento ininterrupto. **Não envia notificações com o app fechado.**
