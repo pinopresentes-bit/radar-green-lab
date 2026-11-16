@@ -141,7 +141,7 @@ async function checkSignals(){
  const missing=all.filter(x=>!x.stats).length;
  list.innerHTML='<div class="empty">Nenhuma hipótese passou pelos critérios agora.'+(missing?" Sem estatísticas completas em "+missing+" de "+live.length+" jogos.":"")+' Não vou inventar sinais.</div>';
  }else{
- list.innerHTML=items.slice(0,6).map(({g,item})=>'<div class="signalitem"><h3>📡 OBSERVAÇÃO • '+esc(g.home.name)+' x '+esc(g.away.name)+'</h3><div class="market">'+esc(item.name)+'</div><div class="facts">'+esc(item.why)+'</div><p>Risco: '+esc(item.risk)+' Odd e disponibilidade não verificadas.</p><button class="sigbutton" data-sig="'+esc(g.code+"-"+g.id)+'">Ver jogo</button></div>').join("");
+ list.innerHTML=items.map(({g,item})=>'<div class="signalitem"><h3>📡 OBSERVAÇÃO • '+esc(g.home.name)+' x '+esc(g.away.name)+'</h3><div class="market">'+esc(item.name)+'</div><div class="facts">'+esc(item.why)+'</div><p>Risco: '+esc(item.risk)+' Odd e disponibilidade não verificadas.</p><button class="sigbutton" data-sig="'+esc(g.code+"-"+g.id)+'">Ver jogo</button></div>').join("");
  list.querySelectorAll("[data-sig]").forEach(b=>b.onclick=()=>openDetail(b.dataset.sig))
  }
  foot.textContent="Última consulta: "+clock(new Date())+" · todas as partidas ao vivo encontradas · não funciona com app fechado.";
