@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v11">
+<meta name="green-lab-build" content="2026-11-16-v11-1">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -61,7 +61,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v11</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v11.1</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="actionHub">
@@ -95,7 +95,7 @@ function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-16-v11";
+const APP_BUILD="2026-11-16-v11-1";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -203,7 +203,7 @@ function renderLiveMatch(g,stats,items,consultedAt){
  ].join(" · "):"Estatísticas detalhadas não disponíveis nesta consulta.";
  const marketHtml=items.length
   ?items.map(item=>'<div class="live-market"><strong>🟡 '+esc(item.name)+'</strong><small>'+esc(item.why)+'</small><small>Risco: '+esc(item.risk)+'</small></div>').join("")
-  :'<p class="live-no-data">Nenhum mercado passou pelos filtros deste jogo nesta consulta.</p>';
+  :'<p class="live-no-data">'+(currentMinute(g.detail)>80?'Partida nos minutos finais: o radar encerra novas hipóteses depois dos 80 minutos.':'Nenhum mercado passou pelos filtros deste jogo nesta consulta.')+'</p>';
  return '<div class="signalitem"><div class="live-game-title">🔴 '+esc(g.home.name)+' × '+esc(g.away.name)+'</div><div class="live-game-meta">'+score+' · '+esc(g.detail||"Ao vivo")+' · '+esc(g.label)+' · Consultado às '+esc(clock(consultedAt))+'</div><div class="facts">'+esc(statLine)+'</div>'+marketHtml+'<button class="sigbutton" data-sig="'+esc(key)+'">Ver partida</button></div>';
 }
 async function checkSignals(){
@@ -763,7 +763,7 @@ function extraDataPanels(game){
  '<p id="oddResult" role="status">A odd precisa ser maior que 1,00.</p><p class="mini-disclaimer">O resultado informa somente a taxa de acerto necessária para equilíbrio teórico, antes de custos. Não prevê a chance real nem recomenda apostar.</p></div>';
 }
 function matchCheckMessage(game){
- if(game.status==="live")return "🔴 Ao vivo: nova consulta a cada 60 segundos enquanto o app estiver aberto.";
+ if(game.status==="live")return "🔴 Ao vivo: consulta automática aproximada a cada 30 segundos com o app aberto, sujeita a atraso da ESPN.";
  if(game.status==="done")return "🏁 Encerrado. Os registros podem ser completados pela fonte mais tarde.";
  const left=new Date(game.start).getTime()-Date.now();
  if(!Number.isFinite(left))return "Horário indisponível; consulte novamente para conferir as escalações.";
@@ -868,7 +868,7 @@ async function verifyVersion(silent){
   }else if(match[1]!==APP_BUILD){
    node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
    $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
-  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v11.</div>';
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v11.1.</div>';
  }catch{
   if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
  }finally{
