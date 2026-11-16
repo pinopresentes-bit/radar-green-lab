@@ -72,7 +72,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v6 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não oferece odds, apostas ou notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v6 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -259,7 +259,7 @@ function preDisplay(g,data){
  if(data.error)return'<div class="predata"><small>⚠️ Dados indisponíveis na consulta. Tente atualizar.</small></div>';
  if(preMarket==="corners")return'<div class="predata"><small>🚩 Escanteios totais, por equipe e comparação: abra Analisar para consultar dados.</small></div>';
  if(preMarket==="half")return'<div class="predata"><small>⏱️ Gol no 1º tempo: abra Analisar para consultar minutos dos gols. Escanteios por período pendentes.</small></div>';
- if(preMarket==="players")return'<div class="predata"><small>🥅 Gols, assistências e chutes no gol por jogador: escalações e estatísticas individuais ainda não integradas.</small></div>';
+ if(preMarket==="players")return'<div class="predata"><small>🥅 Jogadores: abra Analisar para consultar titulares e estatísticas que a ESPN disponibilizar. Histórico recente individual e odds permanecem pendentes.</small></div>';
  if(data.hCount<5||data.aCount<5)return'<div class="predata"><small>⚪ Histórico insuficiente: '+data.hCount+'/5 e '+data.aCount+'/5 jogos. Sem estudo comparativo.</small></div>';
  const facts=data.findings.filter(f=>preMarket==="all"||f.type===preMarket);
  if(!facts.length)return'<div class="predata"><small>⚪ Nenhum mercado deste filtro atingiu os critérios históricos.</small></div>';
