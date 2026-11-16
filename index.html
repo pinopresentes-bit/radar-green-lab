@@ -31,7 +31,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 .signalhub{background:#143520;border:1px solid #40835a;border-radius:16px;padding:15px;margin:16px 0}.signalhead{display:flex;justify-content:space-between;align-items:center;gap:8px}.signalhead h2{margin:4px 0;font-size:19px}.eyebrow{font-size:10px;color:#8af7ad;font-weight:900;letter-spacing:1.3px}.signalstatus{font-size:10px;background:#1e4930;color:#b7f8c8;border-radius:22px;padding:7px 9px;white-space:nowrap}.signalhub p{font-size:12px;color:#b9d2c0;line-height:1.6;margin:10px 0}.signalhub strong{color:#e6ffea}.signalitem{background:#12271a;border:1px solid #6c6736;border-radius:12px;padding:12px;margin:9px 0}.signalitem h3{color:#eacb86;margin:0 0 8px;font-size:13px}.signalitem .market{font-size:14px;color:#aff2c4;font-weight:850}.signalitem .facts{font-size:11px;color:#c4dec7;line-height:1.5;margin-top:6px}.signalfoot{font-size:10px;color:#9dbba4;margin-top:12px}.sigbutton{background:#244530;color:#c9f6d0;border:1px solid #508260;border-radius:8px;padding:8px 12px;font-size:11px;margin-top:10px;font-weight:800}
 .preitem{display:flex;align-items:center;gap:8px;justify-content:space-between;background:#10261a;border:1px solid #3a5f45;padding:11px;border-radius:11px;margin-top:8px}.preitem .name{font-size:12px;line-height:1.4;font-weight:800;overflow-wrap:anywhere}.preitem .stamp{font-size:11px;color:#f2cf85;font-weight:850;margin:4px 0}.preitem .sub{font-size:10px;color:#b6c8b6;line-height:1.4}.preitem button{background:#294b34;border:1px solid #527b5b;border-radius:8px;color:#e1f9e1;font-size:11px;font-weight:800;padding:9px 10px;flex-shrink:0}
 .prestudy{display:block;color:#f6d591;font-size:11px;font-weight:900;margin-top:7px}.studyevidence{display:block;color:#d4efd6;font-size:11px;margin-top:3px}.studywarning{display:block;color:#bac9b8;font-size:10px;margin-top:4px;line-height:1.45}
-@media(min-width:720px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}.overlay{align-items:center}.sheet{border-radius:20px}}
+.panel .insight b{color:#f0d08d}.panel .insight small{display:block;margin-top:5px}.panel>p>b{color:#f0d08d}@media(min-width:720px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}.overlay{align-items:center}.sheet{border-radius:20px}}
 </style>
 </head>
 <body>
@@ -243,6 +243,22 @@ async function teamHistory(g,t){
 let active="";
 async function openDetail(key){const g=state.games.find(x=>x.code+"-"+x.id===key);if(!g)return;active=key;$("overlay").classList.remove("hidden");$("gameTitle").textContent=g.home.name+" x "+g.away.name;$("gameBody").innerHTML='<div class="panel"><p>Buscando histórico recente das equipes...</p></div>';const [a,b]=await Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]);if(active!==key)return;
 let str='<div class="panel"><h3>'+esc(g.label)+'</h3><p>'+esc(dateTime(g.start))+' • '+esc(g.detail||g.status)+'</p><p>'+esc(g.home.name)+' x '+esc(g.away.name)+'</p></div><div class="panel"><h3>Histórico disponível nesta competição</h3><p>'+esc(g.home.name)+': '+a.length+' partidas • '+esc(g.away.name)+': '+b.length+' partidas.</p></div>';
+if(g.status==="upcoming"){
+ const studied=pregameStudies(a,b);
+ str+='<div class="panel"><h3>🤖 Modo sinal • estudo pré-jogo</h3>';
+ if(a.length<5||b.length<5){
+  str+='<p>⚪ HISTÓRICO INSUFICIENTE — apenas '+a.length+'/5 e '+b.length+'/5 jogos disponíveis. Não há hipótese estatística validada para este confronto.</p>';
+ }else if(!studied.length){
+  str+='<p>⚪ SEM SINAL ESTATÍSTICO — nenhum mercado atingiu os critérios históricos de observação.</p>';
+ }else{
+  str+='<p><b>🟡 EM OBSERVAÇÃO — NÃO É ENTRADA CONFIRMADA</b></p>';
+  for(const study of studied){
+   str+='<div class="insight"><b>Mercado em estudo: '+esc(study.name)+'</b><small>Últimos 5 jogos: '+esc(g.home.name)+' '+study.home+'/5; '+esc(g.away.name)+' '+study.away+'/5. Este filtro é apenas frequência histórica de partidas, não probabilidade de acerto.</small></div>';
+  }
+  str+='<p>Antes de considerar uma entrada: confirmar escalações, notícias de desfalques, competição, disponibilidade do mercado e odd atual. Sem essa verificação, o radar não declara vantagem estatística nem retorno esperado.</p>';
+ }
+ str+='</div>';
+}
 if(a.length>=3&&b.length>=3){str+='<div class="panel"><h3>Frequências históricas — não são previsões</h3>';for(const [name,fn] of [["2+ gols na partida",x=>x.total>=2],["3+ gols na partida",x=>x.total>=3],["Ambos marcam",x=>x.btts]]){str+='<div class="insight"><b>'+esc(name)+'</b><small>'+esc(g.home.name)+": "+a.filter(fn).length+"/"+a.length+" • "+esc(g.away.name)+": "+b.filter(fn).length+"/"+b.length+" na amostra recente. Não é cotação nem probabilidade de vitória.</small></div>"}str+='</div>'}else str+='<div class="notice">Histórico insuficiente na fonte. Não podemos calcular uma tendência confiável.</div>';
 str+='<div class="notice">Escalações, chutes no gol, assistências e odds NÃO são confirmados por este aplicativo. Os dados da ESPN são fornecidos sem garantia de atualização. Nenhuma aposta é feita.</div>';$("gameBody").innerHTML=str}
 $("close").onclick=()=>{active="";$("overlay").classList.add("hidden")};$("overlay").onclick=e=>{if(e.target===$("overlay"))$("close").click()};
