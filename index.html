@@ -77,7 +77,7 @@ let lastFetchAt=0, lastVisibleDay=state.date;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
 $("day").onchange=e=>{if(e.target.value)setDay(e.target.value)};
-$("refresh").onclick=()=>load();
+$("refresh").onclick=()=>{for(const [key,study] of pregameStudyCache){if(study.error||study.hCount===0||study.aCount===0)pregameStudyCache.delete(key)}pregameBatch="";pregameBatchToken++;load()};
 function setDay(x){state.date=x;$("day").value=x;state.games=[];state.loaded=false;pregameBatch="";pregameBatchToken++;render();renderPreCards();load()}
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{state.filter=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(t=>t.classList.toggle("on",t===b));render()});
 $("league").onchange=e=>{state.league=e.target.value;render()};
@@ -88,7 +88,7 @@ return {id:String(e.id),code,label,home:t(home),away:t(away),start:e.date||e.com
 async function api(url){const c=new AbortController(),timer=setTimeout(()=>c.abort(),10500);try{const r=await fetch(url,{cache:"no-store",signal:c.signal});if(!r.ok)throw Error("HTTP "+r.status);return await r.json()}finally{clearTimeout(timer)}}
 async function load(){if(state.busy)return;state.busy=true;$("refresh").disabled=true;$("refresh").textContent="Buscando...";$("notice").innerHTML='<div class="notice">🔎 Consultando competições e placares.</div>';const date=state.date;let all=[];state.success=0;state.fails=0;
 await Promise.allSettled(LEAGUES.map(async ([code,label])=>{try{const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/scoreboard?dates="+date.replace(/-/g,"")+"&limit=200";const json=await api(url);state.success++;(json.events||[]).forEach(e=>{const g=parseGame(e,code,label);if(g&&ymd(new Date(g.start))===date)all.push(g)})}catch{state.fails++}}));
-state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar";if(date!==state.date)return;
+state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar";if(date!==state.date){load();return}
 state.games=[...new Map(all.map(g=>[g.code+"-"+g.id,g])).values()].sort((a,b)=>new Date(a.start)-new Date(b.start));state.loaded=true;$("checked").textContent=clock(new Date());
 const msg=state.success===0?"Não foi possível acessar a fonte de placares. Tente mais tarde ou verifique sua internet.":"Consultar fontes: "+state.success+" de "+LEAGUES.length+" competições. "+(state.fails?"Parte das ligas não respondeu.":"Cobertura limitada às ligas consultadas.")+" Dados podem estar atrasados.";
 $("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals();renderPreGame();renderHighlights();lastFetchAt=Date.now()}
@@ -283,7 +283,7 @@ async function leagueSchedule(g){
   const key=g.code+":"+dates;
   if(!historyCache.has(key)){
     const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/scoreboard?dates="+dates+"&limit=300";
-    historyCache.set(key,api(url).then(j=>j.events||[]).catch(()=>[]));
+    historyCache.set(key,api(url).then(j=>j.events||[]).catch(()=>{historyCache.delete(key);return []}));
   }
   return historyCache.get(key);
 }
@@ -336,7 +336,7 @@ function getEventSummary(code,eventId){
  const key=code+":"+eventId;
  if(!eventSummaryCache.has(key)){
   const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/summary?event="+encodeURIComponent(eventId);
-  eventSummaryCache.set(key,api(url).catch(()=>null));
+  eventSummaryCache.set(key,api(url).catch(()=>{eventSummaryCache.delete(key);return null}));
  }
  return eventSummaryCache.get(key);
 }
@@ -347,7 +347,7 @@ async function firstHalfGoalMatches(game,matches){
   if(m.total===0)return 0;
   const key=game.code+":"+m.id;
   if(!periodStudyCache.has(key)){
-   periodStudyCache.set(key,getEventSummary(game.code,m.id).then(v=>v?goalHalfFromSummary(v,m):null).catch(()=>null));
+   periodStudyCache.set(key,getEventSummary(game.code,m.id).then(v=>{const result=v?goalHalfFromSummary(v,m):null;if(result===null)periodStudyCache.delete(key);return result}).catch(()=>{periodStudyCache.delete(key);return null}));
   }
   return periodStudyCache.get(key);
  }));
@@ -398,7 +398,7 @@ function getCornerTotals(summary,teamId){
 async function lastCorners(game,team,matches){
  const data=await Promise.all(matches.slice(0,5).map(m=>{
   const key=game.code+":"+m.id+":"+team.id;
-  if(!cornerStudyCache.has(key))cornerStudyCache.set(key,getEventSummary(game.code,m.id).then(s=>s?getCornerTotals(s,team.id):null).catch(()=>null));
+  if(!cornerStudyCache.has(key))cornerStudyCache.set(key,getEventSummary(game.code,m.id).then(s=>{const result=s?getCornerTotals(s,team.id):null;if(result===null)cornerStudyCache.delete(key);return result}).catch(()=>{cornerStudyCache.delete(key);return null}));
   return cornerStudyCache.get(key);
  }));
  return data.filter(Boolean);
