@@ -41,6 +41,13 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 .today-highlights{margin:16px 0;border:1px solid #355b43;border-radius:15px;padding:14px;background:#12291c}.today-highlights h2{margin:4px 0;font-size:19px}.today-highlights>.muted{font-size:11px}.highlight-games{display:grid;gap:8px;margin-top:12px}.highlight-game{display:flex;align-items:center;justify-content:space-between;gap:9px;border:1px solid #365943;border-radius:10px;background:#0d2115;padding:11px}.highlight-game b{font-size:12px;display:block;line-height:1.5}.highlight-game small{color:#ebce85;font-size:11px}.highlight-game button{color:#122518;background:#88eeb2;border:0;border-radius:8px;padding:9px;font-weight:800;font-size:11px;white-space:nowrap}
 .pre-controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:12px 0 4px}.pre-controls label{font-size:11px;color:#b8d3bf;font-weight:800}.pre-controls select{flex:1;min-width:140px;background:#22422e;color:#f1f8f0;border:1px solid #55715a;border-radius:9px;padding:10px;font-size:12px}.pre-controls button{font-size:11px}.preitem .prestatus{font-size:10px;color:#bce4c4;margin-top:3px}.preitem .name{font-size:12px}.preitem .predata{margin-top:4px;line-height:1.5}.preitem .predata small{display:block;color:#a7c3ad;font-size:10px}.preitem .predata b{color:#f0d08d;font-size:11px}.preitem.studyfound{border-color:#779257}.queue-report{font-size:11px;color:#b7d2bd;margin:10px 0}.preitem .preopen{flex-shrink:0}.pre-sample{font-size:10px;color:#c0d1c2;line-height:1.45}
 @media(min-width:720px){.games{grid-template-columns:repeat(2,minmax(0,1fr))}.overlay{align-items:center}.sheet{border-radius:20px}}
+
+.oddsrow{display:flex;gap:8px;margin:8px 0}.oddsrow input{min-width:0;flex:1;background:#1e3426;color:#f1f7f0;border:1px solid #47644e;border-radius:8px;padding:10px}
+.oddslabel{display:block;font-size:11px;color:#bdd8c1;font-weight:800;margin-top:9px}
+#oddMarket{width:100%;background:#1e3426;color:#f1f7f0;border:1px solid #47644e;border-radius:8px;padding:10px;margin-top:6px}
+.playerrow{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #34513b;align-items:flex-start;font-size:11px}
+.playerrow small{font-size:10px;color:#b5d1b8;text-align:right;max-width:52%}.playerlist{padding-top:8px}.market-check summary{cursor:pointer;font-size:12px;color:#eacc90;padding:4px 0}
+.stat-grid{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px}.stat-grid th,.stat-grid td{padding:9px 5px;border-bottom:1px solid #34513b;text-align:center}.stat-grid th{color:#d9e8da}.stat-grid td:nth-child(2){color:#e5c888}
 </style>
 </head>
 <body>
@@ -459,6 +466,86 @@ async function updateCornerPanel(game,a,b){
  set("most","Histórico consultado",game.home.name+" cobrou mais escanteios que seus adversários em "+home.filter(x=>x.own>x.opponent).length+"/"+home.length+" jogos. "+game.away.name+" em "+away.filter(x=>x.own>x.opponent).length+"/"+away.length+" jogos. Não é previsão de quem ganhará em escanteios no confronto.");
 }
 
+
+function matchSummaryUrl(game){
+ return "https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(game.code)+"/summary?event="+encodeURIComponent(game.id);
+}
+function teamLineup(summary,team){
+ const rows=Array.isArray(summary?.rosters)?summary.rosters:[];
+ const name=normTeam(team.name);
+ const group=rows.find(x=>String(x?.team?.id||"")===team.id&&team.id)
+  ||rows.find(x=>normTeam(x?.team?.displayName||x?.team?.shortDisplayName||"")===name);
+ if(!group||!Array.isArray(group.roster))return null;
+ const players=group.roster.filter(p=>p?.athlete?.displayName)
+  .map(p=>({name:p.athlete.displayName,starter:p.starter===true,position:p.position?.abbreviation||p.position?.name||"",stats:Array.isArray(p.stats)?p.stats:[]}));
+ if(!players.length)return null;
+ return {starters:players.filter(p=>p.starter),reserves:players.filter(p=>!p.starter)};
+}
+function playerStatsText(player){
+ const names=[["Gols",["goals","goal"]],["Assist.",["goalAssists","assists","assist"]],["Chutes no alvo",["shotsOnTarget","shotsOnGoal","shots on target"]]];
+ return names.map(([label,keys])=>{const v=statNumber(player.stats,keys);return v===null?null:label+": "+v}).filter(Boolean).join(" · ");
+}
+function rosterMarkup(team,roster){
+ const title=esc(team.name);
+ if(!roster)return '<div class="market-check"><b>'+title+'</b><p>Escalação ainda não disponibilizada nesta fonte.</p></div>';
+ const eleven=roster.starters;
+ const status=eleven.length===11?"11 titulares listados":eleven.length+" titulares informados · lista incompleta";
+ const listing=eleven.map(p=>'<div class="playerrow"><span>'+esc(p.name)+'</span><small>'+esc(p.position)+(playerStatsText(p)?" · "+esc(playerStatsText(p)):"")+'</small></div>').join("");
+ return '<details class="market-check"'+(eleven.length===0?'':'')+'><summary><b>'+title+' · '+esc(status)+'</b></summary><div class="playerlist">'+(listing||'<p>Sem titulares identificados nos dados consultados.</p>')+'</div><p>'+roster.reserves.length+' reservas listados na fonte.</p></details>';
+}
+function liveStatTable(summary,game){
+ const teams=Array.isArray(summary?.boxscore?.teams)?summary.boxscore.teams:[];
+ if(teams.length<2)return '<p>Estatísticas por equipe ainda não disponíveis nesta fonte.</p>';
+ const own=team=>teams.find(x=>String(x?.team?.id||"")===String(team.id))
+  ||teams.find(x=>normTeam(x?.team?.displayName||"")===normTeam(team.name));
+ const a=own(game.home),b=own(game.away);
+ if(!a||!b)return '<p>Não foi possível associar com segurança as estatísticas às duas equipes.</p>';
+ const fields=[["Chutes",["totalShots","shots"]],["No alvo",["shotsOnTarget","shotsOnGoal"]],["Escanteios",["cornerKicks","corners","CK"]],["Faltas",["fouls"]]];
+ const rows=fields.map(([label,keys])=>({label,left:statNumber(a.statistics,keys),right:statNumber(b.statistics,keys)}));
+ if(rows.every(x=>x.left===null&&x.right===null))return '<p>A partida não tem estatísticas detalhadas publicadas.</p>';
+ return '<table class="stat-grid"><thead><tr><th>'+esc(game.home.abbr||game.home.name)+'</th><th>Indicador</th><th>'+esc(game.away.abbr||game.away.name)+'</th></tr></thead><tbody>'+
+ rows.map(x=>'<tr><td>'+esc(x.left===null?"—":x.left)+'</td><td>'+esc(x.label)+'</td><td>'+esc(x.right===null?"—":x.right)+'</td></tr>').join("")+'</tbody></table>';
+}
+function extraDataPanels(game){
+ const matchType=game.status==="live"?"Partida ao vivo":"Pré-jogo / registro da partida";
+ return '<div class="panel"><h3>👥 Escalações e estatísticas individuais</h3><p>Fonte: ESPN (não oficial). Publicação não garante escalação oficial. Confira os titulares antes do jogo.</p><div id="lineupStatus" class="studywarning">Consultando escalações…</div><div id="lineupTeams"></div></div>'+
+ '<div class="panel"><h3>📈 Estatísticas por equipe</h3><p>'+esc(matchType)+' · fonte ESPN, sujeita a atraso.</p><div id="liveTeamStats" class="studywarning">Consultando dados da partida…</div><div id="liveDataTime" class="studywarning"></div></div>'+
+ '<div class="panel"><h3>🧮 Conferir odd do mercado</h3><p>Digite a cotação decimal que aparece na sua casa de apostas. Este campo <b>não busca odds automaticamente</b>.</p>'+
+ '<label class="oddslabel" for="oddMarket">Mercado</label><select id="oddMarket"><option>Mais de 1,5 gols</option><option>Mais de 2,5 gols</option><option>Ambos marcam</option><option>Gol no 1º tempo</option><option>Mais de 8,5 escanteios</option><option>Mais de 9,5 escanteios</option><option>Outro mercado</option></select>'+
+ '<label class="oddslabel" for="oddInput">Odd decimal</label><div class="oddsrow"><input id="oddInput" type="text" inputmode="decimal" autocomplete="off" placeholder="Ex.: 2,10"><button class="btn primary" id="oddCalculate" type="button">Calcular</button></div>'+
+ '<p id="oddResult" role="status">A odd precisa ser maior que 1,00.</p><p class="mini-disclaimer">O resultado informa somente a taxa de acerto necessária para equilíbrio teórico, antes de custos. Não prevê a chance real nem recomenda apostar.</p></div>';
+}
+async function updateExtraMatchData(game){
+ const key=preKey(game);
+ if(active!==key||!$("lineupTeams"))return;
+ try{
+  const response=await api(matchSummaryUrl(game));
+  if(active!==key||!$("lineupTeams"))return;
+  const home=teamLineup(response,game.home),away=teamLineup(response,game.away);
+  $("lineupTeams").innerHTML=rosterMarkup(game.home,home)+rosterMarkup(game.away,away);
+  const both=home?.starters.length===11&&away?.starters.length===11;
+  $("lineupStatus").textContent=both?"Ambas as equipes têm 11 titulares informados pela ESPN.":"Lista ainda parcial ou indisponível: não considerar escalação confirmada.";
+  $("liveTeamStats").innerHTML=liveStatTable(response,game);
+  $("liveDataTime").textContent="Consulta realizada às "+clock(new Date())+" · dados da ESPN podem atrasar.";
+ }catch{
+  if(active!==key||!$("lineupTeams"))return;
+  $("lineupStatus").textContent="Não foi possível consultar as escalações. Tente atualizar.";
+  $("lineupTeams").innerHTML="";
+  $("liveTeamStats").textContent="Estatísticas indisponíveis na consulta.";
+  $("liveDataTime").textContent="";
+ }
+}
+function bindOddCalculator(){
+ const btn=$("oddCalculate");if(!btn)return;
+ btn.onclick=()=>{
+  const raw=String($("oddInput").value||"").trim().replace(",",".");
+  const n=Number(raw),out=$("oddResult");
+  if(!Number.isFinite(n)||n<=1||n>10000){out.textContent="Digite uma odd decimal válida, maior que 1,00.";return}
+  const percent=(100/n).toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:2});
+  out.textContent=$("oddMarket").value+": odd "+n.toLocaleString("pt-BR")+" exige pelo menos "+percent+"% de acertos para equilíbrio teórico antes de custos. Sem estimativa da chance real, não é possível afirmar vantagem.";
+ };
+}
+
 async function openDetail(key){const g=state.games.find(x=>x.code+"-"+x.id===key);if(!g)return;active=key;$("overlay").classList.remove("hidden");$("gameTitle").textContent=g.home.name+" x "+g.away.name;$("gameBody").innerHTML='<div class="panel"><p>Buscando histórico recente das equipes...</p></div>';const [a,b]=await Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]);if(active!==key)return;
 let str='<div class="panel"><h3>'+esc(g.label)+'</h3><p>'+esc(dateTime(g.start))+' • '+esc(g.detail||g.status)+'</p><p>'+esc(g.home.name)+' x '+esc(g.away.name)+'</p></div><div class="panel"><h3>Histórico disponível nesta competição</h3><p>'+esc(g.home.name)+': '+a.length+' partidas • '+esc(g.away.name)+': '+b.length+' partidas.</p></div>';
 if(g.status==="upcoming"){
@@ -479,7 +566,7 @@ if(g.status==="upcoming"){
 }
 if(a.length>=3&&b.length>=3){str+='<div class="panel"><h3>Frequências históricas — não são previsões</h3>';for(const [name,fn] of [["2+ gols na partida",x=>x.total>=2],["3+ gols na partida",x=>x.total>=3],["Ambos marcam",x=>x.btts]]){str+='<div class="insight"><b>'+esc(name)+'</b><small>'+esc(g.home.name)+": "+a.filter(fn).length+"/"+a.length+" • "+esc(g.away.name)+": "+b.filter(fn).length+"/"+b.length+" na amostra recente. Não é cotação nem probabilidade de vitória.</small></div>"}str+='</div>'}else str+='<div class="notice">Histórico insuficiente na fonte. Não podemos calcular uma tendência confiável.</div>';
 if(g.status==="upcoming"){str+=extraMarketPanel(g);str+=cornerMarketPanel()}
-str+='<div class="notice">Escalações, chutes no gol, assistências e odds NÃO são confirmados por este aplicativo. Os dados da ESPN são fornecidos sem garantia de atualização. Nenhuma aposta é feita.</div>';$("gameBody").innerHTML=str;if(g.status==="upcoming"){updateFirstHalfPanel(g,a,b);updateCornerPanel(g,a,b)}}
+str+='<div class="notice">Escalações e estatísticas podem ser consultadas quando a ESPN as publica, mas não são verificadas como oficiais. Odds só podem ser inseridas manualmente. Nenhuma aposta é feita.</div>';str+=extraDataPanels(g);$("gameBody").innerHTML=str;bindOddCalculator();updateExtraMatchData(g);if(g.status==="upcoming"){updateFirstHalfPanel(g,a,b);updateCornerPanel(g,a,b)}}
 $("close").onclick=()=>{active="";$("overlay").classList.add("hidden")};$("overlay").onclick=e=>{if(e.target===$("overlay"))$("close").click()};
 if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("./sw.js").catch(()=>{});
 
