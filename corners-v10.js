@@ -19,7 +19,7 @@
   return m&&Number(m[1])>45&&Number(m[1])<=120?2:null;
  }
  function splitCornerPeriods(summary,total){
-  if(total===0)return {first:0,second:0};
+  // Total zero não comprova a existência de uma linha do tempo completa.\n  // Sem eventos verificáveis, não transformar ausência de dados em zero.\n  if(total===0)return null;
   const feeds=[summary?.plays,summary?.keyEvents,summary?.details?.plays,summary?.details?.keyEvents,summary?.commentary?.plays];
   for(const feed of feeds){
    if(!Array.isArray(feed))continue;
@@ -119,7 +119,7 @@
    ["first","second","total","team","venue","most"].forEach(s=>set(s,"Insuficiente",coverage+"Pelo menos uma equipe ficou sem partidas com totais confirmados."));
    return;
   }
-  const quality=H.length>=5&&A.length>=5?"Histórico disponível":"Amostra curta";
+  const quality=H.length>=5&&A.length>=5?"Histórico disponível":"Amostra curta — NÃO VALIDADO";
   set("total",quality,coverage+study(game.home.name,H,"total",[7.5,8.5,9.5])+". "+study(game.away.name,A,"total",[7.5,8.5,9.5])+". São frequências de jogos separados, não da partida futura.");
   set("team",quality,byTeam(game.home.name,H)+". "+byTeam(game.away.name,A)+".");
   const homeAtHome=H.filter(x=>x.venue==="casa"),awayAway=A.filter(x=>x.venue==="fora");
@@ -127,9 +127,9 @@
   set("most",quality,game.home.name+" liderou em cantos "+H.filter(x=>x.own>x.opponent).length+"/"+H.length+" jogos; "+game.away.name+" liderou "+A.filter(x=>x.own>x.opponent).length+"/"+A.length+". Empates não contam como liderança.");
   for(const field of ["first","second"]){
    const home=H.filter(r=>Number.isInteger(r[field])),away=A.filter(r=>Number.isInteger(r[field]));
-   const state=home.length>=3&&away.length>=3?"Eventos conferidos":"Cobertura insuficiente";
+   const state=home.length>=5&&away.length>=5?"Eventos conferidos":"Cobertura insuficiente";
    const info="Eventos completos de "+(field==="first"?"1º":"2º")+" tempo: "+game.home.name+" "+home.length+"/"+H.length+" e "+game.away.name+" "+away.length+"/"+A.length+". ";
-   set(field,state,info+(home.length&&away.length?study(game.home.name,home,field,[3.5,4.5])+". "+study(game.away.name,away,field,[3.5,4.5])+". ":"")+"Se a fonte mostrar somente o total de 90 minutos, a divisão por período fica indisponível.");
+   set(field,state,info+(home.length>=5&&away.length>=5?study(game.home.name,home,field,[2.5,3.5,4.5])+". "+study(game.away.name,away,field,[2.5,3.5,4.5])+". ":"SEM DADO CONFIÁVEL — NÃO VALIDADO. ")+"Se a fonte mostrar somente o total de 90 minutos, a divisão por período fica indisponível.");
   }
  }
  // Funções anteriores eram chamadas ao abrir o detalhe. Sobrescrevê-las sem
