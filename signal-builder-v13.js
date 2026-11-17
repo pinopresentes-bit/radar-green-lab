@@ -9,7 +9,7 @@ style.textContent='#assembledContent .am-card{background:#10291b;border:1px soli
 document.head.append(style);
 const studies=new Map(),rosters=new Map();
 const toRow=(name,value,reason,yes)=>'<div class="am-row"><strong>'+esc(name)+'</strong><span class="am-value'+(yes?'':' off')+'">'+esc(value)+'</span><small>'+esc(reason)+'</small></div>';
-const candidate=()=>{const g=preCandidates();const key=window.greenLabPriorityKey;return (key&&g.find(x=>preKey(x)===key))||g.find(x=>pregameStudyCache.get(preKey(x))?.findings?.length)||g[0]||null};
+const candidate=()=>{const g=preCandidates().filter(x=>new Date(x.start).getTime()>Date.now());const soon=g.filter(x=>new Date(x.start).getTime()-Date.now()<=7200000).sort((a,b)=>new Date(a.start)-new Date(b.start));if(soon.length)return soon.find(x=>pregameStudyCache.get(preKey(x))?.findings?.length)||soon[0];const key=window.greenLabPriorityKey;return (key&&g.find(x=>preKey(x)===key))||g.find(x=>pregameStudyCache.get(preKey(x))?.findings?.length)||g[0]||null};
 function hMarket(h,a,rule,min,market){
  const p=h.filter(rule).length,q=a.filter(rule).length,ready=h.length>=5&&a.length>=5;
  const ok=ready&&p>=min&&q>=min;
@@ -71,10 +71,10 @@ function render(){
  const one=hMarket(h,a,x=>x.total>=2,4,"Mais de 1,5 gols");
  const two=hMarket(h,a,x=>x.total>=3,4,"Mais de 2,5 gols");
  const both=hMarket(h,a,x=>x.btts,3,"Ambas marcam: SIM");
- const ct=d?.done?cornerPick(d.hCorners,d.aCorners,"total",[7.5,8.5,9.5,10.5]):null;
+ const ct=d?.done?cornerPick(d.hCorners,d.aCorners,"total",[6.5,7.5,8.5,9.5,10.5]):null;
  const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
  const cornerRow=(label,x,s1,s2)=>{
-  return toRow(label,x?"🟡 "+x.label:d?.done?"⚪ Sem tendência com critério suficiente":"⏳ Consultando registros",
+  return toRow(label,x?"🟡 "+x.label:d?.done?"🔴 SEM DADO CONFIÁVEL — NÃO VALIDADO":"⏳ Consultando registros",
    x?x.info:d?.done?(s1<5||s2<5?"SEM DADO CONFIÁVEL — NÃO VALIDADO: "+s1+" e "+s2+" jogos por equipe; exigidos ao menos 5 para cada lado.":"Amostra de "+s1+" e "+s2+" jogos: nenhuma linha atingiu o filtro de 75% em cada equipe. NÃO VALIDADO."):"Verificando registros dos últimos jogos.",!!x);
  };
  const playerRow=(label,kind)=>{
@@ -100,8 +100,8 @@ function render(){
  review+coverage+'<div class="am-rows">'+
  toRow("⚽ Gols: 1,5",one.value,one.explain,one.ok)+
  toRow("⚽ Gols: 2,5",two.value,two.explain,two.ok)+
- cornerRow("🚩 Escanteios 1º tempo",cf,d?.hHalves?.length||0,d?.aHalves?.length||0)+
- cornerRow("🚩 Escanteios totais",ct,d?.hCorners?.length||0,d?.aCorners?.length||0)+
+ cornerRow("🚩 ESCANTEIOS 1º TEMPO · 2,5/3,5/4,5",cf,d?.hHalves?.length||0,d?.aHalves?.length||0)+
+ cornerRow("🚩 ESCANTEIOS TOTAL · 6,5/7,5/8,5/9,5/10,5",ct,d?.hCorners?.length||0,d?.aCorners?.length||0)+
  toRow("🤝 Ambas marcam",both.value,both.explain,both.ok)+
  playerRow("🥅 Marcador (somente 1)","goal")+
  playerRow("🎯 Chute no gol (1 jogador)","shot")+
