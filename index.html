@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v28">
+<meta name="green-lab-build" content="2026-11-18-v29">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -114,12 +114,12 @@ let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}cat
 const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
 const state={date:ymd(new Date()),filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-17-v28";
+const APP_BUILD="2026-11-18-v29";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
 $("day").onchange=e=>{if(e.target.value)setDay(e.target.value)};
-$("refresh").onclick=()=>{for(const [key,study] of pregameStudyCache){if(study.error||study.hCount===0||study.aCount===0)pregameStudyCache.delete(key)}pregameBatch="";pregameBatchToken++;load()};
+$("refresh").onclick=()=>{pregameStudyCache.clear();lineupCheckCache.clear();pregameBatch="";pregameBatchToken++;load()};
 function setDay(x){try{localStorage.setItem("gl-selected-day",x)}catch{}liveQuickResults=[];lastLiveSignalAt=0;state.date=x;$("day").value=x;state.games=[];state.loaded=false;pregameBatch="";pregameBatchToken++;render();renderPreCards();load()}
 document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("on",b.dataset.tab===state.filter));
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{state.filter=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(t=>t.classList.toggle("on",t===b));render()});
@@ -579,7 +579,7 @@ function renderActionHub(){
 function normTeam(x){return String(x||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();}
 function renderHighlights(){
   const section=$("highlights"),list=$("highlightGames");
-  if(!state.loaded){list.innerHTML='<div class="empty">Buscando os destaques do dia...</div>';return}
+  if(!state.loaded){section.hidden=false;list.innerHTML='<div class="empty">Buscando os destaques do dia...</div>';return}
   const today=state.games.filter(g=>g.code==="uefa.nations"&&g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000)
     .sort((a,b)=>new Date(a.start)-new Date(b.start)).slice(0,5);
   if(!today.length){section.hidden=true;return}
@@ -1027,7 +1027,7 @@ async function verifyVersion(silent){
   }else if(match[1]!==APP_BUILD){
    node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
    $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
-  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v28.</div>';
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v29.</div>';
  }catch{
   if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
  }finally{
@@ -1044,7 +1044,7 @@ function refreshWhenReturning(){
   lastVisibleDay=day;setDay(day);return;
  }
  lastVisibleDay=day;
- if(!state.busy&&Date.now()-lastFetchAt>40000&&state.date===day)load();
+ if(!state.busy&&Date.now()-lastFetchAt>40000&&state.date===day)load();else if(state.loaded){render();renderPreCards();renderHighlights();}
   if(Date.now()-lastBuildCheck>300000)verifyVersion(true);
 }
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)refreshWhenReturning()});
@@ -1061,7 +1061,7 @@ window.addEventListener("online",()=>{
 });
 render();load();verifyVersion(true);
 </script>
-<script src="./signal-builder-v13.js?v=20"></script>
-<script src="./corners-v10.js?v=20"></script>
+<script src="./signal-builder-v13.js?v=29"></script>
+<script src="./corners-v10.js?v=29"></script>
 </body>
 </html>
