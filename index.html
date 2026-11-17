@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v17">
+<meta name="green-lab-build" content="2026-11-16-v18">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -71,7 +71,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v17</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v18</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Sinal final: o que está confirmado?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Esta é a primeira tela para decidir o que investigar. <strong>Um estudo histórico não é um sinal validado.</strong></p><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
@@ -98,7 +98,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v17 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v18 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -112,7 +112,7 @@ function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-16-v17";
+const APP_BUILD="2026-11-16-v18";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -216,10 +216,10 @@ function renderLiveMatch(g,stats,items,consultedAt){
  const statLine=stats?[
   stats.shots===null?"Chutes: —":"Chutes: "+stats.shots,
   stats.sot===null?"No alvo: —":"No alvo: "+stats.sot,
-  stats.corners===null?"Escanteios: —":"Escanteios: "+stats.corners
+  stats.corners===null?"Escanteios: —":"Escanteios totais até agora: "+stats.corners
  ].join(" · "):"Estatísticas detalhadas não disponíveis nesta consulta.";
  const marketHtml=items.length
-  ?items.map(item=>'<div class="live-market"><strong>🟡 '+esc(item.name)+'</strong><small>'+esc(item.why)+'</small><small>Risco: '+esc(item.risk)+'</small></div>').join("")
+  ?items.map(item=>'<div class="live-market"><strong>🟡 HIPÓTESE AO VIVO · '+esc(item.name)+'</strong><small>'+esc(item.why)+'</small><small>Não é sinal pré-jogo nem entrada validada. Odd não verificada.</small><small>Risco: '+esc(item.risk)+'</small></div>').join("")
   :'<p class="live-no-data">'+(currentMinute(g.detail)>80?'Partida nos minutos finais: o radar encerra novas hipóteses depois dos 80 minutos.':'Nenhum mercado passou pelos filtros deste jogo nesta consulta.')+'</p>';
  return '<div class="signalitem"><div class="live-game-title">🔴 '+esc(g.home.name)+' × '+esc(g.away.name)+'</div><div class="live-game-meta">'+score+' · '+esc(g.detail||"Ao vivo")+' · '+esc(g.label)+' · Consultado às '+esc(clock(consultedAt))+'</div><div class="facts">'+esc(statLine)+'</div>'+marketHtml+'<button class="sigbutton" data-sig="'+esc(key)+'">Ver partida</button></div>';
 }
@@ -459,7 +459,7 @@ function renderQuickSignals(){
   const line=esc(item.name);
   const snap=[stats.shots===null?"Chutes: indisponíveis":"Chutes: "+stats.shots,
    stats.sot===null?"No alvo: indisponível":"No alvo: "+stats.sot,
-   stats.corners===null?"Escanteios: indisponíveis":"Escanteios: "+stats.corners].join(" · ");
+   stats.corners===null?"Escanteios: indisponíveis":"Escanteios totais até agora: "+stats.corners].join(" · ");
   rows.push('<article class="quick-card"><div class="quick-top">🔴 AO VIVO · '+esc(g.detail||"Em andamento")+' · Consultado às '+esc(clock(new Date(lastLiveSignalAt)))+'</div>'+
    '<h3>'+esc(g.home.name)+' × '+esc(g.away.name)+' · '+esc(g.home.score)+'–'+esc(g.away.score)+'</h3>'+
    '<div class="quick-market">Mercado em estudo: '+line+'</div>'+
@@ -972,7 +972,7 @@ async function verifyVersion(silent){
   }else if(match[1]!==APP_BUILD){
    node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
    $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
-  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v17.</div>';
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v18.</div>';
  }catch{
   if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
  }finally{
@@ -997,7 +997,7 @@ window.addEventListener("pageshow",()=>{if(!document.hidden&&state.loaded)refres
 setInterval(()=>{if(!document.hidden&&state.date===ymd(new Date()))load()},30000);
 render();load();verifyVersion(true);
 </script>
-<script src="./signal-builder-v13.js?v=16"></script>
-<script src="./corners-v10.js?v=16"></script>
+<script src="./signal-builder-v13.js?v=18"></script>
+<script src="./corners-v10.js?v=18"></script>
 </body>
 </html>
