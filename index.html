@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v20">
+<meta name="green-lab-build" content="2026-11-16-v21">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -71,7 +71,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v20</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v21</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Sinal final: o que está confirmado?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Esta é a primeira tela para decidir o que investigar. <strong>Um estudo histórico não é um sinal validado.</strong></p><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
@@ -477,7 +477,7 @@ function renderFinalHub(){
   }).join("");
   box.querySelectorAll("[data-final]").forEach(b=>b.onclick=()=>openDetail(b.dataset.final));
  }
- foot.textContent="Até 3 partidas, um cartão por jogo com os mercados encontrados. "+games.length+" partidas futuras; "+pending.length+" aguardando histórico. A ordem não representa probabilidade de acerto. Atualizado: "+clock(new Date())+".";
+ foot.textContent="Até 3 partidas, um cartão por jogo com os mercados encontrados. "+games.length+" partidas futuras; "+pending.length+" aguardando histórico. A ordem é frequência histórica, NÃO confiança nem probabilidade real. Antes de qualquer sinal: confirmar fontes, amostra, escalações oficiais, desfalques e riscos. Atualizado: "+clock(new Date())+".";
 }
 function renderQuickSignals(){
  const list=$("quickList"),counter=$("quickCount"),foot=$("quickFoot");
@@ -539,6 +539,7 @@ function pregameStudies(home,away){
   const definitions=[
     {type:"goals",name:"Mais de 1,5 gols",rule:r=>r.total>=2,min:4},
     {type:"goals",name:"Mais de 2,5 gols",rule:r=>r.total>=3,min:4},
+    {type:"goals",name:"Menos de 4,5 gols",rule:r=>r.total<5,min:4},
     {type:"btts",name:"Ambas marcam",rule:r=>r.btts,min:3}
   ];
   return definitions.map(x=>{
@@ -779,10 +780,10 @@ function marketRow(emoji,title,desc,kind,id){
  return '<div class="market-check"><div class="market-top"><b>'+emoji+' '+esc(title)+'</b><span class="market-state"'+mark+'>'+esc(kind)+'</span></div><p'+details+'>'+esc(desc)+'</p></div>';
 }
 function extraMarketPanel(game){
- let str='<div class="panel"><h3>⚽ Radar de mercados • pré-jogo</h3><p>Cada mercado tem seu próprio requisito de dados. Status pendente não significa sinal de entrada.</p>';
+ let str='<div class="panel"><h3>⚽ Radar de mercados • pré-jogo</h3><p>PRIORIDADE: estudo profundo por partida, fontes rastreáveis e dados recentes. Gols +1,5 / +2,5 / -4,5, ambas marcam e gol no 1º tempo. Dados pendentes NÃO são sinal.</p>';
  str+=marketRow("🥅","Jogador para marcar","Precisa da escalação confirmada e histórico recente de gols e minutos do jogador. Não vamos escolher um nome sem essas informações.","Dados pendentes","player-goal");
  str+=marketRow("🎯","Assistência de jogador","Precisa dos titulares e números individuais de assistências e criação de chances.","Dados pendentes","player-assist");
- str+='<p class="mini-disclaimer">O radar de escanteios (total, por equipe, 1º tempo e mais opções) aparece em um painel próprio, logo abaixo.</p>';
+ str+='<p class="mini-disclaimer">Jogadores: checar provável formação e titulares oficiais, posição, minutos, gols, assistências, chutes no alvo, desfalques e adversários dos últimos 5–10 jogos. ESPN não é confirmação oficial. Escanteios aparecem no painel abaixo.</p>';
  str+='<div class="market-check"><div class="market-top"><b>⚽ Gol no 1º tempo</b><span class="market-state" id="half-status">Verificando</span></div><p id="half-study">Consultando o minuto dos gols nos jogos anteriores, quando disponível...</p></div>';
  str+=marketRow("🥅","Chute no gol de jogador","Precisa da confirmação do jogador e de estatísticas individuais de finalizações no alvo.","Dados pendentes","player-shot");
  str+='<p class="mini-disclaimer">Sinais individuais e de primeiro tempo só serão classificados como observação quando houver dados do mercado específico. Nenhuma odd foi consultada.</p></div>';
@@ -827,9 +828,9 @@ async function lastCorners(game,team,matches){
 }
 function cornerMarketPanel(){
  let str='<div class="panel"><h3>🚩 Radar de escanteios • pré-jogo</h3><p>Tipos disponíveis para estudo. Os números são obtidos dos últimos jogos somente quando a fonte publica escanteios de cada equipe.</p>';
- str+='<div class="market-check"><div class="market-top"><b>🚩 Total de escanteios na partida</b><span class="market-state" id="corner-total-status">Buscando</span></div><p id="corner-total-data">Conferindo médias e linhas de 7,5 • 8,5 • 9,5 • 10,5 escanteios...</p></div>';
+ str+='<div class="market-check"><div class="market-top"><b>🚩 Total de escanteios na partida</b><span class="market-state" id="corner-total-status">Buscando</span></div><p id="corner-total-data">Conferindo escanteios totais 6,5 • 7,5 • 8,5 • 9,5 • 10,5, feitos/cedidos e mando; sem amostra confiável, NÃO VALIDADO.</p></div>';
  str+='<div class="market-check"><div class="market-top"><b>🏟️ Escanteios por equipe</b><span class="market-state" id="corner-team-status">Buscando</span></div><p id="corner-team-data">Consultando os escanteios cobrados por cada equipe nos jogos anteriores...</p></div>';
- str+=marketRow("⏱️","Escanteios no 1º tempo","Exemplos: mais de 3,5 ou 4,5. Precisamos de escanteios por período, não somente o total final.","Dados pendentes");
+ str+=marketRow("⏱️","Escanteios no 1º tempo","Linhas: mais de 2,5 / 3,5 / 5,5 e menos de 5,5. SEM DADO CONFIÁVEL — NÃO VALIDADO até comprovar 5–10 jogos com eventos do primeiro tempo; jamais dividir escanteios totais por dois.","Dados pendentes");
  str+=marketRow("⚡","Escanteio nos primeiros 10 minutos","Exemplo: pelo menos um escanteio nos 10 minutos iniciais. Exige registro do minuto de cada escanteio.","Dados pendentes");
  str+='<div class="market-check"><div class="market-top"><b>⚖️ Quem cobra mais escanteios?</b><span class="market-state" id="corner-most-status">Buscando</span></div><p id="corner-most-data">Comparando frequência histórica de liderança em escanteios de cada equipe...</p></div>';
  str+=marketRow("📐","Handicap de escanteios","Exemplos: equipe +1,5 ou -1,5. Exige análise da diferença de escanteios entre equipes e disponibilidade da linha.","Análise futura");
