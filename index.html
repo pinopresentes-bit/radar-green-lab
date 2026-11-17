@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v27">
+<meta name="green-lab-build" content="2026-11-17-v28">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -99,7 +99,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v27 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v28 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -112,15 +112,16 @@ function clock(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,hour:"2-di
 function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}).format(new Date(x))}
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
-const state={date:savedStudyDay||ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
+const state={date:ymd(new Date()),filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-17-v27";
+const APP_BUILD="2026-11-17-v28";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
 $("day").onchange=e=>{if(e.target.value)setDay(e.target.value)};
 $("refresh").onclick=()=>{for(const [key,study] of pregameStudyCache){if(study.error||study.hCount===0||study.aCount===0)pregameStudyCache.delete(key)}pregameBatch="";pregameBatchToken++;load()};
 function setDay(x){try{localStorage.setItem("gl-selected-day",x)}catch{}liveQuickResults=[];lastLiveSignalAt=0;state.date=x;$("day").value=x;state.games=[];state.loaded=false;pregameBatch="";pregameBatchToken++;render();renderPreCards();load()}
+document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("on",b.dataset.tab===state.filter));
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{state.filter=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(t=>t.classList.toggle("on",t===b));render()});
 $("league").onchange=e=>{state.league=e.target.value;render()};
 function parseGame(e,code,label){const co=e.competitions?.[0]?.competitors||[];const home=co.find(x=>x.homeAway==="home")||co[0],away=co.find(x=>x.homeAway==="away")||co[1];if(!home||!away)return null;
@@ -579,7 +580,7 @@ function normTeam(x){return String(x||"").normalize("NFD").replace(/[\u0300-\u03
 function renderHighlights(){
   const section=$("highlights"),list=$("highlightGames");
   if(!state.loaded){list.innerHTML='<div class="empty">Buscando os destaques do dia...</div>';return}
-  const today=state.games.filter(g=>g.code==="uefa.nations"&&g.status!=="done")
+  const today=state.games.filter(g=>g.code==="uefa.nations"&&g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000)
     .sort((a,b)=>new Date(a.start)-new Date(b.start)).slice(0,5);
   if(!today.length){section.hidden=true;return}
   section.hidden=false;
@@ -679,8 +680,8 @@ $("preSort").onclick=()=>{preOrder=preOrder==="time"?"study":"time";$("preSort")
 function logo(t){return /^https:\/\//.test(t.logo)?'<img src="'+esc(t.logo)+'" alt="" loading="lazy">':'<span class="initial">'+esc(t.abbr||t.name.slice(0,2))+'</span>'}
 function card(g){const key=g.code+"-"+g.id,isFav=state.favs.has(key);const st=g.status==="live"?"🔴 "+(g.detail||"AO VIVO"):g.status==="done"?"Final":clock(g.start);
 return '<article class="game '+(g.status==="live"?"live":"")+'"><div class="ghead"><b>'+esc(g.label)+'</b><span class="status '+g.status+'">'+esc(st)+'</span></div><div class="match"><div class="team">'+logo(g.home)+'<strong>'+esc(g.home.name)+'</strong></div><div class="score">'+(g.status==="upcoming"?"×":esc(g.home.score)+" : "+esc(g.away.score))+'<small>'+(g.status==="upcoming"?"Pré-jogo":"Placar")+'</small></div><div class="team">'+logo(g.away)+'<strong>'+esc(g.away.name)+'</strong></div></div><div class="gfoot"><button class="fav '+(isFav?"on":"")+'" data-fav="'+esc(key)+'">'+(isFav?"★":"☆")+'</button><small class="muted">'+esc(dateTime(g.start))+'</small><button class="detailbtn" data-detail="'+esc(key)+'">Analisar →</button></div></article>'}
-function render(){const all=state.games,filtered=all.filter(g=>(state.league==="all"||g.code===state.league)&&(state.filter==="all"||g.status===state.filter||(state.filter==="favorites"&&state.favs.has(g.code+"-"+g.id))));
-$("total").textContent=state.loaded?all.length:"—";$("live").textContent=state.loaded?all.filter(g=>g.status==="live").length:"—";$("next").textContent=state.loaded?all.filter(g=>g.status==="upcoming").length:"—";$("count").textContent=state.loaded?filtered.length+" exibidos":"Buscando";
+function render(){const all=state.games,filtered=all.filter(g=>(state.league==="all"||g.code===state.league)&&(state.filter==="all"||(state.filter==="upcoming"&&g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000)||(state.filter!=="upcoming"&&g.status===state.filter)||(state.filter==="favorites"&&state.favs.has(g.code+"-"+g.id))));
+$("total").textContent=state.loaded?all.length:"—";$("live").textContent=state.loaded?all.filter(g=>g.status==="live").length:"—";$("next").textContent=state.loaded?all.filter(g=>g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000).length:"—";$("count").textContent=state.loaded?filtered.length+" exibidos":"Buscando";
 const available=LEAGUES.filter(l=>all.some(g=>g.code===l[0]));if(!available.some(l=>l[0]===state.league))state.league="all";$("league").innerHTML='<option value="all">Todas as disponíveis</option>'+available.map(l=>'<option value="'+esc(l[0])+'">'+esc(l[1])+'</option>').join("");$("league").value=state.league;
 $("games").innerHTML=filtered.length?filtered.map(card).join(""):'<div class="empty">'+(state.loaded?"Nenhuma partida encontrada neste filtro e data. Experimente outra data ou liga.":"📡 Carregando jogos...")+"</div>";
 document.querySelectorAll("[data-fav]").forEach(b=>b.onclick=()=>{const k=b.dataset.fav;state.favs.has(k)?state.favs.delete(k):state.favs.add(k);try{localStorage.setItem("gl-favs",JSON.stringify([...state.favs]))}catch{}render()});
@@ -1026,7 +1027,7 @@ async function verifyVersion(silent){
   }else if(match[1]!==APP_BUILD){
    node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
    $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
-  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v27.</div>';
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v28.</div>';
  }catch{
   if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
  }finally{
@@ -1052,8 +1053,8 @@ window.addEventListener("pageshow",()=>{if(!document.hidden&&state.loaded)refres
 setInterval(()=>{
  if(document.hidden||state.busy)return;
  const today=ymd(new Date());
- if(state.date!==today)return;
- if(Date.now()-lastFetchAt>=60000)load();
+ if(state.date!==today){if(state.date===lastVisibleDay){lastVisibleDay=today;setDay(today)}return;}
+ if(Date.now()-lastFetchAt>=60000)load();else {render();renderPreCards();renderHighlights();}
 },30000);
 window.addEventListener("online",()=>{
  if(!document.hidden&&!state.busy&&state.date===ymd(new Date()))load();
