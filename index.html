@@ -570,6 +570,10 @@ const pregameStudyCache=new Map();
 let pregameBatch="",pregameBatchToken=0,pregameInProgress=false,preMarket="all",preOrder="time";
 function pregameStudies(home,away){
   if(home.length<5||away.length<5)return [];
+  // The UI reports x/5: use exactly the five most recent completed matches.
+  // teamHistory may return up to ten matches for other analyses.
+  home=home.slice(0,5);
+  away=away.slice(0,5);
   const definitions=[
     {type:"goals",name:"Mais de 1,5 gols",rule:r=>r.total>=2,min:4},
     {type:"goals",name:"Mais de 2,5 gols",rule:r=>r.total>=3,min:4},
