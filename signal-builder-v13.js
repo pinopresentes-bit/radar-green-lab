@@ -96,6 +96,7 @@ function render(){
  const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na casa. Histórico de 5 jogos não comprova vantagem; sem cotação verificada, não há avaliação de valor.</div>':'';
  status.textContent=d?.done?"8 campos estudados · 0 sinais validados":"Consultando 8 campos";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
+ '<div class="am-warning">⏱️ Confira o horário e a partida na fonte oficial antes de qualquer entrada. Japão × Paraguai (17/11): <a href="https://www.jfa.jp/eng/samuraiblue/20261117/match_page/m4.html" target="_blank" rel="noopener noreferrer" style="color:#9afaaf">JFA — escalação oficial</a>. Lista de convocados não equivale a 11 titulares. Daichi Kamada foi liberado após o jogo com o Brasil; não usar escalação anterior como confirmação.</div>'+ 
  '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
  review+coverage+'<div class="am-rows">'+
  toRow("⚽ Gols: 1,5",one.value,one.explain,one.ok)+
