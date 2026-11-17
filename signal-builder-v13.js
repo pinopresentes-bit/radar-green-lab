@@ -71,6 +71,9 @@ function render(){
  const one=hMarket(h,a,x=>x.total>=2,4,"Mais de 1,5 gols");
  const two=hMarket(h,a,x=>x.total>=3,4,"Mais de 2,5 gols");
  const both=hMarket(h,a,x=>x.btts,3,"Ambas marcam: SIM");
+ const bothNo=hMarket(h,a,x=>!x.btts,3,"Ambas marcam: NÃO");
+ const under=hMarket(h,a,x=>x.total<4,4,"Menos de 3,5 gols");
+ const halfSecond=d?.done?cornerPick(d.hCorners.filter(x=>Number.isInteger(x.total)&&Number.isInteger(x.first)).map(x=>({second:x.total-x.first})),d.aCorners.filter(x=>Number.isInteger(x.total)&&Number.isInteger(x.first)).map(x=>({second:x.total-x.first})),"second",[2.5,3.5,4.5]):null;
  const ct=d?.done?cornerPick(d.hCorners,d.aCorners,"total",[6.5,7.5,8.5,9.5,10.5]):null;
  const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
  const cornerRow=(label,x,s1,s2)=>{
@@ -94,16 +97,19 @@ function render(){
  const selected=options[0]||null;
  const coverage=d?.done?'<div class="am-warning">📚 Cobertura de dados: histórico de gols '+esc(h.length)+' jogos (mandante) e '+esc(a.length)+' jogos (visitante); escanteios totais '+esc(d.hCorners?.length||0)+' e '+esc(d.aCorners?.length||0)+'; escanteios 1º tempo '+esc(d.hHalves?.length||0)+' e '+esc(d.aHalves?.length||0)+'. Estatísticas ausentes não são zero. Fonte: registros ESPN; conferir em fonte oficial.</div>':'';
  const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na casa. Histórico de 5 jogos não comprova vantagem; sem cotação verificada, não há avaliação de valor.</div>':'';
- status.textContent=d?.done?"8 campos estudados · 0 sinais validados":"Consultando 8 campos";
+ status.textContent=d?.done?"11 campos estudados · 0 sinais validados":"Consultando 11 campos";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
- '<div class="am-warning">⏱️ Confira o horário e a partida na fonte oficial antes de qualquer entrada. Japão × Paraguai (17/11): <a href="https://www.jfa.jp/eng/samuraiblue/20261117/match_page/m4.html" target="_blank" rel="noopener noreferrer" style="color:#9afaaf">JFA — escalação oficial</a>. Lista de convocados não equivale a 11 titulares. Daichi Kamada foi liberado após o jogo com o Brasil; não usar escalação anterior como confirmação.</div>'+ 
+ '<div class="am-warning">⏱️ Confira o horário e a partida na fonte oficial antes de qualquer entrada. Lista de convocados não equivale a 11 titulares; confira a escalação desta partida.</div>'+ 
  '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
  review+coverage+'<div class="am-rows">'+
  toRow("⚽ Gols: 1,5",one.value,one.explain,one.ok)+
  toRow("⚽ Gols: 2,5",two.value,two.explain,two.ok)+
+ toRow("⚽ Menos de 3,5 gols",under.value,under.explain,under.ok)+
  cornerRow("🚩 ESCANTEIOS 1º TEMPO · 2,5/3,5/4,5",cf,d?.hHalves?.length||0,d?.aHalves?.length||0)+
  cornerRow("🚩 ESCANTEIOS TOTAL · 6,5/7,5/8,5/9,5/10,5",ct,d?.hCorners?.length||0,d?.aCorners?.length||0)+
- toRow("🤝 Ambas marcam",both.value,both.explain,both.ok)+
+ toRow("🚩 ESCANTEIOS 2º TEMPO · 2,5/3,5/4,5","⚪ SEM DADO CONFIÁVEL — NÃO VALIDADO","Somente exibir projeção após verificar separadamente eventos reais do segundo tempo. Não dividir o total por dois.",false)+
+ toRow("🤝 Ambas marcam: SIM",both.value,both.explain,both.ok)+
+ toRow("🤝 Ambas marcam: NÃO",bothNo.value,bothNo.explain,bothNo.ok)+
  playerRow("🥅 Marcador (somente 1)","goal")+
  playerRow("🎯 Chute no gol (1 jogador)","shot")+
  playerRow("🅰 Assistência (1 jogador)","assist")+
