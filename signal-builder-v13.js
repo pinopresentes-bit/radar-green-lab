@@ -91,11 +91,12 @@ function render(){
   {ok:!!ct,market:ct?.label+" (jogo)",detail:ct?.info}
  ].filter(x=>x.ok);
  const selected=options[0]||null;
+ const coverage=d?.done?'<div class="am-warning">📚 Cobertura de dados: histórico de gols '+esc(h.length)+' jogos (mandante) e '+esc(a.length)+' jogos (visitante); escanteios totais '+esc(d.hCorners?.length||0)+' e '+esc(d.aCorners?.length||0)+'; escanteios 1º tempo '+esc(d.hHalves?.length||0)+' e '+esc(d.aHalves?.length||0)+'. Estatísticas ausentes não são zero. Fonte: registros ESPN; conferir em fonte oficial.</div>':'';
  const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na BR365 ou 99Play. Sem odd verificada, não há avaliação de valor.</div>':'';
- status.textContent=d?.done?"8 campos verificados":"Verificando 8 campos";
+ status.textContent=d?.done?"8 campos estudados · sem validação":"Consultando 8 campos";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
  '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
- review+'<div class="am-rows">'+
+ review+coverage+'<div class="am-rows">'+
  toRow("⚽ Gols: 1,5",one.value,one.explain,one.ok)+
  toRow("⚽ Gols: 2,5",two.value,two.explain,two.ok)+
  cornerRow("🚩 Escanteios 1º tempo",cf,d?.hHalves?.length||0,d?.aHalves?.length||0)+
