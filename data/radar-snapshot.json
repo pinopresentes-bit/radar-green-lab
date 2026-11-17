@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-17T15:23:12.700558+00:00",
+  "generated_at_utc": "2026-11-17T16:29:34.782507+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -54,7 +54,7 @@
       "start": "2026-11-17T13:00Z",
       "home": "Lebanon",
       "away": "Palestine",
-      "state": "pre",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -72,7 +72,7 @@
       "start": "2026-11-17T14:00Z",
       "home": "Qatar",
       "away": "South Korea",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -81,7 +81,7 @@
       "start": "2026-11-17T14:10Z",
       "home": "United Arab Emirates",
       "away": "Syria",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -90,7 +90,7 @@
       "start": "2026-11-17T15:30Z",
       "home": "Saudi Arabia",
       "away": "Uzbekistan",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -99,7 +99,7 @@
       "start": "2026-11-17T16:00Z",
       "home": "Jordan",
       "away": "Australia",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -108,7 +108,7 @@
       "start": "2026-11-17T16:00Z",
       "home": "Russia",
       "away": "Venezuela",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -117,7 +117,7 @@
       "start": "2026-11-17T16:15Z",
       "home": "Iraq",
       "away": "Iran",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
