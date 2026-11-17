@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v48">
+<meta name="green-lab-build" content="2026-11-17-v49">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -114,7 +114,7 @@ let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}cat
 const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
 const state={date:ymd(new Date()),filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-17-v48";
+const APP_BUILD="2026-11-17-v49";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -124,9 +124,31 @@ function setDay(x){try{localStorage.setItem("gl-selected-day",x)}catch{}liveQuic
 document.querySelectorAll("[data-tab]").forEach(b=>b.classList.toggle("on",b.dataset.tab===state.filter));
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{state.filter=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(t=>t.classList.toggle("on",t===b));render()});
 $("league").onchange=e=>{state.league=e.target.value;render()};
+function teamNameBR(name){
+ const aliases={
+  "denmark":"Dinamarca","norway":"Noruega","wales":"País de Gales",
+  "hungary":"Hungria","n ireland":"Irlanda do Norte","northern ireland":"Irlanda do Norte",
+  "bosnia-herz":"Bósnia e Herzegovina","bosnia and herzegovina":"Bósnia e Herzegovina",
+  "romania":"Romênia","poland":"Polônia","sweden":"Suécia",
+  "ireland":"Irlanda","portugal":"Portugal","england":"Inglaterra",
+  "germany":"Alemanha","spain":"Espanha","france":"França",
+  "scotland":"Escócia","austria":"Áustria","switzerland":"Suíça",
+  "czechia":"Tchéquia","croatia":"Croácia","belgium":"Bélgica",
+  "netherlands":"Países Baixos","italy":"Itália","slovakia":"Eslováquia",
+  "slovenia":"Eslovênia","ukraine":"Ucrânia","turkey":"Turquia",
+  "kosovo":"Kosovo","serbia":"Sérvia","albania":"Albânia",
+  "iceland":"Islândia","finland":"Finlândia","greece":"Grécia",
+  "belize":"Belize","st lucia":"Santa Lúcia","barbados":"Barbados",
+  "cayman isl":"Ilhas Cayman","cayman islands":"Ilhas Cayman",
+  "dominica":"Dominica","st kitts & nevis":"São Cristóvão e Névis",
+  "sint maarten":"São Martinho","bonaire":"Bonaire",
+  "japan":"Japão","paraguay":"Paraguai"
+ };
+ return aliases[String(name||"").trim().toLowerCase()]||name;
+}
 function parseGame(e,code,label){const co=e.competitions?.[0]?.competitors||[];const home=co.find(x=>x.homeAway==="home")||co[0],away=co.find(x=>x.homeAway==="away")||co[1];if(!home||!away)return null;
 const typ=e.status?.type||{},status=typ.state==="in"?"live":typ.state==="post"||typ.completed?"done":"upcoming";
-const t=c=>({id:String(c.team?.id||""),name:c.team?.shortDisplayName||c.team?.displayName||"Equipe",logo:c.team?.logo||"",abbr:c.team?.abbreviation||"",score:c.score??"—"});
+const t=c=>{const sourceName=c.team?.shortDisplayName||c.team?.displayName||"Equipe";return {id:String(c.team?.id||""),name:teamNameBR(sourceName),sourceName,logo:c.team?.logo||"",abbr:c.team?.abbreviation||"",score:c.score??"—"};};
 return {id:String(e.id),code,label,home:t(home),away:t(away),start:e.date||e.competitions[0].date,status,detail:typ.shortDetail||typ.detail||""}}
 async function api(url){let error;for(let attempt=0;attempt<2;attempt++){const c=new AbortController(),timer=setTimeout(()=>c.abort(),16000);try{const r=await fetch(url,{cache:"no-store",signal:c.signal});if(!r.ok)throw Error("HTTP "+r.status);return await r.json()}catch(e){error=e}finally{clearTimeout(timer)}if(attempt===0)await new Promise(resolve=>setTimeout(resolve,650))}throw error}
 async function load(){if(state.busy)return;state.busy=true;$("refresh").disabled=true;$("refresh").textContent="Buscando...";$("notice").innerHTML='<div class="notice">🔎 Consultando competições e placares.</div>';const date=state.date;let all=[];state.success=0;state.fails=0;
@@ -886,7 +908,7 @@ function matchSummaryUrl(game){
 }
 function teamLineup(summary,team){
  const rows=Array.isArray(summary?.rosters)?summary.rosters:[];
- const name=normTeam(team.name);
+ const name=normTeam(team.sourceName||team.name);
  const group=rows.find(x=>String(x?.team?.id||"")===team.id&&team.id)
   ||rows.find(x=>normTeam(x?.team?.displayName||x?.team?.shortDisplayName||"")===name);
  if(!group||!Array.isArray(group.roster))return null;
