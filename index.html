@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v22">
+<meta name="green-lab-build" content="2026-11-16-v23">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -63,7 +63,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 .quick-risk{color:#efca8c;font-size:11px;line-height:1.55;margin-top:8px}
 .quick-button{font-size:12px;color:#0c2314;background:#86f0af;border:0;border-radius:8px;padding:10px 12px;margin-top:11px;font-weight:900}
 .quick-card small{display:block;color:#b2cbb7;line-height:1.45;margin-top:5px}
-.gl-legend{display:grid;gap:9px;margin:14px 0;padding:14px;border:1px solid #42634d;border-radius:14px;background:#10261a;font-size:13px;line-height:1.5}.gl-legend>div{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}.gl-dot{display:inline-block;width:12px;height:12px;min-width:12px;border-radius:50%;vertical-align:middle}.gl-green{background:#4ade80}.gl-yellow{background:#facc15}.gl-red{background:#fb7185}.gl-result-note{padding-top:9px;border-top:1px solid #365641;color:#b7d3bf}
+.gl-legend{display:grid;gap:5px;margin:10px 0;padding:10px;border:1px solid #42634d;border-radius:14px;background:#10261a;font-size:13px;line-height:1.5}.gl-legend>div{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}.gl-dot{display:inline-block;width:12px;height:12px;min-width:12px;border-radius:50%;vertical-align:middle}.gl-green{background:#4ade80}.gl-yellow{background:#facc15}.gl-red{background:#fb7185}.gl-result-note{padding-top:9px;border-top:1px solid #365641;color:#b7d3bf}
 </style>
 </head>
 <body>
@@ -72,7 +72,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v22</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v23</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Sinal final: o que está confirmado?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Esta é a primeira tela para decidir o que investigar. <strong>Um estudo histórico não é um sinal validado.</strong></p><div class="gl-legend" role="note" aria-label="Legenda de confiança dos sinais"><div><span class="gl-dot gl-green" aria-hidden="true"></span><b>VERDE</b> — sinal validado com evidências; não garante acerto</div><div><span class="gl-dot gl-yellow" aria-hidden="true"></span><b>AMARELO</b> — em estudo, falta confirmação</div><div><span class="gl-dot gl-red" aria-hidden="true"></span><b>VERMELHO</b> — não validado ou reprovado; não é sinal de entrada</div><div class="gl-result-note">📋 RESULTADOS APÓS O JOGO: 🟢 GREEN = acertou · 🔴 RED = perdeu · ⚪ ANULADO = devolvido. Resultados não são a mesma coisa que confiança pré-jogo.</div></div><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
@@ -99,7 +99,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v22 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v23 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -111,15 +111,16 @@ function ymd(d){const parts=new Intl.DateTimeFormat("en-US",{timeZone:TZ,year:"n
 function clock(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,hour:"2-digit",minute:"2-digit"}).format(new Date(x))}
 function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}).format(new Date(x))}
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
-const state={date:ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
+const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
+const state={date:savedStudyDay||ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-16-v20";
+const APP_BUILD="2026-11-16-v23";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
 $("day").onchange=e=>{if(e.target.value)setDay(e.target.value)};
 $("refresh").onclick=()=>{for(const [key,study] of pregameStudyCache){if(study.error||study.hCount===0||study.aCount===0)pregameStudyCache.delete(key)}pregameBatch="";pregameBatchToken++;load()};
-function setDay(x){liveQuickResults=[];lastLiveSignalAt=0;state.date=x;$("day").value=x;state.games=[];state.loaded=false;pregameBatch="";pregameBatchToken++;render();renderPreCards();load()}
+function setDay(x){try{localStorage.setItem("gl-selected-day",x)}catch{}liveQuickResults=[];lastLiveSignalAt=0;state.date=x;$("day").value=x;state.games=[];state.loaded=false;pregameBatch="";pregameBatchToken++;render();renderPreCards();load()}
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{state.filter=b.dataset.tab;document.querySelectorAll("[data-tab]").forEach(t=>t.classList.toggle("on",t===b));render()});
 $("league").onchange=e=>{state.league=e.target.value;render()};
 function parseGame(e,code,label){const co=e.competitions?.[0]?.competitors||[];const home=co.find(x=>x.homeAway==="home")||co[0],away=co.find(x=>x.homeAway==="away")||co[1];if(!home||!away)return null;
@@ -464,7 +465,7 @@ function renderFinalHub(){
  }).filter(x=>x.findings.length).sort((a,b)=>b.score-a.score||new Date(a.g.start)-new Date(b.g.start));
  status.textContent=studied.length?studied.length+" jogos em estudo":"Sem tendência";
  if(!studied.length){
-  box.innerHTML='<div class="empty">'+(pending.length?"Analisando históricos de "+pending.length+" jogos. ":"Nenhum mercado passou no filtro histórico disponível. ")+'Nenhuma entrada validada.</div>';
+  box.innerHTML='<div class="empty">'+(pending.length?"Analisando históricos de "+pending.length+" jogos. ":"Nenhum mercado passou no filtro histórico da data selecionada. Confira a data no topo e toque em Atualizar jogos. ")+'Nenhuma entrada validada.</div>';
  }else{
   box.innerHTML=studied.slice(0,3).map(({g,findings},idx)=>{
    const l=lineupCheckCache.get(preKey(g)),roster=l&&!l.error&&!l.duplicate&&l.home===11&&l.away===11;
@@ -558,7 +559,7 @@ function renderActionHub(){
  const ready=g=>{const l=lineupCheckCache.get(preKey(g));return !!(l&&!l.error&&!l.duplicate&&l.home===11&&l.away===11)};
  count.textContent=studied.length+" em estudo";
  stats.innerHTML='<span>📊 '+studied.length+' estudos</span><span>👥 '+studied.filter(ready).length+' listas ESPN completas</span><span>🧮 '+studied.filter(g=>manualOdds.has(preKey(g))).length+' odds anotadas</span><span>✅ 0 sinais validados</span>';
- if(!studied.length){list.innerHTML='<div class="empty">'+(candidate.some(g=>!pregameStudyCache.has(preKey(g)))?"Consultando históricos...":"Nenhum mercado passou pelos filtros históricos.")+'</div>';return}
+ if(!studied.length){list.innerHTML='<div class="empty">'+(candidate.some(g=>!pregameStudyCache.has(preKey(g)))?"Consultando históricos...":"Nenhum mercado passou pelos filtros históricos da data selecionada. Confira a data e atualize os jogos.")+'</div>';return}
  const ranked=[...studied].sort((a,b)=>Number(ready(b))-Number(ready(a))||new Date(a.start)-new Date(b.start)).slice(0,6);
  list.innerHTML=ranked.map(g=>{
   const key=preKey(g),d=pregameStudyCache.get(key),l=lineupCheckCache.get(key),q=manualOdds.get(key);
@@ -1032,7 +1033,7 @@ $("checkVersion").onclick=()=>verifyVersion(false);
 
 function refreshWhenReturning(){
  const day=ymd(new Date());
- if(state.date===lastVisibleDay&&day!==lastVisibleDay){
+ if(state.date===lastVisibleDay&&day!==lastVisibleDay&&state.date===ymd(new Date(Date.now()-86400000))){
   // When a new day begins, the home screen should not keep showing yesterday's matches.
   if(state.busy){location.reload();return}
   lastVisibleDay=day;setDay(day);return;
