@@ -83,10 +83,19 @@ function render(){
    r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"Nenhum titular tem histórico individual suficiente publicado.":"Aguardando titulares listados na ESPN e histórico individual de 3+ jogos.",!!p);
  };
  const has=one.ok||two.ok||both.ok||!!ct||!!cf;
+ const options=[
+  {ok:one.ok,market:"Mais de 1,5 gols",detail:one.explain},
+  {ok:two.ok,market:"Mais de 2,5 gols",detail:two.explain},
+  {ok:both.ok,market:"Ambas marcam: SIM",detail:both.explain},
+  {ok:!!cf,market:cf?.label+" (1º tempo)",detail:cf?.info},
+  {ok:!!ct,market:ct?.label+" (jogo)",detail:ct?.info}
+ ].filter(x=>x.ok);
+ const selected=options[0]||null;
+ const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na BR365 ou 99Play. Sem odd verificada, não há avaliação de valor.</div>':'';
  status.textContent=d?.done?"8 campos verificados":"Verificando 8 campos";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
  '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
- '<div class="am-rows">'+
+ review+'<div class="am-rows">'+
  toRow("⚽ Gols: 1,5",one.value,one.explain,one.ok)+
  toRow("⚽ Gols: 2,5",two.value,two.explain,two.ok)+
  cornerRow("🚩 Escanteios 1º tempo",cf,d?.hHalves?.length||0,d?.aHalves?.length||0)+
