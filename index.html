@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v39">
+<meta name="green-lab-build" content="2026-11-17-v40">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -856,23 +856,23 @@ async function updateCornerPanel(game,a,b){
   if(label)label.textContent=status;
   if(node)node.textContent=message;
  };
- const ready=home.length>=3&&away.length>=3;
+ const ready=home.length>=5&&away.length>=5;
  if(!ready){
   const message="Dados confirmados: "+game.home.name+" "+home.length+"/5 jogos, "+game.away.name+" "+away.length+"/5 jogos. Amostra insuficiente nesta fonte; não gerar sinal.";
-  ["total","team","most"].forEach(x=>set(x,"Dados insuficientes",message));
+  ["total","team","most"].forEach(x=>set(x,"SEM DADO CONFIÁVEL — NÃO VALIDADO",message));
   return;
  }
  const mean=(items,field)=>items.reduce((x,r)=>x+r[field],0)/items.length;
  const num=x=>Number(x).toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1});
- const thresholds=[7.5,8.5,9.5,10.5];
+ const thresholds=[6.5,7.5,8.5,9.5,10.5];
  const totalLines=thresholds.map(line=>{
    const h=home.filter(x=>x.total>line).length,aw=away.filter(x=>x.total>line).length;
    return "Mais de "+num(line)+": "+game.home.name+" "+h+"/"+home.length+" • "+game.away.name+" "+aw+"/"+away.length;
  }).join(" | ");
- set("total","Histórico consultado","Média total: "+game.home.name+" "+num(mean(home,"total"))+" e "+game.away.name+" "+num(mean(away,"total"))+" escanteios por partida. "+totalLines+". Frequências, não previsões.");
+ set("total","Estudo histórico — NÃO É SINAL","Média total: "+game.home.name+" "+num(mean(home,"total"))+" e "+game.away.name+" "+num(mean(away,"total"))+" escanteios por partida. "+totalLines+". Frequências, não previsões.");
  const ownLines=(name,items)=>name+": média "+num(mean(items,"own"))+" escanteios cobrados; 4+ em "+items.filter(x=>x.own>=4).length+"/"+items.length+" jogos e 5+ em "+items.filter(x=>x.own>=5).length+"/"+items.length;
- set("team","Histórico consultado",ownLines(game.home.name,home)+". "+ownLines(game.away.name,away)+".");
- set("most","Histórico consultado",game.home.name+" cobrou mais escanteios que seus adversários em "+home.filter(x=>x.own>x.opponent).length+"/"+home.length+" jogos. "+game.away.name+" em "+away.filter(x=>x.own>x.opponent).length+"/"+away.length+" jogos. Não é previsão de quem ganhará em escanteios no confronto.");
+ set("team","Estudo histórico — NÃO É SINAL",ownLines(game.home.name,home)+". "+ownLines(game.away.name,away)+".");
+ set("most","Estudo histórico — NÃO É SINAL",game.home.name+" cobrou mais escanteios que seus adversários em "+home.filter(x=>x.own>x.opponent).length+"/"+home.length+" jogos. "+game.away.name+" em "+away.filter(x=>x.own>x.opponent).length+"/"+away.length+" jogos. Não é previsão de quem ganhará em escanteios no confronto.");
 }
 
 
