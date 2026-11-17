@@ -73,7 +73,7 @@ function render(){
  const both=hMarket(h,a,x=>x.btts,3,"Ambas marcam: SIM");
  const bothNo=hMarket(h,a,x=>!x.btts,3,"Ambas marcam: NÃO");
  const under=hMarket(h,a,x=>x.total<4,4,"Menos de 3,5 gols");
- const halfSecond=d?.done?cornerPick(d.hCorners.filter(x=>Number.isInteger(x.total)&&Number.isInteger(x.first)).map(x=>({second:x.total-x.first})),d.aCorners.filter(x=>Number.isInteger(x.total)&&Number.isInteger(x.first)).map(x=>({second:x.total-x.first})),"second",[2.5,3.5,4.5]):null;
+ 
  const ct=d?.done?cornerPick(d.hCorners,d.aCorners,"total",[6.5,7.5,8.5,9.5,10.5]):null;
  const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
  const cornerRow=(label,x,s1,s2)=>{
@@ -99,7 +99,7 @@ function render(){
  const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na casa. Histórico de 5 jogos não comprova vantagem; sem cotação verificada, não há avaliação de valor.</div>':'';
  status.textContent=d?.done?"11 campos estudados · 0 sinais validados":"Consultando 11 campos";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
- '<div class="am-warning">⏱️ Confira o horário e a partida na fonte oficial antes de qualquer entrada. Lista de convocados não equivale a 11 titulares; confira a escalação desta partida.</div>'+ 
+ '<div class="am-warning">⏱️ Confira o horário e a partida na fonte oficial antes de qualquer entrada. <strong>Agenda CONCACAF 17/11:</strong> Belize × Sint Maarten, Dominica × Cayman Islands e St Lucia × Barbados às 16h (Brasília). St Kitts & Nevis × Bonaire: horário divergente entre fontes, conferir antes do início. <a href="https://www.concacaf.com/competitions/nations-league/news/2026-27-concacaf-nations-league-november-schedule-confirmed" target="_blank" rel="noopener noreferrer" style="color:#9afaaf">Fonte oficial CONCACAF</a>. Lista de convocados não equivale a 11 titulares; confirme a escalação da partida. Estudos históricos não são sinais validados.</div>'+ 
  '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
  review+coverage+'<div class="am-rows">'+
  toRow("⚽ Gols: 1,5",one.value,one.explain,one.ok)+
