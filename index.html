@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v23">
+<meta name="green-lab-build" content="2026-11-16-v24">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -75,7 +75,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v23</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
-<section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Sinal final: o que está confirmado?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Esta é a primeira tela para decidir o que investigar. <strong>Um estudo histórico não é um sinal validado.</strong></p><div class="gl-legend" role="note" aria-label="Legenda de confiança dos sinais"><div><span class="gl-dot gl-green" aria-hidden="true"></span><b>VERDE</b> — sinal validado com evidências; não garante acerto</div><div><span class="gl-dot gl-yellow" aria-hidden="true"></span><b>AMARELO</b> — em estudo, falta confirmação</div><div><span class="gl-dot gl-red" aria-hidden="true"></span><b>VERMELHO</b> — não validado ou reprovado; não é sinal de entrada</div><div class="gl-result-note">📋 RESULTADOS APÓS O JOGO: 🟢 GREEN = acertou · 🔴 RED = perdeu · ⚪ ANULADO = devolvido. Resultados não são a mesma coisa que confiança pré-jogo.</div></div><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
+<section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Prioridade: qual jogo estudar primeiro?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Um mercado principal por jogo, com os demais recolhidos. <strong>Amarelo é estudo, não entrada. Verde exige evidências verificadas.</strong></p><div class="gl-legend" role="note" aria-label="Legenda de confiança dos sinais"><div><span class="gl-dot gl-green" aria-hidden="true"></span><b>VERDE</b> — sinal validado com evidências; não garante acerto</div><div><span class="gl-dot gl-yellow" aria-hidden="true"></span><b>AMARELO</b> — em estudo, falta confirmação</div><div><span class="gl-dot gl-red" aria-hidden="true"></span><b>VERMELHO</b> — não validado ou reprovado; não é sinal de entrada</div><div class="gl-result-note">📋 RESULTADOS APÓS O JOGO: 🟢 GREEN = acertou · 🔴 RED = perdeu · ⚪ ANULADO = devolvido. Resultados não são a mesma coisa que confiança pré-jogo.</div></div><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
 <section class="signalhub" id="quickHub">
  <div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • LEITURA RÁPIDA</span><h2>Qual mercado o radar encontrou?</h2></div><span id="quickCount" class="signalstatus">Consultando</span></div>
  <p>Aqui aparecem as linhas exatas dos mercados identificados. <strong>São hipóteses de estudo, não apostas confirmadas.</strong> Confira a cotação e o risco antes de decidir.</p>
@@ -114,7 +114,7 @@ let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}cat
 const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
 const state={date:savedStudyDay||ymd(new Date()),filter:"all",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-16-v23";
+const APP_BUILD="2026-11-16-v24";
 let lastBuildCheck=0;
 $("day").value=state.date;
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -457,29 +457,33 @@ function renderFinalHub(){
  const box=$("finalList"),status=$("finalStatus"),foot=$("finalFoot");
  if(!box)return;
  if(!state.loaded){status.textContent="Aguardando";box.innerHTML='<div class="empty">Carregando os jogos...</div>';return}
- if(state.success===0){status.textContent="Fonte indisponível";box.innerHTML='<div class="empty">Sem sinais: consulta à fonte falhou.</div>';return}
+ if(state.success===0){status.textContent="Fonte indisponível";box.innerHTML='<div class="empty">Consulta falhou. Nenhum sinal confirmado; tente atualizar.</div>';return}
  const games=preCandidates(),pending=games.filter(g=>!pregameStudyCache.has(preKey(g)));
  const studied=games.map(g=>{
-  const findings=[...(pregameStudyCache.get(preKey(g))?.findings||[])].sort((a,b)=>Math.min(b.home,b.away)-Math.min(a.home,a.away)||b.home+b.away-a.home-a.away);
+  const findings=[...(pregameStudyCache.get(preKey(g))?.findings||[])].filter(f=>Number.isFinite(f.home)&&Number.isFinite(f.away)).sort((a,b)=>Math.min(b.home,b.away)-Math.min(a.home,a.away)||b.home+b.away-a.home-a.away);
   return {g,findings,score:findings.length?Math.min(findings[0].home,findings[0].away)*10+findings[0].home+findings[0].away:0};
  }).filter(x=>x.findings.length).sort((a,b)=>b.score-a.score||new Date(a.g.start)-new Date(b.g.start));
  status.textContent=studied.length?studied.length+" jogos em estudo":"Sem tendência";
- if(!studied.length){
-  box.innerHTML='<div class="empty">'+(pending.length?"Analisando históricos de "+pending.length+" jogos. ":"Nenhum mercado passou no filtro histórico da data selecionada. Confira a data no topo e toque em Atualizar jogos. ")+'Nenhuma entrada validada.</div>';
- }else{
-  box.innerHTML=studied.slice(0,3).map(({g,findings},idx)=>{
+ if(!studied.length){box.innerHTML='<div class="empty">'+(pending.length?"Analisando históricos de "+pending.length+" jogos. ":"Nenhum mercado passou no filtro histórico desta data. ")+'Nenhuma entrada validada.</div>'}
+ else{
+  box.innerHTML=studied.slice(0,3).map(({g,findings})=>{
    const l=lineupCheckCache.get(preKey(g)),roster=l&&!l.error&&!l.duplicate&&l.home===11&&l.away===11;
-   const detail=findings.map(f=>'<div class="facts" style="margin-top:8px"><b>'+esc(f.name)+'</b> · '+esc(g.home.name)+' '+f.home+'/5 · '+esc(g.away.name)+' '+f.away+'/5 · '+esc(f.level||"Preliminar")+'</div>').join("");
-   return '<div class="signalitem"><h3>📊 '+(idx+1)+'º JOGO EM ESTUDO · '+esc(dateTime(g.start))+'</h3>'+
-   '<div class="market">'+esc(g.home.name)+' × '+esc(g.away.name)+'</div>'+detail+
-   '<p>🚩 Escanteios 1ºT e total: consultar análise específica; sem linha final nesta seção até validar cobertura.<br>'+
-   '👥 '+(roster?'11 nomes por equipe na ESPN — confirmar oficialmente':'Escalações ainda não verificadas integralmente')+'.<br>'+
-   '🧮 Odds: não verificadas. <strong>Status: ESTUDO, NÃO VALIDADO.</strong></p>'+
-   '<button class="sigbutton" data-final="'+esc(preKey(g))+'">Abrir análise e fontes</button></div>';
+   const primary=findings[0],others=findings.slice(1);
+   const q=manualOdds.get(preKey(g));
+   const detail=others.length?'<details style="margin-top:12px"><summary>Ver outros '+others.length+' mercados em estudo</summary>'+others.map(f=>'<div class="facts" style="margin-top:8px">'+esc(f.name)+' · '+esc(g.home.name)+' '+f.home+'/5 · '+esc(g.away.name)+' '+f.away+'/5</div>').join("")+'</details>':'';
+   return '<article class="signalitem"><h3>🟡 ESTUDO PRIORITÁRIO · '+esc(dateTime(g.start))+'</h3>'+
+   '<div class="market">'+esc(g.home.name)+' × '+esc(g.away.name)+'</div>'+
+   '<p><strong>Mercado principal para investigar: '+esc(primary.name)+'</strong></p>'+
+   '<div class="facts">Histórico recente: '+esc(g.home.name)+' '+primary.home+'/5 · '+esc(g.away.name)+' '+primary.away+'/5. Frequência não é probabilidade.</div>'+
+   '<p>👥 '+(roster?'11 nomes por equipe na ESPN; confirmação oficial pendente':'Titulares oficiais não confirmados')+'<br>'+
+   '🧮 '+(q?'Odd anotada manualmente; ainda não verificada na casa':'Odd da casa não verificada')+'<br>'+
+   '🚩 Escanteios, gols por tempo, artilheiros e assistências exigem dados específicos antes de qualquer conclusão.<br>'+
+   '⚠️ Conferir desfalques, fonte, amostra e risco. <strong>NÃO É ENTRADA VALIDADA.</strong></p>'+
+   detail+'<button class="sigbutton" data-final="'+esc(preKey(g))+'">Analisar este jogo</button></article>';
   }).join("");
   box.querySelectorAll("[data-final]").forEach(b=>b.onclick=()=>openDetail(b.dataset.final));
  }
- foot.textContent="Até 3 partidas, um cartão por jogo com os mercados encontrados. "+games.length+" partidas futuras; "+pending.length+" aguardando histórico. A ordem é frequência histórica, NÃO confiança nem probabilidade real. Antes de qualquer sinal: confirmar fontes, amostra, escalações oficiais, desfalques e riscos. Atualizado: "+clock(new Date())+".";
+ foot.textContent="Pré-seleção por frequência histórica, não por chance estimada. "+games.length+" partidas futuras; "+pending.length+" aguardando histórico. Nenhum sinal verde sem confirmação de fontes, titulares e cotação. Atualizado: "+clock(new Date())+".";
 }
 function renderQuickSignals(){
  const list=$("quickList"),counter=$("quickCount"),foot=$("quickFoot");
