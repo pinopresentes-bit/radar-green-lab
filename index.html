@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v34">
+<meta name="green-lab-build" content="2026-11-17-v35">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -114,7 +114,7 @@ let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}cat
 const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
 const state={date:ymd(new Date()),filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-17-v34";
+const APP_BUILD="2026-11-17-v35";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -466,6 +466,7 @@ function renderFinalHub(){
   const findings=[...(pregameStudyCache.get(preKey(g))?.findings||[])].filter(f=>Number.isFinite(f.home)&&Number.isFinite(f.away)).sort((a,b)=>Math.min(b.home,b.away)-Math.min(a.home,a.away)||b.home+b.away-a.home-a.away);
   return {g,findings,score:findings.length?Math.min(findings[0].home,findings[0].away)*10+findings[0].home+findings[0].away:0};
  }).filter(x=>x.findings.length).sort((a,b)=>b.score-a.score||new Date(a.g.start)-new Date(b.g.start));
+ window.greenLabPriorityKey=studied.length?preKey(studied[0].g):null;
  status.textContent=studied.length?studied.length+" jogos em estudo":"Sem tendência";
  if(!studied.length){box.innerHTML='<div class="empty">'+(pending.length?"Analisando históricos de "+pending.length+" jogos. ":"Nenhum mercado passou no filtro histórico desta data. ")+'Nenhuma entrada validada.</div>'}
  else{
@@ -1063,7 +1064,7 @@ window.addEventListener("online",()=>{
 });
 render();load();verifyVersion(true);
 </script>
-<script src="./signal-builder-v13.js?v=34"></script>
+<script src="./signal-builder-v13.js?v=35"></script>
 <script src="./corners-v10.js?v=33"></script>
 <script src="./audit-lab-v33.js?v=33"></script>
 </body>
