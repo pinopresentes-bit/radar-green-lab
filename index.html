@@ -245,7 +245,7 @@ function registerLiveAlerts(entries){
   const key=preKey(g)+":"+item.type+":"+item.name;
   if(observedLiveAlerts.has(key))continue;
   observedLiveAlerts.add(key);added=true;
-  const threshold=Number((item.name.match(/Mais de (\\d+),5/)||[])[1]);
+  const threshold=Number((item.name.match(/Mais de (\d+),5/)||[])[1]);
   liveAlertArchive.unshift({key,gameId:String(g.id),date:ymd(new Date(g.start)),time:clock(new Date()),game:g.home.name+" × "+g.away.name,name:item.name,type:item.type,threshold:Number.isFinite(threshold)?threshold:null,scoreAt:String(g.home.score)+" × "+String(g.away.score),status:"PENDENTE"});
  }
  if(added){liveAlertArchive.splice(40);saveLiveArchive();renderLiveAlerts()}
@@ -273,6 +273,7 @@ async function checkSignals(){
   return;
  }
  if(!live.length){
+  for(const game of state.games.filter(g=>g.status==="done"))liveResultCheck(game,null);
   liveQuickResults=[];renderQuickSignals();
   lastLiveSignalAt=Date.now();
   $("liveFreshness").textContent="Consulta às "+clock(new Date())+" · sem partidas ao vivo";
