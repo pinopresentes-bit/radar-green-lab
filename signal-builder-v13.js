@@ -9,7 +9,7 @@ style.textContent='#assembledContent .am-card{background:#10291b;border:1px soli
 document.head.append(style);
 const studies=new Map(),rosters=new Map();
 const toRow=(name,value,reason,yes)=>'<div class="am-row"><strong>'+esc(name)+'</strong><span class="am-value'+(yes?'':' off')+'">'+esc(value)+'</span><small>'+esc(reason)+'</small></div>';
-const candidate=()=>{const g=preCandidates().filter(x=>new Date(x.start).getTime()>Date.now());const soon=g.filter(x=>new Date(x.start).getTime()-Date.now()<=7200000).sort((a,b)=>new Date(a.start)-new Date(b.start));if(soon.length)return soon.find(x=>pregameStudyCache.get(preKey(x))?.findings?.length)||soon[0];const key=window.greenLabPriorityKey;return (key&&g.find(x=>preKey(x)===key))||g.find(x=>pregameStudyCache.get(preKey(x))?.findings?.length)||g[0]||null};
+const candidate=()=>{const now=Date.now();const g=preCandidates().filter(x=>new Date(x.start).getTime()>now).sort((a,b)=>new Date(a.start)-new Date(b.start));const windowGames=g.filter(x=>{const delta=new Date(x.start).getTime()-now;return delta>=1800000&&delta<=7200000});if(windowGames.length)return windowGames[0];const imminent=g.filter(x=>new Date(x.start).getTime()-now<1800000);if(imminent.length)return imminent[0];return g[0]||null};
 function hMarket(h,a,rule,min,market){
  const p=h.filter(rule).length,q=a.filter(rule).length,ready=h.length>=5&&a.length>=5;
  const ok=ready&&p>=min&&q>=min;
@@ -93,8 +93,8 @@ function render(){
  ].filter(x=>x.ok);
  const selected=options[0]||null;
  const coverage=d?.done?'<div class="am-warning">📚 Cobertura de dados: histórico de gols '+esc(h.length)+' jogos (mandante) e '+esc(a.length)+' jogos (visitante); escanteios totais '+esc(d.hCorners?.length||0)+' e '+esc(d.aCorners?.length||0)+'; escanteios 1º tempo '+esc(d.hHalves?.length||0)+' e '+esc(d.aHalves?.length||0)+'. Estatísticas ausentes não são zero. Fonte: registros ESPN; conferir em fonte oficial.</div>':'';
- const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na BR365 ou 99Play. Sem odd verificada, não há avaliação de valor.</div>':'';
- status.textContent=d?.done?"8 campos estudados · sem validação":"Consultando 8 campos";
+ const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na casa. Histórico de 5 jogos não comprova vantagem; sem cotação verificada, não há avaliação de valor.</div>':'';
+ status.textContent=d?.done?"8 campos estudados · 0 sinais validados":"Consultando 8 campos";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
  '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
  review+coverage+'<div class="am-rows">'+
