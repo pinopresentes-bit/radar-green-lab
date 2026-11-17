@@ -16,7 +16,7 @@ function hMarket(h,a,rule,min,market){
  return {ok,value:ok?"🟡 "+market:ready?"⚪ Critério não atingido":"⏳ Histórico insuficiente",explain:p+"/"+h.length+" jogos do mandante e "+q+"/"+a.length+" do visitante. Não é probabilidade de acerto."};
 }
 function cornerPick(h,a,type,lines){
- if(h.length<4||a.length<4)return null;
+ if(h.length<5||a.length<5)return null;
  for(const t of [...lines].reverse()){
   const p=h.filter(x=>x[type]>t).length,q=a.filter(x=>x[type]>t).length;
   if(p>=Math.ceil(h.length*.75)&&q>=Math.ceil(a.length*.75))return {label:"Mais de "+t.toFixed(1).replace(".",",")+" escanteios",info:p+"/"+h.length+" e "+q+"/"+a.length+" jogos da amostra."};
@@ -26,8 +26,9 @@ function cornerPick(h,a,type,lines){
 function minutePeriod(p){
  if(p?.period?.number!=null)return Number(p.period.number);
  if(typeof p?.period==="number")return p.period;
- const m=String(p?.clock?.displayValue??p?.clock?.value??p?.time??"").match(/^(\d+)/);
- return m?(Number(m[1])<=45?1:2):null;
+ // Minuto de jogo sozinho não comprova o período (45+ acréscimos, reinícios etc.).
+ // Sem período explícito da fonte, não gerar linha de escanteios do 1º tempo.
+ return null;
 }
 function firstCorners(s,tot){
  if(!s||tot===null)return null;
@@ -74,7 +75,7 @@ function render(){
  const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
  const cornerRow=(label,x,s1,s2)=>{
   return toRow(label,x?"🟡 "+x.label:d?.done?"⚪ Sem tendência com critério suficiente":"⏳ Consultando registros",
-   x?x.info:d?.done?(s1<4||s2<4?"Dados insuficientes: "+s1+" e "+s2+" jogos por equipe; exigidos ao menos 4 para cada lado.":"Amostra de "+s1+" e "+s2+" jogos: nenhuma linha atingiu o filtro de 75% em cada equipe."):"Verificando registros dos últimos jogos.",!!x);
+   x?x.info:d?.done?(s1<5||s2<5?"SEM DADO CONFIÁVEL — NÃO VALIDADO: "+s1+" e "+s2+" jogos por equipe; exigidos ao menos 5 para cada lado.":"Amostra de "+s1+" e "+s2+" jogos: nenhuma linha atingiu o filtro de 75% em cada equipe. NÃO VALIDADO."):"Verificando registros dos últimos jogos.",!!x);
  };
  const playerRow=(label,kind)=>{
   const p=pickPlayer(d,r,kind);
