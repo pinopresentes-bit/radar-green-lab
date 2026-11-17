@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v40">
+<meta name="green-lab-build" content="2026-11-17-v41">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -114,7 +114,7 @@ let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}cat
 const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
 const state={date:ymd(new Date()),filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-17-v39";
+const APP_BUILD="2026-11-17-v41";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -128,9 +128,9 @@ function parseGame(e,code,label){const co=e.competitions?.[0]?.competitors||[];c
 const typ=e.status?.type||{},status=typ.state==="in"?"live":typ.state==="post"||typ.completed?"done":"upcoming";
 const t=c=>({id:String(c.team?.id||""),name:c.team?.shortDisplayName||c.team?.displayName||"Equipe",logo:c.team?.logo||"",abbr:c.team?.abbreviation||"",score:c.score??"—"});
 return {id:String(e.id),code,label,home:t(home),away:t(away),start:e.date||e.competitions[0].date,status,detail:typ.shortDetail||typ.detail||""}}
-async function api(url){const c=new AbortController(),timer=setTimeout(()=>c.abort(),10500);try{const r=await fetch(url,{cache:"no-store",signal:c.signal});if(!r.ok)throw Error("HTTP "+r.status);return await r.json()}finally{clearTimeout(timer)}}
+async function api(url){let error;for(let attempt=0;attempt<2;attempt++){const c=new AbortController(),timer=setTimeout(()=>c.abort(),16000);try{const r=await fetch(url,{cache:"no-store",signal:c.signal});if(!r.ok)throw Error("HTTP "+r.status);return await r.json()}catch(e){error=e}finally{clearTimeout(timer)}if(attempt===0)await new Promise(resolve=>setTimeout(resolve,650))}throw error}
 async function load(){if(state.busy)return;state.busy=true;$("refresh").disabled=true;$("refresh").textContent="Buscando...";$("notice").innerHTML='<div class="notice">🔎 Consultando competições e placares.</div>';const date=state.date;let all=[];state.success=0;state.fails=0;
-await Promise.allSettled(LEAGUES.map(async ([code,label])=>{try{const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/scoreboard?dates="+date.replace(/-/g,"")+"&limit=200";const json=await api(url);state.success++;(json.events||[]).forEach(e=>{const g=parseGame(e,code,label);if(g&&ymd(new Date(g.start))===date)all.push(g)})}catch{state.fails++}}));
+for(let i=0;i<LEAGUES.length;i+=5){await Promise.allSettled(LEAGUES.slice(i,i+5).map(async ([code,label])=>{try{const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/scoreboard?dates="+date.replace(/-/g,"")+"&limit=200";const json=await api(url);state.success++;(json.events||[]).forEach(e=>{const g=parseGame(e,code,label);if(g&&ymd(new Date(g.start))===date)all.push(g)})}catch{state.fails++}}));}
 state.busy=false;$("refresh").disabled=false;$("refresh").textContent="⟳ Atualizar jogos";if(date!==state.date){load();return}
 state.games=[...new Map(all.map(g=>[g.code+"-"+g.id,g])).values()].sort((a,b)=>new Date(a.start)-new Date(b.start));state.loaded=true;$("checked").textContent=clock(new Date());
 const msg=state.success===0?"Não foi possível acessar a fonte de placares. Tente mais tarde ou verifique sua internet.":"Consultar fontes: "+state.success+" de "+LEAGUES.length+" competições. "+(state.fails?"Parte das ligas não respondeu.":"Cobertura limitada às ligas consultadas.")+" Dados podem estar atrasados.";
