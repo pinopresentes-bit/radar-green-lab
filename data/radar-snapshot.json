@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-17T12:57:30.676268+00:00",
+  "generated_at_utc": "2026-11-17T14:17:14.636612+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -9,7 +9,7 @@
       "start": "2026-11-17T05:30Z",
       "home": "Tahiti",
       "away": "Cook Islands",
-      "state": "pre",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -18,7 +18,7 @@
       "start": "2026-11-17T06:00Z",
       "home": "Malaysia",
       "away": "Yemen",
-      "state": "pre",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -36,7 +36,7 @@
       "start": "2026-11-17T12:00Z",
       "home": "China",
       "away": "Bahrain",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -45,7 +45,7 @@
       "start": "2026-11-17T12:00Z",
       "home": "Kyrgyz Republic",
       "away": "Vietnam",
-      "state": "pre",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -63,7 +63,7 @@
       "start": "2026-11-17T13:10Z",
       "home": "Japan",
       "away": "Paraguay",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -72,7 +72,7 @@
       "start": "2026-11-17T14:00Z",
       "home": "Qatar",
       "away": "South Korea",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -81,7 +81,7 @@
       "start": "2026-11-17T14:10Z",
       "home": "United Arab Emirates",
       "away": "Syria",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -223,12 +223,12 @@
   "failed_requests": [
     {
       "league": "concacaf.gold.cup",
-      "date": "20261118",
+      "date": "20261117",
       "error": "HTTPError"
     },
     {
       "league": "concacaf.gold.cup",
-      "date": "20261117",
+      "date": "20261118",
       "error": "HTTPError"
     }
   ],
