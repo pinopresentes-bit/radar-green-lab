@@ -1,1 +1,23 @@
-const C='green-lab-pwa-v13';const ASSETS=['./','./index.html','./signal-builder-v13.js','./corners-v10.js','./manifest.webmanifest','./icon.svg'];self.addEventListener('install',e=>{e.waitUntil(caches.open(C).then(x=>x.addAll(ASSETS)).then(()=>self.skipWaiting()))});self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(a=>Promise.all(a.filter(k=>k!==C).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});self.addEventListener('fetch',e=>{const url=new URL(e.request.url);if(e.request.method!=='GET'||url.origin!==self.location.origin)return;e.respondWith(fetch(e.request).then(r=>{if(r.ok){const copy=r.clone();caches.open(C).then(x=>x.put(e.request,copy)).catch(()=>{})}return r}).catch(()=>caches.match(e.request)))})
+const CACHE='green-lab-pwa-v29';
+const ASSETS=['./','./index.html','./signal-builder-v13.js','./corners-v10.js','./manifest.webmanifest','./icon.svg'];
+self.addEventListener('install',event=>{
+ event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));
+});
+self.addEventListener('activate',event=>{
+ event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('green-lab-pwa-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim()));
+});
+self.addEventListener('fetch',event=>{
+ const request=event.request,url=new URL(request.url);
+ if(request.method!=='GET'||url.origin!==self.location.origin)return;
+ // Always attempt fresh code for the app; cached files are offline fallbacks only.
+ event.respondWith(fetch(request,{cache:'no-store'}).then(response=>{
+  if(response.ok){
+   const copy=response.clone();
+   event.waitUntil(caches.open(CACHE).then(cache=>cache.put(request,copy)).catch(()=>{}));
+  }
+  return response;
+ }).catch(async()=>{
+  const cache=await caches.open(CACHE);
+  return await cache.match(request)||await cache.match(url.pathname.endsWith('/')?'./':'./index.html')||Response.error();
+ }));
+});
