@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v30">
+<meta name="green-lab-build" content="2026-11-17-v31">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -72,7 +72,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v30</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v31</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Prioridade: qual jogo estudar primeiro?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Um mercado principal por jogo, com os demais recolhidos. <strong>Amarelo é estudo, não entrada. Verde exige evidências verificadas.</strong></p><div class="gl-legend" role="note" aria-label="Legenda de confiança dos sinais"><div><span class="gl-dot gl-green" aria-hidden="true"></span><b>VERDE</b> — sinal validado com evidências; não garante acerto</div><div><span class="gl-dot gl-yellow" aria-hidden="true"></span><b>AMARELO</b> — em estudo, falta confirmação</div><div><span class="gl-dot gl-red" aria-hidden="true"></span><b>VERMELHO</b> — não validado ou reprovado; não é sinal de entrada</div><div class="gl-result-note">📋 RESULTADOS APÓS O JOGO: 🟢 GREEN = acertou · 🔴 RED = perdeu · ⚪ ANULADO = devolvido. Resultados não são a mesma coisa que confiança pré-jogo.</div></div><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
@@ -89,7 +89,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <p>Próximos passos: conferir escalações oficiais, cotação real e risco. <strong>O radar não confirma vantagem estatística.</strong></p>
 </section>
 <section class="signalhub" id="liveHub"><div class="signalhead"><div><span class="eyebrow">🤖 RADAR AO VIVO • ESTUDOS</span><h2>Jogos e mercados ao vivo</h2></div><span id="signalStatus" class="signalstatus">Consultando</span></div><div class="controls"><button id="refreshLive" type="button" class="btn primary">↻ Atualizar ao vivo agora</button><span id="liveFreshness" class="muted" role="status">Aguardando primeira consulta</span></div><p>Consulta automática aproximadamente a cada 30 segundos com a página aberta. Placar, minuto e estatísticas quando a fonte publicar. <strong>Observação de mercado não é aposta confirmada.</strong></p><label class="alert-opt"><input type="checkbox" id="liveAlerts"> Avisos de novas observações nesta tela (somente com app aberto)</label><details class="alert-history"><summary id="alertCount">Últimos avisos (0)</summary><div id="alertFeed"><p>Os avisos surgem quando novos critérios de observação são atendidos.</p></div></details><div id="signalList" aria-live="polite"><div class="empty">Verificando partidas...</div></div><div class="signalfoot" id="signalFoot">Atualizações apenas enquanto o aplicativo estiver aberto.</div></section>
-<section class="signalhub" id="lineupHub"><div class="signalhead"><div><span class="eyebrow">👥 MONITOR DE ESCALAÇÕES</span><h2>Titulares dos próximos jogos</h2></div><span id="lineupMonitorCount" class="signalstatus">Consultando</span></div><p>Consulta partidas que começam nas próximas 2 horas, até 4 por rodada. A ESPN pode publicar escalações incompletas. <strong>Dados desta fonte não substituem confirmação oficial.</strong></p><label class="alert-opt"><input type="checkbox" id="lineupAlerts"> Avisar nesta tela quando houver 11 titulares informados para os dois times (app aberto)</label><details class="alert-history"><summary id="lineupAlertCount">Avisos de escalações (0)</summary><div id="lineupAlertFeed"><p>Nenhum aviso ainda.</p></div></details><div id="lineupMonitorList" aria-live="polite"><div class="empty">Verificando próximos jogos...</div></div><div class="signalfoot" id="lineupMonitorFoot">Consultas no máximo a cada 5 minutos por jogo com a página aberta. Toque em uma equipe para ver os nomes listados.</div></section>
+<section class="signalhub" id="lineupHub"><div class="signalhead"><div><span class="eyebrow">👥 MONITOR DE ESCALAÇÕES</span><h2>Titulares dos próximos jogos</h2></div><span id="lineupMonitorCount" class="signalstatus">Consultando</span></div><p>Consulta partidas que começam nas próximas 6 horas, até 12 por rodada. Titulares da ESPN não são confirmação oficial. A ESPN pode publicar escalações incompletas. <strong>Dados desta fonte não substituem confirmação oficial.</strong></p><label class="alert-opt"><input type="checkbox" id="lineupAlerts"> Avisar nesta tela quando houver 11 titulares informados para os dois times (app aberto)</label><details class="alert-history"><summary id="lineupAlertCount">Avisos de escalações (0)</summary><div id="lineupAlertFeed"><p>Nenhum aviso ainda.</p></div></details><div id="lineupMonitorList" aria-live="polite"><div class="empty">Verificando próximos jogos...</div></div><div class="signalfoot" id="lineupMonitorFoot">Consultas no máximo a cada 5 minutos por jogo com a página aberta. Sem conexão oficial com o Sofascore. Toque em uma equipe para ver os nomes listados.</div></section>
 <section class="signalhub" id="studyHub"><div class="signalhead"><div><span class="eyebrow">📊 PRÉ-SINAIS • ESTUDO HISTÓRICO</span><h2>Mercados em observação</h2></div><span id="studyCount" class="signalstatus">Consultando</span></div><p>Estudos de partidas futuras que passaram pelos filtros históricos. <strong>Não são entradas confirmadas: faltam escalações e odds para validar cada mercado.</strong></p><div id="studyList" aria-live="polite"><div class="empty">Analisando próximos jogos...</div></div></section>
 <section class="signalhub" id="preHub"><div class="signalhead"><div><span class="eyebrow">📅 AGENDA AUTOMÁTICA</span><h2>Próximos jogos em observação</h2></div><span class="signalstatus" id="preCount">Verificando</span></div><p>O radar seleciona os próximos confrontos pelo horário para preparar a análise. <strong>Estar nesta lista não significa um sinal validado.</strong></p><div id="preList"><div class="empty">Consultando a agenda...</div></div><div class="pre-controls"><label for="preMarket">Mercado para estudar</label><select id="preMarket" aria-label="Filtrar mercado"><option value="all">Todos os mercados</option><option value="goals">Total de gols</option><option value="btts">Ambas marcam</option><option value="corners">Escanteios por tempo e total</option><option value="half">1º tempo</option><option value="players">Jogadores: gol, assistência, chute no gol</option></select><button class="btn" id="preSort" type="button">Ordem: horário</button></div><div class="signalfoot" id="preFoot">Escalações, chutes no gol e odds ainda precisam ser verificados.</div></section>
 <section id="highlights" class="today-highlights" aria-label="Partidas em destaque"><div class="signalhead"><div><span class="eyebrow">🌍 SELEÇÕES INTERNACIONAIS</span><h2>Jogos em destaque</h2></div><span class="signalstatus">Agenda de hoje</span></div><p class="muted">Destaques da programação, não sinais de aposta.</p><div id="highlightGames" class="highlight-games"><div class="empty">Consultando programação...</div></div></section>
@@ -114,7 +114,7 @@ let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}cat
 const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
 const state={date:ymd(new Date()),filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-17-v30";
+const APP_BUILD="2026-11-17-v31";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -355,8 +355,8 @@ function lineupCandidates(){
  return state.games.filter(g=>{
   if(g.status!=="upcoming")return false;
   const delta=new Date(g.start).getTime()-now;
-  return Number.isFinite(delta)&&delta>=-90000&&delta<=120*60000;
- }).sort((a,b)=>new Date(a.start)-new Date(b.start)).slice(0,4);
+  return Number.isFinite(delta)&&delta>=-90000&&delta<=360*60000;
+ }).sort((a,b)=>new Date(a.start)-new Date(b.start)).slice(0,12);
 }
 function lineupDataState(entry){
  if(!entry)return {status:"⌛ Aguardando primeira consulta",detail:"A fonte ainda não foi consultada neste painel."};
@@ -394,7 +394,7 @@ function renderLineupMonitor(){
  const games=lineupCandidates();
  count.textContent=games.length+" próximo(s)";
  if(!games.length){
-  list.innerHTML='<div class="empty">Nenhum jogo começando nas próximas 2 horas entre as competições consultadas.</div>';
+  list.innerHTML='<div class="empty">Nenhum jogo começando nas próximas 6 horas entre as competições consultadas.</div>';
   foot.textContent="Verificado às "+clock(new Date())+" · atualizações apenas com o app aberto.";
   return;
  }
@@ -405,7 +405,7 @@ function renderLineupMonitor(){
   return '<div class="signalitem"><h3>'+esc(dateTime(g.start))+' · '+esc(g.label)+'</h3><div class="market">'+esc(g.home.name)+' × '+esc(g.away.name)+'</div><div class="facts"><b>'+esc(st.status)+'</b><p>'+esc(st.detail)+esc(detail)+'</p></div>'+lineupPreview(g.home,entry?.homeNames)+lineupPreview(g.away,entry?.awayNames)+'<button class="sigbutton" data-lp="'+esc(preKey(g))+'">Análise completa</button></div>';
  }).join("");
  list.querySelectorAll("[data-lp]").forEach(b=>b.onclick=()=>openDetail(b.dataset.lp));
- foot.textContent="Atualizado às "+clock(new Date())+" · até 4 jogos, consultas por partida a cada 5 minutos · dados da ESPN (não oficial).";
+ foot.textContent="Atualizado às "+clock(new Date())+" · até 12 jogos, consultas por partida a cada 5 minutos · dados da ESPN (não oficial).";
 }
 async function monitorUpcomingLineups(){
  if(lineupScanBusy||document.hidden||!state.loaded)return;
@@ -415,13 +415,15 @@ async function monitorUpcomingLineups(){
  const now=Date.now(),date=state.date;
  const next=games.filter(g=>{
   const previous=lineupCheckCache.get(preKey(g));
-  return !previous||now-previous.checkedAt>=300000;
+  if(!previous)return true;
+  if(!previous.error&&!previous.duplicate&&previous.home===11&&previous.away===11)return false;
+  return now-previous.checkedAt>=300000;
  });
  if(!next.length)return;
  lineupScanBusy=true;
  const currentToken=++lineupScanToken;
  try{
-  await mapWithLimit(next,2,async g=>{
+  await mapWithLimit(next,3,async g=>{
    const key=preKey(g);
    let result={checkedAt:Date.now(),home:0,away:0,error:false,duplicate:false,homeNames:[],awayNames:[]};
    try{
@@ -1027,7 +1029,7 @@ async function verifyVersion(silent){
   }else if(match[1]!==APP_BUILD){
    node.innerHTML='<div class="notice">📲 Nova versão disponível. <button class="btn primary" type="button" id="applyAppUpdate">Carregar atualização</button></div>';
    $("applyAppUpdate").onclick=()=>location.replace("./?gl-build="+encodeURIComponent(match[1])+"&reload="+Date.now());
-  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v30.</div>';
+  }else if(!silent)node.innerHTML='<div class="notice">✅ Green Lab atualizado · versão v31.</div>';
  }catch{
   if(!silent)$("versionNotice").innerHTML='<div class="notice">Não foi possível verificar a versão. O radar continua disponível.</div>';
  }finally{
@@ -1061,7 +1063,7 @@ window.addEventListener("online",()=>{
 });
 render();load();verifyVersion(true);
 </script>
-<script src="./signal-builder-v13.js?v=30"></script>
-<script src="./corners-v10.js?v=30"></script>
+<script src="./signal-builder-v13.js?v=31"></script>
+<script src="./corners-v10.js?v=31"></script>
 </body>
 </html>
