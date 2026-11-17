@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v43">
+<meta name="green-lab-build" content="2026-11-17-v44">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -965,6 +965,17 @@ async function updateExtraMatchData(game){
   $("liveTeamStats").innerHTML=liveStatTable(response,game);
   $("liveDataTime").textContent="Consulta realizada às "+clock(new Date())+" · a ESPN pode atrasar os dados.";
   updatePlayerMarketAvailability(home,away);
+  const japanParaguay=/japan|japão|japao/i.test(game.home.name+" "+game.away.name)&&/paraguay|paraguai/i.test(game.home.name+" "+game.away.name);
+  if(japanParaguay){
+   const panel=document.createElement("div");panel.className="panel";
+   panel.innerHTML='<h3>📰 Japão × Paraguai • checagem externa de titulares</h3>'+
+    '<p><b>Japão:</b> fonte jornalística japonesa de 17/11 informa como titulares Keisuke Goto (centroavante), Yuito Suzuki, Tatsuhiro Sakamoto e Yuki Soma. A reportagem informa 10 mudanças em relação ao jogo contra o Brasil. <a href="https://www.soccerdigestweb.com/news/detail/id%3D77791" target="_blank" rel="noopener noreferrer" style="color:#8af7ad">Ver escalação publicada</a>.</p>'+
+    '<p>🥅 <b>Gol — Keisuke Goto:</b> jogador titular, mas SEM SINAL VALIDADO: faltam gols/minutos recentes e odd real.</p>'+
+    '<p>🎯 <b>Chute no alvo — Tatsuhiro Sakamoto:</b> titular, mas SEM SINAL VALIDADO: falta frequência de chutes no alvo e odd.</p>'+
+    '<p>🅰️ <b>Assistência:</b> SEM DADO CONFIÁVEL — NÃO VALIDADO.</p>'+
+    '<p>⚠️ A lista de convocados da JFA não é escalação titular. Verifique a publicação oficial de jogo em <a href="https://www.jfa.jp/eng/samuraiblue/20261117/match_page/m4.html" target="_blank" rel="noopener noreferrer" style="color:#8af7ad">JFA</a>. A escalação do Paraguai também exige confirmação. Esta informação não valida apostas.</p>';
+   $("lineupTeams").prepend(panel);
+  }
  }catch{
   if(active!==key||sequence!==matchDataSequence||!$("lineupTeams"))return;
   $("lineupStatus").textContent="Falha ao consultar a fonte. Não sabemos se houve publicação dos titulares. Tente novamente.";
