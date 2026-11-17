@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-17T17:35:57.645811+00:00",
+  "generated_at_utc": "2026-11-17T18:54:32.506825+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -99,7 +99,7 @@
       "start": "2026-11-17T16:00Z",
       "home": "Jordan",
       "away": "Australia",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -108,7 +108,7 @@
       "start": "2026-11-17T16:00Z",
       "home": "Russia",
       "away": "Venezuela",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -117,7 +117,7 @@
       "start": "2026-11-17T16:15Z",
       "home": "Iraq",
       "away": "Iran",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -126,7 +126,7 @@
       "start": "2026-11-17T16:30Z",
       "home": "Kuwait",
       "away": "Honduras",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -223,12 +223,12 @@
   "failed_requests": [
     {
       "league": "concacaf.gold.cup",
-      "date": "20261117",
+      "date": "20261118",
       "error": "HTTPError"
     },
     {
       "league": "concacaf.gold.cup",
-      "date": "20261118",
+      "date": "20261117",
       "error": "HTTPError"
     }
   ],
