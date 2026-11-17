@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v46">
+<meta name="green-lab-build" content="2026-11-17-v47">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -114,7 +114,7 @@ let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}cat
 const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
 const state={date:ymd(new Date()),filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-17-v41";
+const APP_BUILD="2026-11-17-v47";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -731,7 +731,7 @@ async function teamHistory(g,t){
     games=Array.from(new Map([...games,...extras].map(x=>[x.id,x])).values())
       .sort((x,y)=>new Date(y.date)-new Date(x.date));
   }
-  return games.slice(0,5);
+  return games.slice(0,10);
 }
 let active="";
 
@@ -829,12 +829,15 @@ function getCornerTotals(summary,teamId){
  return {own:x,opponent:y,total:x+y};
 }
 async function lastCorners(game,team,matches){
- const data=await Promise.all(matches.slice(0,5).map(m=>{
+ // Search up to ten distinct completed matches to find five real, validated boxscores.
+ // Missing data is never interpreted as zero corners.
+ const candidates=[...new Map(matches.filter(m=>m?.id).map(m=>[String(m.id),m])).values()].slice(0,10);
+ const data=await Promise.all(candidates.map(m=>{
   const key=game.code+":"+m.id+":"+team.id;
   if(!cornerStudyCache.has(key))cornerStudyCache.set(key,getEventSummary(game.code,m.id).then(s=>{const result=s?getCornerTotals(s,team.id):null;if(result===null)cornerStudyCache.delete(key);return result}).catch(()=>{cornerStudyCache.delete(key);return null}));
   return cornerStudyCache.get(key);
  }));
- return data.filter(Boolean);
+ return data.filter(Boolean).slice(0,5);
 }
 function cornerMarketPanel(){
  let str='<div class="panel"><h3>🚩 Radar de escanteios • pré-jogo</h3><p>Tipos disponíveis para estudo. Os números são obtidos dos últimos jogos somente quando a fonte publica escanteios de cada equipe.</p>';
@@ -858,7 +861,7 @@ async function updateCornerPanel(game,a,b){
  };
  const ready=home.length>=5&&away.length>=5;
  if(!ready){
-  const message="Dados confirmados: "+game.home.name+" "+home.length+"/5 jogos, "+game.away.name+" "+away.length+"/5 jogos. Amostra insuficiente nesta fonte; não gerar sinal.";
+  const message="Escanteios totais verificados na ESPN: "+game.home.name+" "+home.length+"/5 jogos necessários; "+game.away.name+" "+away.length+"/5. O radar procura até 10 partidas anteriores disponíveis por equipe, mas esta fonte não forneceu amostra suficiente. Dado ausente não é zero; não gerar sinal.";
   ["total","team","most"].forEach(x=>set(x,"SEM DADO CONFIÁVEL — NÃO VALIDADO",message));
   return;
  }
