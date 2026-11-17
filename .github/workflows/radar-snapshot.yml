@@ -1,0 +1,31 @@
+name: Radar snapshot automatico
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: radar-snapshot
+  cancel-in-progress: false
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Coletar placares e escalações ESPN
+        run: python scripts/radar_snapshot.py
+      - name: Publicar somente se houve mudança
+        run: |
+          git config user.name "green-lab-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/radar-snapshot.json
+          if ! git diff --cached --quiet; then
+            git commit -m "data: atualizar snapshot do radar"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
