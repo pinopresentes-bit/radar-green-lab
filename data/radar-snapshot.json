@@ -1,1 +1,238 @@
-{"generated_at_utc":null,"timezone":"America/Sao_Paulo","source":"ESPN scoreboard (não oficial)","games":[],"failed_requests":[],"lineups_officially_confirmed":false,"odds_available":false,"warning":"Aguardando primeira execução do workflow; não constitui sinal de aposta."}
+{
+  "generated_at_utc": "2026-11-17T04:07:01.932588+00:00",
+  "timezone": "America/Sao_Paulo",
+  "source": "ESPN scoreboard (não oficial)",
+  "games": [
+    {
+      "id": "401933879",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T05:30Z",
+      "home": "Tahiti",
+      "away": "Cook Islands",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401930237",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T06:00Z",
+      "home": "Malaysia",
+      "away": "Yemen",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401916335",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T10:00Z",
+      "home": "Singapore",
+      "away": "Brazil",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401930880",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T12:00Z",
+      "home": "China",
+      "away": "Bahrain",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401930242",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T12:00Z",
+      "home": "Kyrgyz Republic",
+      "away": "Vietnam",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933635",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T13:00Z",
+      "home": "Lebanon",
+      "away": "Palestine",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401916336",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T13:10Z",
+      "home": "Japan",
+      "away": "Paraguay",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401931477",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T14:00Z",
+      "home": "Qatar",
+      "away": "South Korea",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401932718",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T14:10Z",
+      "home": "United Arab Emirates",
+      "away": "Syria",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401931495",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T15:30Z",
+      "home": "Saudi Arabia",
+      "away": "Uzbekistan",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401919974",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T16:00Z",
+      "home": "Jordan",
+      "away": "Australia",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401930978",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T16:00Z",
+      "home": "Russia",
+      "away": "Venezuela",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933615",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T16:15Z",
+      "home": "Iraq",
+      "away": "Iran",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401931956",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T16:30Z",
+      "home": "Kuwait",
+      "away": "Honduras",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401930895",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T23:00Z",
+      "home": "Argentina",
+      "away": "Costa Rica",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401921304",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T23:00Z",
+      "home": "Chile",
+      "away": "Colombia",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401930899",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T23:30Z",
+      "home": "Ecuador",
+      "away": "Bolivia",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401932215",
+      "league": "fifa.friendly",
+      "start": "2026-11-17T23:30Z",
+      "home": "Uruguay",
+      "away": "Dominican Republic",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841315",
+      "league": "bra.1",
+      "start": "2026-11-18T22:30Z",
+      "home": "Coritiba",
+      "away": "Santos",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841310",
+      "league": "bra.1",
+      "start": "2026-11-18T23:00Z",
+      "home": "Remo",
+      "away": "Chapecoense",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841314",
+      "league": "bra.1",
+      "start": "2026-11-18T23:30Z",
+      "home": "Cruzeiro",
+      "away": "Palmeiras",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841313",
+      "league": "bra.1",
+      "start": "2026-11-18T23:30Z",
+      "home": "Flamengo",
+      "away": "Athletico-PR",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841316",
+      "league": "bra.1",
+      "start": "2026-11-19T00:30Z",
+      "home": "Corinthians",
+      "away": "Botafogo",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841312",
+      "league": "bra.1",
+      "start": "2026-11-19T00:30Z",
+      "home": "Grêmio",
+      "away": "Bahia",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    }
+  ],
+  "failed_requests": [
+    {
+      "league": "concacaf.gold.cup",
+      "date": "20261117",
+      "error": "HTTPError"
+    },
+    {
+      "league": "concacaf.gold.cup",
+      "date": "20261118",
+      "error": "HTTPError"
+    }
+  ],
+  "lineups_officially_confirmed": false,
+  "odds_available": false,
+  "warning": "Sem cotações e sem validação oficial de titulares; não constitui sinal de aposta."
+}
