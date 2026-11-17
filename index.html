@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-16-v21">
+<meta name="green-lab-build" content="2026-11-16-v22">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -63,6 +63,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 .quick-risk{color:#efca8c;font-size:11px;line-height:1.55;margin-top:8px}
 .quick-button{font-size:12px;color:#0c2314;background:#86f0af;border:0;border-radius:8px;padding:10px 12px;margin-top:11px;font-weight:900}
 .quick-card small{display:block;color:#b2cbb7;line-height:1.45;margin-top:5px}
+.gl-legend{display:grid;gap:9px;margin:14px 0;padding:14px;border:1px solid #42634d;border-radius:14px;background:#10261a;font-size:13px;line-height:1.5}.gl-legend>div{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}.gl-dot{display:inline-block;width:12px;height:12px;min-width:12px;border-radius:50%;vertical-align:middle}.gl-green{background:#4ade80}.gl-yellow{background:#facc15}.gl-red{background:#fb7185}.gl-result-note{padding-top:9px;border-top:1px solid #365641;color:#b7d3bf}
 </style>
 </head>
 <body>
@@ -71,10 +72,10 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v21</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v22</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
-<section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Sinal final: o que está confirmado?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Esta é a primeira tela para decidir o que investigar. <strong>Um estudo histórico não é um sinal validado.</strong></p><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
+<section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Sinal final: o que está confirmado?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Esta é a primeira tela para decidir o que investigar. <strong>Um estudo histórico não é um sinal validado.</strong></p><div class="gl-legend" role="note" aria-label="Legenda de confiança dos sinais"><div><span class="gl-dot gl-green" aria-hidden="true"></span><b>VERDE</b> — sinal validado com evidências; não garante acerto</div><div><span class="gl-dot gl-yellow" aria-hidden="true"></span><b>AMARELO</b> — em estudo, falta confirmação</div><div><span class="gl-dot gl-red" aria-hidden="true"></span><b>VERMELHO</b> — não validado ou reprovado; não é sinal de entrada</div><div class="gl-result-note">📋 RESULTADOS APÓS O JOGO: 🟢 GREEN = acertou · 🔴 RED = perdeu · ⚪ ANULADO = devolvido. Resultados não são a mesma coisa que confiança pré-jogo.</div></div><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div></section>
 <section class="signalhub" id="quickHub">
  <div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • LEITURA RÁPIDA</span><h2>Qual mercado o radar encontrou?</h2></div><span id="quickCount" class="signalstatus">Consultando</span></div>
  <p>Aqui aparecem as linhas exatas dos mercados identificados. <strong>São hipóteses de estudo, não apostas confirmadas.</strong> Confira a cotação e o risco antes de decidir.</p>
@@ -98,7 +99,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v20 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v22 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
