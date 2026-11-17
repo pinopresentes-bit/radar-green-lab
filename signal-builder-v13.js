@@ -9,7 +9,7 @@ style.textContent='#assembledContent .am-card{background:#10291b;border:1px soli
 document.head.append(style);
 const studies=new Map(),rosters=new Map();
 const toRow=(name,value,reason,yes)=>'<div class="am-row"><strong>'+esc(name)+'</strong><span class="am-value'+(yes?'':' off')+'">'+esc(value)+'</span><small>'+esc(reason)+'</small></div>';
-const candidate=()=>{const g=preCandidates();return g.find(x=>pregameStudyCache.get(preKey(x))?.findings?.length)||g[0]||null};
+const candidate=()=>{const g=preCandidates();const key=window.greenLabPriorityKey;return (key&&g.find(x=>preKey(x)===key))||g.find(x=>pregameStudyCache.get(preKey(x))?.findings?.length)||g[0]||null};
 function hMarket(h,a,rule,min,market){
  const p=h.filter(rule).length,q=a.filter(rule).length,ready=h.length>=5&&a.length>=5;
  const ok=ready&&p>=min&&q>=min;
