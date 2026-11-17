@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v42">
+<meta name="green-lab-build" content="2026-11-17-v43">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -75,7 +75,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v33</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
-<section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Prioridade: qual jogo estudar primeiro?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Um mercado principal por jogo, com os demais recolhidos. <strong>Amarelo é estudo, não entrada. Verde exige evidências verificadas.</strong></p><div class="gl-legend" role="note" aria-label="Legenda de confiança dos sinais"><div><span class="gl-dot gl-green" aria-hidden="true"></span><b>VERDE</b> — sinal validado com evidências; não garante acerto</div><div><span class="gl-dot gl-yellow" aria-hidden="true"></span><b>AMARELO</b> — em estudo, falta confirmação</div><div><span class="gl-dot gl-red" aria-hidden="true"></span><b>VERMELHO</b> — não validado ou reprovado; não é sinal de entrada</div><div class="gl-result-note">📋 RESULTADOS APÓS O JOGO: 🟢 GREEN = acertou · 🔴 RED = perdeu · ⚪ ANULADO = devolvido. Resultados não são a mesma coisa que confiança pré-jogo.</div></div><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div><a class="go-signals" style="display:flex;width:100%;margin-top:12px;text-align:center" href="#assembledHub">🧩 ABRIR SINAL MONTADO ↓</a></section>
+<section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Próximos jogos: o que estudar primeiro?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Um mercado principal por jogo, com os demais recolhidos. <strong>Amarelo é estudo, não entrada. Verde exige evidências verificadas.</strong></p><div class="gl-legend" role="note" aria-label="Legenda de confiança dos sinais"><div><span class="gl-dot gl-green" aria-hidden="true"></span><b>VERDE</b> — sinal validado com evidências; não garante acerto</div><div><span class="gl-dot gl-yellow" aria-hidden="true"></span><b>AMARELO</b> — em estudo, falta confirmação</div><div><span class="gl-dot gl-red" aria-hidden="true"></span><b>VERMELHO</b> — não validado ou reprovado; não é sinal de entrada</div><div class="gl-result-note">📋 RESULTADOS APÓS O JOGO: 🟢 GREEN = acertou · 🔴 RED = perdeu · ⚪ ANULADO = devolvido. Resultados não são a mesma coisa que confiança pré-jogo.</div></div><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div><a class="go-signals" style="display:flex;width:100%;margin-top:12px;text-align:center" href="#assembledHub">🧩 ABRIR SINAL MONTADO ↓</a></section>
 <section class="signalhub" id="quickHub">
  <div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • LEITURA RÁPIDA</span><h2>Qual mercado o radar encontrou?</h2></div><span id="quickCount" class="signalstatus">Consultando</span></div>
  <p>Aqui aparecem as linhas exatas dos mercados identificados. <strong>São hipóteses de estudo, não apostas confirmadas.</strong> Confira a cotação e o risco antes de decidir.</p>
@@ -465,7 +465,7 @@ function renderFinalHub(){
  const studied=games.map(g=>{
   const findings=[...(pregameStudyCache.get(preKey(g))?.findings||[])].filter(f=>Number.isFinite(f.home)&&Number.isFinite(f.away)).sort((a,b)=>Math.min(b.home,b.away)-Math.min(a.home,a.away)||b.home+b.away-a.home-a.away);
   return {g,findings,score:findings.length?Math.min(findings[0].home,findings[0].away)*10+findings[0].home+findings[0].away:0};
- }).filter(x=>x.findings.length).sort((a,b)=>b.score-a.score||new Date(a.g.start)-new Date(b.g.start));
+ }).filter(x=>x.findings.length).sort((a,b)=>{const now=Date.now(),ta=new Date(a.g.start).getTime()-now,tb=new Date(b.g.start).getTime()-now;const pa=ta>=0&&ta<=7200000?0:ta>=0&&ta<=21600000?1:2,pb=tb>=0&&tb<=7200000?0:tb>=0&&tb<=21600000?1:2;return pa-pb||(pa===0?ta-tb:b.score-a.score)||ta-tb;});
  window.greenLabPriorityKey=studied.length?preKey(studied[0].g):null;
  status.textContent=studied.length?studied.length+" jogos em estudo":"Sem tendência";
  if(!studied.length){box.innerHTML='<div class="empty">'+(pending.length?"Analisando históricos de "+pending.length+" jogos. ":"Nenhum mercado passou no filtro histórico desta data. ")+'Nenhuma entrada validada.</div>'}
@@ -477,7 +477,7 @@ function renderFinalHub(){
    const detail=others.length?'<details style="margin-top:12px"><summary>Ver outros '+others.length+' mercados em estudo</summary>'+others.map(f=>'<div class="facts" style="margin-top:8px">'+esc(f.name)+' · '+esc(g.home.name)+' '+f.home+'/5 · '+esc(g.away.name)+' '+f.away+'/5</div>').join("")+'</details>':'';
    return '<article class="signalitem"><h3>🟡 ESTUDO PRIORITÁRIO · '+esc(dateTime(g.start))+'</h3>'+
    '<div class="market">'+esc(g.home.name)+' × '+esc(g.away.name)+'</div>'+
-   '<p><strong>Mercado principal para investigar: '+esc(primary.name)+'</strong></p>'+
+   '<p><strong>Hipótese principal para estudar: '+esc(primary.name)+'</strong></p>'+
    '<div class="facts">Histórico recente: '+esc(g.home.name)+' '+primary.home+'/5 · '+esc(g.away.name)+' '+primary.away+'/5. Frequência não é probabilidade.</div>'+
    '<p>👥 '+(roster?'11 nomes por equipe na ESPN; confirmação oficial pendente':'Titulares oficiais não confirmados')+'<br>'+
    '🧮 '+(q?'Odd anotada manualmente; ainda não verificada na casa':'Odd da casa não verificada')+'<br>'+
