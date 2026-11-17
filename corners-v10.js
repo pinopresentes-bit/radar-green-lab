@@ -19,7 +19,9 @@
   return m&&Number(m[1])>45&&Number(m[1])<=120?2:null;
  }
  function splitCornerPeriods(summary,total){
-  // Total zero não comprova a existência de uma linha do tempo completa.\n  // Sem eventos verificáveis, não transformar ausência de dados em zero.\n  if(total===0)return null;
+  // Total zero não comprova a existência de uma linha do tempo completa.
+  // Sem eventos verificáveis, não transformar ausência de dados em zero.
+  if(total===0)return null;
   const feeds=[summary?.plays,summary?.keyEvents,summary?.details?.plays,summary?.details?.keyEvents,summary?.commentary?.plays];
   for(const feed of feeds){
    if(!Array.isArray(feed))continue;
@@ -120,7 +122,7 @@
    return;
   }
   const quality=H.length>=5&&A.length>=5?"Histórico disponível":"Amostra curta — NÃO VALIDADO";
-  set("total",quality,coverage+study(game.home.name,H,"total",[7.5,8.5,9.5])+". "+study(game.away.name,A,"total",[7.5,8.5,9.5])+". São frequências de jogos separados, não da partida futura.");
+  set("total",quality,coverage+study(game.home.name,H,"total",[6.5,7.5,8.5,9.5,10.5])+". "+study(game.away.name,A,"total",[6.5,7.5,8.5,9.5,10.5])+". São frequências de jogos separados, não da partida futura.");
   set("team",quality,byTeam(game.home.name,H)+". "+byTeam(game.away.name,A)+".");
   const homeAtHome=H.filter(x=>x.venue==="casa"),awayAway=A.filter(x=>x.venue==="fora");
   set("venue",homeAtHome.length>=3&&awayAway.length>=3?"Recorte disponível":"Poucos jogos por mando",byTeam(game.home.name+" em casa",homeAtHome)+". "+byTeam(game.away.name+" fora",awayAway)+".");
