@@ -74,12 +74,12 @@ function render(){
  const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
  const cornerRow=(label,x,s1,s2)=>{
   return toRow(label,x?"🟡 "+x.label:d?.done?"⚪ Sem tendência com critério suficiente":"⏳ Consultando registros",
-   x?x.info:d?.done?"Amostra com dados: "+s1+" e "+s2+" jogos. Dados existentes não garantem linha qualificada (exige 75% em cada equipe e pelo menos 4 jogos).":"Verificando registros dos últimos jogos.",!!x);
+   x?x.info:d?.done?(s1<4||s2<4?"Dados insuficientes: "+s1+" e "+s2+" jogos por equipe; exigidos ao menos 4 para cada lado.":"Amostra de "+s1+" e "+s2+" jogos: nenhuma linha atingiu o filtro de 75% em cada equipe."):"Verificando registros dos últimos jogos.",!!x);
  };
  const playerRow=(label,kind)=>{
   const p=pickPlayer(d,r,kind);
   return toRow(label,p?"🟡 "+p.name:"⚪ Sem jogador indicado",
-   p?p[kind].total+" eventos em "+p[kind].n+" jogos com dados individuais; apenas um nome em observação.":
+   p?p[kind].hits+"/"+p[kind].n+" jogos com pelo menos 1 "+(kind==="shot"?"chute no alvo":kind==="goal"?"gol":"assistência")+"; "+p[kind].total+" no total da amostra. Frequência observada, não garantia.":
    r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"Nenhum titular tem histórico individual suficiente publicado.":"Aguardando titulares listados na ESPN e histórico individual de 3+ jogos.",!!p);
  };
  const has=one.ok||two.ok||both.ok||!!ct||!!cf;
