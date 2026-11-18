@@ -42,8 +42,8 @@ function firstCorners(s,tot){
  }
  return null;
 }
-function addStat(players,p){
- const k=normTeam(p.name);if(!k)return;
+function addStat(players,p,teamId){
+ const k=String(teamId)+":"+normTeam(p.name);if(!p.name)return;
  if(!players[k])players[k]={name:p.name,goal:{n:0,total:0,hits:0},assist:{n:0,total:0,hits:0},shot:{n:0,total:0,hits:0}};
  for(const [type,aliases] of [["goal",["goals","goal"]],["assist",["goalAssists","assists","assist"]],["shot",["shotsOnTarget","shotsOnGoal","shots on target"]]]){
   const v=statNumber(p.stats,aliases);
