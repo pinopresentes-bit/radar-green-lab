@@ -54,9 +54,9 @@ function addStat(players,p){
 function pickPlayer(d,r,kind){
  if(!d?.done||!r?.home||!r?.away)return null;
  if(r.home.starters?.length!==11||r.away.starters?.length!==11)return null;
- const names=[...r.home.starters,...r.away.starters].map(x=>normTeam(x.name));
+ const names=[...r.home.starters.map(x=>String(r.homeTeamId)+":"+normTeam(x.name)),...r.away.starters.map(x=>String(r.awayTeamId)+":"+normTeam(x.name))];
  const eligible=[...new Set(names)].map(k=>d.players[k]).filter(x=>{
-  const m=x?.[kind];return m?.n>=3&&(kind==="shot"?m.hits>=2:m.total>=2);
+  const m=x?.[kind];return m?.n>=5&&(kind==="shot"?m.hits>=3:m.total>=2);
  }).sort((a,b)=>b[kind].total-a[kind].total);
  return eligible[0]||null;
 }
@@ -84,7 +84,7 @@ function render(){
   const p=pickPlayer(d,r,kind);
   return toRow(label,p?"🟡 "+p.name:"⚪ Sem jogador indicado",
    p?p[kind].hits+"/"+p[kind].n+" jogos com pelo menos 1 "+(kind==="shot"?"chute no alvo":kind==="goal"?"gol":"assistência")+"; "+p[kind].total+" no total da amostra. Frequência observada, não garantia.":
-   r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"Nenhum titular tem histórico individual suficiente publicado.":"Aguardando titulares listados na ESPN e histórico individual de 3+ jogos.",!!p);
+   r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"Nenhum titular tem histórico individual suficiente publicado.":"Aguardando titulares listados na ESPN e histórico individual verificável de 5+ jogos.",!!p);
  };
  const has=one.ok||two.ok||both.ok||!!ct||!!cf;
  const options=[
@@ -136,7 +136,7 @@ async function loadStudy(g){
    }catch{return {...x,corners:null,first:null,players:[]}}
   });
   const sample=(side,field)=>all.filter(x=>x.side===side&&x[field]!==null).map(x=>field==="first"?{first:x.first}:x.corners);
-  const players={};for(const x of all)for(const p of x.players)addStat(players,p);
+  const players={};for(const x of all)for(const p of x.players)addStat(players,p,x.team.id);
   studies.set(key,{home,away,done:true,hCorners:sample("h","corners"),aCorners:sample("a","corners"),hHalves:sample("h","first"),aHalves:sample("a","first"),players});
  }catch{studies.set(key,{home:[],away:[],done:true,hCorners:[],aCorners:[],hHalves:[],aHalves:[],players:{}})}
  render();
@@ -145,7 +145,7 @@ async function checkRoster(g){
  const key=preKey(g);rosters.set(key,{pending:true,checkedAt:Date.now()});
  try{
   const summary=await api(matchSummaryUrl(g));
-  rosters.set(key,{home:teamLineup(summary,g.home),away:teamLineup(summary,g.away),checkedAt:Date.now()});
+  rosters.set(key,{home:teamLineup(summary,g.home),away:teamLineup(summary,g.away),homeTeamId:g.home.id,awayTeamId:g.away.id,checkedAt:Date.now()});
  }catch{rosters.set(key,{home:null,away:null,checkedAt:Date.now()})}
  render();
 }
