@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 57
   },
-  "generated_at_utc": "2026-11-18T07:14:31.079365+00:00",
+  "generated_at_utc": "2026-11-18T08:38:28.978858+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -326,20 +326,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401879232",
-      "league": "eng.1",
-      "start": "2026-11-21T17:30Z",
-      "home": "Newcastle United",
-      "away": "Arsenal",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882797",
       "league": "esp.1",
       "start": "2026-11-21T17:30Z",
       "home": "Sevilla",
       "away": "Real Betis",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879232",
+      "league": "eng.1",
+      "start": "2026-11-21T17:30Z",
+      "home": "Newcastle United",
+      "away": "Arsenal",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
