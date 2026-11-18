@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-18-v57">
+<meta name="green-lab-build" content="2026-11-18-v58">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -492,14 +492,14 @@ function renderFinalHub(){
  if(!box)return;
  if(!state.loaded){status.textContent="Aguardando";box.innerHTML='<div class="empty">Carregando os jogos...</div>';return}
  if(state.success===0){status.textContent="Fonte indisponível";box.innerHTML='<div class="empty">Consulta falhou. Nenhum sinal confirmado; tente atualizar.</div>';return}
- const games=preCandidates(),pending=games.filter(g=>!pregameStudyCache.has(preKey(g)));
+ const games=preCandidates(),pending=games.filter(g=>!pregameStudyCache.has(preKey(g))),failed=games.filter(g=>pregameStudyCache.get(preKey(g))?.error);
  const studied=games.map(g=>{
   const findings=[...(pregameStudyCache.get(preKey(g))?.findings||[])].filter(f=>Number.isFinite(f.home)&&Number.isFinite(f.away)).sort((a,b)=>Math.min(b.home,b.away)-Math.min(a.home,a.away)||b.home+b.away-a.home-a.away);
   return {g,findings,score:findings.length?Math.min(findings[0].home,findings[0].away)*10+findings[0].home+findings[0].away:0};
  }).filter(x=>x.findings.length).sort((a,b)=>{const now=Date.now(),ta=new Date(a.g.start).getTime()-now,tb=new Date(b.g.start).getTime()-now;const pa=ta>=0&&ta<=7200000?0:ta>=0&&ta<=21600000?1:2,pb=tb>=0&&tb<=7200000?0:tb>=0&&tb<=21600000?1:2;return pa-pb||b.score-a.score||ta-tb;});
  window.greenLabPriorityKey=studied.length?preKey(studied[0].g):null;
  status.textContent=studied.length?studied.length+" jogos em estudo":"Sem tendência";
- if(!studied.length){box.innerHTML='<div class="empty">'+(pending.length?"Analisando históricos de "+pending.length+" jogos. ":"Nenhum mercado passou no filtro histórico desta data. ")+'Nenhuma entrada validada.</div>'}
+ if(!studied.length){box.innerHTML='<div class="empty">'+(pending.length?"Analisando históricos de "+pending.length+" jogos. ":"Nenhum mercado passou no filtro histórico desta data. "+(failed.length?failed.length+" consulta(s) falharam ou excederam o tempo. ":""))+'Nenhuma entrada validada.</div>'}
  else{
   box.innerHTML=studied.slice(0,3).map(({g,findings})=>{
    const l=lineupCheckCache.get(preKey(g)),roster=l&&!l.error&&!l.duplicate&&l.home===11&&l.away===11;
@@ -518,7 +518,7 @@ function renderFinalHub(){
   }).join("");
   box.querySelectorAll("[data-final]").forEach(b=>b.onclick=()=>openDetail(b.dataset.final));
  }
- foot.textContent="Pré-seleção por frequência histórica, não por chance estimada. "+games.length+" partidas futuras; "+pending.length+" aguardando histórico. Nenhum sinal verde sem confirmação de fontes, titulares e cotação. Atualizado: "+clock(new Date())+".";
+ foot.textContent="Pré-seleção por frequência histórica, não por chance estimada. "+games.length+" partidas futuras; "+pending.length+" aguardando histórico; "+failed.length+" com falha/tempo excedido. Nenhum sinal verde sem confirmação de fontes, titulares e cotação. Atualizado: "+clock(new Date())+".";
 }
 function renderQuickSignals(){
  const list=$("quickList"),counter=$("quickCount"),foot=$("quickFoot");
@@ -631,7 +631,7 @@ function preKey(g){return g.code+"-"+g.id}
 function preCandidates(){return state.games.filter(g=>g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000).sort((a,b)=>new Date(a.start)-new Date(b.start))}
 function preDisplay(g,data){
  if(!data)return'<div class="predata"><small>📊 Aguardando análise do histórico…</small></div>';
- if(data.error)return'<div class="predata"><small>⚠️ Dados indisponíveis na consulta. Tente atualizar.</small></div>';
+ if(data.error)return'<div class="predata"><small>⚠️ Falha ou tempo excedido na consulta histórica. Sem sinal validado; atualize para tentar novamente.</small></div>';
  if(preMarket==="corners")return'<div class="predata"><small>🚩 Abra Analisar para conferir até 10 jogos, cantos por tempo (quando disponíveis), médias, medianas e casa/fora.</small></div>';
  if(preMarket==="half")return'<div class="predata"><small>⏱️ Gol no 1º tempo: abra Analisar para consultar minutos dos gols. Escanteios por período pendentes.</small></div>';
  if(preMarket==="players")return'<div class="predata"><small>🥅 Jogadores: abra Analisar para consultar titulares e estatísticas que a ESPN disponibilizar. Histórico recente individual e odds permanecem pendentes.</small></div>';
@@ -703,10 +703,10 @@ async function runPregameQueue(matches,token){
      const g=matches[index++],key=preKey(g);
      if(pregameStudyCache.has(key))continue;
      try{
-       const [h,a]=await Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]);
+       const [h,a]=await Promise.race([Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]),new Promise((_,reject)=>setTimeout(()=>reject(Error("Tempo limite de 45 segundos para histórico")),45000))]);
        if(token!==pregameBatchToken)return;
        pregameStudyCache.set(key,{hCount:h.length,aCount:a.length,findings:pregameStudies(h,a)});
-     }catch{if(token!==pregameBatchToken)return;pregameStudyCache.set(key,{error:true,hCount:0,aCount:0,findings:[]})}
+     }catch(e){if(token!==pregameBatchToken)return;pregameStudyCache.set(key,{error:true,reason:String(e?.message||"Fonte indisponível"),hCount:0,aCount:0,findings:[]})}
      if(token===pregameBatchToken)renderPreCards();
    }
  };
