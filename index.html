@@ -749,17 +749,28 @@ async function leagueSchedule(g){
 }
 async function teamHistory(g,t){
   if(!t.id)return [];
-  let games=[];
-  try{
-    const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/teams/"+encodeURIComponent(t.id)+"/schedule?season="+new Date(g.start).getUTCFullYear();
-    games=matchHistory((await api(url)).events,g,t);
-  }catch{}
-  if(games.length<3){
-    const extras=matchHistory(await leagueSchedule(g),g,t);
-    games=Array.from(new Map([...games,...extras].map(x=>[x.id,x])).values())
-      .sort((x,y)=>new Date(y.date)-new Date(x.date));
+  const year=new Date(g.start).getUTCFullYear();
+  const cutoff=new Date(new Date(g.start).getTime()-365*86400000);
+  const found=new Map();
+  const add=events=>{
+    for(const match of matchHistory(events,g,t)){
+      // Keep recent completed fixtures only; never treat missing scores as zeros.
+      if(new Date(match.date)>=cutoff)found.set(match.id,match);
+    }
+  };
+  // The current-season endpoint alone can contain only one match for national teams.
+  // Search the prior season as a fallback, retaining the same verified team ID.
+  for(const season of [year,year-1]){
+    if(found.size>=10)break;
+    try{
+      const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/teams/"+encodeURIComponent(t.id)+"/schedule?season="+season;
+      add((await api(url)).events);
+    }catch{}
   }
-  return games.slice(0,10);
+  if(found.size<10){
+    try{add(await leagueSchedule(g))}catch{}
+  }
+  return [...found.values()].sort((x,y)=>new Date(y.date)-new Date(x.date)).slice(0,10);
 }
 let active="";
 
