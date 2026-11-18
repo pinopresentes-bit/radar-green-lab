@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 57
   },
-  "generated_at_utc": "2026-11-18T11:58:52.434716+00:00",
+  "generated_at_utc": "2026-11-18T13:11:05.620950+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -335,20 +335,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401884729",
-      "league": "ger.1",
-      "start": "2026-11-21T17:30Z",
-      "home": "Schalke 04",
-      "away": "VfB Stuttgart",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882797",
       "league": "esp.1",
       "start": "2026-11-21T17:30Z",
       "home": "Sevilla",
       "away": "Real Betis",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401884729",
+      "league": "ger.1",
+      "start": "2026-11-21T17:30Z",
+      "home": "Schalke 04",
+      "away": "VfB Stuttgart",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -479,20 +479,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401933739",
-      "league": "usa.1",
-      "start": "2026-11-21T23:00Z",
-      "home": "Inter Miami CF",
-      "away": "Columbus Crew",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401877051",
       "league": "mex.1",
       "start": "2026-11-21T23:00Z",
       "home": "Santos",
       "away": "León",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933739",
+      "league": "usa.1",
+      "start": "2026-11-21T23:00Z",
+      "home": "Inter Miami CF",
+      "away": "Columbus Crew",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
