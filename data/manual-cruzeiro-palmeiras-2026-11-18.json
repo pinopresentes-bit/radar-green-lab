@@ -1,0 +1,53 @@
+{
+  "match": "Cruzeiro x Palmeiras",
+  "date": "2026-11-18",
+  "kickoff": "20:30 America/Sao_Paulo",
+  "status": "LIVE",
+  "source_urls": [
+    "https://placar.com.br/belo-horizonte-minas-gerais/futebol/brasileiro-serie-a-2026/jogo/11-2026/147496/cruzeiro-palmeiras/",
+    "https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/11/18/cruzeiro-x-palmeiras-escalacoes-brasileirao.ghtm",
+    "https://ge.globo.com/mg/futebol/brasileirao-serie-a/noticia/2026/11/18/cruzeiro-x-palmeiras-onde-assistir-ao-vivo-horario-e-escalacoes.ghtml"
+  ],
+  "home_starting": [
+    "Otávio",
+    "William",
+    "Fabrício Bruno",
+    "Villalba",
+    "Rojas",
+    "Lucas Romero",
+    "Zé Lucas",
+    "Gerson",
+    "Matheus Pereira",
+    "Marquinhos",
+    "Kaio Jorge"
+  ],
+  "away_starting": [
+    "Carlos Miguel",
+    "Benedetti",
+    "Bruno Fuchs",
+    "Barboza",
+    "Khellven",
+    "Marlon Freitas",
+    "Andreas Pereira",
+    "Lucas Evangelista",
+    "Arthur",
+    "Vitor Roque",
+    "Ramón Sosa"
+  ],
+  "unverified": [
+    "live minute",
+    "live corners",
+    "first-half corners",
+    "live shots on target",
+    "last 5-10 match corners splits",
+    "current score at ingestion"
+  ],
+  "markets": {
+    "goals_over_1_5": "PRELIMINARY_ONLY",
+    "corners_first_half": "SEM DADO CONFIÁVEL — NÃO VALIDADO",
+    "corners_total": "SEM DADO CONFIÁVEL — NÃO VALIDADO",
+    "shots_on_target": "NOT_VALIDATED",
+    "scorers": "NOT_VALIDATED"
+  },
+  "note": "Reference snapshot only. Must not be treated as live verified signal; re-fetch before use."
+}
