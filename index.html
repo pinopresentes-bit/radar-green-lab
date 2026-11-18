@@ -177,7 +177,14 @@ function liveStats(obj){
  };
  return Object.values(result).every(x=>x===null)?null:result;
 }
-function currentMinute(s){const m=String(s||"").match(/(\d{1,3})\s*['’:]/);return m?Number(m[1]):null}
+function currentMinute(s){
+ const raw=String(s||"");
+ // Added time: 45+2' means minute 47, not minute 2.
+ const extra=raw.match(/\b(\d{1,3})\s*['’]?\s*\+\s*(\d{1,2})\s*['’]?/);
+ if(extra)return Number(extra[1])+Number(extra[2]);
+ const m=raw.match(/\b(\d{1,3})\s*['’:]/);
+ return m?Number(m[1]):null;
+}
 function findHypotheses(g,st){
  if(!st)return[];
  const minute=currentMinute(g.detail);
