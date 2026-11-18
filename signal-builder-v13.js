@@ -72,8 +72,8 @@ function pickPlayer(d,r,kind){
  if(r.home.starters?.length!==11||r.away.starters?.length!==11)return null;
  const names=[...r.home.starters.map(x=>String(r.homeTeamId)+":"+normTeam(x.name)),...r.away.starters.map(x=>String(r.awayTeamId)+":"+normTeam(x.name))];
  const eligible=[...new Set(names)].map(k=>d.players[k]).filter(x=>{
-  const m=x?.[kind];return m?.n>=5&&(kind==="shot"?m.hits>=3:m.total>=2);
- }).sort((a,b)=>b[kind].total-a[kind].total);
+  const m=x?.[kind];return m?.n>=5&&(kind==="shot"?m.hits>=4&&m.hits/m.n>=0.65:kind==="assist"?m.hits>=3&&m.hits/m.n>=0.5:m.hits>=2&&m.hits/m.n>=0.3);
+ }).sort((a,b)=>b[kind].hits/b[kind].n-a[kind].hits/a[kind].n||b[kind].total-a[kind].total);
  return eligible[0]||null;
 }
 function render(){
@@ -88,6 +88,9 @@ function render(){
  const two=hMarket(h,a,x=>x.total>=3,4,"Mais de 2,5 gols");
  const both=hMarket(h,a,x=>x.btts,3,"Ambas marcam: SIM");
  const bothNo=hMarket(h,a,x=>!x.btts,3,"Ambas marcam: NÃO");
+ // BTTS SIM/NÃO são alternativas excludentes: não destacar ambas como sinais simultâneos.
+ const bttsConflict=both.ok&&bothNo.ok;
+ if(bttsConflict){both.ok=false;bothNo.ok=false;}
  const under=hMarket(h,a,x=>x.total<4,4,"Menos de 3,5 gols");
  
  const bulletin=g.code==="uefa.wchampions" && Date.parse(g.start)===Date.parse("2026-11-18T20:00:00Z") && /chelsea/i.test(g.home.name) && /paris|psg/i.test(g.away.name);
@@ -100,7 +103,7 @@ function render(){
  const playerRow=(label,kind)=>{
   const p=pickPlayer(d,r,kind);
   return toRow(label,p?"🟡 "+p.name:"⚪ Sem jogador indicado",
-   p?p[kind].hits+"/"+p[kind].n+" jogos com pelo menos 1 "+(kind==="shot"?"chute no alvo":kind==="goal"?"gol":"assistência")+"; "+p[kind].total+" no total da amostra. Frequência observada, não garantia.":
+   p?p[kind].hits+"/"+p[kind].n+" jogos com pelo menos 1 "+(kind==="shot"?"chute no alvo":kind==="goal"?"gol":"assistência")+"; "+p[kind].total+" no total da amostra. Frequência observada, não garantia. Jogador listado pela ESPN; escalação oficial e odd ainda exigem conferência.":
    r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"Nenhum titular tem histórico individual suficiente publicado.":"Aguardando titulares listados na ESPN e histórico individual verificável de 5+ jogos.",!!p);
  };
  const has=one.ok||two.ok||both.ok||!!ct||!!cf;
