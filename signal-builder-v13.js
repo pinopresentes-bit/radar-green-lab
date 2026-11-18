@@ -2,14 +2,30 @@
 (()=>{
 "use strict";
 const section=document.createElement("section");section.className="signalhub";section.id="assembledHub";
-section.innerHTML='<div class="signalhead"><div><span class="eyebrow">🧩 GREEN LAB • SINAL MONTADO</span><h2>Qual mercado analisar?</h2></div><span class="signalstatus" id="assembledStatus">Montando</span></div><p>Gols, escanteios, ambas marcam e jogadores em um só lugar. <strong>Sem aposta validada e sem odds verificadas.</strong></p><div id="assembledContent"><div class="empty">Analisando histórico...</div></div>';
+section.innerHTML='<div class="signalhead"><div><span class="eyebrow">🧩 GREEN LAB • SINAL MONTADO</span><h2>Qual mercado analisar?</h2></div><span class="signalstatus" id="assembledStatus">Montando</span></div><p>Gols, escanteios, ambas marcam e jogadores em um só lugar. <strong>Sem aposta validada e sem odds verificadas.</strong></p><label id="assembledPicker" hidden>Escolher jogo<select id="assembledGame" style="width:100%;font-size:16px"></select></label><div id="assembledContent"><div class="empty">Analisando histórico...</div></div>';
 (document.getElementById("finalHub")||document.getElementById("notice"))?.insertAdjacentElement("afterend",section);
 const style=document.createElement("style");
 style.textContent='#assembledContent .am-card{background:#10291b;border:1px solid #467958;border-radius:12px;padding:13px;margin:10px 0}#assembledContent .am-card h3{font-size:15px;color:#e5d39d;line-height:1.5;margin:6px 0}#assembledContent .am-rows{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}#assembledContent .am-row{border-top:1px solid #3d6046;padding:9px 0;display:flex;flex-direction:column;gap:4px}#assembledContent .am-row strong{font-size:11px;color:#f3f8ee}#assembledContent .am-value{font-size:12px;font-weight:850;color:#9afaaf;line-height:1.5}#assembledContent .am-value.off{color:#bbcfbd}#assembledContent .am-row small{font-size:10px;line-height:1.5;color:#b8cfbd}#assembledContent .am-cta{background:#7febae;color:#0b2517;font-size:12px;font-weight:850;border:0;border-radius:8px;padding:11px;margin-top:11px}#assembledContent .am-warning{border:1px solid #746b3d;border-radius:8px;background:#293422;padding:9px;font-size:11px;color:#f7d9a1;line-height:1.5;margin:10px 0}#assembledContent .am-footer{font-size:10px;color:#b5cfba;line-height:1.5;margin-top:9px}@media(max-width:460px){#assembledContent .am-rows{grid-template-columns:1fr}}';
 document.head.append(style);
 const studies=new Map(),rosters=new Map();
 const toRow=(name,value,reason,yes)=>'<div class="am-row"><strong>'+esc(name)+'</strong><span class="am-value'+(yes?'':' off')+'">'+esc(value)+'</span><small>'+esc(reason)+'</small></div>';
-const candidate=()=>{const now=Date.now();const g=preCandidates().filter(x=>new Date(x.start).getTime()>now).sort((a,b)=>new Date(a.start)-new Date(b.start));const windowGames=g.filter(x=>{const delta=new Date(x.start).getTime()-now;return delta>=1800000&&delta<=7200000});if(windowGames.length)return windowGames[0];const imminent=g.filter(x=>new Date(x.start).getTime()-now<1800000);if(imminent.length)return imminent[0];return g[0]||null};
+const picker=document.getElementById("assembledGame");
+let selectedKey="", menu="";
+picker.addEventListener("change",()=>{selectedKey=picker.value;render()});
+function candidate(){
+ const now=Date.now();
+ const games=preCandidates().filter(g=>Date.parse(g.start)>now).sort((a,b)=>Date.parse(a.start)-Date.parse(b.start));
+ const options=games.map(g=>'<option value="'+esc(preKey(g))+'">'+esc(dateTime(g.start)+" · "+g.home.name+" × "+g.away.name)+'</option>').join("");
+ if(menu!==options){picker.innerHTML=options;menu=options}
+ document.getElementById("assembledPicker").hidden=games.length<2;
+ let game=games.find(g=>preKey(g)===selectedKey);
+ if(!game){
+  selectedKey="";
+  game=games.find(g=>Date.parse(g.start)-now>=1800000 && Date.parse(g.start)-now<=7200000)||games[0];
+ }
+ if(game)picker.value=preKey(game);
+ return game;
+}
 function hMarket(h,a,rule,min,market){
  const p=h.filter(rule).length,q=a.filter(rule).length,ready=h.length>=5&&a.length>=5;
  const ok=ready&&p>=min&&q>=min;
