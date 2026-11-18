@@ -93,9 +93,10 @@ function render(){
  if(bttsConflict){both.ok=false;bothNo.ok=false;}
  const under=hMarket(h,a,x=>x.total<4,4,"Menos de 3,5 gols");
  
- const bulletin=g.code==="uefa.wchampions" && Date.parse(g.start)===Date.parse("2026-11-18T20:00:00Z") && /chelsea/i.test(g.home.name) && /paris|psg/i.test(g.away.name);
- const ct=bulletin?{label:"Mais de 6,5 escanteios",info:"Chelsea em casa 4/5; PSG fora 5/5. Confiança moderada. Amostra curta."}:d?.done?cornerPick(d.hCorners,d.aCorners,"total",[6.5,7.5,8.5,9.5,10.5]):null;
- const cf=bulletin?{label:"Mais de 2,5 escanteios",info:"Chelsea em casa: 5, 8, 3, 6, 4. PSG fora: 7, 4, 5, 3, 3. Linha atingida em 5/5 por equipe. Amostra curta, com competições diferentes. Confiança moderada."}:d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
+ // Somente estatísticas obtidas de partidas individuais entram no sinal montado.
+ // Boletins em texto não são importados como amostras verificadas.
+ const ct=d?.done?cornerPick(d.hCorners,d.aCorners,"total",[6.5,7.5,8.5,9.5,10.5]):null;
+ const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
  const cornerRow=(label,x,s1,s2)=>{
   return toRow(label,x?"🟡 "+x.label:d?.done?"🔴 SEM DADO CONFIÁVEL — NÃO VALIDADO":"⏳ Consultando registros",
    x?x.info:d?.done?(s1<5||s2<5?"SEM DADO CONFIÁVEL — NÃO VALIDADO: "+s1+" e "+s2+" partidas com registros verificáveis, de no mínimo 5 necessárias por equipe. A fonte pode não publicar eventos por período; ausência de dado não é zero.":"Amostra de "+s1+" e "+s2+" jogos: nenhuma linha atingiu o filtro de 75% em cada equipe. NÃO VALIDADO."):"Verificando registros dos últimos jogos.",!!x);
