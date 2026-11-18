@@ -772,27 +772,38 @@ async function teamHistory(g,t){
   }
   // National teams play across different ESPN competitions. Search related
   // scoreboards, but match the exact source team name to avoid wrong squads.
-  const international=["concacaf.nations.league","fifa.friendly","fifa.world","concacaf.gold.cup","fifa.worldq.conmebol","fifa.worldq.concacaf","uefa.nations"];
+  // ESPN uses competition-specific team IDs. Find the same national team by
+  // its official name in short monthly scoreboard windows (not one annual query).
+  const international=["concacaf.nations.league","fifa.friendly","fifa.world","concacaf.gold","fifa.worldq.concacaf","fifa.worldq.conmebol","uefa.nations","conmebol.america"];
   if(found.size<5&&international.includes(g.code)&&t.sourceName){
     const norm=v=>String(v||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
     const target=norm(t.sourceName);
-    const from=new Date(new Date(g.start).getTime()-365*86400000);
-    const range=ymd(from).replace(/-/g,"")+"-"+ymd(new Date(g.start)).replace(/-/g,"");
+    const ranges=[];
+    const until=new Date(g.start);
+    for(let i=0;i<12;i++){
+      const end=new Date(until.getTime()-i*30*86400000);
+      const start=new Date(Math.max(cutoff.getTime(),end.getTime()-29*86400000));
+      if(end<cutoff)break;
+      const fmt=d=>d.toISOString().slice(0,10).replace(/-/g,"");
+      ranges.push(fmt(start)+"-"+fmt(end));
+    }
     for(const code of international){
-      if(code===g.code||found.size>=10)continue;
-      try{
-        const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/scoreboard?dates="+range+"&limit=300";
-        const events=(await api(url)).events||[];
-        for(const e of events){
-          const sides=e.competitions?.[0]?.competitors||[];
-          const side=sides.find(c=>norm(c.team?.displayName||c.team?.shortDisplayName)===target);
-          if(!side)continue;
-          const sameLeagueTeam={id:String(side.team.id)};
-          for(const m of matchHistory([e],g,sameLeagueTeam)){
-            if(new Date(m.date)>=cutoff&&!found.has(m.id))found.set(m.id,{...m,code});
+      if(found.size>=10)break;
+      for(const dates of ranges){
+        if(found.size>=10)break;
+        try{
+          const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/scoreboard?dates="+dates+"&limit=300";
+          const events=(await api(url)).events||[];
+          for(const e of events){
+            const sides=e.competitions?.[0]?.competitors||[];
+            const side=sides.find(c=>[c.team?.displayName,c.team?.shortDisplayName].some(n=>norm(n)===target));
+            if(!side)continue;
+            for(const m of matchHistory([e],g,{id:String(side.team.id)})){
+              if(new Date(m.date)>=cutoff&&!found.has(m.id))found.set(m.id,{...m,code});
+            }
           }
-        }
-      }catch{}
+        }catch{}
+      }
     }
   }
   return [...found.values()].sort((x,y)=>new Date(y.date)-new Date(x.date)).slice(0,10);
