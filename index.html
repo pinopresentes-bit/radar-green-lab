@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v52">
+<meta name="green-lab-build" content="2026-11-18-v53">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -99,7 +99,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v52 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v53 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -115,7 +115,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-17-v52";
+const APP_BUILD="2026-11-18-v53";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
 $("today").onclick=()=>setDay(ymd(new Date()));
@@ -926,7 +926,7 @@ function cornerMarketPanel(){
  let str='<div class="panel"><h3>🚩 Radar de escanteios • pré-jogo</h3><p>Tipos disponíveis para estudo. Os números são obtidos dos últimos jogos somente quando a fonte publica escanteios de cada equipe.</p>';
  str+='<div class="market-check"><div class="market-top"><b>🚩 Total de escanteios na partida</b><span class="market-state" id="corner-total-status">Buscando</span></div><p id="corner-total-data">Conferindo escanteios totais 6,5 • 7,5 • 8,5 • 9,5 • 10,5, feitos/cedidos e mando; sem amostra confiável, NÃO VALIDADO.</p></div>';
  str+='<div class="market-check"><div class="market-top"><b>🏟️ Escanteios por equipe</b><span class="market-state" id="corner-team-status">Buscando</span></div><p id="corner-team-data">Consultando os escanteios cobrados por cada equipe nos jogos anteriores...</p></div>';
- str+=marketRow("⏱️","Escanteios no 1º tempo","Linhas: mais de 2,5 / 3,5 / 5,5 e menos de 5,5. SEM DADO CONFIÁVEL — NÃO VALIDADO até comprovar 5–10 jogos com eventos do primeiro tempo; jamais dividir escanteios totais por dois.","Dados pendentes");
+ str+=marketRow("⏱️","Escanteios no 1º tempo","Linhas: mais de 2,5 / 3,5 / 4,5. SEM DADO CONFIÁVEL — NÃO VALIDADO até comprovar 5–10 jogos com eventos reais do primeiro tempo, separados por equipe e mando; jamais dividir escanteios totais por dois.","Dados pendentes");
  str+=marketRow("⚡","Escanteio nos primeiros 10 minutos","Exemplo: pelo menos um escanteio nos 10 minutos iniciais. Exige registro do minuto de cada escanteio.","Dados pendentes");
  str+='<div class="market-check"><div class="market-top"><b>⚖️ Quem cobra mais escanteios?</b><span class="market-state" id="corner-most-status">Buscando</span></div><p id="corner-most-data">Comparando frequência histórica de liderança em escanteios de cada equipe...</p></div>';
  str+=marketRow("📐","Handicap de escanteios","Exemplos: equipe +1,5 ou -1,5. Exige análise da diferença de escanteios entre equipes e disponibilidade da linha.","Análise futura");
