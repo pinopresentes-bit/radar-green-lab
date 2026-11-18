@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-17-v51">
+<meta name="green-lab-build" content="2026-11-17-v52">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -99,7 +99,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v28 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v52 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -112,9 +112,10 @@ function clock(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,hour:"2-di
 function dateTime(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}).format(new Date(x))}
 let favs;try{favs=new Set(JSON.parse(localStorage.getItem("gl-favs")||"[]"))}catch{favs=new Set}
 const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");return /^\d{4}-\d{2}-\d{2}$/.test(x||"")?x:null}catch{return null}})();
-const state={date:ymd(new Date()),filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
+const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
+const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-17-v50";
+const APP_BUILD="2026-11-17-v52";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
 $("today").onclick=()=>setDay(ymd(new Date()));
