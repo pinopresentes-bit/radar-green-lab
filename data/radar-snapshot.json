@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 56
+    "future_games": 53
   },
-  "generated_at_utc": "2026-11-18T22:48:24.209016+00:00",
+  "generated_at_utc": "2026-11-18T23:46:16.123657+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -25,7 +25,7 @@
       "start": "2026-11-18T23:00Z",
       "home": "Remo",
       "away": "Chapecoense",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -34,7 +34,7 @@
       "start": "2026-11-18T23:30Z",
       "home": "Cruzeiro",
       "away": "Palmeiras",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -43,7 +43,7 @@
       "start": "2026-11-18T23:30Z",
       "home": "Flamengo",
       "away": "Athletico-PR",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
