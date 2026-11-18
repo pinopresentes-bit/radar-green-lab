@@ -78,7 +78,7 @@ function render(){
  const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
  const cornerRow=(label,x,s1,s2)=>{
   return toRow(label,x?"🟡 "+x.label:d?.done?"🔴 SEM DADO CONFIÁVEL — NÃO VALIDADO":"⏳ Consultando registros",
-   x?x.info:d?.done?(s1<5||s2<5?"SEM DADO CONFIÁVEL — NÃO VALIDADO: "+s1+" e "+s2+" jogos por equipe; exigidos ao menos 5 para cada lado.":"Amostra de "+s1+" e "+s2+" jogos: nenhuma linha atingiu o filtro de 75% em cada equipe. NÃO VALIDADO."):"Verificando registros dos últimos jogos.",!!x);
+   x?x.info:d?.done?(s1<5||s2<5?"SEM DADO CONFIÁVEL — NÃO VALIDADO: "+s1+" e "+s2+" partidas com registros verificáveis, de no mínimo 5 necessárias por equipe. A fonte pode não publicar eventos por período; ausência de dado não é zero.":"Amostra de "+s1+" e "+s2+" jogos: nenhuma linha atingiu o filtro de 75% em cada equipe. NÃO VALIDADO."):"Verificando registros dos últimos jogos.",!!x);
  };
  const playerRow=(label,kind)=>{
   const p=pickPlayer(d,r,kind);
@@ -95,12 +95,12 @@ function render(){
   {ok:!!ct,market:ct?.label+" (jogo)",detail:ct?.info}
  ].filter(x=>x.ok);
  const selected=options[0]||null;
- const coverage=d?.done?'<div class="am-warning">📚 Cobertura de dados: histórico de gols '+esc(h.length)+' jogos (mandante) e '+esc(a.length)+' jogos (visitante); escanteios totais '+esc(d.hCorners?.length||0)+' e '+esc(d.aCorners?.length||0)+'; escanteios 1º tempo '+esc(d.hHalves?.length||0)+' e '+esc(d.aHalves?.length||0)+'. Estatísticas ausentes não são zero. Fonte: registros ESPN; conferir em fonte oficial.</div>':'';
+ const coverage=d?.done?'<div class="am-warning">📚 Cobertura de dados: histórico de gols '+esc(h.length)+' jogos (mandante) e '+esc(a.length)+' jogos (visitante); escanteios totais '+esc(d.hCorners?.length||0)+' e '+esc(d.aCorners?.length||0)+'; escanteios 1º tempo com registros verificáveis '+esc(d.hHalves?.length||0)+' e '+esc(d.aHalves?.length||0)+'. Quando não houver cobertura por período, nenhum sinal de 1º tempo será calculado. Estatísticas ausentes não são zero. Fonte: registros ESPN; conferir em fonte oficial.</div>':'';
  const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na casa. Histórico de 5 jogos não comprova vantagem; sem cotação verificada, não há avaliação de valor.</div>':'';
  status.textContent=d?.done?"11 campos estudados · 0 sinais validados":"Consultando 11 campos";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
- '<div class="am-warning">⏱️ Confira o horário e a partida na fonte oficial antes de qualquer entrada. <strong>Agenda CONCACAF 17/11:</strong> Belize × Sint Maarten, Dominica × Cayman Islands e St Lucia × Barbados às 16h (Brasília). St Kitts & Nevis × Bonaire: horário divergente entre fontes, conferir antes do início. <a href="https://www.concacaf.com/competitions/nations-league/news/2026-27-concacaf-nations-league-november-schedule-confirmed" target="_blank" rel="noopener noreferrer" style="color:#9afaaf">Fonte oficial CONCACAF</a>. Lista de convocados não equivale a 11 titulares; confirme a escalação da partida. Estudos históricos não são sinais validados.</div>'+ 
- '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
+ '<div class="am-warning">⏱️ Partida e horário obtidos da agenda consultada. Confirme a programação e os titulares na fonte oficial antes de qualquer decisão. A ESPN não confirma escalação oficial. Estudos históricos não são sinais validados.</div>'+ 
+  '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
  review+coverage+'<div class="am-rows">'+
  toRow("⚽ Gols: 1,5",one.value,one.explain,one.ok)+
  toRow("⚽ Gols: 2,5",two.value,two.explain,two.ok)+
