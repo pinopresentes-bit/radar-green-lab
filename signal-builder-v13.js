@@ -115,14 +115,14 @@ function render(){
   {ok:!!cf,market:cf?.label+" (1º tempo)",detail:cf?.info},
   {ok:!!ct,market:ct?.label+" (jogo)",detail:ct?.info}
  ].filter(x=>x.ok);
- const selected=(bulletin?options.find(x=>x.market.endsWith("(1º tempo)")):options[0])||null;
+ const selected=options[0]||null;
  const coverage=d?.done?'<div class="am-warning">📚 Cobertura de dados: histórico de gols '+esc(h.length)+' jogos (mandante) e '+esc(a.length)+' jogos (visitante); escanteios totais '+esc(d.hCorners?.length||0)+' e '+esc(d.aCorners?.length||0)+'; escanteios 1º tempo com registros verificáveis '+esc(d.hHalves?.length||0)+' e '+esc(d.aHalves?.length||0)+'. Quando não houver cobertura por período, nenhum sinal de 1º tempo será calculado. Estatísticas ausentes não são zero. Fonte: registros ESPN; conferir em fonte oficial.</div>':'';
  const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na casa. Histórico de 5 jogos não comprova vantagem; sem cotação verificada, não há avaliação de valor.</div>':'';
  status.textContent=d?.done?"11 campos estudados · 0 sinais validados":"Consultando 11 campos";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
  '<div class="am-warning">⏱️ Partida e horário obtidos da agenda consultada. Confirme a programação e os titulares na fonte oficial antes de qualquer decisão. A ESPN não confirma escalação oficial. Estudos históricos não são sinais validados.</div>'+ 
   '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
- (bulletin?'<div class="am-warning">Boletim de 18/11 às 16h10 · Escanteios conferidos no TotalCorner: <a href="https://www.totalcorner.com/team/view/1711">Chelsea</a> e <a href="https://www.totalcorner.com/team/view/1892">PSG</a>. Odd pendente.</div>':'')+review+(bulletin?'':coverage)+'<div class="am-rows">'+
+ review+coverage+'<div class="am-rows">'+
  toRow("⚽ Gols: 1,5",one.value,one.explain,one.ok)+
  toRow("⚽ Gols: 2,5",two.value,two.explain,two.ok)+
  toRow("⚽ Menos de 3,5 gols",under.value,under.explain,under.ok)+
