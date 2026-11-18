@@ -770,6 +770,31 @@ async function teamHistory(g,t){
   if(found.size<10){
     try{add(await leagueSchedule(g))}catch{}
   }
+  // National teams play across different ESPN competitions. Search related
+  // scoreboards, but match the exact source team name to avoid wrong squads.
+  const international=["concacaf.nations.league","fifa.friendly","fifa.world","concacaf.gold.cup","fifa.worldq.conmebol","fifa.worldq.concacaf","uefa.nations"];
+  if(found.size<5&&international.includes(g.code)&&t.sourceName){
+    const norm=v=>String(v||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]+/g," ").trim();
+    const target=norm(t.sourceName);
+    const from=new Date(new Date(g.start).getTime()-365*86400000);
+    const range=ymd(from).replace(/-/g,"")+"-"+ymd(new Date(g.start)).replace(/-/g,"");
+    for(const code of international){
+      if(code===g.code||found.size>=10)continue;
+      try{
+        const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/scoreboard?dates="+range+"&limit=300";
+        const events=(await api(url)).events||[];
+        for(const e of events){
+          const sides=e.competitions?.[0]?.competitors||[];
+          const side=sides.find(c=>norm(c.team?.displayName||c.team?.shortDisplayName)===target);
+          if(!side)continue;
+          const sameLeagueTeam={id:String(side.team.id)};
+          for(const m of matchHistory([e],g,sameLeagueTeam)){
+            if(new Date(m.date)>=cutoff&&!found.has(m.id))found.set(m.id,{...m,code});
+          }
+        }
+      }catch{}
+    }
+  }
   return [...found.values()].sort((x,y)=>new Date(y.date)-new Date(x.date)).slice(0,10);
 }
 let active="";
@@ -816,9 +841,9 @@ async function firstHalfGoalMatches(game,matches){
  const sample=matches.slice(0,5);
  const per=await Promise.all(sample.map(async m=>{
   if(m.total===0)return 0;
-  const key=game.code+":"+m.id;
+  const key=(m.code||game.code)+":"+m.id;
   if(!periodStudyCache.has(key)){
-   periodStudyCache.set(key,getEventSummary(game.code,m.id).then(v=>{const result=v?goalHalfFromSummary(v,m):null;if(result===null)periodStudyCache.delete(key);return result}).catch(()=>{periodStudyCache.delete(key);return null}));
+   periodStudyCache.set(key,getEventSummary(m.code||game.code,m.id).then(v=>{const result=v?goalHalfFromSummary(v,m):null;if(result===null)periodStudyCache.delete(key);return result}).catch(()=>{periodStudyCache.delete(key);return null}));
   }
   return periodStudyCache.get(key);
  }));
@@ -873,7 +898,7 @@ async function lastCorners(game,team,matches){
  const candidates=[...new Map(matches.filter(m=>m?.id).map(m=>[String(m.id),m])).values()].slice(0,10);
  const data=await Promise.all(candidates.map(m=>{
   const key=game.code+":"+m.id+":"+team.id;
-  if(!cornerStudyCache.has(key))cornerStudyCache.set(key,getEventSummary(game.code,m.id).then(s=>{const result=s?getCornerTotals(s,team.id):null;if(result===null)cornerStudyCache.delete(key);return result}).catch(()=>{cornerStudyCache.delete(key);return null}));
+  if(!cornerStudyCache.has(key))cornerStudyCache.set(key,getEventSummary(m.code||game.code,m.id).then(s=>{const result=s?getCornerTotals(s,team.id):null;if(result===null)cornerStudyCache.delete(key);return result}).catch(()=>{cornerStudyCache.delete(key);return null}));
   return cornerStudyCache.get(key);
  }));
  return data.filter(Boolean).slice(0,5);
