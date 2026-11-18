@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-11-18T03:41:36.331564+00:00",
+  "source": "ESPN public unofficial API",
+  "gamesChecked": 6,
+  "totalCornersAvailable": 0,
+  "periodCornersVerified": 0,
+  "matches": [
+    {
+      "id": "401841315",
+      "league": "bra.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401841310",
+      "league": "bra.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401841314",
+      "league": "bra.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401841313",
+      "league": "bra.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401841316",
+      "league": "bra.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401841312",
+      "league": "bra.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    }
+  ]
+}
