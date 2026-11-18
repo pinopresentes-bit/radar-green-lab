@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 57
+    "future_games": 56
   },
-  "generated_at_utc": "2026-11-18T21:49:00.787369+00:00",
+  "generated_at_utc": "2026-11-18T22:48:24.209016+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -16,7 +16,7 @@
       "start": "2026-11-18T22:30Z",
       "home": "Coritiba",
       "away": "Santos",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
