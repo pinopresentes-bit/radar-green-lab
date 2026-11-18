@@ -10,10 +10,10 @@ BASE = "https://site.api.espn.com/apis/site/v2/sports/soccer/"
 LEAGUES = ["bra.1", "bra.2", "eng.1", "esp.1", "ita.1", "ger.1", "fra.1",
            "uefa.champions", "uefa.europa", "conmebol.libertadores",
            "conmebol.sudamericana", "fifa.world", "fifa.friendly",
-           "concacaf.gold.cup", "usa.1", "mex.1"]
+           "concacaf.nations.league", "uefa.nations", "usa.1", "mex.1", "arg.1", "uru.1"]
 TZ = ZoneInfo("America/Sao_Paulo")
 now = dt.datetime.now(dt.timezone.utc)
-dates = [(now.astimezone(TZ) + dt.timedelta(days=i)).strftime("%Y%m%d") for i in range(2)]
+dates = [(now.astimezone(TZ) + dt.timedelta(days=i)).strftime("%Y%m%d") for i in range(4)]
 
 def get_json(url):
     req = urllib.request.Request(url, headers={"User-Agent": "GreenLabPRO/1.0 (public scoreboard)"})
@@ -48,7 +48,8 @@ with ThreadPoolExecutor(max_workers=6) as pool:
         for game in found:
             if game["id"] and game["home"] and game["away"]:
                 games[game["league"] + ":" + game["id"]] = game
-result = {"generated_at_utc": now.isoformat(), "timezone": "America/Sao_Paulo",
+future_games = [g for g in games.values() if g["state"] == "pre" and g["start"]]
+result = {"coverage": {"days": 4, "leagues": len(LEAGUES), "requests": len(LEAGUES) * len(dates), "failed": len(errors), "future_games": len(future_games)}, "generated_at_utc": now.isoformat(), "timezone": "America/Sao_Paulo",
           "source": "ESPN scoreboard (não oficial)", "games": sorted(games.values(), key=lambda g: g["start"] or ""),
           "failed_requests": errors, "lineups_officially_confirmed": False,
           "odds_available": False, "warning": "Sem cotações e sem validação oficial de titulares; não constitui sinal de aposta."}
