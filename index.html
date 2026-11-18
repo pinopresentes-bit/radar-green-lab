@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-18-v58">
+<meta name="green-lab-build" content="2026-11-18-v59">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -620,7 +620,7 @@ function normTeam(x){return String(x||"").normalize("NFD").replace(/[\u0300-\u03
 function renderHighlights(){
   const section=$("highlights"),list=$("highlightGames");
   if(!state.loaded){section.hidden=false;list.innerHTML='<div class="empty">Buscando os destaques do dia...</div>';return}
-  const today=state.games.filter(g=>g.code==="uefa.nations"&&g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000)
+  const today=state.games.filter(g=>g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000)
     .sort((a,b)=>new Date(a.start)-new Date(b.start)).slice(0,5);
   if(!today.length){section.hidden=true;return}
   section.hidden=false;
@@ -703,7 +703,7 @@ async function runPregameQueue(matches,token){
      const g=matches[index++],key=preKey(g);
      if(pregameStudyCache.has(key))continue;
      try{
-       const [h,a]=await Promise.race([Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]),new Promise((_,reject)=>setTimeout(()=>reject(Error("Tempo limite de 45 segundos para histórico")),45000))]);
+       const [h,a]=await Promise.race([Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]),new Promise((_,reject)=>setTimeout(()=>reject(Error("Tempo limite de 30 segundos para histórico")),30000))]);
        if(token!==pregameBatchToken)return;
        pregameStudyCache.set(key,{hCount:h.length,aCount:a.length,findings:pregameStudies(h,a)});
      }catch(e){if(token!==pregameBatchToken)return;pregameStudyCache.set(key,{error:true,reason:String(e?.message||"Fonte indisponível"),hCount:0,aCount:0,findings:[]})}
