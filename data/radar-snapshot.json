@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-18T01:00:18.711612+00:00",
+  "generated_at_utc": "2026-11-18T02:30:56.596850+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -144,7 +144,7 @@
       "start": "2026-11-17T23:00Z",
       "home": "Chile",
       "away": "Colombia",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -153,7 +153,7 @@
       "start": "2026-11-17T23:30Z",
       "home": "Ecuador",
       "away": "Bolivia",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -162,7 +162,7 @@
       "start": "2026-11-17T23:30Z",
       "home": "Uruguay",
       "away": "Dominican Republic",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
