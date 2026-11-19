@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-18-v60">
+<meta name="green-lab-build" content="2026-11-19-v61">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -75,7 +75,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v61</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
-<section class="signalhub" id="boletim" style="scroll-margin-top:6rem"><h2>Último boletim de hoje</h2><p style="padding:.75rem;border:1px solid #a88542;border-radius:10px;color:#f0d69c"><strong>Boletim externo — não integrado ao sinal montado.</strong> Os números abaixo são um rascunho informativo e só entram no cálculo após validação de cada partida, período e fonte. Divergências com o sinal montado não significam que os dados foram importados.</p><div id="boletimTexto" style="white-space:pre-wrap;overflow-wrap:anywhere">Consultando…</div></section>
+<section class="signalhub" id="boletim" style="scroll-margin-top:6rem"><h2>Último boletim de hoje</h2><p style="padding:.75rem;border:1px solid #a88542;border-radius:10px;color:#f0d69c"><strong>Boletim da notificação.</strong> A mesma edição aparece no Sinal Montado. Os cartões indicam separadamente a situação de cada mercado.</p><div id="boletimTexto" style="white-space:pre-wrap;overflow-wrap:anywhere">Consultando…</div></section>
 <section class="signalhub" id="finalHub" aria-label="Resumo de sinais"><div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • PAINEL PRIORITÁRIO</span><h2>Próximos jogos: o que estudar primeiro?</h2></div><span class="signalstatus" id="finalStatus">Consultando</span></div><p>Um mercado principal por jogo, com os demais recolhidos. <strong>Amarelo é estudo, não entrada. Verde exige evidências verificadas.</strong></p><div class="gl-legend" role="note" aria-label="Legenda de confiança dos sinais"><div><span class="gl-dot gl-green" aria-hidden="true"></span><b>VERDE</b> — sinal validado com evidências; não garante acerto</div><div><span class="gl-dot gl-yellow" aria-hidden="true"></span><b>AMARELO</b> — em estudo, falta confirmação</div><div><span class="gl-dot gl-red" aria-hidden="true"></span><b>VERMELHO</b> — não validado ou reprovado; não é sinal de entrada</div><div class="gl-result-note">📋 RESULTADOS APÓS O JOGO: 🟢 GREEN = acertou · 🔴 RED = perdeu · ⚪ ANULADO = devolvido. Resultados não são a mesma coisa que confiança pré-jogo.</div></div><div id="finalList" aria-live="polite"><div class="empty">Consultando dados...</div></div><div class="signalfoot" id="finalFoot">Confirme informações em fontes oficiais e odds diretamente na casa escolhida.</div><a class="go-signals" style="display:flex;width:100%;margin-top:12px;text-align:center" href="#assembledHub">🧩 ABRIR SINAL MONTADO ↓</a></section>
 <section class="signalhub" id="quickHub">
  <div class="signalhead"><div><span class="eyebrow">🎯 GREEN LAB • LEITURA RÁPIDA</span><h2>Qual mercado o radar encontrou?</h2></div><span id="quickCount" class="signalstatus">Consultando</span></div>
@@ -1182,6 +1182,21 @@ render();load();verifyVersion(true);
 <script>
 (() => {
   const body = document.getElementById("boletimTexto");
+  const edition = document.createElement("details");
+  const title = document.createElement("summary");
+  const report = document.createElement("div");
+  report.style.cssText = "white-space:pre-wrap;overflow-wrap:anywhere;margin-top:.75rem";
+  edition.className = "notice";
+  edition.append(title, report);
+  function exibirEdicao(texto) {
+    body.textContent = texto;
+    const picker = document.getElementById("assembledPicker");
+    if (!picker) return;
+    if (edition.previousElementSibling !== picker) picker.after(edition);
+    const linhas = texto.trim().split(/\r?\n/);
+    title.textContent = linhas.length > 1 ? "Boletim da notificação · " + linhas.slice(0, 2).join(" · ") : texto;
+    report.textContent = texto;
+  }
   let request = 0;
   async function mostrarBoletim() {
     const id = ++request;
@@ -1190,9 +1205,9 @@ render();load();verifyVersion(true);
       const res = await fetch("./data/boletins/" + dia + ".txt", {cache: "no-store"});
       if (!res.ok && res.status !== 404) throw Error();
       const texto = res.ok ? await res.text() : "Aguardando o primeiro boletim de hoje.";
-      if (id === request) body.textContent = texto;
+      if (id === request) exibirEdicao(texto);
     } catch {
-      if (id === request) body.textContent = "Não foi possível consultar o boletim agora.";
+      if (id === request) exibirEdicao("Não foi possível consultar o boletim agora.");
     }
   }
   function atualizarVisivel() {
