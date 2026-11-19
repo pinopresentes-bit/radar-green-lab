@@ -4,12 +4,39 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 80
+    "future_games": 86
   },
-  "generated_at_utc": "2026-11-19T03:23:46.986890+00:00",
+  "generated_at_utc": "2026-11-19T04:32:15.742802+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
+    {
+      "id": "401934704",
+      "league": "uru.1",
+      "start": "2026-11-19T19:30Z",
+      "home": "Boston River",
+      "away": "Deportivo Maldonado",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401934686",
+      "league": "uru.1",
+      "start": "2026-11-19T19:30Z",
+      "home": "Peñarol",
+      "away": "Cerro Largo",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401934703",
+      "league": "uru.1",
+      "start": "2026-11-19T19:30Z",
+      "home": "Progreso",
+      "away": "Montevideo City Torque",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
     {
       "id": "401841308",
       "league": "bra.1",
@@ -61,6 +88,33 @@
       "start": "2026-11-20T19:30Z",
       "home": "Bayern Munich",
       "away": "FC Cologne",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401934702",
+      "league": "uru.1",
+      "start": "2026-11-20T19:30Z",
+      "home": "Cerro",
+      "away": "Nacional",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401934685",
+      "league": "uru.1",
+      "start": "2026-11-20T19:30Z",
+      "home": "Liverpool",
+      "away": "Montevideo Wanderers",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401934701",
+      "league": "uru.1",
+      "start": "2026-11-20T19:30Z",
+      "home": "Racing (Montevideo)",
+      "away": "Central Español Fútbol Club",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
