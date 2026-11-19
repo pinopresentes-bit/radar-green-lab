@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 86
+    "future_games": 83
   },
-  "generated_at_utc": "2026-11-19T18:55:36.248921+00:00",
+  "generated_at_utc": "2026-11-19T19:59:10.911899+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -16,7 +16,7 @@
       "start": "2026-11-19T19:30Z",
       "home": "Boston River",
       "away": "Deportivo Maldonado",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -25,7 +25,7 @@
       "start": "2026-11-19T19:30Z",
       "home": "Peñarol",
       "away": "Cerro Largo",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -34,7 +34,7 @@
       "start": "2026-11-19T19:30Z",
       "home": "Progreso",
       "away": "Montevideo City Torque",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
