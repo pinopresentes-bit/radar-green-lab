@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-19-v62">
+<meta name="green-lab-build" content="2026-11-19-v63">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -117,7 +117,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-19-v62";
+const APP_BUILD="2026-11-19-v63";
  $("verifiedSchedule").hidden=ymd(new Date())!=="2026-11-19";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
@@ -1192,23 +1192,38 @@ render();load();verifyVersion(true);
     const normalizar = valor => valor.toLowerCase().replace(/\s+[x×]\s+/g, " × ").trim();
     return Boolean(partida) && normalizar(cabecalho).split(/\s+·\s+/).includes(normalizar(partida));
   }
-  let cabecalho = "";
+  let blocos = [];
   function filtrarEdicao() {
     const jogo = document.querySelector("#assembledContent .am-card h3")?.textContent;
-    edition.hidden = !mesmaPartida(cabecalho, jogo) || state.date !== ymd(new Date());
-    if (edition.hidden) edition.open = false;
+    const bloco = state.date === ymd(new Date()) && blocos.find(b => mesmaPartida(b[0], jogo));
+    edition.hidden = !bloco;
+    if (!bloco) edition.open = false;
+    else {
+      title.textContent = "Boletim da notificação · " + bloco[0];
+      report.textContent = bloco.join("\n");
+    }
+    for (const row of document.querySelectorAll("#assembledContent .am-row")) {
+      const nome = row.firstElementChild?.textContent || "";
+      const mercado = ["ESCANTEIOS 1º TEMPO", "ESCANTEIOS TOTAL"].find(m => nome.includes(m)) || (nome.includes("Chute no gol") ? "JOGADORES" : "");
+      const linha = mercado && bloco && bloco.find(l => l.startsWith(mercado + " ·"));
+      let nota = row.querySelector(".boletim-mercado");
+      if (!linha) { nota?.remove(); continue; }
+      if (!nota) { nota = document.createElement("p"); nota.className = "boletim-mercado"; row.append(nota); }
+      const mensagem = "Estudo do boletim · " + linha;
+      if (nota.textContent !== mensagem) nota.textContent = mensagem;
+    }
   }
   const cartao = document.getElementById("assembledContent");
   if (cartao) new MutationObserver(filtrarEdicao).observe(cartao, {childList:true, subtree:true});
   function exibirEdicao(texto) {
     body.textContent = texto;
+    blocos = [];
+    for (const linha of texto.split(/\r?\n/)) {
+      if (/^\d{1,2}[h:]\d{2}\s+·\s+.+\s+[×x]\s+/.test(linha)) blocos.push([linha]);
+      else if (blocos.length) blocos[blocos.length - 1].push(linha);
+    }
     const picker = document.getElementById("assembledPicker");
-    if (!picker) return;
-    if (edition.previousElementSibling !== picker) picker.after(edition);
-    const linhas = texto.trim().split(/\r?\n/);
-    title.textContent = linhas.length > 1 ? "Boletim da notificação · " + linhas.slice(0, 2).join(" · ") : texto;
-    report.textContent = texto;
-    cabecalho = linhas[1] || "";
+    if (picker && edition.previousElementSibling !== picker) picker.after(edition);
     filtrarEdicao();
   }
   let request = 0;
