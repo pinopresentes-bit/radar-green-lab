@@ -90,7 +90,7 @@ function render(){
  const bothNo=hMarket(h,a,x=>!x.btts,3,"Ambas marcam: NÃO");
  // BTTS SIM/NÃO são alternativas excludentes: não destacar ambas como sinais simultâneos.
  const bttsConflict=both.ok&&bothNo.ok;
- if(bttsConflict){both.ok=false;bothNo.ok=false;}
+ if(bttsConflict){both.ok=false;bothNo.ok=false;both.value="⚪ Inconclusivo — SIM e NÃO sem predominância";bothNo.value="⚪ Inconclusivo — alternativas conflitantes";both.explain+=" As duas alternativas atingiram o limiar mínimo; nenhuma foi priorizada.";bothNo.explain+=" As duas alternativas atingiram o limiar mínimo; nenhuma foi priorizada.";}
  const under=hMarket(h,a,x=>x.total<4,4,"Menos de 3,5 gols");
  
  // Somente estatísticas obtidas de partidas individuais entram no sinal montado.
@@ -105,7 +105,7 @@ function render(){
   const p=pickPlayer(d,r,kind);
   return toRow(label,p?"🟡 "+p.name:"⚪ Sem jogador indicado",
    p?p[kind].hits+"/"+p[kind].n+" jogos com pelo menos 1 "+(kind==="shot"?"chute no alvo":kind==="goal"?"gol":"assistência")+"; "+p[kind].total+" no total da amostra. Frequência observada, não garantia. Jogador listado pela ESPN; escalação oficial e odd ainda exigem conferência.":
-   r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"Nenhum titular tem histórico individual suficiente publicado.":"Aguardando titulares listados na ESPN e histórico individual verificável de 5+ jogos.",!!p);
+   r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"A ESPN listou 11 jogadores de cada lado, mas não há 5+ fichas individuais com estatística suficiente para este mercado. Escalação ESPN não é confirmação oficial.":"A ESPN ainda não listou 11 titulares de cada lado, ou não há histórico individual verificável de 5+ jogos. Conferir fonte oficial; o app não importa escalações das notificações.",!!p);
  };
  const has=one.ok||two.ok||both.ok||!!ct||!!cf;
  const options=[
