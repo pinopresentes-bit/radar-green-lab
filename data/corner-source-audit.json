@@ -1,12 +1,12 @@
 {
-  "checkedAt": "2026-11-19T03:09:00.432951+00:00",
+  "checkedAt": "2026-11-19T04:18:01.347250+00:00",
   "source": "ESPN public unofficial API",
-  "gamesChecked": 6,
+  "gamesChecked": 5,
   "totalCornersAvailable": 0,
   "periodCornersVerified": 0,
   "matches": [
     {
-      "id": "401841315",
+      "id": "401841308",
       "league": "bra.1",
       "total": null,
       "firstHalf": null,
@@ -14,7 +14,7 @@
       "status": "unavailable"
     },
     {
-      "id": "401841310",
+      "id": "401841317",
       "league": "bra.1",
       "total": null,
       "firstHalf": null,
@@ -22,7 +22,7 @@
       "status": "unavailable"
     },
     {
-      "id": "401841314",
+      "id": "401841309",
       "league": "bra.1",
       "total": null,
       "firstHalf": null,
@@ -30,24 +30,16 @@
       "status": "unavailable"
     },
     {
-      "id": "401841313",
-      "league": "bra.1",
+      "id": "401933535",
+      "league": "usa.1",
       "total": null,
       "firstHalf": null,
       "secondHalf": null,
       "status": "unavailable"
     },
     {
-      "id": "401841316",
-      "league": "bra.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable"
-    },
-    {
-      "id": "401841312",
-      "league": "bra.1",
+      "id": "401933555",
+      "league": "usa.1",
       "total": null,
       "firstHalf": null,
       "secondHalf": null,
