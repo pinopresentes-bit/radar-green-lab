@@ -1,7 +1,7 @@
 {
-  "checkedAt": "2026-11-19T04:18:01.347250+00:00",
+  "checkedAt": "2026-11-19T05:44:42.722060+00:00",
   "source": "ESPN public unofficial API",
-  "gamesChecked": 5,
+  "gamesChecked": 8,
   "totalCornersAvailable": 0,
   "periodCornersVerified": 0,
   "matches": [
@@ -40,6 +40,30 @@
     {
       "id": "401933555",
       "league": "usa.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401934704",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401934686",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401934703",
+      "league": "uru.1",
       "total": null,
       "firstHalf": null,
       "secondHalf": null,
