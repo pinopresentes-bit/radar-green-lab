@@ -592,7 +592,7 @@ function pregameStudies(home,away){
   return definitions.map(x=>{
     const h=home.filter(x.rule).length,a=away.filter(x.rule).length;
     return {...x,home:h,away:a};
-  }).filter(x=>x.home>=3&&x.away>=3).map(({type,name,home,away,min})=>({type,name,home,away,level:home>=min&&away>=min?"histórico forte":"observação preliminar"}));
+  }).filter(x=>x.home>=3&&x.away>=3).map(({type,name,home,away,min})=>({type,name,home,away,level:home>=min&&away>=min?"frequência histórica alta (5 jogos), não validada":"observação preliminar"}));
 }
 
 const manualOdds=new Map();
@@ -641,13 +641,15 @@ function preDisplay(g,data){
  return'<div class="predata">'+facts.map(f=>'<div><b>📊 '+esc(f.name)+'</b><small>'+esc(g.home.name)+': '+f.home+'/5 · '+esc(g.away.name)+': '+f.away+'/5</small></div>').join("")+'<small>Amostra curta; não é entrada validada. Faltam odds e escalações.</small></div>';
 }
 
-function renderBestStudies(){
+function studyPriority(f){return f.name==="Menos de 4,5 gols"?0:f.name==="Mais de 1,5 gols"?3:f.name==="Mais de 2,5 gols"?2:f.name==="Ambas marcam"?1:0}
+ function studyRank(f){return Math.min(f.home,f.away)*10+studyPriority(f)}
+ function renderBestStudies(){
  const list=$("studyList"),counter=$("studyCount");
  if(!state.loaded){counter.textContent="Consultando";list.innerHTML='<div class="empty">Buscando os próximos confrontos...</div>';return}
  const studied=preCandidates().flatMap(g=>{
   const data=pregameStudyCache.get(preKey(g));
   return (data?.findings||[]).map(f=>({g,f,strength:Math.min(f.home,f.away)}));
- }).sort((a,b)=>b.strength-a.strength||b.f.home+b.f.away-a.f.home-a.f.away||new Date(a.g.start)-new Date(b.g.start));
+ }).sort((a,b)=>studyRank(b.f)-studyRank(a.f)||b.f.home+b.f.away-a.f.home-a.f.away||new Date(a.g.start)-new Date(b.g.start));
  const unique=[],used=new Set();
  for(const record of studied){const key=preKey(record.g);if(used.has(key))continue;used.add(key);unique.push(record);if(unique.length>=6)break}
  counter.textContent=unique.length?unique.length+" em estudo":"Nenhum pré-sinal";
@@ -674,7 +676,7 @@ function renderPreCards(){renderFinalHub();renderBestStudies();renderActionHub()
  if(preOrder==="study"){
   upcoming.sort((a,b)=>{
     const da=pregameStudyCache.get(preKey(a)),db=pregameStudyCache.get(preKey(b));
-    const quality=d=>d?.findings?.length?Math.max(...d.findings.map(f=>Math.min(f.home,f.away))):0;
+    const quality=d=>d?.findings?.length?Math.max(...d.findings.map(studyRank)):0;
     return quality(db)-quality(da)||new Date(a.start)-new Date(b.start);
   });
  }
