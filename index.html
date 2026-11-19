@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-19-v63">
+<meta name="green-lab-build" content="2026-11-19-v64">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -65,6 +65,10 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 .quick-card small{display:block;color:#b2cbb7;line-height:1.45;margin-top:5px}
 .gl-legend{display:grid;gap:5px;margin:10px 0;padding:10px;border:1px solid #42634d;border-radius:14px;background:#10261a;font-size:13px;line-height:1.5}.gl-legend>div{display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}.gl-dot{display:inline-block;width:12px;height:12px;min-width:12px;border-radius:50%;vertical-align:middle}.gl-green{background:#4ade80}.gl-yellow{background:#facc15}.gl-red{background:#fb7185}.gl-result-note{padding-top:9px;border-top:1px solid #365641;color:#b7d3bf}
 </style>
+<style>
+.am-row.com-boletim .am-value::before {content:"Consulta ESPN · "}
+.am-row.com-boletim .boletim-mercado {margin:.4rem 0;font-weight:600}
+</style>
 </head>
 <body>
 <header><div class="top"><div class="brand"><img src="./icon.svg" alt=""><div><small>RADAR DE FUTEBOL</small><strong>GREEN LAB <em>PRO</em></strong></div></div><a class="go-signals" href="#finalHub" aria-label="Ir para o painel de sinais">🎯 VER SINAIS</a></div></header>
@@ -117,7 +121,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-19-v63";
+const APP_BUILD="2026-11-19-v64";
  $("verifiedSchedule").hidden=ymd(new Date())!=="2026-11-19";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
@@ -1207,8 +1211,9 @@ render();load();verifyVersion(true);
       const mercado = ["ESCANTEIOS 1º TEMPO", "ESCANTEIOS TOTAL"].find(m => nome.includes(m)) || (nome.includes("Chute no gol") ? "JOGADORES" : "");
       const linha = mercado && bloco && bloco.find(l => l.startsWith(mercado + " ·"));
       let nota = row.querySelector(".boletim-mercado");
-      if (!linha) { nota?.remove(); continue; }
-      if (!nota) { nota = document.createElement("p"); nota.className = "boletim-mercado"; row.append(nota); }
+      if (!linha) { nota?.remove(); row.classList.remove("com-boletim"); continue; }
+      row.classList.add("com-boletim");
+      if (!nota) { nota = document.createElement("p"); nota.className = "boletim-mercado"; row.firstElementChild.after(nota); }
       const mensagem = "Estudo do boletim · " + linha;
       if (nota.textContent !== mensagem) nota.textContent = mensagem;
     }
