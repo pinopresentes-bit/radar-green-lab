@@ -1,32 +1,29 @@
-Radar Green Lab PRO · 19/11/2026 · 00h12 de São Paulo
-Nenhuma partida pré-jogo identificada na janela de 00h42 a 02h12 nas agendas consultadas. Próxima checagem prevista às 01h10.
+Radar Green Lab PRO · 19/11/2026 · 01h10 de São Paulo
+Sem partida identificada entre 01h40 e 03h10 nas agendas consultadas. Próxima checagem prevista às 02h10.
 
-19h30 · Vasco × Internacional · Série A · São Januário
-Mais de 1,5 gol no jogo e mais de 2,5 escanteios no 1º tempo são os dois estudos FUNDAMENTADOS. Cada linha ocorreu em 5 dos últimos 6 jogos do Vasco em casa e em 5 dos últimos 6 do Inter fora na Série A. Confiança moderada pela amostra curta. Escanteios totais seguem PRELIMINARES.
+19h30 · Vitória × RB Bragantino · Barradão
+Estudos FUNDAMENTADOS: mais de 6,5 escanteios no jogo (5/5 de cada lado), mais de 2,5 escanteios no 1º tempo (5/5 e 4/5) e mais de 1,5 gol no jogo (4/5 de cada lado). Confiança moderada. São os últimos cinco mandos do Vitória e as últimas cinco saídas do Bragantino na Série A. A estreia de Rafael Lacerda no Vitória aumenta a incerteza.
 
 ESCANTEIOS 1º TEMPO
-Totais reais ao intervalo: Vasco 6, 2, 4, 6, 7, 3 (19 feitos, 9 cedidos). Inter 3, 3, 5, 2, 3, 3 (5 feitos, 14 cedidos). Frequências acima de 2,5 / 3,5 / 4,5: Vasco 5/6, 4/6, 3/6; Inter 5/6, 1/6, 1/6. As linhas de 3,5 e 4,5 são PRELIMINARES, confiança baixa. Quatro das seis saídas do Inter ficaram em exatamente três cantos.
+Totais reais até o intervalo: Vitória 6, 4, 5, 4, 5 (17 feitos, 7 cedidos). Bragantino 12, 9, 6, 2, 5 (15 feitos, 19 cedidos). Acima de 2,5 / 3,5 / 4,5: Vitória 5/5, 5/5, 3/5; Bragantino 4/5, 4/5, 4/5. A linha de 3,5 também teve respaldo nos dois recortes. A de 4,5 é PRELIMINAR, confiança baixa.
 
 ESCANTEIOS TOTAL
-Vasco 10, 6, 11, 14, 14, 6 (42 feitos, 19 cedidos). Inter 13, 7, 11, 6, 6, 6 (20 feitos, 29 cedidos). Frequências acima de 6,5 / 7,5 / 8,5 / 9,5 / 10,5: Vasco 4/6, 4/6, 4/6, 4/6, 3/6; Inter 3/6, 2/6, 2/6, 2/6, 2/6. PRELIMINAR, confiança baixa. Mesmo a menor linha falhou em metade das saídas do Inter.
+Vitória 15, 8, 9, 10, 7 (29 feitos, 20 cedidos). Bragantino 18, 17, 15, 7, 9 (31 feitos, 35 cedidos). Acima de 6,5 / 7,5 / 8,5 / 9,5 / 10,5: Vitória 5/5, 4/5, 3/5, 2/5, 1/5; Bragantino 5/5, 4/5, 4/5, 3/5, 3/5. Em um jogo de cada lado houve exatamente sete. Linhas superiores PRELIMINARES, confiança moderada em 7,5 e baixa nas demais.
 
-GOLS E AMBAS MARCAM
-Na ordem Vasco em casa / Inter fora: mais de 2,5 gols no jogo ocorreu em 5/6 e 3/6; ambas marcam, em 3/6 e 4/6. No 1º tempo, mais de 1,5 gol ocorreu em 2/6 e 2/6; mais de 2,5, em 1/6 e 1/6. PRELIMINAR, confiança baixa pela divergência entre equipes ou baixa frequência.
+GOLS · Na ordem Vitória em casa / Bragantino fora: mais de 2,5 no jogo, 3/5 e 1/5; ambas marcam, 2/5 e 3/5. No 1º tempo, mais de 1,5 gol, 2/5 e 0/5; mais de 2,5, 0/5 e 0/5. PRELIMINAR, confiança baixa pela divergência e pela escassez de gols antes do intervalo.
 
-JOGADOR · Bruno Duarte (Vasco), titularidade NÃO CONFIRMADA. Em cinco atuações de Série A, acertou 1+ chute no alvo em 3/5 e marcou em 2/5 (três gols). Ambos PRELIMINARES, confiança baixa por minutagem variável. Assistência em 0/5: NÃO CONFIRMADO. Thiago Maia desfalca o Inter. Os dois onzes oficiais seguem pendentes para revisão. Odds sem verificação.
+JOGADOR · Eduardo Sasha (Bragantino), titularidade NÃO CONFIRMADA. Em cinco atuações documentadas de 7 a 28/10, acertou 1+ chute no alvo em 3/5, marcou em 1/5 e deu assistência em 0/5. Chute e marcador PRELIMINARES, confiança baixa: recorte anterior ao jogo de 02/11 e minutos variáveis (45–82). Assistência NÃO CONFIRMADA. Lucas Barbosa está suspenso. Revisar após divulgação dos 11 de cada lado. Odds sem verificação.
 
-Agenda parcial em São Paulo: 19/11, 14h45 Paris FC × Køge (feminino); 20/11, 17h15 Castilla × Real Murcia; 21/11, 16h30 Palmeiras × Flamengo; 22/11, 16h Athletico-PR × Remo.
+Agenda parcial · 19/11, 07h Suíça × Tchéquia (sub-17) e 14h45 Paris FC × Køge (feminino); 20/11, 17h15 Castilla × Real Murcia; 21/11, 16h30 Palmeiras × Flamengo; 22/11, 16h Athletico-PR × Remo.
 
 Fontes públicas
-Agenda: https://uniquescores.com/football/scores/2026-11-19/
-https://matchcalendar.football/pt/today/2026-11-19/
+https://www.totalcorner.com/team/view/963
+https://www.totalcorner.com/team/view/803
+https://matchcalendar.football/pt/team/vitoria/results/
+https://matchcalendar.football/es/team/rb-bragantino/results/
+https://statz.ai/player/eduardo-sasha/217695
+https://noataque.com.br/futebol/brasileirao-serie-a/time/vitoria/noticia/2026/11/18/vitoria-x-bragantino-onde-assistir-ao-vivo-e-escalacoes-pela-35a-rodada-do-campeonato-brasileiro/
+https://trivela.com.br/onde-assistir/palpite-escalacoes-vitoria-x-bragantino-19-11-2026/
+https://uniquescores.com/football/scores/2026-11-19/
+https://www.thestatsapi.com/football/league/brasileirao/fixtures
 https://www.realmadrid.com/es-ES/futbol/partidos/entradas/real-madrid-ii-real-murcia-20-11-2026
-https://www.365scores.com/pt-br/football/league/brasileirao-serie-a-113
-Escanteios e placares: https://www.totalcorner.com/team/view/1127
-https://www.totalcorner.com/team/view/964
-Gols por tempo: https://matchcalendar.football/pt/team/vasco-da-gama/results/
-https://matchcalendar.football/pt/team/internacional/results/
-Jogador e elencos: https://statz.ai/player/bruno-duarte/227227
-https://www.supervasco.com/noticias/estatisticas-de-chapecoense-0-x-2-vasco-459872.html
-https://ge.globo.com/futebol/times/vasco/noticia/2026/11/18/escalacao-do-vasco-thiago-mendes-e-sosa-devem-retornar-contra-o-inter-veja-o-provavel-time.ghtml
-https://www.itatiaia.com.br/esportes/futebol/futebol-nacional/futebol-do-sul/internacional/escalacao-do-internacional-provavel-time-contra-o-vasco-pelo-brasileirao/
