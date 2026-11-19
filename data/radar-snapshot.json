@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 83
+    "future_games": 81
   },
-  "generated_at_utc": "2026-11-19T21:46:48.866878+00:00",
+  "generated_at_utc": "2026-11-19T22:44:55.048124+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -43,7 +43,7 @@
       "start": "2026-11-19T22:30Z",
       "home": "Vasco da Gama",
       "away": "Internacional",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-19T22:30Z",
       "home": "Vitória",
       "away": "Red Bull Bragantino",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
