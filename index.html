@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-19-v61">
+<meta name="green-lab-build" content="2026-11-19-v62">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -1188,6 +1188,18 @@ render();load();verifyVersion(true);
   report.style.cssText = "white-space:pre-wrap;overflow-wrap:anywhere;margin-top:.75rem";
   edition.className = "notice";
   edition.append(title, report);
+  function mesmaPartida(cabecalho, partida) {
+    const normalizar = valor => valor.toLowerCase().replace(/\s+[x×]\s+/g, " × ").trim();
+    return Boolean(partida) && normalizar(cabecalho).split(/\s+·\s+/).includes(normalizar(partida));
+  }
+  let cabecalho = "";
+  function filtrarEdicao() {
+    const jogo = document.querySelector("#assembledContent .am-card h3")?.textContent;
+    edition.hidden = !mesmaPartida(cabecalho, jogo) || state.date !== ymd(new Date());
+    if (edition.hidden) edition.open = false;
+  }
+  const cartao = document.getElementById("assembledContent");
+  if (cartao) new MutationObserver(filtrarEdicao).observe(cartao, {childList:true, subtree:true});
   function exibirEdicao(texto) {
     body.textContent = texto;
     const picker = document.getElementById("assembledPicker");
@@ -1196,6 +1208,8 @@ render();load();verifyVersion(true);
     const linhas = texto.trim().split(/\r?\n/);
     title.textContent = linhas.length > 1 ? "Boletim da notificação · " + linhas.slice(0, 2).join(" · ") : texto;
     report.textContent = texto;
+    cabecalho = linhas[1] || "";
+    filtrarEdicao();
   }
   let request = 0;
   async function mostrarBoletim() {
