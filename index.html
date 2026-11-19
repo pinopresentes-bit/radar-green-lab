@@ -101,7 +101,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v61 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v62 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
@@ -117,7 +117,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-19-v61";
+const APP_BUILD="2026-11-19-v62";
  $("verifiedSchedule").hidden=ymd(new Date())!=="2026-11-19";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
@@ -967,6 +967,16 @@ async function updateCornerPanel(game,a,b){
 }
 
 
+function officialLineupSource(game){
+ const n=normTeam(game.home.name+" "+game.away.name);
+ if(n.includes("bayern")&&(n.includes("vienna")||n.includes("austria wien")))return {url:"https://www.uefa.com/womenschampionsleague/match/2050573--austria-wien-vs-bayern/lineups/",name:"UEFA — Austria Wien x Bayern"};
+ if(n.includes("paris")&&(n.includes("koge")||n.includes("køge")))return {url:"https://parisfc.fr/en/match-center/women/126598/2026-11-19/paris-fc-vs-koge-uefa-womens-champions-league/",name:"Paris FC — escalações"};
+ return null;
+}
+function externalLineupMarkup(game){
+ const source=officialLineupSource(game);if(!source)return "";
+ return '<div class="market-check"><b>🔎 Verificação oficial complementar</b><p>A ESPN não é a única fonte. Consulte <a target="_blank" rel="noopener noreferrer" href="'+esc(source.url)+'">'+esc(source.name)+'</a>. Atenção: lista de inscritas não é escalação titular. O radar não valida automaticamente nomes vindos deste link; só considerar titulares quando a página os identificar explicitamente como titulares de hoje.</p></div>';
+}
 function matchSummaryUrl(game){
  return "https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(game.code)+"/summary?event="+encodeURIComponent(game.id);
 }
@@ -1050,7 +1060,7 @@ async function updateExtraMatchData(game){
   const response=await api(matchSummaryUrl(game));
   if(active!==key||sequence!==matchDataSequence||!$("lineupTeams"))return;
   const home=teamLineup(response,game.home),away=teamLineup(response,game.away);
-  $("lineupTeams").innerHTML=rosterMarkup(game.home,home)+rosterMarkup(game.away,away);
+  $("lineupTeams").innerHTML=externalLineupMarkup(game)+rosterMarkup(game.home,home)+rosterMarkup(game.away,away);
   const both=home?.starters.length===11&&away?.starters.length===11;
   $("lineupStatus").textContent=both?"11 titulares listados por equipe na ESPN. Confira os nomes com a fonte oficial.":"Lista parcial ou indisponível. Não considerar escalação confirmada.";
   $("liveTeamStats").innerHTML=liveStatTable(response,game);
