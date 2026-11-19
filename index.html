@@ -500,8 +500,8 @@ function renderFinalHub(){
  if(state.success===0){status.textContent="Fonte indisponível";box.innerHTML='<div class="empty">Consulta falhou. Nenhum sinal confirmado; tente atualizar.</div>';return}
  const games=preCandidates(),pending=games.filter(g=>!pregameStudyCache.has(preKey(g))),failed=games.filter(g=>pregameStudyCache.get(preKey(g))?.error);
  const studied=games.map(g=>{
-  const findings=[...(pregameStudyCache.get(preKey(g))?.findings||[])].filter(f=>Number.isFinite(f.home)&&Number.isFinite(f.away)).sort((a,b)=>Math.min(b.home,b.away)-Math.min(a.home,a.away)||b.home+b.away-a.home-a.away);
-  return {g,findings,score:findings.length?Math.min(findings[0].home,findings[0].away)*10+findings[0].home+findings[0].away:0};
+  const findings=[...(pregameStudyCache.get(preKey(g))?.findings||[])].filter(f=>Number.isFinite(f.home)&&Number.isFinite(f.away)).sort((a,b)=>studyRank(b)-studyRank(a)||b.home+b.away-a.home-a.away);
+  return {g,findings,score:findings.length?studyRank(findings[0])*10+findings[0].home+findings[0].away:0};
  }).filter(x=>x.findings.length).sort((a,b)=>{const now=Date.now(),ta=new Date(a.g.start).getTime()-now,tb=new Date(b.g.start).getTime()-now;const pa=ta>=0&&ta<=7200000?0:ta>=0&&ta<=21600000?1:2,pb=tb>=0&&tb<=7200000?0:tb>=0&&tb<=21600000?1:2;return pa-pb||b.score-a.score||ta-tb;});
  window.greenLabPriorityKey=studied.length?preKey(studied[0].g):null;
  status.textContent=studied.length?studied.length+" jogos em estudo":"Sem tendência";
@@ -647,8 +647,8 @@ function preDisplay(g,data){
  return'<div class="predata">'+facts.map(f=>'<div><b>📊 '+esc(f.name)+'</b><small>'+esc(g.home.name)+': '+f.home+'/5 · '+esc(g.away.name)+': '+f.away+'/5</small></div>').join("")+'<small>Amostra curta; não é entrada validada. Faltam odds e escalações.</small></div>';
 }
 
-function studyPriority(f){return f.name==="Menos de 4,5 gols"?0:f.name==="Mais de 1,5 gols"?3:f.name==="Mais de 2,5 gols"?2:f.name==="Ambas marcam"?1:0}
- function studyRank(f){return Math.min(f.home,f.away)*10+studyPriority(f)}
+function studyPriority(f){return f.name==="Mais de 1,5 gols"?4:f.name==="Mais de 2,5 gols"?3:f.name==="Ambas marcam"?1:f.name==="Menos de 4,5 gols"?0:0}
+ function studyRank(f){return (f.name==="Menos de 4,5 gols"?0:100)+Math.min(f.home,f.away)*10+studyPriority(f)}
  function renderBestStudies(){
  const list=$("studyList"),counter=$("studyCount");
  if(!state.loaded){counter.textContent="Consultando";list.innerHTML='<div class="empty">Buscando os próximos confrontos...</div>';return}
