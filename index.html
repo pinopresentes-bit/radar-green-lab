@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-20-v66">
+<meta name="green-lab-build" content="2026-11-20-v67">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -121,7 +121,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-19-v65";
+const APP_BUILD="2026-11-20-v67";
  $("verifiedSchedule").hidden=ymd(new Date())!=="2026-11-19";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
@@ -167,11 +167,22 @@ const msg=state.success===0?"Não foi possível acessar a fonte de placares. Ten
 $("notice").innerHTML='<div class="notice'+(state.success?"":" error")+'">'+esc(msg)+'</div>';render();checkSignals();renderPreGame();renderHighlights();monitorUpcomingLineups();if(state.success>0)lastFetchAt=Date.now();const opened=state.games.find(g=>g.code+"-"+g.id===active);if(opened)updateExtraMatchData(opened)}
 
 function statNumber(row,names){
- if(!Array.isArray(row))return null;
- const accepted=names.map(x=>x.toLowerCase().replace(/[^a-z0-9]/g,""));
- for(const v of row){const keys=[v.name,v.label,v.abbreviation,v.displayName].filter(Boolean).map(x=>String(x).toLowerCase().replace(/[^a-z0-9]/g,""));if(!keys.some(k=>accepted.includes(k)))continue;
-   const raw=v.value??v.displayValue;if(raw===null||raw===undefined||String(raw).trim()==="")continue;const n=Number(String(raw).replace(",","."));if(Number.isFinite(n))return n;
- }return null
+ // ESPN may return statistics as a list of descriptors or as a keyed object.
+ // Missing values must stay null; never convert absence to zero.
+ const normalize=x=>String(x).toLowerCase().replace(/[^a-z0-9]/g,"");
+ const accepted=new Set(names.map(normalize));
+ const entries=Array.isArray(row)?row:(row&&typeof row==="object"?Object.entries(row).map(([name,value])=>({name,value})):[]);
+ for(const v of entries){
+  if(!v||typeof v!=="object")continue;
+  const keys=[v.name,v.label,v.abbreviation,v.displayName].filter(Boolean).map(normalize);
+  if(!keys.some(k=>accepted.has(k)))continue;
+  const raw=v.value??v.displayValue;
+  const scalar=raw&&typeof raw==="object"?(raw.value??raw.displayValue):raw;
+  if(scalar===null||scalar===undefined||String(scalar).trim()==="")continue;
+  const n=Number(String(scalar).replace(",","."));
+  if(Number.isFinite(n))return n;
+ }
+ return null;
 }
 function liveStats(obj){
  const teams=obj?.boxscore?.teams;
