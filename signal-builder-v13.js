@@ -40,15 +40,16 @@ function cornerPick(h,a,type,lines){
  return null;
 }
 function minutePeriod(p){
- if(p?.period?.number!=null)return Number(p.period.number);
- if(typeof p?.period==="number")return p.period;
+ const v=String(p?.period?.number??p?.period?.value??p?.period??"").trim().toLowerCase();
+ if(["1","first","firsthalf","first-half","1st","period1"].includes(v))return 1;
+ if(["2","second","secondhalf","second-half","2nd","period2"].includes(v))return 2;
  // Minuto de jogo sozinho não comprova o período (45+ acréscimos, reinícios etc.).
  // Sem período explícito da fonte, não gerar linha de escanteios do 1º tempo.
  return null;
 }
 function firstCorners(s,tot){
  if(!s||tot===null)return null;
- for(const list of [s?.plays,s?.keyEvents,s?.details?.plays]){
+ for(const list of [s?.plays,s?.keyEvents,s?.details?.plays,s?.details?.keyEvents,s?.commentary?.plays,s?.commentary?.events,s?.commentary?.items,s?.commentary]){
   if(!Array.isArray(list))continue;
   const found=list.filter(p=>/corner(?:-|\s*)kick|(?:^|\s)corner(?:\s|$)/.test([p?.type?.text,p?.type?.slug,p?.description,p?.text].filter(Boolean).join(" ").toLowerCase()));
   if(found.length!==tot)continue;
