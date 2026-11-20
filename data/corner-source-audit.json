@@ -1,28 +1,15 @@
 {
-  "checkedAt": "2026-11-20T21:32:33.152951+00:00",
+  "checkedAt": "2026-11-20T21:40:40.554141+00:00",
   "source": "ESPN public unofficial API",
-  "gamesChecked": 10,
+  "gamesChecked": 11,
   "totalCornersAvailable": 0,
   "periodCornersVerified": 0,
+  "scheduledSkipped": 10,
+  "historicalGamesFound": 11,
+  "errors": [],
   "matches": [
     {
-      "id": "401876395",
-      "league": "fra.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable"
-    },
-    {
-      "id": "401884736",
-      "league": "ger.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable"
-    },
-    {
-      "id": "401877054",
+      "id": "401876988",
       "league": "mex.1",
       "total": null,
       "firstHalf": null,
@@ -30,39 +17,7 @@
       "status": "unavailable"
     },
     {
-      "id": "401877053",
-      "league": "mex.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable"
-    },
-    {
-      "id": "401877052",
-      "league": "mex.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable"
-    },
-    {
-      "id": "401882805",
-      "league": "esp.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable"
-    },
-    {
-      "id": "401933760",
-      "league": "arg.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable"
-    },
-    {
-      "id": "401934702",
+      "id": "401934704",
       "league": "uru.1",
       "total": null,
       "firstHalf": null,
@@ -70,7 +25,7 @@
       "status": "unavailable"
     },
     {
-      "id": "401934685",
+      "id": "401934686",
       "league": "uru.1",
       "total": null,
       "firstHalf": null,
@@ -78,7 +33,63 @@
       "status": "unavailable"
     },
     {
-      "id": "401934701",
+      "id": "401934703",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401933375",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401933255",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401933376",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401933236",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401933257",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401933256",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401933237",
       "league": "uru.1",
       "total": null,
       "firstHalf": null,
