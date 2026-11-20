@@ -28,7 +28,8 @@ function candidate(){
 }
 function hMarket(h,a,rule,min,market){
  const p=h.filter(rule).length,q=a.filter(rule).length,ready=h.length>=5&&a.length>=5;
- const ok=ready&&p>=min&&q>=min;
+ const thresholdH=Math.max(min,Math.ceil(h.length*0.7)),thresholdA=Math.max(min,Math.ceil(a.length*0.7));
+ const ok=ready&&p>=thresholdH&&q>=thresholdA;
  return {ok,value:ok?"🟡 "+market:ready?"⚪ Critério não atingido":"⏳ Histórico insuficiente",explain:p+"/"+h.length+" jogos do mandante e "+q+"/"+a.length+" do visitante. Não é probabilidade de acerto."};
 }
 function cornerPick(h,a,type,lines){
@@ -132,7 +133,7 @@ function render(){
  toRow("⏱️ Gol no 1º tempo: +0,5",firstGoal.value,firstGoal.explain,firstGoal.ok)+
  cornerRow("🚩 ESCANTEIOS 1º TEMPO · 2,5/3,5/4,5",cf,d?.hHalves?.length||0,d?.aHalves?.length||0)+
  cornerRow("🚩 ESCANTEIOS TOTAL · 6,5/7,5/8,5/9,5/10,5",ct,d?.hCorners?.length||0,d?.aCorners?.length||0)+
- toRow("🤝 Ambas marcam: SIM",both.value,both.explain,both.ok)+
+ toRow(bttsConflict?"🤝 Ambas marcam: INCONCLUSIVO":"🤝 Ambas marcam: SIM",both.value,both.explain,both.ok)+
  playerRow("🎯 Jogador para marcar gol","goal")+
  '</div><div class="am-footer">Cada mercado é avaliado separadamente. Não combinar automaticamente. Confirmar escalações oficiais e odds. Marcador é apenas candidato condicionado a titulares oficiais; não é aposta validada. Escanteios por tempo exigem eventos reais.</div>'+
  '<button class="am-cta" id="assembledOpen">Ver análise completa e titulares</button></div>';
