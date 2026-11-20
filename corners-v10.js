@@ -12,8 +12,8 @@
  const historyCache=new Map();
  const fetched=new Map();
  function periodForCorner(p){
-  const n=p?.period?.number??p?.period;
-  if(n!==undefined&&n!==null&&n!=="")return Number(n)===1?1:Number(n)===2?2:null;
+  const n=p?.period?.number??p?.period?.value??p?.period;
+  if(n!==undefined&&n!==null&&n!==""){const v=String(n).trim().toLowerCase();if(["1","first","firsthalf","first-half","1st","period1"].includes(v))return 1;if(["2","second","secondhalf","second-half","2nd","period2"].includes(v))return 2;}
   // Sem período explícito, minuto 45+ não comprova segundo tempo.
   return null;
  }
@@ -21,11 +21,11 @@
   // Total zero não comprova a existência de uma linha do tempo completa.
   // Sem eventos verificáveis, não transformar ausência de dados em zero.
   if(total===0)return null;
-  const feeds=[summary?.plays,summary?.keyEvents,summary?.details?.plays,summary?.details?.keyEvents,summary?.commentary?.plays];
+  const feeds=[summary?.plays,summary?.keyEvents,summary?.details?.plays,summary?.details?.keyEvents,summary?.commentary?.plays,summary?.commentary?.events,summary?.commentary?.items,summary?.commentary,summary?.details?.commentary,summary?.details?.commentary?.plays];
   for(const feed of feeds){
    if(!Array.isArray(feed))continue;
    const events=feed.filter(p=>{
-    const t=String(p?.type?.slug??p?.type?.text??p?.type?.name??p?.type??"").toLowerCase();
+    const t=[p?.type?.slug,p?.type?.text,p?.type?.name,typeof p?.type==="string"?p.type:"",p?.description,p?.text].filter(Boolean).join(" ").toLowerCase();
     return /(^|[\s_-])corner(?:[\s_-]?kick)?($|[\s_-])/.test(t);
    });
    // Caso haja evento ausente, repetido ou minuto duvidoso, não estimar a divisão.
