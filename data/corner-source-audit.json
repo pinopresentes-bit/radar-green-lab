@@ -1,13 +1,13 @@
 {
-  "checkedAt": "2026-11-20T08:02:29.407261+00:00",
+  "checkedAt": "2026-11-20T09:20:57.489143+00:00",
   "source": "ESPN public unofficial API",
   "gamesChecked": 10,
   "totalCornersAvailable": 0,
   "periodCornersVerified": 0,
   "matches": [
     {
-      "id": "401884736",
-      "league": "ger.1",
+      "id": "401882805",
+      "league": "esp.1",
       "total": null,
       "firstHalf": null,
       "secondHalf": null,
@@ -16,14 +16,6 @@
     {
       "id": "401876395",
       "league": "fra.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable"
-    },
-    {
-      "id": "401882805",
-      "league": "esp.1",
       "total": null,
       "firstHalf": null,
       "secondHalf": null,
@@ -54,8 +46,8 @@
       "status": "unavailable"
     },
     {
-      "id": "401933760",
-      "league": "arg.1",
+      "id": "401884736",
+      "league": "ger.1",
       "total": null,
       "firstHalf": null,
       "secondHalf": null,
@@ -80,6 +72,14 @@
     {
       "id": "401934701",
       "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable"
+    },
+    {
+      "id": "401933760",
+      "league": "arg.1",
       "total": null,
       "firstHalf": null,
       "secondHalf": null,
