@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-20-v68">
+<meta name="green-lab-build" content="2026-11-20-v69">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -121,7 +121,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-20-v68";
+const APP_BUILD="2026-11-20-v69";
  $("verifiedSchedule").hidden=ymd(new Date())!=="2026-11-19";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
@@ -934,15 +934,20 @@ async function updateFirstHalfPanel(game,h,a){
 
 const cornerStudyCache=new Map();
 function getCornerTotals(summary,teamId){
- const teams=summary?.boxscore?.teams;
- if(!Array.isArray(teams)||teams.length<2)return null;
- const own=teams.find(t=>String(t?.team?.id)===String(teamId));
- const other=teams.find(t=>String(t?.team?.id)!==String(teamId));
- if(!own||!other)return null;
- const aliases=["cornerKicks","corner kicks","cornerkick","corners","CK"];
- const x=statNumber(own.statistics,aliases),y=statNumber(other.statistics,aliases);
- if(x===null||y===null||x<0||y<0||x>50||y>50||!Number.isInteger(x)||!Number.isInteger(y))return null;
- return {own:x,opponent:y,total:x+y};
+ // ESPN varies by league: boxscore team statistics or competition competitor statistics.
+ // Require two identifiable teams AND real corner counts; never treat missing as zero.
+ const pools=[summary?.boxscore?.teams,summary?.header?.competitions?.[0]?.competitors,summary?.competitions?.[0]?.competitors];
+ const aliases=["cornerKicks","corner kicks","cornerkick","corners","CK","escanteios"];
+ for(const teams of pools){
+  if(!Array.isArray(teams)||teams.length<2)continue;
+  const own=teams.find(t=>String(t?.team?.id??t?.id)===String(teamId));
+  const other=teams.find(t=>String(t?.team?.id??t?.id)!==String(teamId));
+  if(!own||!other)continue;
+  const x=statNumber(own.statistics,aliases),y=statNumber(other.statistics,aliases);
+  if(x===null||y===null||x<0||y<0||x>50||y>50||!Number.isInteger(x)||!Number.isInteger(y))continue;
+  return {own:x,opponent:y,total:x+y};
+ }
+ return null;
 }
 async function lastCorners(game,team,matches){
  // Search up to ten distinct completed matches to find five real, validated boxscores.
