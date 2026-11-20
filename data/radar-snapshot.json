@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 82
+    "future_games": 81
   },
-  "generated_at_utc": "2026-11-20T22:43:18.462197+00:00",
+  "generated_at_utc": "2026-11-20T23:43:49.880460+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -70,7 +70,7 @@
       "start": "2026-11-20T23:00Z",
       "home": "Vélez Sarsfield",
       "away": "Belgrano (Córdoba)",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -254,20 +254,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401879232",
-      "league": "eng.1",
-      "start": "2026-11-21T17:30Z",
-      "home": "Newcastle United",
-      "away": "Arsenal",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882797",
       "league": "esp.1",
       "start": "2026-11-21T17:30Z",
       "home": "Sevilla",
       "away": "Real Betis",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879232",
+      "league": "eng.1",
+      "start": "2026-11-21T17:30Z",
+      "home": "Newcastle United",
+      "away": "Arsenal",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
