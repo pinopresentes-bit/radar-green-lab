@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 81
+    "future_games": 79
   },
-  "generated_at_utc": "2026-11-19T23:39:45.611382+00:00",
+  "generated_at_utc": "2026-11-20T00:54:56.600187+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -43,7 +43,7 @@
       "start": "2026-11-19T22:30Z",
       "home": "Vasco da Gama",
       "away": "Internacional",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-19T22:30Z",
       "home": "Vitória",
       "away": "Red Bull Bragantino",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -61,7 +61,7 @@
       "start": "2026-11-20T00:30Z",
       "home": "São Paulo",
       "away": "Fluminense",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -70,7 +70,7 @@
       "start": "2026-11-20T00:30Z",
       "home": "Orlando City SC",
       "away": "FC Cincinnati",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
