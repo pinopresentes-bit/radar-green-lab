@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-20-v67">
+<meta name="green-lab-build" content="2026-11-20-v68">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -121,7 +121,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-20-v67";
+const APP_BUILD="2026-11-20-v68";
  $("verifiedSchedule").hidden=ymd(new Date())!=="2026-11-19";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
@@ -647,17 +647,30 @@ function renderHighlights(){
 function preKey(g){return g.code+"-"+g.id}
 function preCandidates(){return state.games.filter(g=>g.status==="upcoming"&&new Date(g.start).getTime()>Date.now()-90000).sort((a,b)=>new Date(a.start)-new Date(b.start))}
 function preDisplay(g,data){
+ const row=(name,status,detail)=>'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid #304637"><div style="min-width:0"><b>'+esc(name)+'</b><small style="display:block;color:#b5d0ba;margin-top:3px">'+esc(detail)+'</small></div><span style="flex-shrink:0;font-size:10px;border-radius:12px;padding:4px 7px;background:'+(status==="Em estudo"?"#604327":"#303a33")+'">'+esc(status)+'</span></div>';
  if(!data)return'<div class="predata"><small>📊 Aguardando análise do histórico…</small></div>';
- if(data.error)return'<div class="predata"><small>⚠️ Falha ou tempo excedido na consulta histórica. Sem sinal validado; atualize para tentar novamente.</small></div>';
- if(preMarket==="corners")return'<div class="predata"><small>🚩 Abra Analisar para conferir até 10 jogos, cantos por tempo (quando disponíveis), médias, medianas e casa/fora.</small></div>';
- if(preMarket==="half")return'<div class="predata"><small>⏱️ Gol no 1º tempo: abra Analisar para consultar minutos dos gols. Escanteios por período pendentes.</small></div>';
- if(preMarket==="players")return'<div class="predata"><small>🥅 Jogadores: abra Analisar para consultar titulares e estatísticas que a ESPN disponibilizar. Histórico recente individual e odds permanecem pendentes.</small></div>';
- if(data.hCount<5||data.aCount<5)return'<div class="predata"><small>⚪ Histórico insuficiente: '+data.hCount+'/5 e '+data.aCount+'/5 jogos. Sem estudo comparativo.</small></div>';
- const facts=data.findings.filter(f=>preMarket==="all"||f.type===preMarket);
- if(!facts.length)return'<div class="predata"><small>⚪ Nenhum mercado deste filtro atingiu os critérios históricos.</small></div>';
- return'<div class="predata">'+facts.map(f=>'<div><b>📊 '+esc(f.name)+'</b><small>'+esc(g.home.name)+': '+f.home+'/5 · '+esc(g.away.name)+': '+f.away+'/5</small></div>').join("")+'<small>Amostra curta; não é entrada validada. Faltam odds e escalações.</small></div>';
+ if(data.error)return'<div class="predata"><small>⚠️ Falha na consulta histórica. Nenhum mercado validado; atualize para tentar novamente.</small></div>';
+ const facts=data.findings||[];
+ const find=name=>facts.find(f=>f.name===name);
+ const goal=find("Mais de 1,5 gols")||find("Mais de 2,5 gols");
+ const goalName=goal?goal.name.replace("Mais de ","Gols +"):"Gols +1,5 / +2,5";
+ const goalDetail=goal?g.home.name+" "+goal.home+"/5 · "+g.away.name+" "+goal.away+"/5 · ESPN; escalações pendentes":"Sem frequência suficiente nas últimas 5 partidas por equipe";
+ let rows="";
+ if(preMarket==="all"||preMarket==="goals")rows+=row(goalName,goal?"Em estudo":"Não validado",goalDetail);
+ if(preMarket==="all"||preMarket==="btts"){
+  const btts=find("Ambas marcam");
+  rows+=row("Ambas marcam",btts?"Em estudo":"Não validado",btts?g.home.name+" "+btts.home+"/5 · "+g.away.name+" "+btts.away+"/5 · ESPN":"Frequência insuficiente para destacar SIM");
+ }
+ if(preMarket==="all"||preMarket==="corners"||preMarket==="half"){
+  rows+=row("Escanteios 1º tempo +2,5 / +3,5 / +4,5","Não validado","Sem amostra de eventos reais por período nesta visão; abra Analisar");
+  rows+=row("Escanteios total +6,5 a +10,5","Não validado","A cobertura de boxscores deve ser conferida em Analisar");
+ }
+ if(preMarket==="all"||preMarket==="players"){
+  rows+=row("Chutes no gol · jogador","Não validado","Titular e últimos 5–10 jogos individuais não confirmados");
+  rows+=row("Marcador / assistência","Não validado","Aguardando escalação e histórico individual verificável");
+ }
+ return'<div class="predata" style="margin-top:8px">'+rows+'<small style="display:block;margin-top:8px">📚 Fonte histórica de gols: ESPN · Amostra: 5 por equipe quando disponível · Sem odds ou sinal final</small></div>';
 }
-
 function studyPriority(f){return f.name==="Mais de 1,5 gols"?4:f.name==="Mais de 2,5 gols"?3:f.name==="Ambas marcam"?1:f.name==="Menos de 4,5 gols"?0:0}
  function studyRank(f){return (f.name==="Menos de 4,5 gols"?0:100)+Math.min(f.home,f.away)*10+studyPriority(f)}
  function renderBestStudies(){
