@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 88
+    "future_games": 84
   },
-  "generated_at_utc": "2026-11-20T18:28:49.719016+00:00",
+  "generated_at_utc": "2026-11-20T19:36:22.615044+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -16,7 +16,7 @@
       "start": "2026-11-20T19:30Z",
       "home": "Bayern Munich",
       "away": "FC Cologne",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -25,7 +25,7 @@
       "start": "2026-11-20T19:30Z",
       "home": "Cerro",
       "away": "Nacional",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -34,7 +34,7 @@
       "start": "2026-11-20T19:30Z",
       "home": "Liverpool",
       "away": "Montevideo Wanderers",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -43,7 +43,7 @@
       "start": "2026-11-20T19:30Z",
       "home": "Racing (Montevideo)",
       "away": "Central Español Fútbol Club",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
