@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 88
   },
-  "generated_at_utc": "2026-11-20T04:30:17.621268+00:00",
+  "generated_at_utc": "2026-11-20T05:57:48.885881+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -708,7 +708,7 @@
       "league": "usa.1",
       "start": "2026-11-23T01:30Z",
       "home": "Vancouver Whitecaps",
-      "away": "TBD Away",
+      "away": "Real Salt Lake",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
