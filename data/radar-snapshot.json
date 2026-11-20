@@ -4,84 +4,12 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 79
+    "future_games": 88
   },
-  "generated_at_utc": "2026-11-20T02:04:00.798909+00:00",
+  "generated_at_utc": "2026-11-20T03:16:12.942495+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
-    {
-      "id": "401934704",
-      "league": "uru.1",
-      "start": "2026-11-19T19:30Z",
-      "home": "Boston River",
-      "away": "Deportivo Maldonado",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401934686",
-      "league": "uru.1",
-      "start": "2026-11-19T19:30Z",
-      "home": "Peñarol",
-      "away": "Cerro Largo",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401934703",
-      "league": "uru.1",
-      "start": "2026-11-19T19:30Z",
-      "home": "Progreso",
-      "away": "Montevideo City Torque",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401841308",
-      "league": "bra.1",
-      "start": "2026-11-19T22:30Z",
-      "home": "Vasco da Gama",
-      "away": "Internacional",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401841317",
-      "league": "bra.1",
-      "start": "2026-11-19T22:30Z",
-      "home": "Vitória",
-      "away": "Red Bull Bragantino",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401841309",
-      "league": "bra.1",
-      "start": "2026-11-20T00:30Z",
-      "home": "São Paulo",
-      "away": "Fluminense",
-      "state": "in",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401933535",
-      "league": "usa.1",
-      "start": "2026-11-20T00:30Z",
-      "home": "Orlando City SC",
-      "away": "FC Cincinnati",
-      "state": "in",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401933555",
-      "league": "usa.1",
-      "start": "2026-11-20T03:00Z",
-      "home": "Seattle Sounders FC",
-      "away": "Real Salt Lake",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
     {
       "id": "401884736",
       "league": "ger.1",
@@ -699,7 +627,7 @@
       "league": "usa.1",
       "start": "2026-11-22T21:00Z",
       "home": "Nashville SC",
-      "away": "TBD Away",
+      "away": "FC Cincinnati",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -781,6 +709,96 @@
       "start": "2026-11-23T01:30Z",
       "home": "Vancouver Whitecaps",
       "away": "TBD Away",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401934684",
+      "league": "uru.1",
+      "start": "2026-11-23T19:30Z",
+      "home": "Juventud",
+      "away": "Defensor Sporting",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401875009",
+      "league": "ita.1",
+      "start": "2026-11-23T19:45Z",
+      "home": "Monza",
+      "away": "Fiorentina",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879237",
+      "league": "eng.1",
+      "start": "2026-11-23T20:00Z",
+      "home": "Brentford",
+      "away": "Everton",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401882802",
+      "league": "esp.1",
+      "start": "2026-11-23T20:00Z",
+      "home": "Levante",
+      "away": "Elche",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933756",
+      "league": "arg.1",
+      "start": "2026-11-23T20:00Z",
+      "home": "Gimnasia La Plata",
+      "away": "Newell's Old Boys",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841323",
+      "league": "bra.1",
+      "start": "2026-11-23T22:30Z",
+      "home": "Internacional",
+      "away": "Vitória",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401934683",
+      "league": "uru.1",
+      "start": "2026-11-23T22:30Z",
+      "home": "Albion FC",
+      "away": "Danubio",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841326",
+      "league": "bra.1",
+      "start": "2026-11-23T23:00Z",
+      "home": "Botafogo",
+      "away": "São Paulo",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841320",
+      "league": "bra.1",
+      "start": "2026-11-24T00:00Z",
+      "home": "Santos",
+      "away": "Grêmio",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933728",
+      "league": "usa.1",
+      "start": "2026-11-24T01:00Z",
+      "home": "St. Louis CITY SC",
+      "away": "LAFC",
       "state": "pre",
       "source": "ESPN (não oficial)"
     }
