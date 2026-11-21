@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 69
+    "future_games": 68
   },
-  "generated_at_utc": "2026-11-21T17:37:57.377451+00:00",
+  "generated_at_utc": "2026-11-21T18:39:46.885687+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -151,7 +151,7 @@
       "start": "2026-11-21T16:15Z",
       "home": "Nice",
       "away": "Paris Saint-Germain",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -196,7 +196,7 @@
       "start": "2026-11-21T18:00Z",
       "home": "Defensa y Justicia",
       "away": "Barracas Central",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
