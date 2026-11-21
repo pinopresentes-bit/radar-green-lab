@@ -3,10 +3,10 @@
     "days": 4,
     "leagues": 19,
     "requests": 76,
-    "failed": 0,
-    "future_games": 81
+    "failed": 1,
+    "future_games": 80
   },
-  "generated_at_utc": "2026-11-21T00:58:19.588965+00:00",
+  "generated_at_utc": "2026-11-21T02:10:24.337334+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -70,7 +70,7 @@
       "start": "2026-11-20T23:00Z",
       "home": "Vélez Sarsfield",
       "away": "Belgrano (Córdoba)",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -79,7 +79,7 @@
       "start": "2026-11-21T01:00Z",
       "home": "Puebla",
       "away": "Atlético de San Luis",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -254,20 +254,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401882797",
-      "league": "esp.1",
-      "start": "2026-11-21T17:30Z",
-      "home": "Sevilla",
-      "away": "Real Betis",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401879232",
       "league": "eng.1",
       "start": "2026-11-21T17:30Z",
       "home": "Newcastle United",
       "away": "Arsenal",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401882797",
+      "league": "esp.1",
+      "start": "2026-11-21T17:30Z",
+      "home": "Sevilla",
+      "away": "Real Betis",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -803,7 +803,13 @@
       "source": "ESPN (não oficial)"
     }
   ],
-  "failed_requests": [],
+  "failed_requests": [
+    {
+      "league": "uefa.champions",
+      "date": "20261122",
+      "error": "URLError"
+    }
+  ],
   "lineups_officially_confirmed": false,
   "odds_available": false,
   "warning": "Sem cotações e sem validação oficial de titulares; não constitui sinal de aposta."
