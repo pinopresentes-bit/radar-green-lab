@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-11-21T04:10:31.187148+00:00",
+  "checkedAt": "2026-11-21T05:13:37.126401+00:00",
   "source": "ESPN public unofficial API",
-  "gamesChecked": 21,
-  "totalCornersAvailable": 21,
+  "gamesChecked": 23,
+  "totalCornersAvailable": 23,
   "periodCornersVerified": 0,
   "scheduledSkipped": 39,
-  "historicalGamesFound": 21,
+  "historicalGamesFound": 23,
   "errors": [],
   "matches": [
     {
@@ -130,17 +130,6 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401884736",
-      "league": "ger.1",
-      "total": 5,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
       "id": "401876395",
       "league": "fra.1",
       "total": 7,
@@ -163,9 +152,9 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401877054",
-      "league": "mex.1",
-      "total": 9,
+      "id": "401884736",
+      "league": "ger.1",
+      "total": 5,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -174,9 +163,20 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401876988",
-      "league": "mex.1",
-      "total": 10,
+      "id": "401933535",
+      "league": "usa.1",
+      "total": 8,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933555",
+      "league": "usa.1",
+      "total": 8,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -218,9 +218,9 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401933535",
-      "league": "usa.1",
-      "total": 8,
+      "id": "401877054",
+      "league": "mex.1",
+      "total": 9,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -229,9 +229,31 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401933555",
-      "league": "usa.1",
-      "total": 8,
+      "id": "401877053",
+      "league": "mex.1",
+      "total": 18,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401877052",
+      "league": "mex.1",
+      "total": 14,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401876988",
+      "league": "mex.1",
+      "total": 10,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
