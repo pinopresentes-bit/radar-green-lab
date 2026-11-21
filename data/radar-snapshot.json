@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 57
+    "future_games": 56
   },
-  "generated_at_utc": "2026-11-21T21:35:44.425649+00:00",
+  "generated_at_utc": "2026-11-21T22:35:52.454574+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -223,7 +223,7 @@
       "start": "2026-11-21T19:45Z",
       "home": "Napoli",
       "away": "Torino",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -232,7 +232,7 @@
       "start": "2026-11-21T19:45Z",
       "home": "AS Monaco",
       "away": "AJ Auxerre",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -241,7 +241,7 @@
       "start": "2026-11-21T19:45Z",
       "home": "Lens",
       "away": "Toulouse",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -250,7 +250,7 @@
       "start": "2026-11-21T19:45Z",
       "home": "Lille",
       "away": "Lyon",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -259,7 +259,7 @@
       "start": "2026-11-21T19:45Z",
       "home": "Strasbourg",
       "away": "Brest",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -268,7 +268,7 @@
       "start": "2026-11-21T20:00Z",
       "home": "Real Madrid",
       "away": "Celta Vigo",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -277,7 +277,7 @@
       "start": "2026-11-21T20:00Z",
       "home": "Argentinos Juniors",
       "away": "Independiente",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -286,7 +286,7 @@
       "start": "2026-11-21T20:30Z",
       "home": "Bahia",
       "away": "Coritiba",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -304,7 +304,7 @@
       "start": "2026-11-21T22:30Z",
       "home": "Atlético-MG",
       "away": "Boca Juniors",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
