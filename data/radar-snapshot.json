@@ -3,10 +3,10 @@
     "days": 4,
     "leagues": 19,
     "requests": 76,
-    "failed": 1,
-    "future_games": 77
+    "failed": 0,
+    "future_games": 74
   },
-  "generated_at_utc": "2026-11-21T14:46:47.461508+00:00",
+  "generated_at_utc": "2026-11-21T15:40:23.690061+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -25,7 +25,7 @@
       "start": "2026-11-21T13:00Z",
       "home": "Alavés",
       "away": "Deportivo",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -97,7 +97,7 @@
       "start": "2026-11-21T15:00Z",
       "home": "AFC Bournemouth",
       "away": "Nottingham Forest",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -106,7 +106,7 @@
       "start": "2026-11-21T15:00Z",
       "home": "Aston Villa",
       "away": "Sunderland",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -115,7 +115,7 @@
       "start": "2026-11-21T15:00Z",
       "home": "Chelsea",
       "away": "Leeds United",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -124,7 +124,7 @@
       "start": "2026-11-21T15:00Z",
       "home": "Coventry City",
       "away": "Crystal Palace",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -133,7 +133,7 @@
       "start": "2026-11-21T15:00Z",
       "home": "Tottenham Hotspur",
       "away": "Ipswich Town",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -142,7 +142,7 @@
       "start": "2026-11-21T15:15Z",
       "home": "Rayo Vallecano",
       "away": "Valencia",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -479,6 +479,15 @@
       "source": "ESPN (não oficial)"
     },
     {
+      "id": "401841318",
+      "league": "bra.1",
+      "start": "2026-11-22T19:00Z",
+      "home": "Athletico-PR",
+      "away": "Remo",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
       "id": "401912682",
       "league": "bra.2",
       "start": "2026-11-22T19:00Z",
@@ -533,6 +542,15 @@
       "source": "ESPN (não oficial)"
     },
     {
+      "id": "401841324",
+      "league": "bra.1",
+      "start": "2026-11-22T21:30Z",
+      "home": "Fluminense",
+      "away": "Mirassol",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
       "id": "401912708",
       "league": "bra.2",
       "start": "2026-11-22T21:30Z",
@@ -547,6 +565,15 @@
       "start": "2026-11-22T22:00Z",
       "home": "River Plate",
       "away": "Lanús",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841321",
+      "league": "bra.1",
+      "start": "2026-11-22T22:30Z",
+      "home": "Red Bull Bragantino",
+      "away": "Vasco da Gama",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -614,20 +641,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401879237",
-      "league": "eng.1",
-      "start": "2026-11-23T20:00Z",
-      "home": "Brentford",
-      "away": "Everton",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882802",
       "league": "esp.1",
       "start": "2026-11-23T20:00Z",
       "home": "Levante",
       "away": "Elche",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879237",
+      "league": "eng.1",
+      "start": "2026-11-23T20:00Z",
+      "home": "Brentford",
+      "away": "Everton",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -785,13 +812,7 @@
       "source": "ESPN (não oficial)"
     }
   ],
-  "failed_requests": [
-    {
-      "league": "bra.1",
-      "date": "20261122",
-      "error": "TimeoutError"
-    }
-  ],
+  "failed_requests": [],
   "lineups_officially_confirmed": false,
   "odds_available": false,
   "warning": "Sem cotações e sem validação oficial de titulares; não constitui sinal de aposta."
