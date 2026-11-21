@@ -1,13 +1,46 @@
 {
-  "checkedAt": "2026-11-20T23:29:21.233939+00:00",
+  "checkedAt": "2026-11-21T00:32:27.354779+00:00",
   "source": "ESPN public unofficial API",
-  "gamesChecked": 11,
-  "totalCornersAvailable": 1,
+  "gamesChecked": 16,
+  "totalCornersAvailable": 4,
   "periodCornersVerified": 0,
   "scheduledSkipped": 10,
-  "historicalGamesFound": 11,
+  "historicalGamesFound": 16,
   "errors": [],
   "matches": [
+    {
+      "id": "401882805",
+      "league": "esp.1",
+      "total": 11,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401876395",
+      "league": "fra.1",
+      "total": 7,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401884736",
+      "league": "ger.1",
+      "total": 5,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
     {
       "id": "401876988",
       "league": "mex.1",
@@ -18,6 +51,42 @@
       "statLocation": "boxscore.teams",
       "boxscoreTeamCount": 2,
       "headerTeamCount": 2
+    },
+    {
+      "id": "401934702",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable",
+      "statLocation": null,
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2,
+      "reason": "ESPN summary has no verifiable two-team corner totals"
+    },
+    {
+      "id": "401934685",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable",
+      "statLocation": null,
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2,
+      "reason": "ESPN summary has no verifiable two-team corner totals"
+    },
+    {
+      "id": "401934701",
+      "league": "uru.1",
+      "total": null,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "unavailable",
+      "statLocation": null,
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2,
+      "reason": "ESPN summary has no verifiable two-team corner totals"
     },
     {
       "id": "401934704",
@@ -117,18 +186,6 @@
     },
     {
       "id": "401933256",
-      "league": "uru.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable",
-      "statLocation": null,
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2,
-      "reason": "ESPN summary has no verifiable two-team corner totals"
-    },
-    {
-      "id": "401933237",
       "league": "uru.1",
       "total": null,
       "firstHalf": null,
