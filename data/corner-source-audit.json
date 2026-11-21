@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-21T05:13:37.126401+00:00",
+  "checkedAt": "2026-11-21T06:14:01.505986+00:00",
   "source": "ESPN public unofficial API",
   "gamesChecked": 23,
   "totalCornersAvailable": 23,
@@ -130,9 +130,9 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401876395",
-      "league": "fra.1",
-      "total": 7,
+      "id": "401882805",
+      "league": "esp.1",
+      "total": 11,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -141,9 +141,9 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401882805",
-      "league": "esp.1",
-      "total": 11,
+      "id": "401876395",
+      "league": "fra.1",
+      "total": 7,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -177,39 +177,6 @@
       "id": "401933555",
       "league": "usa.1",
       "total": 8,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933740",
-      "league": "usa.nwsl",
-      "total": 9,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933734",
-      "league": "usa.nwsl",
-      "total": 17,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933760",
-      "league": "arg.1",
-      "total": 14,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -254,6 +221,39 @@
       "id": "401876988",
       "league": "mex.1",
       "total": 10,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933760",
+      "league": "arg.1",
+      "total": 14,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933740",
+      "league": "usa.nwsl",
+      "total": 9,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933734",
+      "league": "usa.nwsl",
+      "total": 17,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
