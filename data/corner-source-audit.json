@@ -1,28 +1,17 @@
 {
-  "checkedAt": "2026-11-21T01:55:47.295086+00:00",
+  "checkedAt": "2026-11-21T03:03:49.625170+00:00",
   "source": "ESPN public unofficial API",
-  "gamesChecked": 17,
-  "totalCornersAvailable": 5,
+  "gamesChecked": 18,
+  "totalCornersAvailable": 6,
   "periodCornersVerified": 0,
   "scheduledSkipped": 10,
-  "historicalGamesFound": 17,
+  "historicalGamesFound": 18,
   "errors": [],
   "matches": [
     {
       "id": "401884736",
       "league": "ger.1",
       "total": 5,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882805",
-      "league": "esp.1",
-      "total": 11,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -42,9 +31,9 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401876988",
-      "league": "mex.1",
-      "total": 10,
+      "id": "401882805",
+      "league": "esp.1",
+      "total": 11,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -53,9 +42,20 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401933760",
-      "league": "arg.1",
-      "total": 14,
+      "id": "401877054",
+      "league": "mex.1",
+      "total": 9,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401876988",
+      "league": "mex.1",
+      "total": 10,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -206,6 +206,17 @@
       "boxscoreTeamCount": 2,
       "headerTeamCount": 2,
       "reason": "ESPN summary has no verifiable two-team corner totals"
+    },
+    {
+      "id": "401933760",
+      "league": "arg.1",
+      "total": 14,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
     }
   ]
 }
