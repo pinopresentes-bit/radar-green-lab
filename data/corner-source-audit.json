@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-21T19:32:27.012997+00:00",
+  "checkedAt": "2026-11-21T20:26:47.835109+00:00",
   "source": "ESPN public unofficial API",
   "gamesChecked": 23,
   "totalCornersAvailable": 23,
@@ -130,9 +130,9 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401882805",
-      "league": "esp.1",
-      "total": 11,
+      "id": "401876395",
+      "league": "fra.1",
+      "total": 7,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -152,31 +152,9 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401876395",
-      "league": "fra.1",
-      "total": 7,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933535",
-      "league": "usa.1",
-      "total": 8,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933555",
-      "league": "usa.1",
-      "total": 8,
+      "id": "401882805",
+      "league": "esp.1",
+      "total": 11,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -221,6 +199,28 @@
       "id": "401876988",
       "league": "mex.1",
       "total": 10,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933535",
+      "league": "usa.1",
+      "total": 8,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933555",
+      "league": "usa.1",
+      "total": 8,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
