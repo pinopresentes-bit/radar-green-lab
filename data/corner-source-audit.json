@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-21T22:23:08.808473+00:00",
+  "checkedAt": "2026-11-21T23:23:57.367704+00:00",
   "source": "ESPN public unofficial API",
   "gamesChecked": 23,
   "totalCornersAvailable": 23,
@@ -130,6 +130,17 @@
       "headerTeamCount": 2
     },
     {
+      "id": "401882805",
+      "league": "esp.1",
+      "total": 11,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
       "id": "401884736",
       "league": "ger.1",
       "total": 5,
@@ -144,17 +155,6 @@
       "id": "401876395",
       "league": "fra.1",
       "total": 7,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882805",
-      "league": "esp.1",
-      "total": 11,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
