@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 89
   },
-  "generated_at_utc": "2026-11-21T06:29:22.614866+00:00",
+  "generated_at_utc": "2026-11-21T07:46:43.761002+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -218,6 +218,15 @@
       "source": "ESPN (não oficial)"
     },
     {
+      "id": "401875067",
+      "league": "ita.1",
+      "start": "2026-11-21T19:45Z",
+      "home": "Napoli",
+      "away": "Torino",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
       "id": "401876399",
       "league": "fra.1",
       "start": "2026-11-21T19:45Z",
@@ -250,15 +259,6 @@
       "start": "2026-11-21T19:45Z",
       "home": "Strasbourg",
       "away": "Brest",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401875067",
-      "league": "ita.1",
-      "start": "2026-11-21T19:45Z",
-      "home": "Napoli",
-      "away": "Torino",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -641,20 +641,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401879237",
-      "league": "eng.1",
-      "start": "2026-11-23T20:00Z",
-      "home": "Brentford",
-      "away": "Everton",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882802",
       "league": "esp.1",
       "start": "2026-11-23T20:00Z",
       "home": "Levante",
       "away": "Elche",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879237",
+      "league": "eng.1",
+      "start": "2026-11-23T20:00Z",
+      "home": "Brentford",
+      "away": "Everton",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
