@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 89
   },
-  "generated_at_utc": "2026-11-21T10:43:45.263630+00:00",
+  "generated_at_utc": "2026-11-21T11:42:00.160689+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -641,20 +641,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401879237",
-      "league": "eng.1",
-      "start": "2026-11-23T20:00Z",
-      "home": "Brentford",
-      "away": "Everton",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882802",
       "league": "esp.1",
       "start": "2026-11-23T20:00Z",
       "home": "Levante",
       "away": "Elche",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879237",
+      "league": "eng.1",
+      "start": "2026-11-23T20:00Z",
+      "home": "Brentford",
+      "away": "Everton",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
