@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 89
   },
-  "generated_at_utc": "2026-11-21T03:18:17.431171+00:00",
+  "generated_at_utc": "2026-11-21T04:27:34.433089+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -479,20 +479,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401841318",
-      "league": "bra.1",
-      "start": "2026-11-22T19:00Z",
-      "home": "Athletico-PR",
-      "away": "Remo",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401912682",
       "league": "bra.2",
       "start": "2026-11-22T19:00Z",
       "home": "Criciúma",
       "away": "Fortaleza",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841318",
+      "league": "bra.1",
+      "start": "2026-11-22T19:00Z",
+      "home": "Athletico-PR",
+      "away": "Remo",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -542,20 +542,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401841324",
-      "league": "bra.1",
-      "start": "2026-11-22T21:30Z",
-      "home": "Fluminense",
-      "away": "Mirassol",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401912708",
       "league": "bra.2",
       "start": "2026-11-22T21:30Z",
       "home": "Atlético Goianiense",
       "away": "Vila Nova",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841324",
+      "league": "bra.1",
+      "start": "2026-11-22T21:30Z",
+      "home": "Fluminense",
+      "away": "Mirassol",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
