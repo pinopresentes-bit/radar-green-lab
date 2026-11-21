@@ -3,10 +3,10 @@
     "days": 4,
     "leagues": 19,
     "requests": 76,
-    "failed": 0,
-    "future_games": 87
+    "failed": 1,
+    "future_games": 77
   },
-  "generated_at_utc": "2026-11-21T13:54:47.197503+00:00",
+  "generated_at_utc": "2026-11-21T14:46:47.461508+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -16,7 +16,7 @@
       "start": "2026-11-21T12:30Z",
       "home": "Manchester City",
       "away": "Fulham",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -34,7 +34,7 @@
       "start": "2026-11-21T14:00Z",
       "home": "Como",
       "away": "Cagliari",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -43,7 +43,7 @@
       "start": "2026-11-21T14:00Z",
       "home": "Lazio",
       "away": "Lecce",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-21T14:30Z",
       "home": "1. FC Union Berlin",
       "away": "RB Leipzig",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -61,7 +61,7 @@
       "start": "2026-11-21T14:30Z",
       "home": "Bayer Leverkusen",
       "away": "SC Paderborn 07",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -70,7 +70,7 @@
       "start": "2026-11-21T14:30Z",
       "home": "Borussia Mönchengladbach",
       "away": "Borussia Dortmund",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -79,7 +79,7 @@
       "start": "2026-11-21T14:30Z",
       "home": "Eintracht Frankfurt",
       "away": "TSG Hoffenheim",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -88,7 +88,7 @@
       "start": "2026-11-21T14:30Z",
       "home": "SV Elversberg",
       "away": "SC Freiburg",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -317,20 +317,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401877051",
-      "league": "mex.1",
-      "start": "2026-11-21T23:00Z",
-      "home": "Santos",
-      "away": "León",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401933739",
       "league": "usa.1",
       "start": "2026-11-21T23:00Z",
       "home": "Inter Miami CF",
       "away": "Columbus Crew",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401877051",
+      "league": "mex.1",
+      "start": "2026-11-21T23:00Z",
+      "home": "Santos",
+      "away": "León",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -479,15 +479,6 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401841318",
-      "league": "bra.1",
-      "start": "2026-11-22T19:00Z",
-      "home": "Athletico-PR",
-      "away": "Remo",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401912682",
       "league": "bra.2",
       "start": "2026-11-22T19:00Z",
@@ -542,15 +533,6 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401841324",
-      "league": "bra.1",
-      "start": "2026-11-22T21:30Z",
-      "home": "Fluminense",
-      "away": "Mirassol",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401912708",
       "league": "bra.2",
       "start": "2026-11-22T21:30Z",
@@ -565,15 +547,6 @@
       "start": "2026-11-22T22:00Z",
       "home": "River Plate",
       "away": "Lanús",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401841321",
-      "league": "bra.1",
-      "start": "2026-11-22T22:30Z",
-      "home": "Red Bull Bragantino",
-      "away": "Vasco da Gama",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -812,7 +785,13 @@
       "source": "ESPN (não oficial)"
     }
   ],
-  "failed_requests": [],
+  "failed_requests": [
+    {
+      "league": "bra.1",
+      "date": "20261122",
+      "error": "TimeoutError"
+    }
+  ],
   "lineups_officially_confirmed": false,
   "odds_available": false,
   "warning": "Sem cotações e sem validação oficial de titulares; não constitui sinal de aposta."
