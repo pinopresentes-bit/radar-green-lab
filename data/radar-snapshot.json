@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 60
+    "future_games": 59
   },
-  "generated_at_utc": "2026-11-22T12:46:03.716701+00:00",
+  "generated_at_utc": "2026-11-22T13:53:38.637699+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -16,7 +16,7 @@
       "start": "2026-11-22T11:30Z",
       "home": "Juventus",
       "away": "Venezia",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -25,7 +25,7 @@
       "start": "2026-11-22T13:00Z",
       "home": "Barcelona",
       "away": "Villarreal",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
