@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 61
   },
-  "generated_at_utc": "2026-11-22T09:43:51.234495+00:00",
+  "generated_at_utc": "2026-11-22T10:42:56.730179+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -128,20 +128,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401912682",
-      "league": "bra.2",
-      "start": "2026-11-22T19:00Z",
-      "home": "Criciúma",
-      "away": "Fortaleza",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401841318",
       "league": "bra.1",
       "start": "2026-11-22T19:00Z",
       "home": "Athletico-PR",
       "away": "Remo",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912682",
+      "league": "bra.2",
+      "start": "2026-11-22T19:00Z",
+      "home": "Criciúma",
+      "away": "Fortaleza",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -191,20 +191,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401912708",
-      "league": "bra.2",
-      "start": "2026-11-22T21:30Z",
-      "home": "Atlético Goianiense",
-      "away": "Vila Nova",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401841324",
       "league": "bra.1",
       "start": "2026-11-22T21:30Z",
       "home": "Fluminense",
       "away": "Mirassol",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912708",
+      "league": "bra.2",
+      "start": "2026-11-22T21:30Z",
+      "home": "Atlético Goianiense",
+      "away": "Vila Nova",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -290,20 +290,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401879237",
-      "league": "eng.1",
-      "start": "2026-11-23T20:00Z",
-      "home": "Brentford",
-      "away": "Everton",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882802",
       "league": "esp.1",
       "start": "2026-11-23T20:00Z",
       "home": "Levante",
       "away": "Elche",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879237",
+      "league": "eng.1",
+      "start": "2026-11-23T20:00Z",
+      "home": "Brentford",
+      "away": "Everton",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
