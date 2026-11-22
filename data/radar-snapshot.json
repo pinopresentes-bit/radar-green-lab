@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 42
+    "future_games": 39
   },
-  "generated_at_utc": "2026-11-22T20:39:50.054922+00:00",
+  "generated_at_utc": "2026-11-22T21:38:05.187470+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -128,21 +128,21 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401912682",
-      "league": "bra.2",
-      "start": "2026-11-22T19:00Z",
-      "home": "Criciúma",
-      "away": "Fortaleza",
-      "state": "in",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401841318",
       "league": "bra.1",
       "start": "2026-11-22T19:00Z",
       "home": "Athletico-PR",
       "away": "Remo",
-      "state": "in",
+      "state": "post",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912682",
+      "league": "bra.2",
+      "start": "2026-11-22T19:00Z",
+      "home": "Criciúma",
+      "away": "Fortaleza",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -151,7 +151,7 @@
       "start": "2026-11-22T19:00Z",
       "home": "Rosario Central",
       "away": "Gimnasia (Mendoza)",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -187,16 +187,7 @@
       "start": "2026-11-22T21:00Z",
       "home": "Nashville SC",
       "away": "FC Cincinnati",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401912708",
-      "league": "bra.2",
-      "start": "2026-11-22T21:30Z",
-      "home": "Atlético Goianiense",
-      "away": "Vila Nova",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -205,7 +196,16 @@
       "start": "2026-11-22T21:30Z",
       "home": "Fluminense",
       "away": "Mirassol",
-      "state": "pre",
+      "state": "in",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912708",
+      "league": "bra.2",
+      "start": "2026-11-22T21:30Z",
+      "home": "Atlético Goianiense",
+      "away": "Vila Nova",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
