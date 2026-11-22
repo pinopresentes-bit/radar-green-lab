@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-22T19:37:10.437596+00:00",
+  "checkedAt": "2026-11-22T20:29:49.005567+00:00",
   "source": "ESPN public unofficial API",
   "gamesChecked": 56,
   "totalCornersAvailable": 56,
@@ -460,6 +460,39 @@
       "headerTeamCount": 2
     },
     {
+      "id": "401933758",
+      "league": "arg.1",
+      "total": 7,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933755",
+      "league": "arg.1",
+      "total": 12,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933760",
+      "league": "arg.1",
+      "total": 14,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
       "id": "401877050",
       "league": "mex.1",
       "total": 7,
@@ -584,39 +617,6 @@
       "id": "401933555",
       "league": "usa.1",
       "total": 8,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933758",
-      "league": "arg.1",
-      "total": 7,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933755",
-      "league": "arg.1",
-      "total": 12,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933760",
-      "league": "arg.1",
-      "total": 14,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
