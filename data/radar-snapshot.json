@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 61
   },
-  "generated_at_utc": "2026-11-22T04:28:59.332809+00:00",
+  "generated_at_utc": "2026-11-22T05:29:35.482754+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -29,15 +29,6 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401879234",
-      "league": "eng.1",
-      "start": "2026-11-22T14:00Z",
-      "home": "Hull City",
-      "away": "Brighton & Hove Albion",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401875047",
       "league": "ita.1",
       "start": "2026-11-22T14:00Z",
@@ -52,6 +43,15 @@
       "start": "2026-11-22T14:00Z",
       "home": "Sassuolo",
       "away": "Genoa",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879234",
+      "league": "eng.1",
+      "start": "2026-11-22T14:00Z",
+      "home": "Hull City",
+      "away": "Brighton & Hove Albion",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -92,20 +92,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401878755",
-      "league": "eng.1",
-      "start": "2026-11-22T16:30Z",
-      "home": "Liverpool",
-      "away": "Manchester United",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401884730",
       "league": "ger.1",
       "start": "2026-11-22T16:30Z",
       "home": "Werder Bremen",
       "away": "Hamburg SV",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401878755",
+      "league": "eng.1",
+      "start": "2026-11-22T16:30Z",
+      "home": "Liverpool",
+      "away": "Manchester United",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -128,20 +128,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401912682",
-      "league": "bra.2",
-      "start": "2026-11-22T19:00Z",
-      "home": "Criciúma",
-      "away": "Fortaleza",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401841318",
       "league": "bra.1",
       "start": "2026-11-22T19:00Z",
       "home": "Athletico-PR",
       "away": "Remo",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912682",
+      "league": "bra.2",
+      "start": "2026-11-22T19:00Z",
+      "home": "Criciúma",
+      "away": "Fortaleza",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -191,20 +191,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401912708",
-      "league": "bra.2",
-      "start": "2026-11-22T21:30Z",
-      "home": "Atlético Goianiense",
-      "away": "Vila Nova",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401841324",
       "league": "bra.1",
       "start": "2026-11-22T21:30Z",
       "home": "Fluminense",
       "away": "Mirassol",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912708",
+      "league": "bra.2",
+      "start": "2026-11-22T21:30Z",
+      "home": "Atlético Goianiense",
+      "away": "Vila Nova",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
