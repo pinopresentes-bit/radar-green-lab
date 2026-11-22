@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 39
+    "future_games": 37
   },
-  "generated_at_utc": "2026-11-22T21:38:05.187470+00:00",
+  "generated_at_utc": "2026-11-22T22:39:40.984538+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -160,7 +160,7 @@
       "start": "2026-11-22T19:45Z",
       "home": "Atalanta",
       "away": "Internazionale",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -169,7 +169,7 @@
       "start": "2026-11-22T19:45Z",
       "home": "Marseille",
       "away": "Le Mans",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -178,7 +178,7 @@
       "start": "2026-11-22T20:00Z",
       "home": "Getafe",
       "away": "Atlético Madrid",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -214,7 +214,7 @@
       "start": "2026-11-22T22:00Z",
       "home": "River Plate",
       "away": "Lanús",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -223,7 +223,7 @@
       "start": "2026-11-22T22:30Z",
       "home": "Red Bull Bragantino",
       "away": "Vasco da Gama",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
