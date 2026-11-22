@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 52
+    "future_games": 51
   },
-  "generated_at_utc": "2026-11-22T00:53:46.993773+00:00",
+  "generated_at_utc": "2026-11-22T02:02:37.712223+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -322,7 +322,7 @@
       "start": "2026-11-21T23:00Z",
       "home": "Inter Miami CF",
       "away": "Columbus Crew",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -331,7 +331,7 @@
       "start": "2026-11-21T23:00Z",
       "home": "Santos",
       "away": "León",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -340,7 +340,7 @@
       "start": "2026-11-22T00:00Z",
       "home": "Chapecoense",
       "away": "Cruzeiro",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -349,7 +349,7 @@
       "start": "2026-11-22T01:00Z",
       "home": "Pumas UNAM",
       "away": "Monterrey",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
