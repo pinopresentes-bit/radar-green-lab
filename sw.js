@@ -18,6 +18,6 @@ self.addEventListener('fetch',event=>{
   return response;
  }).catch(async()=>{
   const cache=await caches.open(CACHE);
-  return await cache.match(request)||await cache.match(url.pathname.endsWith('/')?'./':'./index.html')||Response.error();
+  return await cache.match(request)||(request.mode==='navigate'?await cache.match('./index.html'):null)||Response.error();
  }));
 });
