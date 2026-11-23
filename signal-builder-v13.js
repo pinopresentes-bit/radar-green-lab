@@ -50,9 +50,9 @@ function minutePeriod(p){
 }
 function firstCorners(s,tot){
  if(!s||tot===null)return null;
- for(const list of [s?.plays,s?.keyEvents,s?.details?.plays,s?.details?.keyEvents,s?.commentary?.plays,s?.commentary?.events,s?.commentary?.items,s?.commentary]){
+ for(const list of [s?.plays,s?.keyEvents,s?.details?.plays,s?.details?.keyEvents,s?.commentary?.plays,s?.commentary?.events,s?.commentary?.items,s?.commentary,s?.details?.commentary,s?.details?.commentary?.plays]){
   if(!Array.isArray(list))continue;
-  const found=list.filter(p=>/corner(?:-|\s*)kick|(?:^|\s)corner(?:\s|$)/.test([p?.type?.text,p?.type?.slug,p?.description,p?.text].filter(Boolean).join(" ").toLowerCase()));
+  const found=list.filter(p=>/corner(?:-|\s*)kick|(?:^|\s)corner(?:\s|$)/.test([p?.type?.text,p?.type?.slug,p?.type?.name,typeof p?.type==='string'?p.type:'',p?.description,p?.text].filter(Boolean).join(" ").toLowerCase()));
   if(found.length!==tot)continue;
   const halves=found.map(minutePeriod);
   if(halves.some(x=>x!==1&&x!==2))continue;
@@ -150,7 +150,7 @@ async function loadStudy(g){
   const todo=[...home.map(m=>({m,side:"h",team:g.home})),...away.map(m=>({m,side:"a",team:g.away}))];
   const all=await mapWithLimit(todo,3,async x=>{
    try{
-    const summary=await getEventSummary(g.code,x.m.id);
+    const summary=await getEventSummary(x.m.code||g.code,x.m.id);
     const corners=summary?getCornerTotals(summary,x.team.id):null;
     const first=corners?firstCorners(summary,corners.total):null;
     const firstGoals=summary?goalHalfFromSummary(summary,x.m):null;
