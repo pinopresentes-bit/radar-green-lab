@@ -57,9 +57,9 @@
   return historyCache.get(key);
  }
  async function cornerRecord(game,team,match){
-  const key=game.code+":"+match.id+":"+team.id;
+  const key=(match.code||game.code)+":"+match.id+":"+team.id;
   if(!fetched.has(key))fetched.set(key,(async()=>{
-   const payload=await getEventSummary(game.code,match.id);
+   const payload=await getEventSummary(match.code||game.code,match.id);
    const total=payload?getCornerTotals(payload,team.id):null;
    if(!total)return null;
    const split=splitCornerPeriods(payload,total.total);
