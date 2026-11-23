@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 46
   },
-  "generated_at_utc": "2026-11-23T20:47:01.575010+00:00",
+  "generated_at_utc": "2026-11-23T21:48:07.606128+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -16,7 +16,7 @@
       "start": "2026-11-23T19:30Z",
       "home": "Juventud",
       "away": "Defensor Sporting",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -25,7 +25,7 @@
       "start": "2026-11-23T19:45Z",
       "home": "Monza",
       "away": "Fiorentina",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
