@@ -1,8 +1,8 @@
 {
-  "checkedAt": "2026-11-23T05:47:58.176934+00:00",
+  "checkedAt": "2026-11-23T07:55:59.768771+00:00",
   "source": "ESPN public unofficial API",
   "gamesChecked": 60,
-  "totalCornersAvailable": 53,
+  "totalCornersAvailable": 56,
   "periodCornersVerified": 0,
   "scheduledSkipped": 10,
   "historicalGamesFound": 63,
@@ -174,105 +174,6 @@
       "headerTeamCount": 2
     },
     {
-      "id": "401882804",
-      "league": "esp.1",
-      "total": 10,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882800",
-      "league": "esp.1",
-      "total": 21,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882801",
-      "league": "esp.1",
-      "total": 5,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882803",
-      "league": "esp.1",
-      "total": 9,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882806",
-      "league": "esp.1",
-      "total": 10,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882799",
-      "league": "esp.1",
-      "total": 13,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882797",
-      "league": "esp.1",
-      "total": 9,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882798",
-      "league": "esp.1",
-      "total": 11,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401882805",
-      "league": "esp.1",
-      "total": 11,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
       "id": "401879234",
       "league": "eng.1",
       "total": 8,
@@ -364,6 +265,105 @@
       "id": "401879232",
       "league": "eng.1",
       "total": 9,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401882804",
+      "league": "esp.1",
+      "total": 10,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401882800",
+      "league": "esp.1",
+      "total": 21,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401882801",
+      "league": "esp.1",
+      "total": 5,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401882803",
+      "league": "esp.1",
+      "total": 9,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401882806",
+      "league": "esp.1",
+      "total": 10,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401882799",
+      "league": "esp.1",
+      "total": 13,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401882797",
+      "league": "esp.1",
+      "total": 9,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401882798",
+      "league": "esp.1",
+      "total": 11,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401882805",
+      "league": "esp.1",
+      "total": 11,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
@@ -559,6 +559,72 @@
       "headerTeamCount": 2
     },
     {
+      "id": "401933759",
+      "league": "arg.1",
+      "total": 5,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933761",
+      "league": "arg.1",
+      "total": 9,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933762",
+      "league": "arg.1",
+      "total": 5,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933758",
+      "league": "arg.1",
+      "total": 7,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933755",
+      "league": "arg.1",
+      "total": 12,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401933760",
+      "league": "arg.1",
+      "total": 14,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
       "id": "401934702",
       "league": "uru.1",
       "total": null,
@@ -605,75 +671,6 @@
       "boxscoreTeamCount": 2,
       "headerTeamCount": 2,
       "reason": "ESPN summary has no verifiable two-team corner totals"
-    },
-    {
-      "id": "401934686",
-      "league": "uru.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable",
-      "statLocation": null,
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2,
-      "reason": "ESPN summary has no verifiable two-team corner totals"
-    },
-    {
-      "id": "401934703",
-      "league": "uru.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable",
-      "statLocation": null,
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2,
-      "reason": "ESPN summary has no verifiable two-team corner totals"
-    },
-    {
-      "id": "401933375",
-      "league": "uru.1",
-      "total": null,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "unavailable",
-      "statLocation": null,
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2,
-      "reason": "ESPN summary has no verifiable two-team corner totals"
-    },
-    {
-      "id": "401933759",
-      "league": "arg.1",
-      "total": 5,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933761",
-      "league": "arg.1",
-      "total": 9,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
-    },
-    {
-      "id": "401933762",
-      "league": "arg.1",
-      "total": 5,
-      "firstHalf": null,
-      "secondHalf": null,
-      "status": "total_only",
-      "statLocation": "boxscore.teams",
-      "boxscoreTeamCount": 2,
-      "headerTeamCount": 2
     }
   ]
 }
