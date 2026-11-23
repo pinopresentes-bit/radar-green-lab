@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 35
+    "future_games": 32
   },
-  "generated_at_utc": "2026-11-23T00:57:08.060450+00:00",
+  "generated_at_utc": "2026-11-23T02:15:07.075125+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -232,7 +232,7 @@
       "start": "2026-11-22T23:07Z",
       "home": "Guadalajara",
       "away": "Cruz Azul",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -241,7 +241,7 @@
       "start": "2026-11-22T23:30Z",
       "home": "Chicago Fire FC",
       "away": "Charlotte FC",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -250,7 +250,7 @@
       "start": "2026-11-23T01:00Z",
       "home": "Instituto (Córdoba)",
       "away": "Huracán",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -259,7 +259,7 @@
       "start": "2026-11-23T01:10Z",
       "home": "Querétaro",
       "away": "Necaxa",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -268,7 +268,7 @@
       "start": "2026-11-23T01:30Z",
       "home": "Vancouver Whitecaps",
       "away": "Real Salt Lake",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
