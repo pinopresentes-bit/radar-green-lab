@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 46
+    "future_games": 44
   },
-  "generated_at_utc": "2026-11-23T21:48:07.606128+00:00",
+  "generated_at_utc": "2026-11-23T22:47:46.541408+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -34,7 +34,7 @@
       "start": "2026-11-23T20:00Z",
       "home": "Brentford",
       "away": "Everton",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -43,7 +43,7 @@
       "start": "2026-11-23T20:00Z",
       "home": "Levante",
       "away": "Elche",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-23T20:00Z",
       "home": "Gimnasia La Plata",
       "away": "Newell's Old Boys",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -61,7 +61,7 @@
       "start": "2026-11-23T22:30Z",
       "home": "Internacional",
       "away": "Vitória",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -70,7 +70,7 @@
       "start": "2026-11-23T22:30Z",
       "home": "Albion FC",
       "away": "Danubio",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
