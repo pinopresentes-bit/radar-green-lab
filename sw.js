@@ -1,4 +1,4 @@
-const CACHE='green-lab-pwa-v31';
+const CACHE='green-lab-pwa-v32';
 const ASSETS=['./','./index.html','./signal-builder-v13.js','./corners-v10.js','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));
