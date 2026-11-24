@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 51
+    "future_games": 53
   },
-  "generated_at_utc": "2026-11-24T04:36:21.552933+00:00",
+  "generated_at_utc": "2026-11-24T05:56:37.904057+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -209,6 +209,24 @@
       "source": "ESPN (não oficial)"
     },
     {
+      "id": "401931986",
+      "league": "mex.1",
+      "start": "2026-11-26T01:00Z",
+      "home": "Toluca",
+      "away": "Atlas",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401931998",
+      "league": "mex.1",
+      "start": "2026-11-26T03:10Z",
+      "home": "Monterrey",
+      "away": "América",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
       "id": "401915506",
       "league": "uefa.europa",
       "start": "2026-11-26T17:45Z",
@@ -407,20 +425,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401882791",
-      "league": "esp.1",
-      "start": "2026-11-27T20:00Z",
-      "home": "Levante",
-      "away": "Racing Santander",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401879225",
       "league": "eng.1",
       "start": "2026-11-27T20:00Z",
       "home": "Nottingham Forest",
       "away": "Chelsea",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401882791",
+      "league": "esp.1",
+      "start": "2026-11-27T20:00Z",
+      "home": "Levante",
+      "away": "Racing Santander",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
