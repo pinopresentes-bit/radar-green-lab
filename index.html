@@ -121,7 +121,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-24-v73";
+const APP_BUILD="2026-11-24-v74";
  $("verifiedSchedule").hidden=ymd(new Date())!=="2026-11-19";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
@@ -906,7 +906,7 @@ function getEventSummary(code,eventId){
 }
 
 async function firstHalfGoalMatches(game,matches){
- const sample=matches.slice(0,5);
+ const sample=matches.slice(0,10);
  const per=await Promise.all(sample.map(async m=>{
   if(m.total===0)return 0;
   const key=(m.code||game.code)+":"+m.id;
@@ -915,7 +915,8 @@ async function firstHalfGoalMatches(game,matches){
   }
   return periodStudyCache.get(key);
  }));
- return {found:per.filter(v=>v!==null).length,yes:per.filter(v=>v!==null&&v>0).length,total:sample.length};
+ const valid=per.filter(v=>v!==null);
+ return {found:valid.length,yes:valid.filter(v=>v>0).length,total:sample.length};
 }
 function marketRow(emoji,title,desc,kind,id){
  const mark=id?' id="'+id+'-status"':'',details=id?' id="'+id+'-detail"':'';
@@ -937,12 +938,12 @@ async function updateFirstHalfPanel(game,h,a){
  if(active!==id)return;
  const st=$("half-status"),p=$("half-study");
  if(!st||!p)return;
- if(home.found<3||away.found<3){
+ if(home.found<5||away.found<5){
   st.textContent="Dados insuficientes";
   p.textContent="Minutos dos gols disponíveis para "+home.found+"/"+home.total+" jogos de "+game.home.name+" e "+away.found+"/"+away.total+" de "+game.away.name+". Sem sinal de 1º tempo.";
   return;
  }
- const meets=home.found>=4&&away.found>=4&&home.yes/home.found>=.75&&away.yes/away.found>=.75;
+ const meets=home.found>=5&&away.found>=5&&home.yes/home.found>=.75&&away.yes/away.found>=.75;
  st.textContent=meets?"Em observação":"Histórico consultado";
  p.textContent="Gol no 1º tempo: "+game.home.name+" "+home.yes+"/"+home.found+"; "+game.away.name+" "+away.yes+"/"+away.found+" dos jogos com dados completos. "+(meets?"Critério histórico atingido; ainda faltam escalações e odd para avaliar a entrada.":"Sem sinal validado pelo filtro histórico.")+" Amostra curta.";
 }
