@@ -121,7 +121,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-24-v72";
+const APP_BUILD="2026-11-24-v73";
  $("verifiedSchedule").hidden=ymd(new Date())!=="2026-11-19";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
@@ -810,6 +810,22 @@ async function teamHistory(g,t){
   }
   if(found.size<10){
     try{add(await leagueSchedule(g))}catch{}
+  }
+  // Supplement continental club schedules using exact ESPN team IDs.
+  const continental=["uefa.champions","uefa.europa","uefa.europa.conf","conmebol.libertadores","conmebol.sudamericana","afc.champions","afc.cup"];
+  if(found.size<10&&continental.includes(g.code)){
+    const domestic=g.code.startsWith("uefa.")?["eng.1","esp.1","ita.1","ger.1","fra.1","ned.1","por.1","bel.1","tur.1","sco.1","aut.1","nor.1","den.1","gre.1"]:g.code.startsWith("conmebol.")?["bra.1","bra.2","arg.1","uru.1","chi.1","col.1","ecu.1","par.1","per.1"]:["ksa.1","jpn.1","kor.1","aus.1","qat.1","uae.1"];
+    for(let i=0;i<domestic.length&&found.size<10;i+=4){
+      await Promise.all(domestic.slice(i,i+4).map(async code=>{
+        try{
+          const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/teams/"+encodeURIComponent(t.id)+"/schedule?season="+year;
+          const response=await api(url);
+          for(const m of matchHistory(response.events,g,t)){
+            if(new Date(m.date)>=cutoff&&!found.has(m.id))found.set(m.id,{...m,code});
+          }
+        }catch{}
+      }));
+    }
   }
   // National teams play across different ESPN competitions. Search related
   // scoreboards, but match the exact source team name to avoid wrong squads.
