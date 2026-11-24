@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 53
+    "future_games": 55
   },
-  "generated_at_utc": "2026-11-24T05:56:37.904057+00:00",
+  "generated_at_utc": "2026-11-24T07:11:39.927188+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -394,6 +394,24 @@
       "start": "2026-11-26T23:00Z",
       "home": "São Paulo",
       "away": "Remo",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401931982",
+      "league": "mex.1",
+      "start": "2026-11-27T01:00Z",
+      "home": "Pachuca",
+      "away": "Guadalajara",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401931995",
+      "league": "mex.1",
+      "start": "2026-11-27T03:10Z",
+      "home": "León",
+      "away": "Cruz Azul",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
