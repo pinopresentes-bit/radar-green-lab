@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Green Lab">
 <meta name="description" content="Radar Green Lab PRO: agenda, resultados e estudo estatístico de futebol.">
-<meta name="green-lab-build" content="2026-11-23-v70">
+<meta name="green-lab-build" content="2026-11-24-v71">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon.svg" type="image/svg+xml">
 <title>Radar Green Lab PRO</title>
@@ -76,7 +76,7 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 <div class="intro"><h1>Todos os jogos.<br><span>Um único radar.</span></h1><p>Agenda, placares e tendências históricas de futebol no seu iPhone, fora do ChatGPT. Consulte dados atualizados quando a fonte estiver disponível.</p></div>
 <div class="controls"><label for="day">DATA</label><input id="day" type="date"><button id="today" class="btn">Hoje</button><button id="refresh" class="btn primary">⟳ Atualizar jogos</button><button id="checkVersion" class="btn" type="button">↻ Versão do app</button></div>
 <div id="versionNotice" role="status" aria-live="polite"></div>
-<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v70</strong></div></div>
+<div class="tags"><div class="tag">Fonte: <strong>ESPN (não oficial)</strong></div><div class="tag">Última consulta: <strong id="checked">ainda não</strong></div><div class="tag">Versão: <strong id="appVersion">v71</strong></div></div>
 <div class="metrics"><div class="metric"><b id="total">—</b><small>Partidas encontradas</small></div><div class="metric"><b id="live">—</b><small>Ao vivo</small></div><div class="metric"><b id="next">—</b><small>Próximos jogos</small></div></div>
 <div id="notice" aria-live="polite"></div>
 <section class="signalhub" id="boletim" style="scroll-margin-top:6rem"><h2>Último boletim de hoje</h2><p style="padding:.75rem;border:1px solid #a88542;border-radius:10px;color:#f0d69c"><strong>Boletim da notificação.</strong> A mesma edição aparece no Sinal Montado. Os cartões indicam separadamente a situação de cada mercado.</p><div id="boletimTexto" style="white-space:pre-wrap;overflow-wrap:anywhere">Consultando…</div></section>
@@ -105,13 +105,13 @@ footer{color:#89ab91;font-size:11px;line-height:1.65;border-top:1px solid var(--
 </div>
 <div class="selectrow"><label for="league">Liga</label><select id="league"><option value="all">Todas as disponíveis</option></select></div>
 <div class="games" id="games"><div class="empty">📡 Consultando placares...</div></div>
-<footer>Green Lab PRO v70 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
+<footer>Green Lab PRO v71 — versão experimental. Dados externos podem estar incompletos, indisponíveis ou atrasados. Estatísticas históricas não garantem resultados. Este aplicativo não consulta odds em tempo real, não realiza apostas e não envia notificações com o navegador fechado.</footer>
 </main>
 <div id="overlay" class="overlay hidden" role="dialog" aria-modal="true"><div class="sheet"><div class="sheettop"><h2 id="gameTitle">Análise do jogo</h2><button class="close" id="close">✕ Fechar</button></div><div id="gameBody"></div></div></div>
 <script>
 "use strict";
 const TZ="America/Sao_Paulo";
-const LEAGUES=[["uefa.nations","Liga das Nações"],["concacaf.nations.league","CONCACAF Nations"],["fifa.friendly","Amistosos"],["fifa.world","Copa do Mundo"],["conmebol.sudamericana","Sul-Americana"],["bra.1","Brasileirão A"],["bra.2","Brasileirão B"],["conmebol.libertadores","Libertadores"],["eng.1","Premier League"],["esp.1","LaLiga"],["ita.1","Serie A"],["ger.1","Bundesliga"],["fra.1","Ligue 1"],["uefa.wchampions","Champions League Feminina"],["uefa.champions","Champions League"],["uefa.europa","Europa League"],["mex.1","Liga MX"],["mex.w.1","Liga MX Feminina"],["usa.1","MLS"],["usa.nwsl","NWSL"],["arg.1","Argentina"],["uru.1","Uruguai"]];
+const LEAGUES=[["uefa.nations","Liga das Nações"],["concacaf.nations.league","CONCACAF Nations"],["fifa.friendly","Amistosos"],["fifa.world","Copa do Mundo"],["conmebol.sudamericana","Sul-Americana"],["bra.1","Brasileirão A"],["bra.2","Brasileirão B"],["conmebol.libertadores","Libertadores"],["eng.1","Premier League"],["esp.1","LaLiga"],["ita.1","Serie A"],["ger.1","Bundesliga"],["fra.1","Ligue 1"],["uefa.wchampions","Champions League Feminina"],["uefa.champions","Champions League"],["uefa.europa","Europa League"],["mex.1","Liga MX"],["mex.w.1","Liga MX Feminina"],["usa.1","MLS"],["usa.nwsl","NWSL"],["arg.1","Argentina"],["uru.1","Uruguai"],["afc.champions","Champions Asiática"],["afc.cup","AFC competição secundária"],["eng.2","Championship"],["uefa.europa.conf","Conference League"],["ksa.1","Arábia Saudita"],["jpn.1","J League"],["kor.1","K League"],["aus.1","A League"]];
 const $=id=>document.getElementById(id),esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 function ymd(d){const parts=new Intl.DateTimeFormat("en-US",{timeZone:TZ,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(d);const z={};parts.forEach(x=>z[x.type]=x.value);return z.year+"-"+z.month+"-"+z.day}
 function clock(x){return new Intl.DateTimeFormat("pt-BR",{timeZone:TZ,hour:"2-digit",minute:"2-digit"}).format(new Date(x))}
@@ -121,7 +121,7 @@ const savedStudyDay=(()=>{try{const x=localStorage.getItem("gl-selected-day");re
 const initialRadarDate=(()=>{const now=new Date();const hour=Number(new Intl.DateTimeFormat("en-GB",{timeZone:TZ,hour:"2-digit",hourCycle:"h23"}).format(now));return ymd(new Date(now.getTime()+(hour>=22?86400000:0)) )})();
 const state={date:initialRadarDate,filter:"upcoming",league:"all",games:[],loaded:false,busy:false,success:0,fails:0,favs};
 let lastFetchAt=0, lastVisibleDay=state.date;
-const APP_BUILD="2026-11-23-v70";
+const APP_BUILD="2026-11-24-v71";
  $("verifiedSchedule").hidden=ymd(new Date())!=="2026-11-19";
 let lastBuildCheck=0;
 $("day").value=state.date;$("appVersion").textContent="v"+APP_BUILD.split("-v").pop();
