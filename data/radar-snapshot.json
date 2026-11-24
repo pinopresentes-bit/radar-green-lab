@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 45
   },
-  "generated_at_utc": "2026-11-24T21:52:59.060774+00:00",
+  "generated_at_utc": "2026-11-24T22:53:29.571360+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -43,7 +43,7 @@
       "start": "2026-11-24T20:00Z",
       "home": "Como",
       "away": "AEK Athens",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-24T20:00Z",
       "home": "Feyenoord Rotterdam",
       "away": "FC Porto",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -461,20 +461,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401912683",
-      "league": "bra.2",
-      "start": "2026-11-27T23:00Z",
-      "home": "Vila Nova",
-      "away": "Atlético Goianiense",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401841337",
       "league": "bra.1",
       "start": "2026-11-27T23:00Z",
       "home": "Fluminense",
       "away": "Cruzeiro",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912683",
+      "league": "bra.2",
+      "start": "2026-11-27T23:00Z",
+      "home": "Vila Nova",
+      "away": "Atlético Goianiense",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
