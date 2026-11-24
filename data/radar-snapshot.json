@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 51
   },
-  "generated_at_utc": "2026-11-24T03:25:56.376528+00:00",
+  "generated_at_utc": "2026-11-24T04:36:21.552933+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -407,20 +407,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401879225",
-      "league": "eng.1",
-      "start": "2026-11-27T20:00Z",
-      "home": "Nottingham Forest",
-      "away": "Chelsea",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882791",
       "league": "esp.1",
       "start": "2026-11-27T20:00Z",
       "home": "Levante",
       "away": "Racing Santander",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879225",
+      "league": "eng.1",
+      "start": "2026-11-27T20:00Z",
+      "home": "Nottingham Forest",
+      "away": "Chelsea",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
