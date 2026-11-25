@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 75
   },
-  "generated_at_utc": "2026-11-25T05:06:02.896787+00:00",
+  "generated_at_utc": "2026-11-25T06:25:01.198013+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -383,8 +383,8 @@
       "id": "401936333",
       "league": "uru.1",
       "start": "2026-11-27T23:30Z",
-      "home": "Racing (Montevideo)",
-      "away": "Liverpool",
+      "home": "Liverpool",
+      "away": "Racing (Montevideo)",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
