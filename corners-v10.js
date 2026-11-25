@@ -130,9 +130,9 @@
   set("most",quality,game.home.name+" liderou em cantos "+H.filter(x=>x.own>x.opponent).length+"/"+H.length+" jogos; "+game.away.name+" liderou "+A.filter(x=>x.own>x.opponent).length+"/"+A.length+". Empates não contam como liderança.");
   for(const field of ["first","second"]){
    const home=H.filter(r=>Number.isInteger(r[field])),away=A.filter(r=>Number.isInteger(r[field]));
-   const state=home.length>=5&&away.length>=5?"Eventos conferidos":"Cobertura insuficiente";
+   const state=home.length>=5&&away.length>=5?"Eventos conferidos":!home.length||!away.length?"Dados ausentes — NÃO VALIDADO":"Amostra insuficiente — NÃO VALIDADO";
    const info="Eventos completos de "+(field==="first"?"1º":"2º")+" tempo: "+game.home.name+" "+home.length+"/"+H.length+" e "+game.away.name+" "+away.length+"/"+A.length+". ";
-   set(field,state,info+(home.length>=5&&away.length>=5?study(game.home.name,home,field,[2.5,3.5,4.5])+". "+study(game.away.name,away,field,[2.5,3.5,4.5])+". ":"SEM DADO CONFIÁVEL — NÃO VALIDADO. ")+"Se a fonte mostrar somente o total de 90 minutos, a divisão por período fica indisponível.");
+   set(field,state,info+(home.length>=5&&away.length>=5?study(game.home.name,home,field,[2.5,3.5,4.5,5.5])+". "+study(game.away.name,away,field,[2.5,3.5,4.5,5.5])+". ":"SEM DADO CONFIÁVEL — NÃO VALIDADO. ")+"Se a fonte mostrar somente o total de 90 minutos, a divisão por período fica indisponível.");
   }
  }
  // Funções anteriores eram chamadas ao abrir o detalhe. Sobrescrevê-las sem
