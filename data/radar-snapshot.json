@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 73
   },
-  "generated_at_utc": "2026-11-25T18:12:50.286924+00:00",
+  "generated_at_utc": "2026-11-25T19:27:48.863735+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -506,20 +506,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401882793",
-      "league": "esp.1",
-      "start": "2026-11-28T17:30Z",
-      "home": "Elche",
-      "away": "Atlético Madrid",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401878752",
       "league": "eng.1",
       "start": "2026-11-28T17:30Z",
       "home": "Ipswich Town",
       "away": "Aston Villa",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401882793",
+      "league": "esp.1",
+      "start": "2026-11-28T17:30Z",
+      "home": "Elche",
+      "away": "Atlético Madrid",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
