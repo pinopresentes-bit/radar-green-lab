@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 66
+    "future_games": 65
   },
-  "generated_at_utc": "2026-11-25T22:28:54.522233+00:00",
+  "generated_at_utc": "2026-11-25T23:24:47.671043+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -97,7 +97,7 @@
       "start": "2026-11-25T23:00Z",
       "home": "Atlético-MG",
       "away": "Corinthians",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -362,20 +362,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401912683",
-      "league": "bra.2",
-      "start": "2026-11-27T23:00Z",
-      "home": "Vila Nova",
-      "away": "Atlético Goianiense",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401841337",
       "league": "bra.1",
       "start": "2026-11-27T23:00Z",
       "home": "Fluminense",
       "away": "Cruzeiro",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912683",
+      "league": "bra.2",
+      "start": "2026-11-27T23:00Z",
+      "home": "Vila Nova",
+      "away": "Atlético Goianiense",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
