@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 66
   },
-  "generated_at_utc": "2026-11-25T21:29:34.702110+00:00",
+  "generated_at_utc": "2026-11-25T22:28:54.522233+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -34,7 +34,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Atlético Madrid",
       "away": "Viking FK",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -43,7 +43,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Club Brugge",
       "away": "Liverpool",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Internazionale",
       "away": "VfB Stuttgart",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -61,7 +61,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Lille",
       "away": "Bayern Munich",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -70,7 +70,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Paris Saint-Germain",
       "away": "AS Roma",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -79,7 +79,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Shakhtar Donetsk",
       "away": "Fenerbahce",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -88,7 +88,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Sporting CP",
       "away": "Manchester United",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -362,20 +362,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401841337",
-      "league": "bra.1",
-      "start": "2026-11-27T23:00Z",
-      "home": "Fluminense",
-      "away": "Cruzeiro",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401912683",
       "league": "bra.2",
       "start": "2026-11-27T23:00Z",
       "home": "Vila Nova",
       "away": "Atlético Goianiense",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841337",
+      "league": "bra.1",
+      "start": "2026-11-27T23:00Z",
+      "home": "Fluminense",
+      "away": "Cruzeiro",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
