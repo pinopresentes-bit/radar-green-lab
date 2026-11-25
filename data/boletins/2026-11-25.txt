@@ -1,30 +1,59 @@
-RADAR GREEN LAB PRO | 25/11/2026 | 09h15 de São Paulo
-Dois jogos às 10h, UEFA Youth League. Melhor estudo: Sporting CP × Manchester United, mais de 1,5 gols. Nenhum sinal verde de jogador.
+RADAR GREEN LAB PRO | 25/11/2026, 10h07 de São Paulo
+Três partidas da UEFA Youth League às 11h. Destaques FUNDAMENTADOS no histórico, confiança moderada: Lille × Bayern, pelo menos um gol e mais de 2,5 escanteios no primeiro tempo; Inter × Stuttgart, mais de 6,5 escanteios no jogo. Risco comum: cinco partidas por equipe e mudanças de elenco no sub-19.
 
-SPORTING CP × MANCHESTER UNITED | Sub-19
-Gols • Mais de 1,5 FUNDAMENTADO no histórico: 5/5 de cada equipe. Também ocorreu nos dois jogos do Sporting em casa e nos dois do United fora desse recorte. Confiança moderada. O quinto jogo inglês foi um torneio de 80 minutos em 2025; os outros quatro são da Youth League atual.
-Mais de 0,5 gol no 1º tempo: 4/5 e 5/5. Mais de 2,5 gols: 3/5 e 4/5. Ambas marcam, sim: 5/5 e 3/5. PRELIMINAR, confiança baixa pela mistura de competições e mandos.
-ESCANTEIOS 1º TEMPO • Mais de 2,5: 4/5 e 4/5. Mais de 3,5: 3/5 e 1/5. Mais de 4,5: 1/5 e 1/5. Totais registrados ao intervalo: Sporting 4, 3, 5, 1, 4 (10 feitos, 7 cedidos); United 3, 2, 3, 8, 3 (15 feitos, 4 cedidos). PRELIMINAR, confiança baixa: a linha 2,5 passou em só 1/2 do Sporting em casa e 1/2 do United fora.
-ESCANTEIOS TOTAL • Mais de 6,5: 4/5 e 5/5. Mais de 7,5: 3/5 e 4/5. Mais de 8,5: 3/5 e 2/5. Mais de 9,5 e 10,5: 3/5 e 1/5 em cada linha. Totais: Sporting 7, 11, 15, 6, 12 (27 feitos, 24 cedidos); United 7, 8, 9, 16, 8 (38 feitos, 10 cedidos). PRELIMINAR, confiança baixa: no mando desta partida, 6 e 12 cantos nos jogos do Sporting, 8 e 9 nos do United.
-Fontes: https://www.totalcorner.com/h2h/man-utd-u19-vs-sporting-u19
-https://www.totalcorner.com/team/view/2120
-https://www.totalcorner.com/team/view/15554
-https://es.uefa.com/uefayouthleague/match/2049889--sporting-cp-vs-man-utd/lineups/
+Em cada par de frequências, leia mandante / visitante. Gols: cinco jogos recentes disponíveis por equipe, com mandos mistos. Escanteios: cinco fichas disponíveis do mandante em casa e cinco do visitante fora, incluindo partidas de temporadas diferentes. As contagens do intervalo são reais. As frequências descrevem a amostra.
 
-SALZBURG × ESTRELA VERMELHA | Sub-19
-Gols • Seis jogos europeus por equipe, quatro de 2025 em cada série. Mais de 0,5 no 1º tempo: 3/6 e 5/6. Mais de 1,5 no jogo: 5/6 e 3/6. Mais de 2,5: 3/6 e 2/6. Ambas marcam, sim: 5/6 e 2/6. PRELIMINAR, confiança baixa. No recorte por mando, ambas marcaram em 4/5 do Salzburg em casa e 0/3 do visitante fora.
-ESCANTEIOS 1º TEMPO • 2,5 / 3,5 / 4,5: SEM DADO CONFIÁVEL — NÃO VALIDADO. As séries por mando consultadas não cobrem os jogos mais recentes dos dois times.
-ESCANTEIOS TOTAL • 6,5 / 7,5 / 8,5 / 9,5 / 10,5: SEM DADO CONFIÁVEL — NÃO VALIDADO pelo mesmo limite de cobertura.
-Fontes: https://www.forebet.com/en/football/matches/salzburg-u19-crvena-zvezda-u19-2565820
-https://www.totalcorner.com/team/view/15867
-https://www.totalcorner.com/team/view/7775
-https://pt.uefa.com/uefayouthleague/match/2050478--salzburg-vs-crvena-zvezda/lineups/
+CLUB BRUGGE × LIVERPOOL | 11h
+Gols: 1+ no 1º tempo | mais de 1,5 no jogo | mais de 2,5 no jogo | ambas marcam, sim.
+5/5 e 4/5 | 5/5 e 4/5 | 3/5 e 3/5 | 5/5 e 4/5.
+Linhas de gols PRELIMINARES, confiança baixa. O Liverpool teve um 0–0 contra o Villarreal.
+ESCANTEIOS 1º TEMPO • Mais de 2,5 (3/5 e 4/5), 3,5 (1/5 e 4/5), 4,5 (1/5 e 3/5).
+5 feitos e 12 cedidos em casa; 14 feitos e 15 cedidos fora. Totais por jogo: 7, 2, 2, 3, 3 / 7, 6, 4, 10, 2.
+PRELIMINAR, confiança baixa pela variação dos totais.
+ESCANTEIOS TOTAL • Mais de 6,5 (4/5 e 4/5), 7,5 (4/5 e 4/5), 8,5 (3/5 e 4/5), 9,5 (3/5 e 3/5), 10,5 (1/5 e 3/5).
+22 feitos e 25 cedidos em casa; 25 feitos e 27 cedidos fora. Totais por jogo: 13, 8, 10, 6, 10 / 11, 13, 5, 14, 9.
+PRELIMINAR, confiança baixa pela variação dos totais.
+https://www.totalcorner.com/h2h/club-brugge-u19-vs-liverpool-u19
+https://www.totalcorner.com/team/view/9100
+https://www.totalcorner.com/team/view/3484
 
-JOGADORES | Ambos os jogos
-1+ chute no alvo, marcador e assistência: NÃO CONFIRMADO. Para as quatro equipes, ficaram pendentes os 11 titulares oficiais, desfalques e uma série individual de cinco atuações com minutos e estatísticas. Nenhuma cotação verificada.
+INTER DE MILÃO × STUTTGART | 11h
+Gols: 1+ no 1º tempo | mais de 1,5 no jogo | mais de 2,5 no jogo | ambas marcam, sim.
+5/5 e 4/5 | 5/5 e 4/5 | 3/5 e 4/5 | 3/5 e 2/5.
+Linhas de gols PRELIMINARES, confiança baixa. O Stuttgart perdeu por 1–0 para o Slovan, com 0–0 no intervalo.
+ESCANTEIOS 1º TEMPO • Mais de 2,5 (4/5 e 3/5), 3,5 (2/5 e 3/5), 4,5 (2/5 e 3/5).
+13 feitos e 12 cedidos em casa; 13 feitos e 9 cedidos fora. Totais por jogo: 3, 2, 3, 7, 10 / 5, 9, 0, 2, 6.
+PRELIMINAR, confiança baixa pela variação dos totais.
+ESCANTEIOS TOTAL • Mais de 6,5 (5/5 e 4/5), 7,5 (4/5 e 4/5), 8,5 (4/5 e 3/5), 9,5 (4/5 e 3/5), 10,5 (3/5 e 2/5).
+26 feitos e 30 cedidos em casa; 26 feitos e 23 cedidos fora. Totais por jogo: 7, 13, 10, 12, 14 / 12, 10, 4, 8, 15.
+Mais de 6,5 FUNDAMENTADO, confiança moderada. Na visita do Stuttgart ao Wolfsburg houve só quatro. Outras linhas preliminares, confiança baixa.
+https://www.totalcorner.com/h2h/inter-milan-u19-vs-vfb-stuttgart-u19
+https://www.totalcorner.com/team/view/3037
+https://www.totalcorner.com/team/view/4972
 
-AGENDA | Horários de São Paulo
-Hoje, 11h: Club Brugge × Liverpool, Inter de Milão × Stuttgart e Lille × Bayern, todos sub-19. Brasileirão: 26/11, 20h, São Paulo × Remo; 27/11, 20h, Fluminense × Cruzeiro; 28/11, 21h, Botafogo × Bahia.
-Próxima checagem prevista do Radar: 10h10, para os jogos das 11h. Estudo estatístico pré-jogo.
+LILLE × BAYERN DE MUNIQUE | 11h
+Gols: 1+ no 1º tempo | mais de 1,5 no jogo | mais de 2,5 no jogo | ambas marcam, sim.
+5/5 e 5/5 | 4/5 e 5/5 | 3/5 e 4/5 | 4/5 e 3/5.
+Gol no 1º tempo FUNDAMENTADO, confiança moderada. Demais linhas PRELIMINARES, confiança baixa. O Lille perdeu por 1–0 para o Lens, com o único gol antes do intervalo.
+ESCANTEIOS 1º TEMPO • Mais de 2,5 (5/5 e 5/5), 3,5 (4/5 e 4/5), 4,5 (3/5 e 3/5).
+8 feitos e 16 cedidos em casa; 10 feitos e 21 cedidos fora. Totais por jogo: 5, 4, 3, 5, 7 / 5, 12, 3, 4, 7.
+Mais de 2,5 FUNDAMENTADO, confiança moderada. O menor total foi três para cada equipe. Outras linhas preliminares, confiança baixa.
+ESCANTEIOS TOTAL • Mais de 6,5 (4/5 e 4/5), 7,5 (4/5 e 4/5), 8,5 (3/5 e 4/5), 9,5 (1/5 e 4/5), 10,5 (1/5 e 3/5).
+16 feitos e 26 cedidos em casa; 26 feitos e 35 cedidos fora. Totais por jogo: 9, 5, 8, 9, 11 / 15, 19, 6, 11, 10.
+PRELIMINAR, confiança baixa pela variação dos totais.
+https://www.totalcorner.com/h2h/bayern-munich-u19-vs-lille-u19
+https://www.totalcorner.com/team/view/15147
+https://www.totalcorner.com/team/view/3738
+
+CHUTES NO GOL, MARCADOR E ASSISTÊNCIA | Três partidas
+1+ chute no alvo, 1+ gol e 1+ assistência: NÃO CONFIRMADOS. Will Wright, do Liverpool, marcou três contra o Fenerbahçe. É um nome para acompanhar; essa partida isolada não sustenta uma linha individual. Não foi possível verificar os 11 titulares de cada lado, os desfalques e uma série de cinco atuações com minutos e finalizações para indicar um jogador. Sem odds verificadas.
+https://m.dongqiudi.com/en/match/54590123
+https://www.uefa.com/uefayouthleague/match/2049890--club-brugge-vs-liverpool/lineups/
+https://www.uefa.com/uefayouthleague/match/2049887--inter-vs-stuttgart/lineups/
+https://www.uefa.com/uefayouthleague/match/2049891--lille-vs-bayern-munchen/lineups/
+Complemento das fichas de escanteios: https://www.totalcorner.com/league/view/379
+
+Agenda seguinte: hoje às 12h, PSG × Roma e Atlético de Madrid × Viking (sub-19). Brasileirão: 26/11 às 20h, São Paulo × Remo; 27/11 às 20h, Fluminense × Cruzeiro; 28/11 às 21h, Botafogo × Bahia.
+Próxima checagem prevista: 11h10 de São Paulo, para os jogos seguintes. Estudo estatístico pré-jogo.
 https://www.lance.com.br/temporeal/agenda
-https://portaldesports.com.br/tabela-do-brasileirao/
+https://sports.sbt.com.br/noticia/sbt-sports/cbf-detalha-datas-e-horarios-das-ultimas-rodadas-do-brasileirao
