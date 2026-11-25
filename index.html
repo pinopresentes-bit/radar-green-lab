@@ -818,10 +818,15 @@ async function teamHistory(g,t){
     for(let i=0;i<domestic.length&&found.size<10;i+=4){
       await Promise.all(domestic.slice(i,i+4).map(async code=>{
         try{
-          const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/teams/"+encodeURIComponent(t.id)+"/schedule?season="+year;
-          const response=await api(url);
-          for(const m of matchHistory(response.events,g,t)){
-            if(new Date(m.date)>=cutoff&&!found.has(m.id))found.set(m.id,{...m,code});
+          for(const season of [year,year-1]){
+            if(found.size>=10)break;
+            try{
+              const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(code)+"/teams/"+encodeURIComponent(t.id)+"/schedule?season="+season;
+              const response=await api(url);
+              for(const m of matchHistory(response.events,g,t)){
+                if(new Date(m.date)>=cutoff&&!found.has(m.id))found.set(m.id,{...m,code});
+              }
+            }catch{}
           }
         }catch{}
       }));
