@@ -1,32 +1,28 @@
-RADAR GREEN LAB PRO | 25/11/2026 · 12h13 de São Paulo
-UEFA Youth League | Dois pré-jogos das 13h
-Destaques FUNDAMENTADOS pelo histórico, confiança moderada: Hradec Králové × Kairat, mais de 1,5 gols e mais de 2,5 escanteios no 1º tempo. HJK × Stabæk, menos de 10,5 escanteios totais. Cada linha é independente; amostras pequenas, sem cotação verificada.
+RADAR GREEN LAB PRO · 25/11/2026 · 15h10 de São Paulo
+17h00 · Club Brugge × Liverpool · Liga dos Campeões
 
-13h · Hradec Králové × Kairat Almaty
-GOLS — nas cinco fichas disponíveis de cada equipe, mais de 1,5 em 5/5 e 5/5; mais de 2,5 em 5/5 e 4/5 (FUNDAMENTADO, moderada). Gol no 1º tempo em 4/5 e 3/5; ambas marcam em 2/5 e 3/5 (PRELIMINAR, baixa). Dois jogos do recorte do Kairat são de 2025.
-ESCANTEIOS 1º TEMPO — cinco fichas com contagem do intervalo por mando. Totais do Hradec em casa: 5, 4, 5, 4, 5 (11 feitos, 12 cedidos). Kairat fora: 8, 3, 1, 4, 4 (7 feitos, 13 cedidos). Acima de 2,5: 5/5 e 4/5, FUNDAMENTADO, moderada. Acima de 3,5: 5/5 e 3/5; acima de 4,5: 3/5 e 1/5, PRELIMINAR, baixa. Copenhagen × Kairat teve só um até o intervalo.
-ESCANTEIOS TOTAL — cinco fichas com totais por mando: Hradec 10, 14, 7, 7, 7 (29 feitos/16 cedidos); Kairat 11, 7, 8, 10, 11 (19/28). Acima de 6,5 em 5/5 de ambos, FUNDAMENTADO, moderada. Risco: três jogos do Hradec terminaram exatamente em sete. Para 7,5 / 8,5 / 9,5 / 10,5, Hradec: 2/5, 2/5, 2/5, 1/5; Kairat: 4/5, 3/5, 3/5, 2/5. PRELIMINAR, baixa. As fichas com total e as com intervalo podem diferir.
-JOGADORES — 1+ chute no alvo, marcador e assistência: NÃO CONFIRMADO. Sem cinco atuações individuais verificadas e sem confirmação dos dois onzes ou dos desfalques.
+QUADRO DE SINAIS · Três estudos FUNDAMENTADOS, confiança moderada. Nenhuma odd verificada.
+• Gols: pelo menos 1 gol no 1º tempo ocorreu em 5/5 dos últimos jogos de cada equipe.
+• Escanteios no jogo: mais de 7,5 em 4/5 do Brugge em casa e 4/5 do Liverpool fora.
+• Escanteios no 1º tempo: mais de 2,5 em 5/5 de cada lado nesse mesmo recorte. Em duas partidas do Brugge e uma do Liverpool houve exatamente três.
 
-13h · HJK Helsinki × Stabæk
-GOLS — cinco partidas por equipe. HJK: Žilina (0–0 e 3–0), Ballkani (2–1 e 6–0) e PSG (1–6). Stabæk: Cardiff (4–0 e 8–0), Rosenborg (2–2), Lillestrøm (2–1) e Fredrikstad (2–4). Gol no 1º tempo: 4/5 e 4/5. Mais de 1,5 e mais de 2,5 no total: ambas as linhas em 4/5 e 5/5. FUNDAMENTADO, moderada; os mesmos adversários aparecem duas vezes na amostra. Ambas marcam: 2/5 e 3/5, PRELIMINAR, baixa.
-ESCANTEIOS 1º TEMPO — linhas 2,5 / 3,5 / 4,5: SEM DADO CONFIÁVEL — NÃO VALIDADO. Nos quatro jogos do HJK em casa com intervalo conferido houve 4, 5, 6 e 6. Nas visitas do Stabæk a Rosenborg e Fredrikstad houve 6 e 0. Cobertura insuficiente para sugerir uma linha.
-ESCANTEIOS TOTAL — cinco fichas por mando. HJK: 6, 9, 6, 10, 9 (20 feitos/20 cedidos). Stabæk: 6, 11, 3, 7, 7 (16 feitos/18 cedidos). Menos de 10,5: 5/5 e 4/5, FUNDAMENTADO, moderada. O jogo fora contra o Rosenborg teve 11. Para mais de 6,5 / 7,5 / 8,5 / 9,5 / 10,5: HJK 3/5, 3/5, 3/5, 1/5, 0/5; Stabæk 3/5, 1/5, 1/5, 1/5, 1/5. PRELIMINAR, baixa. O recorte do HJK inclui a geração anterior.
-JOGADORES — possíveis marcadores Ahti Haikala (quatro gols europeus pelo HJK) e Richard Ferrington (cinco nos dois jogos contra o Cardiff). PRELIMINAR, baixa: concentração em um adversário e titularidade pendente. Para 1+ chute no alvo e 1+ assistência faltam cinco atuações individuais verificadas: NÃO CONFIRMADO. Sem lista oficial completa de titulares ou desfalques confirmada nesta consulta.
+GOLS · Últimas cinco partidas de cada clube, em todas as competições, com mandos mistos. Mais de 1,5 no jogo: 5/5 Brugge e 4/5 Liverpool (FUNDAMENTADO, moderada). Mais de 2,5: 4/5 e 3/5. Ambas marcam — sim: 5/5 e 3/5 (ambos PRELIMINARES, confiança baixa). Cinco partidas e adversários diferentes limitam a comparação.
+Fonte: https://www.totalcorner.com/stats/club-brugge-vs-liverpool/204015105
 
-Agenda (São Paulo): também às 13h, Sheriff × Maccabi Tel Aviv; às 14h, Hoffenheim × PAOK. Em 26/11 às 20h, São Paulo × Remo; 27/11 às 20h, Fluminense × Cruzeiro; 28/11 às 21h, Botafogo × Bahia. Próxima checagem prevista às 13h10 para a janela seguinte.
+ESCANTEIOS 1º TEMPO · Cinco jogos do Brugge em casa e cinco do Liverpool fora com dados do intervalo. Brugge: 11 feitos, 7 cedidos, totais 4, 3, 3, 4, 4. Liverpool: 24 feitos, 12 cedidos, totais 7, 8, 7, 11, 3. Frequências para mais de 2,5: 5/5 e 5/5 (FUNDAMENTADO, moderada). Mais de 3,5: 3/5 e 4/5 (PRELIMINAR, baixa). Mais de 4,5: 0/5 e 4/5 (NÃO CONFIRMADO pela divergência).
 
-Fontes públicas:
-https://www.uefa.com/uefayouthleague/news/02a9-217f1f848ed1-ec20c176b093-1000--uefa-youth-league-domestic-champions-path-latest-first-roun/
-https://www.totalcorner.com/h2h/hradec-kralove-u19-vs-kairat-almaty-u19
-https://www.totalcorner.com/team/view/1917
-https://www.totalcorner.com/team/view/34731
-https://www.totalcorner.com/h2h/hjk-helsinki-u19-vs-stabaek-u19
-https://www.totalcorner.com/stats/hjk-helsinki-u19-vs-stabaek-u19/205057437
-https://www.rotascore.com/en/match/hjk-helsinki-u19-ballkani-u19/8yomo4h1nn19q0j
-https://m.dongqiudi.com/en/match/54598770
-https://futbollibrehd.app/football/matches/2679675/cardiff-metropolitan-u19-vs-stabaek-u19
-https://www.hjk.fi/uutiset/nuorten-mestarien-liigassa-kaynnistyy-viimeinen-karsintavaihe
-https://www.stabak.no/nyheter/videre-i-uefa-youth-leauge-helsinki-neste
-https://scoutingstats.ai/match/19903709
-https://ge.globo.com/ba/futebol/brasileirao-serie-a/noticia/2026/11/06/cbf-divulga-datas-e-horarios-das-duas-ultimas-rodadas-do-brasileirao-veja-detalhes.ghtml
+ESCANTEIOS TOTAL · Mesmo recorte. Brugge: 30 feitos, 15 cedidos, totais 10, 8, 6, 11, 10. Liverpool: 43 feitos, 17 cedidos, totais 11, 16, 13, 14, 6. Tanto mais de 6,5 quanto mais de 7,5 ocorreram em 4/5 e 4/5 (FUNDAMENTADO, moderada). Mais de 8,5 e mais de 9,5: 3/5 e 4/5 em cada linha (PRELIMINAR, baixa). Mais de 10,5: 1/5 e 4/5 (NÃO CONFIRMADO). Cada equipe teve um jogo com só seis cantos.
+Fontes dos dois períodos: https://www.totalcorner.com/team/view/168 e https://www.totalcorner.com/team/view/2
+
+JOGADORES · Últimas cinco atuações registradas na Premier League ou Champions. Alexander Isak: 1+ chute no alvo em 4/5 (3, 2, 1, 0, 1) e possível marcador em 3/5. Florian Wirtz: 1+ assistência em 2/5. Os três estudos são PRELIMINARES, confiança baixa. Isak está na lista de viagem, mas a prévia projeta Lewis Koumas como titular. Os minutos de Isak variaram de 25 a 90. Gakpo e Gravenberch estão fora. Os 11 de cada time seguem NÃO CONFIRMADOS nesta consulta.
+Fontes: https://www.statmuse.com/fc/player/alexander-isak-6988/game-log
+https://www.statmuse.com/fc/player/florian-wirtz-28647/game-log
+https://stadion-edge.liverpoolfc.com/news/confirmed-liverpool-travelling-squad-club-brugge-champions-league
+https://www.sportsmole.co.uk/football/club-brugge/champions-league/team-news/brugge-vs-liverpool-injury-suspension-list-predicted-xis_609719.html
+https://www.reuters.com/sports/soccer/liverpools-gakpo-gravenberch-miss-brugge-clash-2026-11-24/
+
+AGENDA · Também hoje às 17h: PSG × Roma, Lille × Bayern e Sporting × Manchester United. No Brasil: 26/11 às 20h São Paulo × Remo; 27/11 às 20h Fluminense × Cruzeiro; 28/11 às 21h Botafogo × Bahia.
+https://exame.com/esporte/champions-league-hoje-veja-os-jogos-desta-quarta-e-onde-assistir-ao-vivo/
+https://stcbfsiteprdimgbrs.blob.core.windows.net/img-site/cdn/Tabela_Detalhada_Brasileiro_Serie_A_2026_37_e_38_rodada_ca107fa561.pdf
+
+Próxima checagem prevista: 16h10 de São Paulo, para rever os titulares e os mercados individuais. Frequências históricas em amostras curtas. Nenhuma aposta executada.
