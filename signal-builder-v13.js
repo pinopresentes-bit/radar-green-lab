@@ -111,7 +111,7 @@ function render(){
    p?p[kind].hits+"/"+p[kind].n+" jogos com pelo menos 1 "+(kind==="shot"?"chute no alvo":kind==="goal"?"gol":"assistência")+"; "+p[kind].total+" no total da amostra. Frequência observada, não garantia. Jogador listado pela ESPN; escalação oficial e odd ainda exigem conferência.":
    r?.home?.starters?.length===11&&r?.away?.starters?.length===11?"A ESPN listou 11 jogadores de cada lado, mas não há 5+ fichas individuais com estatística suficiente para este mercado. Escalação ESPN não é confirmação oficial.":"A ESPN ainda não listou 11 titulares de cada lado, ou não há histórico individual verificável de 5+ jogos. Conferir fonte oficial; o app não importa escalações das notificações.",!!p);
  };
- const has=one.ok||two.ok||both.ok||firstGoal.ok||!!ct||!!cf;
+ const has=one.ok||two.ok||both.ok||bothNo.ok||under.ok||firstGoal.ok||!!ct||!!cf||["goal","shot","assist"].some(kind=>!!pickPlayer(d,r,kind));
  const options=[
   {ok:one.ok,market:"Mais de 1,5 gols",detail:one.explain},
   {ok:firstGoal.ok,market:"Gol no 1º tempo (+0,5)",detail:firstGoal.explain},
@@ -123,7 +123,7 @@ function render(){
  const selected=options[0]||null;
  const coverage=d?.done?'<div class="am-warning">📚 Cobertura de dados: histórico de gols '+esc(h.length)+' jogos (mandante) e '+esc(a.length)+' jogos (visitante); escanteios totais '+esc(d.hCorners?.length||0)+' e '+esc(d.aCorners?.length||0)+'; escanteios 1º tempo com registros verificáveis '+esc(d.hHalves?.length||0)+' e '+esc(d.aHalves?.length||0)+'. Quando não houver cobertura por período, nenhum sinal de 1º tempo será calculado. Estatísticas ausentes não são zero. Fonte: registros ESPN; conferir em fonte oficial.</div>':'';
  const review=selected?'<div class="am-warning"><strong>📋 CANDIDATO PARA CONFERÊNCIA — NÃO VALIDADO</strong><br>'+esc(selected.market)+'<br>'+esc(selected.detail)+'<br>Próximo passo: conferir titulares oficiais e odd atual na casa. Histórico de 5 jogos não comprova vantagem; sem cotação verificada, não há avaliação de valor.</div>':'';
- status.textContent=d?.done?"7 mercados estudados · 0 sinais validados":"Consultando 7 mercados";
+ status.textContent=d?.done?"11 mercados estudados · 0 sinais validados":"Consultando 11 mercados";
  out.innerHTML='<div class="am-card"><small>📅 '+esc(dateTime(g.start))+' · '+esc(g.label)+'</small><h3>'+esc(g.home.name)+' × '+esc(g.away.name)+'</h3>'+
  '<div class="am-warning">⏱️ Partida e horário obtidos da agenda consultada. Confirme a programação e os titulares na fonte oficial antes de qualquer decisão. A ESPN não confirma escalação oficial. Estudos históricos não são sinais validados.</div>'+ 
   '<div class="am-warning">'+(has?"🟡 Mercados em observação estatística. Nenhuma aposta está validada.":"⚪ Ainda faltam dados para um sinal fundamentado.")+'</div>'+
@@ -134,7 +134,11 @@ function render(){
  cornerRow("🚩 ESCANTEIOS 1º TEMPO · 2,5/3,5/4,5",cf,d?.hHalves?.length||0,d?.aHalves?.length||0)+
  cornerRow("🚩 ESCANTEIOS TOTAL · 6,5/7,5/8,5/9,5/10,5",ct,d?.hCorners?.length||0,d?.aCorners?.length||0)+
  toRow(bttsConflict?"🤝 Ambas marcam: INCONCLUSIVO":"🤝 Ambas marcam: SIM",both.value,both.explain,both.ok)+
+ toRow("⚽ Gols: menos de 3,5",under.value,under.explain,under.ok)+
+ toRow("🤝 Ambas marcam: NÃO",bothNo.value,bothNo.explain,bothNo.ok)+
  playerRow("🎯 Jogador para marcar gol","goal")+
+ playerRow("🎯 Chutes no alvo","shot")+
+ playerRow("👟 Assistências","assist")+
  '</div><div class="am-footer">Cada mercado é avaliado separadamente. Não combinar automaticamente. Confirmar escalações oficiais e odds. Marcador é apenas candidato condicionado a titulares oficiais; não é aposta validada. Escanteios por tempo exigem eventos reais.</div>'+
  '<button class="am-cta" id="assembledOpen">Ver análise completa e titulares</button></div>';
  document.getElementById("assembledOpen").onclick=()=>openDetail(key);
