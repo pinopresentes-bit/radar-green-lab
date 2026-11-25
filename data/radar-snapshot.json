@@ -4,111 +4,12 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 45
+    "future_games": 75
   },
-  "generated_at_utc": "2026-11-25T02:36:25.238395+00:00",
+  "generated_at_utc": "2026-11-25T03:56:46.628311+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
-    {
-      "id": "401915380",
-      "league": "uefa.champions",
-      "start": "2026-11-24T17:45Z",
-      "home": "Bodo/Glimt",
-      "away": "LASK Linz",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401915300",
-      "league": "uefa.champions",
-      "start": "2026-11-24T17:45Z",
-      "home": "Galatasaray",
-      "away": "Aston Villa",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401915295",
-      "league": "uefa.champions",
-      "start": "2026-11-24T20:00Z",
-      "home": "Arsenal",
-      "away": "Borussia Dortmund",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401915296",
-      "league": "uefa.champions",
-      "start": "2026-11-24T20:00Z",
-      "home": "Como",
-      "away": "AEK Athens",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401915294",
-      "league": "uefa.champions",
-      "start": "2026-11-24T20:00Z",
-      "home": "Feyenoord Rotterdam",
-      "away": "FC Porto",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401915379",
-      "league": "uefa.champions",
-      "start": "2026-11-24T20:00Z",
-      "home": "Manchester City",
-      "away": "Napoli",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401915299",
-      "league": "uefa.champions",
-      "start": "2026-11-24T20:00Z",
-      "home": "RB Leipzig",
-      "away": "Lens",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401915298",
-      "league": "uefa.champions",
-      "start": "2026-11-24T20:00Z",
-      "home": "Real Madrid",
-      "away": "PSV Eindhoven",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401915297",
-      "league": "uefa.champions",
-      "start": "2026-11-24T20:00Z",
-      "home": "Slovan Bratislava",
-      "away": "Real Betis",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401841335",
-      "league": "bra.1",
-      "start": "2026-11-24T21:00Z",
-      "home": "Chapecoense",
-      "away": "Palmeiras",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401933738",
-      "league": "usa.1",
-      "start": "2026-11-25T03:00Z",
-      "home": "San Jose Earthquakes",
-      "away": "Houston Dynamo FC",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
     {
       "id": "401915378",
       "league": "uefa.champions",
@@ -502,6 +403,285 @@
       "start": "2026-11-28T03:00Z",
       "home": "Real Salt Lake",
       "away": "Vancouver Whitecaps",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401882796",
+      "league": "esp.1",
+      "start": "2026-11-28T13:00Z",
+      "home": "Real Betis",
+      "away": "Rayo Vallecano",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401875081",
+      "league": "ita.1",
+      "start": "2026-11-28T14:00Z",
+      "home": "Frosinone",
+      "away": "Parma",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401884721",
+      "league": "ger.1",
+      "start": "2026-11-28T14:30Z",
+      "home": "FC Cologne",
+      "away": "SV Elversberg",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401884722",
+      "league": "ger.1",
+      "start": "2026-11-28T14:30Z",
+      "home": "Hamburg SV",
+      "away": "Bayern Munich",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401884723",
+      "league": "ger.1",
+      "start": "2026-11-28T14:30Z",
+      "home": "Mainz",
+      "away": "1. FC Union Berlin",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401884719",
+      "league": "ger.1",
+      "start": "2026-11-28T14:30Z",
+      "home": "SC Paderborn 07",
+      "away": "Schalke 04",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879227",
+      "league": "eng.1",
+      "start": "2026-11-28T15:00Z",
+      "home": "Leeds United",
+      "away": "Coventry City",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879226",
+      "league": "eng.1",
+      "start": "2026-11-28T15:00Z",
+      "home": "Manchester United",
+      "away": "Brentford",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401882790",
+      "league": "esp.1",
+      "start": "2026-11-28T15:15Z",
+      "home": "Málaga",
+      "away": "Athletic Club",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401876394",
+      "league": "fra.1",
+      "start": "2026-11-28T16:15Z",
+      "home": "Angers",
+      "away": "Lens",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401874826",
+      "league": "ita.1",
+      "start": "2026-11-28T17:00Z",
+      "home": "Torino",
+      "away": "Lazio",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401878752",
+      "league": "eng.1",
+      "start": "2026-11-28T17:30Z",
+      "home": "Ipswich Town",
+      "away": "Aston Villa",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401882793",
+      "league": "esp.1",
+      "start": "2026-11-28T17:30Z",
+      "home": "Elche",
+      "away": "Atlético Madrid",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401884726",
+      "league": "ger.1",
+      "start": "2026-11-28T17:30Z",
+      "home": "VfB Stuttgart",
+      "away": "Eintracht Frankfurt",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933737",
+      "league": "usa.1",
+      "start": "2026-11-28T17:30Z",
+      "home": "Charlotte FC",
+      "away": "Chicago Fire FC",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933724",
+      "league": "usa.1",
+      "start": "2026-11-28T19:30Z",
+      "home": "Houston Dynamo FC",
+      "away": "San Jose Earthquakes",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401874977",
+      "league": "ita.1",
+      "start": "2026-11-28T19:45Z",
+      "home": "Internazionale",
+      "away": "Genoa",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401876391",
+      "league": "fra.1",
+      "start": "2026-11-28T19:45Z",
+      "home": "Le Havre AC",
+      "away": "Strasbourg",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401876390",
+      "league": "fra.1",
+      "start": "2026-11-28T19:45Z",
+      "home": "Le Mans",
+      "away": "Lille",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401876388",
+      "league": "fra.1",
+      "start": "2026-11-28T19:45Z",
+      "home": "Nice",
+      "away": "Troyes",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401876387",
+      "league": "fra.1",
+      "start": "2026-11-28T19:45Z",
+      "home": "Paris Saint-Germain",
+      "away": "Lorient",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401882789",
+      "league": "esp.1",
+      "start": "2026-11-28T20:00Z",
+      "home": "Real Madrid",
+      "away": "Alavés",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912519",
+      "league": "conmebol.libertadores",
+      "start": "2026-11-28T20:00Z",
+      "home": "Palmeiras",
+      "away": "Estudiantes de La Plata",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933723",
+      "league": "usa.1",
+      "start": "2026-11-28T21:30Z",
+      "home": "Philadelphia Union",
+      "away": "New England Revolution",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912709",
+      "league": "bra.2",
+      "start": "2026-11-28T23:00Z",
+      "home": "Fortaleza",
+      "away": "Criciúma",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933722",
+      "league": "usa.1",
+      "start": "2026-11-28T23:30Z",
+      "home": "FC Cincinnati",
+      "away": "Nashville SC",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841336",
+      "league": "bra.1",
+      "start": "2026-11-29T00:00Z",
+      "home": "Botafogo",
+      "away": "Bahia",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401931997",
+      "league": "mex.1",
+      "start": "2026-11-29T01:00Z",
+      "home": "Atlas",
+      "away": "Toluca",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933726",
+      "league": "usa.1",
+      "start": "2026-11-29T01:30Z",
+      "home": "LAFC",
+      "away": "St. Louis CITY SC",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401931996",
+      "league": "mex.1",
+      "start": "2026-11-29T03:10Z",
+      "home": "América",
+      "away": "Monterrey",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401933721",
+      "league": "usa.1",
+      "start": "2026-11-29T03:30Z",
+      "home": "Portland Timbers",
+      "away": "FC Dallas",
       "state": "pre",
       "source": "ESPN (não oficial)"
     }
