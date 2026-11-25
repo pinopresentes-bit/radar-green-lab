@@ -84,7 +84,7 @@ function render(){
  const g=candidate();
  if(!g){status.textContent="Sem pré-jogo";out.innerHTML='<div class="empty">Nenhuma partida futura entre as competições consultadas. Confira os estudos ao vivo abaixo.</div>';return}
  const key=preKey(g),d=studies.get(key);
- if(!d)loadStudy(g);
+ if(!d||(!d.pending&&d.retryAt&&Date.now()>=d.retryAt))loadStudy(g);
  const h=d?.home||[],a=d?.away||[],r=rosters.get(key);
  const one=hMarket(h,a,x=>x.total>=2,4,"Mais de 1,5 gols");
  const two=hMarket(h,a,x=>x.total>=3,4,"Mais de 2,5 gols");
@@ -142,8 +142,8 @@ function render(){
  if(remain<=7200000&&remain>0&&(!prior||(!prior.pending&&Date.now()-prior.checkedAt>300000)))checkRoster(g);
 }
 async function loadStudy(g){
- const key=preKey(g);if(studies.has(key))return;
- studies.set(key,{pending:true});
+ const key=preKey(g);const previous=studies.get(key);if(previous&&(previous.pending||!previous.retryAt||Date.now()<previous.retryAt))return;
+ studies.set(key,{...previous,pending:true});
  try{
   const [home,away]=await Promise.all([teamHistory(g,g.home),teamHistory(g,g.away)]);
   studies.set(key,{home,away,pending:true});render();
@@ -160,8 +160,8 @@ async function loadStudy(g){
   });
   const sample=(side,field)=>all.filter(x=>x.side===side&&x[field]!==null).map(x=>field==="first"?{first:x.first}:field==="firstGoals"?{firstGoals:x.firstGoals}:x.corners);
   const players={};for(const x of all)for(const p of x.players)addStat(players,p,x.team.id);
-  studies.set(key,{home,away,done:true,hCorners:sample("h","corners"),aCorners:sample("a","corners"),hHalves:sample("h","first"),aHalves:sample("a","first"),hFirstGoals:sample("h","firstGoals"),aFirstGoals:sample("a","firstGoals"),players});
- }catch{studies.set(key,{home:[],away:[],done:true,hCorners:[],aCorners:[],hHalves:[],aHalves:[],hFirstGoals:[],aFirstGoals:[],players:{}})}
+  studies.set(key,{home,away,done:true,retryAt:home.length<5||away.length<5||sample('h','corners').length<5||sample('a','corners').length<5||sample('h','first').length<5||sample('a','first').length<5||sample('h','firstGoals').length<5||sample('a','firstGoals').length<5?Date.now()+300000:0,hCorners:sample("h","corners"),aCorners:sample("a","corners"),hHalves:sample("h","first"),aHalves:sample("a","first"),hFirstGoals:sample("h","firstGoals"),aFirstGoals:sample("a","firstGoals"),players});
+ }catch{studies.set(key,{home:[],away:[],done:true,retryAt:Date.now()+300000,hCorners:[],aCorners:[],hHalves:[],aHalves:[],hFirstGoals:[],aFirstGoals:[],players:{}})}
  render();
 }
 async function checkRoster(g){
