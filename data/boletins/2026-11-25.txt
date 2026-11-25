@@ -1,7 +1,7 @@
-RADAR GREEN LAB PRO · 25/11/2026 · 18h09 de São Paulo
+RADAR GREEN LAB PRO · 25/11/2026 · 19h09 de São Paulo
 20h00 · Atlético-MG × Corinthians · Brasileirão · Arena MRV
 
-Correção da agenda: o Palmeiras confirmou a semifinal sub-20 contra o Operário-PR para quinta-feira, 26/11, às 20h em Barueri. O boletim anterior colocou esse jogo um dia antes.
+TITULARES · Corinthians divulgado às 19h04. No gol, Hugo Souza. Na defesa, Matheuzinho, Gustavo Henrique, João Pedro Tchoca e Angileri. No meio, Raniele, Breno Bidon, Vitinho e Matheus Bidu. No ataque, Kaio César e Memphis Depay. André e Rodrigo Garro começam no banco. Do Atlético, Vitão e Fred são desfalques. A lista completa dos 11 do Galo ficou pendente de verificação.
 
 QUADRO DE SINAIS · FUNDAMENTADO no histórico, confiança moderada: mais de 8,5 escanteios no jogo e mais de 3,5 no primeiro tempo. Cada linha ocorreu em 5/5 mandos do Atlético e 4/5 visitas do Corinthians na Série A. A visita a Vasco teve apenas seis no total e dois até o intervalo. Amostra pequena. Nenhum mercado de gols alcançou a mesma consistência.
 
@@ -11,11 +11,15 @@ ESCANTEIOS TOTAL · Atlético em casa: 9, 15, 15, 15, 12 (44 feitos e 22 cedidos
 
 GOLS · Mais de 1,5: 2/5 do Atlético em casa e 4/5 do Corinthians fora. Mais de 2,5: 1/5 e 4/5. Ambas marcam — sim: 2/5 e 4/5. NÃO CONFIRMADO, confiança baixa pela divergência. Um gol ou mais no primeiro tempo: 3/5 do Atlético em casa e 3/5 do Corinthians em seus últimos cinco jogos com mandos mistos. PRELIMINAR, confiança baixa.
 
-JOGADORES · Memphis Depay, provável titular: 1+ chute no alvo em 5/10 atuações (PRELIMINAR, confiança baixa); marcou em 0/10 e deu assistência em 1/10 (ambos NÃO CONFIRMADOS). Os minutos e a função ofensiva dependem da escalação. Yuri Alberto e Fred estão suspensos. Os 11 de cada lado ainda não foram confirmados nesta consulta. Sem odd verificada.
+JOGADORES · Memphis Depay, titular: 1+ chute no alvo em 5/10 atuações (PRELIMINAR, confiança baixa); marcou em 0/10 e deu assistência em 1/10 (ambos NÃO CONFIRMADOS). Risco: Memphis passou metade da amostra sem acertar o alvo. Yuri Alberto está suspenso. Sem odd verificada.
 
-AGENDA · Hoje, Boca Juniors × Independiente Rivadavia às 21h. Amanhã, 26/11, Palmeiras × Operário-PR (sub-20) e São Paulo × Remo às 20h. Dia 27, Fluminense × Cruzeiro às 20h. Dia 28, Botafogo × Bahia às 21h. Próxima checagem prevista para 19h10, para revisar os titulares antes do jogo das 20h.
+AGENDA · Hoje, Boca Juniors × Independiente Rivadavia às 21h. Amanhã, 26/11, Palmeiras × Operário-PR (sub-20) e São Paulo × Remo às 20h. Dia 27, Fluminense × Cruzeiro às 20h. Dia 28, Botafogo × Bahia às 21h. Próxima checagem prevista para 20h10, com foco em Boca Juniors × Independiente Rivadavia.
+
+Estudo estatístico pré-jogo. Frequências históricas não garantem resultado.
 
 Fontes esportivas:
+https://www.uol.com.br/esporte/futebol/ultimas-noticias/2026/11/25/atletico-mg-corinthians-brasileirao-escalacao.ghtm
+https://ge.globo.com/google/amp/futebol/times/atletico-mg/noticia/2026/11/25/atletico-mg-perde-vitao-para-jogo-contra-o-corinthians-e-critica-stjd-descaso.ghtml
 https://www.totalcorner.com/team/view/808
 https://www.betoncorners.com/teams/corinthians-corners/
 https://statz.ai/team/corinthians/corners
