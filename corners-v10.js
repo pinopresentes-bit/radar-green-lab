@@ -30,6 +30,8 @@
    });
    // Caso haja evento ausente, repetido ou minuto duvidoso, não estimar a divisão.
    if(events.length!==total)continue;
+   const ids=events.map(p=>p?.id??p?.playId).filter(v=>v!==undefined&&v!==null&&v!=="").map(String);
+   if(new Set(ids).size!==ids.length)continue;
    const parts=events.map(periodForCorner);
    if(parts.some(p=>p!==1&&p!==2))continue;
    return {first:parts.filter(x=>x===1).length,second:parts.filter(x=>x===2).length};
@@ -53,7 +55,7 @@
    }
    const events=new Map(original.filter(x=>x?.id).map(x=>[String(x.id),x]));
    return matchHistory([...events.values()],game,team).slice(0,MAX_GAMES).map(x=>({...x,...matchVenue(events.get(x.id),team)}));
-  })().catch(()=>[]));
+  })().catch(()=>[]).then(rows=>{if(!rows.length)historyCache.delete(key);return rows}));
   return historyCache.get(key);
  }
  async function cornerRecord(game,team,match){
@@ -64,7 +66,7 @@
    if(!total)return null;
    const split=splitCornerPeriods(payload,total.total);
    return {...match,...total,first:split?.first??null,second:split?.second??null};
-  })().catch(()=>null));
+  })().catch(()=>null).then(row=>{if(row===null)fetched.delete(key);return row}));
   return fetched.get(key);
  }
  async function inspectTeam(game,team){
