@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 73
+    "future_games": 66
   },
-  "generated_at_utc": "2026-11-25T19:27:48.863735+00:00",
+  "generated_at_utc": "2026-11-25T20:26:08.201169+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -16,7 +16,7 @@
       "start": "2026-11-25T17:45Z",
       "home": "Sabah FK",
       "away": "Barcelona",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -25,7 +25,7 @@
       "start": "2026-11-25T17:45Z",
       "home": "Slavia Prague",
       "away": "Villarreal",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -34,7 +34,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Atlético Madrid",
       "away": "Viking FK",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -43,7 +43,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Club Brugge",
       "away": "Liverpool",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Internazionale",
       "away": "VfB Stuttgart",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -61,7 +61,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Lille",
       "away": "Bayern Munich",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -70,7 +70,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Paris Saint-Germain",
       "away": "AS Roma",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -79,7 +79,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Shakhtar Donetsk",
       "away": "Fenerbahce",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -88,7 +88,7 @@
       "start": "2026-11-25T20:00Z",
       "home": "Sporting CP",
       "away": "Manchester United",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
