@@ -1,7 +1,15 @@
-RADAR GREEN LAB PRO | 26/11/2026 · 00h13 de São Paulo
-São Paulo × Remo · hoje, 20h · Morumbis
+RADAR GREEN LAB PRO | 26/11/2026 · 01h07 de São Paulo
+Na agenda consultada, nenhuma partida começa entre 01h37 e 03h07. Próxima checagem prevista às 02h10.
 
-Destaques FUNDAMENTADOS no histórico, confiança moderada: mais de 6,5 escanteios no jogo, mais de 2,5 escanteios no 1º tempo e menos de 2,5 gols no 1º tempo. Nenhum jogo pré-jogo confirmado na janela das 00h43 às 02h13 da agenda consultada.
+07h · Gangwon FC × Kitchee
+GOLS · Mais de 0,5 gol no 1º tempo ocorreu nos cinco últimos jogos do Gangwon em casa e em quatro das cinco últimas visitas do Kitchee. Mais de 1,5 no jogo: 4/5 e 5/5. FUNDAMENTADO no histórico, confiança moderada. Mais de 2,5 no jogo: 3/5 e 4/5. Ambas marcam: 4/5 e 4/5. Essas duas linhas ficam PRELIMINARES, confiança baixa. Risco para todas: o recorte mistura ligas e copas, e o confronto de setembro terminou 0–0. Fonte: TotalCorner.
+ESCANTEIOS 1º TEMPO · Linhas 2,5 / 3,5 / 4,5. SEM DADO CONFIÁVEL — NÃO VALIDADO.
+ESCANTEIOS TOTAL · Linhas 6,5 / 7,5 / 8,5 / 9,5 / 10,5. SEM DADO CONFIÁVEL — NÃO VALIDADO. Nas fichas dos cinco jogos de cada lado, só dois do mandante e um do visitante trazem as duas contagens. Cobertura insuficiente.
+Chute no alvo, marcador e assistência: NÃO CONFIRMADO. Sem amostra individual de cinco atuações conferida para um provável titular. Escalações e desfalques pendentes.
+
+20h · São Paulo × Remo · Morumbis
+
+Destaques FUNDAMENTADOS no histórico, confiança moderada: mais de 6,5 escanteios no jogo, mais de 2,5 escanteios no 1º tempo e menos de 2,5 gols no 1º tempo.
 
 Amostra: últimos cinco jogos da Série A do São Paulo em casa e do Remo fora. Frequências nessa ordem, do mais recente ao mais antigo.
 
@@ -11,9 +19,9 @@ ESCANTEIOS 1º TEMPO · Mais de 2,5 saiu em 5/5 e 5/5. Totais reais no intervalo
 
 GOLS · Menos de 2,5 no 1º tempo saiu em 5/5 e 4/5. Risco: Palmeiras × Remo teve cinco gols até o intervalo. Pelo menos um gol no 1º tempo: 3/5 e 4/5, PRELIMINAR, confiança baixa. No jogo inteiro, mais de 1,5, mais de 2,5 e ambas marcam SIM tiveram, cada um, 2/5 e 3/5. NÃO CONFIRMADO para os três, confiança baixa pela variação dos placares.
 
-JOGADOR · Jonathan Calleri é provável. Nas últimas dez atuações, teve 1+ chute no alvo em 4/10, marcou em 2/10 e deu assistência em 1/10. Chute no alvo PRELIMINAR, confiança baixa. Marcador e assistência NÃO CONFIRMADOS, confiança baixa. Minutos variaram de 27 a 90. Wendell está suspenso e Artur volta a ficar disponível. Os 11 titulares de cada lado ainda precisam de confirmação.
+JOGADOR · Jonathan Calleri é provável. Nas últimas dez atuações, teve 1+ chute no alvo em 4/10, marcou em 2/10 e deu assistência em 1/10. Chute no alvo PRELIMINAR, confiança baixa. Marcador e assistência NÃO CONFIRMADOS, confiança baixa. Minutos variaram de 27 a 90. Wendell está suspenso e Artur volta a ficar disponível. Pelo Remo, Jajá e Marllon cumprem suspensão e Leonel Picco volta a ficar disponível. Os 11 titulares de cada lado ainda precisam de confirmação.
 
-Agenda parcial (São Paulo): 26/11 às 07h, Gangwon × Kitchee e Kuching × Phnom Penh Crown. 27/11 às 20h, Fluminense × Cruzeiro. 28/11 às 21h, Botafogo × Bahia. 29/11 às 18h30, Corinthians × Grêmio. Próxima checagem prevista às 01h10. Revisar jogadores quando saírem as escalações oficiais. Estudo estatístico. Odds não verificadas.
+Agenda parcial (São Paulo): 26/11 às 07h, Gangwon × Kitchee, Kuching × Phnom Penh Crown e Tampines Rovers × Shanghai Shenhua. 27/11 às 20h, Fluminense × Cruzeiro. 28/11 às 21h, Botafogo × Bahia. 29/11 às 18h30, Corinthians × Grêmio. Revisar jogadores quando saírem as escalações oficiais. Estudo estatístico. Odds não verificadas.
 
 Fontes públicas
 https://statz.ai/team/sao-paulo/corners
@@ -32,3 +40,5 @@ https://statz.ai/player/jonathan-calleri/4700
 https://www.itatiaia.com.br/esportes/futebol/futebol-nacional/futebol-paulista/sao-paulo-fc/escalacao-do-sao-paulo-dorival-tem-retorno-para-enfrentar-o-remo/
 https://cardapiofc.com/pt-br/matches/
 https://credencial.cbf.com.br/competicoes/listar/42/1
+https://www.totalcorner.com/stats/gangwon-fc-vs-kitchee/204959528
+https://www.remo100porcento.com/futebol-profissional/2026/remo-tera-dois-desfalques-e-um-retorno-para-enfrentar-o-sao-paulo-sp
