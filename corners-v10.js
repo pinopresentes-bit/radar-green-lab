@@ -30,8 +30,8 @@
   for(const feed of feeds){
    if(!Array.isArray(feed))continue;
    const events=feed.filter(p=>{
-    const t=[p?.type?.slug,p?.type?.text,p?.type?.name,typeof p?.type==="string"?p.type:"",p?.description,p?.text].filter(Boolean).join(" ").toLowerCase();
-    return /(^|[\s_-])corner(?:[\s_-]?kick)?($|[\s_-])/.test(t);
+    const types=[p?.type?.slug,p?.type?.text,p?.type?.name,typeof p?.type==="string"?p.type:""];
+    return types.some(v=>typeof v==="string"&&/^corner(?:[\s_-]?kick)?$/i.test(v.trim()));
    });
    // Caso haja evento ausente, repetido ou minuto duvidoso, não estimar a divisão.
    if(events.length!==total)continue;
