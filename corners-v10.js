@@ -17,6 +17,11 @@
   // Sem período explícito, minuto 45+ não comprova segundo tempo.
   return null;
  }
+ function validCornerIds(events){
+ const ids=events.map(p=>p?.id??p?.playId);
+ if(ids.some(v=>!(typeof v==="string"&&v.trim()!==""||typeof v==="number"&&Number.isFinite(v))))return false;
+ return new Set(ids.map(v=>String(v).trim())).size===events.length;
+}
  function splitCornerPeriods(summary,total){
   // Total zero não comprova a existência de uma linha do tempo completa.
   // Sem eventos verificáveis, não transformar ausência de dados em zero.
@@ -30,8 +35,7 @@
    });
    // Caso haja evento ausente, repetido ou minuto duvidoso, não estimar a divisão.
    if(events.length!==total)continue;
-   const ids=events.map(p=>p?.id??p?.playId).filter(v=>v!==undefined&&v!==null&&v!=="").map(String);
-   if(ids.length!==events.length||new Set(ids).size!==ids.length)continue;
+   if(!validCornerIds(events))continue;
    const parts=events.map(periodForCorner);
    if(parts.some(p=>p!==1&&p!==2))continue;
    return {first:parts.filter(x=>x===1).length,second:parts.filter(x=>x===2).length};
