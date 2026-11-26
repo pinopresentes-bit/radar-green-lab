@@ -130,7 +130,7 @@
   set("total",quality,coverage+study(game.home.name,H,"total",[6.5,7.5,8.5,9.5,10.5])+". "+study(game.away.name,A,"total",[6.5,7.5,8.5,9.5,10.5])+". São frequências de jogos separados, não da partida futura.");
   set("team",quality,byTeam(game.home.name,H)+". "+byTeam(game.away.name,A)+".");
   const homeAtHome=H.filter(x=>x.venue==="casa"),awayAway=A.filter(x=>x.venue==="fora");
-  set("venue",homeAtHome.length>=3&&awayAway.length>=3?"Recorte disponível":"Poucos jogos por mando",byTeam(game.home.name+" em casa",homeAtHome)+". "+byTeam(game.away.name+" fora",awayAway)+".");
+  set("venue",homeAtHome.length>=3&&awayAway.length>=3?"Recorte disponível":!homeAtHome.length||!awayAway.length?"Dados ausentes — NÃO VALIDADO":"Amostra insuficiente — NÃO VALIDADO",byTeam(game.home.name+" em casa",homeAtHome)+". "+byTeam(game.away.name+" fora",awayAway)+".");
   set("most",quality,game.home.name+" liderou em cantos "+H.filter(x=>x.own>x.opponent).length+"/"+H.length+" jogos; "+game.away.name+" liderou "+A.filter(x=>x.own>x.opponent).length+"/"+A.length+". Empates não contam como liderança.");
   for(const field of ["first","second"]){
    const home=H.filter(r=>Number.isInteger(r[field])),away=A.filter(r=>Number.isInteger(r[field]));
