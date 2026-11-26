@@ -1,4 +1,4 @@
-RADAR GREEN LAB PRO | 26/11/2026, 18h10 (São Paulo)
+RADAR GREEN LAB PRO | 26/11/2026, 19h08 (São Paulo)
 São Paulo × Remo | Brasileirão, hoje às 20h
 
 Destaques FUNDAMENTADOS, confiança moderada: mais de 2,5 escanteios no 1º tempo e mais de 6,5 no jogo. Ambas as linhas ocorreram nos cinco jogos do São Paulo em casa e nos cinco do Remo fora. Para gols, menos de 2,5 no 1º tempo ocorreu em 5/5 e 4/5. As três leituras usam as mesmas partidas. Amostra curta, sem odd verificada.
@@ -16,11 +16,11 @@ Gols no 1º tempo: 1, 0, 0, 2, 2 em casa e 2, 5, 1, 0, 1 fora. Acima de 0,5: 3/5
 No jogo inteiro, mais de 1,5 gols, mais de 2,5 gols e ambas marcam (sim) tiveram, cada um, 2/5 em casa e 3/5 fora. PRELIMINAR, confiança baixa nas três linhas pela frequência irregular.
 
 JOGADORES E ESCALAÇÕES
-Jonathan Calleri, provável pelo São Paulo: 1+ chute no alvo em 1/5 (2, 0, 0, 0, 0), marcou em 0/5 e deu assistência em 1/5. Gabriel Taliari, provável pelo Remo: no recorte disponível até 18/11, 1+ no alvo em 2/5, marcou em 0/5 e deu assistência em 1/5. Chute no alvo, marcador e assistência: NÃO CONFIRMADO, confiança baixa. Riscos: titularidade, minutos e defasagem da ficha de Taliari.
-A ficha oficial consultada ainda não exibia os 11 de cada lado. O ge informa suspensões de Wendell no São Paulo e de Marllon, Edson e Jajá no Remo.
+Jonathan Calleri, provável pelo São Paulo: 1+ chute no alvo em 1/5 (2, 0, 0, 0, 0), marcou em 0/5 e deu assistência em 1/5. Gabriel Taliari, provável pelo Remo: nos cinco jogos até 22/11, 1+ no alvo em 3/5 (1, 1, 0, 0, 1), PRELIMINAR para essa linha, marcou em 0/5 e deu assistência em 1/5. Chute no alvo de Calleri, marcador e assistência dos dois: NÃO CONFIRMADO. Confiança baixa nos mercados individuais. Riscos: titularidade e minutos.
+Às 19h08 não consegui confirmar os 22 titulares na ficha oficial da CBF. O ge informa suspensões de Wendell no São Paulo e de Marllon, Edson e Jajá no Remo.
 
 Agenda selecionada (São Paulo): 27/11 às 20h Fluminense × Cruzeiro; 28/11 às 21h Botafogo × Bahia; 29/11 às 18h30 Corinthians × Grêmio.
-Próxima checagem prevista às 19h10 para conferir os titulares. Estudo estatístico pré-jogo.
+Próxima checagem prevista do Radar às 20h10, já após o início previsto. Para a revisão pré-jogo dos titulares, a janela dos Alertas Pré-Jogo é às 19h30. Estudo estatístico pré-jogo.
 
 Fontes públicas
 Escanteios: https://statz.ai/team/sao-paulo/corners e https://statz.ai/team/remo/corners
