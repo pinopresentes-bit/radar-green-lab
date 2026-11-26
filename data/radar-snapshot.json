@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 76
   },
-  "generated_at_utc": "2026-11-26T21:50:06.252718+00:00",
+  "generated_at_utc": "2026-11-26T22:52:26.534276+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -88,7 +88,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Crystal Palace",
       "away": "Real Sociedad",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -97,7 +97,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Ferencvaros",
       "away": "NK Celje",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -106,7 +106,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Juventus",
       "away": "Omonia Nicosia",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -115,7 +115,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Lyon",
       "away": "Lillestrom",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -124,7 +124,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "NEC Nijmegen",
       "away": "Stade Rennais",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -133,7 +133,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "OFI Crete",
       "away": "Anderlecht",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -142,7 +142,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Sparta Prague",
       "away": "AZ Alkmaar",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -151,7 +151,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Sunderland",
       "away": "Jagiellonia Bialystok",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -160,7 +160,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Torreense",
       "away": "Celtic",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -169,7 +169,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "TSG Hoffenheim",
       "away": "SK Sturm Graz",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -542,20 +542,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401936413",
-      "league": "arg.1",
-      "start": "2026-11-29T01:00Z",
-      "home": "Instituto (Córdoba)",
-      "away": "River Plate",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401931997",
       "league": "mex.1",
       "start": "2026-11-29T01:00Z",
       "home": "Atlas",
       "away": "Toluca",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401936413",
+      "league": "arg.1",
+      "start": "2026-11-29T01:00Z",
+      "home": "Instituto (Córdoba)",
+      "away": "River Plate",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
