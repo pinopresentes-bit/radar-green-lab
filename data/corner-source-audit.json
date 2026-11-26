@@ -1,11 +1,11 @@
 {
-  "checkedAt": "2026-11-26T04:28:14.136927+00:00",
+  "checkedAt": "2026-11-26T05:42:15.664500+00:00",
   "source": "ESPN public unofficial API",
-  "gamesChecked": 24,
-  "totalCornersAvailable": 24,
+  "gamesChecked": 25,
+  "totalCornersAvailable": 25,
   "periodCornersVerified": 0,
   "scheduledSkipped": 21,
-  "historicalGamesFound": 24,
+  "historicalGamesFound": 25,
   "errors": [],
   "matches": [
     {
@@ -166,6 +166,17 @@
       "id": "401931986",
       "league": "mex.1",
       "total": 12,
+      "firstHalf": null,
+      "secondHalf": null,
+      "status": "total_only",
+      "statLocation": "boxscore.teams",
+      "boxscoreTeamCount": 2,
+      "headerTeamCount": 2
+    },
+    {
+      "id": "401931998",
+      "league": "mex.1",
+      "total": 15,
       "firstHalf": null,
       "secondHalf": null,
       "status": "total_only",
