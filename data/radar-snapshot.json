@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 86
+    "future_games": 76
   },
-  "generated_at_utc": "2026-11-26T19:34:49.720038+00:00",
+  "generated_at_utc": "2026-11-26T20:50:26.263098+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -16,7 +16,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Besiktas",
       "away": "Hapoel Be'er",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -25,7 +25,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Celta Vigo",
       "away": "AFC Bournemouth",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -34,7 +34,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Dinamo Zagreb",
       "away": "Bayer Leverkusen",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -43,7 +43,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Marseille",
       "away": "Levski Sofia",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Olympiacos",
       "away": "AC Milan",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -61,7 +61,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "RB Salzburg",
       "away": "Ararat-Armenia",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -70,7 +70,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Union St.-Gilloise",
       "away": "Lech Poznan",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -79,7 +79,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Viktoria Plzen",
       "away": "Benfica",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -88,7 +88,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Crystal Palace",
       "away": "Real Sociedad",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -97,7 +97,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Ferencvaros",
       "away": "NK Celje",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -106,7 +106,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Juventus",
       "away": "Omonia Nicosia",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -115,7 +115,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Lyon",
       "away": "Lillestrom",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -124,7 +124,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "NEC Nijmegen",
       "away": "Stade Rennais",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -133,7 +133,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "OFI Crete",
       "away": "Anderlecht",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -142,7 +142,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Sparta Prague",
       "away": "AZ Alkmaar",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -151,7 +151,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Sunderland",
       "away": "Jagiellonia Bialystok",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -160,7 +160,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "Torreense",
       "away": "Celtic",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -169,7 +169,7 @@
       "start": "2026-11-26T20:00Z",
       "home": "TSG Hoffenheim",
       "away": "SK Sturm Graz",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
