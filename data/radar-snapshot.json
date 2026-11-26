@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 76
+    "future_games": 75
   },
-  "generated_at_utc": "2026-11-26T22:52:26.534276+00:00",
+  "generated_at_utc": "2026-11-26T23:51:52.406470+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -178,7 +178,7 @@
       "start": "2026-11-26T23:00Z",
       "home": "São Paulo",
       "away": "Remo",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -245,20 +245,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401912683",
-      "league": "bra.2",
-      "start": "2026-11-27T23:00Z",
-      "home": "Vila Nova",
-      "away": "Atlético Goianiense",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401841337",
       "league": "bra.1",
       "start": "2026-11-27T23:00Z",
       "home": "Fluminense",
       "away": "Cruzeiro",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401912683",
+      "league": "bra.2",
+      "start": "2026-11-27T23:00Z",
+      "home": "Vila Nova",
+      "away": "Atlético Goianiense",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -434,15 +434,6 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401874977",
-      "league": "ita.1",
-      "start": "2026-11-28T19:45Z",
-      "home": "Internazionale",
-      "away": "Genoa",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401876391",
       "league": "fra.1",
       "start": "2026-11-28T19:45Z",
@@ -475,6 +466,15 @@
       "start": "2026-11-28T19:45Z",
       "home": "Paris Saint-Germain",
       "away": "Lorient",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401874977",
+      "league": "ita.1",
+      "start": "2026-11-28T19:45Z",
+      "home": "Internazionale",
+      "away": "Genoa",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
