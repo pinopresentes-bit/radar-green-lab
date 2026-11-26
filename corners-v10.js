@@ -87,7 +87,7 @@
  function historyRows(game,team,result){
   let markup='<div class="corner-row"><strong>'+esc(team.name)+'</strong> · '+result.available.length+'/'+result.checked+' partidas com escanteios publicados (até 10)</div>';
   if(!result.available.length)return markup+'<div class="corner-row">Esta competição não disponibilizou registros completos para a amostra.</div>';
-  markup+=result.available.map(x=>'<div class="corner-row"><strong>'+esc(dateTime(x.date))+' · '+esc(x.venue)+' contra '+esc(x.opponentName)+'</strong><div>Cobrados: '+x.own+' · Cedidos: '+x.opponent+' · Total: '+x.total+' · 1ºT: '+(x.first===null?"—":x.first)+' · 2ºT: '+(x.second===null?"—":x.second)+'</div><small>— significa divisão não comprovada</small> · <a target="_blank" rel="noopener noreferrer" href="'+esc(summaryUrl(game,x.id))+'">Fonte ESPN</a></div>').join("");
+  markup+=result.available.map(x=>'<div class="corner-row"><strong>'+esc(dateTime(x.date))+' · '+esc(x.venue)+' contra '+esc(x.opponentName)+'</strong><div>Cobrados: '+x.own+' · Cedidos: '+x.opponent+' · Total: '+x.total+' · 1ºT: '+(x.first===null?"—":x.first)+' · 2ºT: '+(x.second===null?"—":x.second)+'</div><small>— significa divisão não comprovada</small> · <a target="_blank" rel="noopener noreferrer" href="'+esc(summaryUrl({...game,code:x.code||game.code},x.id))+'">Fonte ESPN</a></div>').join("");
   return markup;
  }
  function panel(){
@@ -119,7 +119,7 @@
   if($("corner-source"))$("corner-source").textContent="Consultado em "+dateTime(new Date())+" (Brasília). Fonte: ESPN não oficial, links para as partidas acima. Nenhuma outra base foi checada automaticamente.";
   const coverage=game.home.name+" "+H.length+"/"+h.checked+"; "+game.away.name+" "+A.length+"/"+a.checked+". ";
   if(!H.length||!A.length){
-   ["first","second","total","team","venue","most"].forEach(s=>set(s,"Insuficiente",coverage+"Pelo menos uma equipe ficou sem partidas com totais confirmados."));
+   ["first","second","total","team","venue","most"].forEach(s=>set(s,"Dados ausentes — NÃO VALIDADO",coverage+"Pelo menos uma equipe ficou sem partidas com totais confirmados."));
    return;
   }
   const quality=H.length>=5&&A.length>=5?"Histórico disponível":"Amostra curta — NÃO VALIDADO";
