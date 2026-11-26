@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 86
   },
-  "generated_at_utc": "2026-11-26T18:16:25.259248+00:00",
+  "generated_at_utc": "2026-11-26T19:34:49.720038+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -245,20 +245,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401841337",
-      "league": "bra.1",
-      "start": "2026-11-27T23:00Z",
-      "home": "Fluminense",
-      "away": "Cruzeiro",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401912683",
       "league": "bra.2",
       "start": "2026-11-27T23:00Z",
       "home": "Vila Nova",
       "away": "Atlético Goianiense",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841337",
+      "league": "bra.1",
+      "start": "2026-11-27T23:00Z",
+      "home": "Fluminense",
+      "away": "Cruzeiro",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
