@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 63
   },
-  "generated_at_utc": "2026-11-26T01:52:57.283546+00:00",
+  "generated_at_utc": "2026-11-26T02:50:44.915374+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -106,7 +106,7 @@
       "start": "2026-11-26T00:00Z",
       "home": "Boca Juniors",
       "away": "Independiente Rivadavia",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
