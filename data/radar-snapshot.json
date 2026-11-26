@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 64
+    "future_games": 63
   },
-  "generated_at_utc": "2026-11-26T00:20:22.542845+00:00",
+  "generated_at_utc": "2026-11-26T01:52:57.283546+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -97,7 +97,7 @@
       "start": "2026-11-25T23:00Z",
       "home": "Atlético-MG",
       "away": "Corinthians",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -115,7 +115,7 @@
       "start": "2026-11-26T01:00Z",
       "home": "Toluca",
       "away": "Atlas",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
