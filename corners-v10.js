@@ -31,7 +31,7 @@
    // Caso haja evento ausente, repetido ou minuto duvidoso, não estimar a divisão.
    if(events.length!==total)continue;
    const ids=events.map(p=>p?.id??p?.playId).filter(v=>v!==undefined&&v!==null&&v!=="").map(String);
-   if(new Set(ids).size!==ids.length)continue;
+   if(ids.length!==events.length||new Set(ids).size!==ids.length)continue;
    const parts=events.map(periodForCorner);
    if(parts.some(p=>p!==1&&p!==2))continue;
    return {first:parts.filter(x=>x===1).length,second:parts.filter(x=>x===2).length};
