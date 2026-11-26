@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 94
+    "future_games": 86
   },
-  "generated_at_utc": "2026-11-26T17:01:44.948724+00:00",
+  "generated_at_utc": "2026-11-26T18:16:25.259248+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -16,7 +16,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Besiktas",
       "away": "Hapoel Be'er",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -25,7 +25,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Celta Vigo",
       "away": "AFC Bournemouth",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -34,7 +34,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Dinamo Zagreb",
       "away": "Bayer Leverkusen",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -43,7 +43,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Marseille",
       "away": "Levski Sofia",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Olympiacos",
       "away": "AC Milan",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -61,7 +61,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "RB Salzburg",
       "away": "Ararat-Armenia",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -70,7 +70,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Union St.-Gilloise",
       "away": "Lech Poznan",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -79,7 +79,7 @@
       "start": "2026-11-26T17:45Z",
       "home": "Viktoria Plzen",
       "away": "Benfica",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -398,20 +398,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401884726",
-      "league": "ger.1",
-      "start": "2026-11-28T17:30Z",
-      "home": "VfB Stuttgart",
-      "away": "Eintracht Frankfurt",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882793",
       "league": "esp.1",
       "start": "2026-11-28T17:30Z",
       "home": "Elche",
       "away": "Atlético Madrid",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401884726",
+      "league": "ger.1",
+      "start": "2026-11-28T17:30Z",
+      "home": "VfB Stuttgart",
+      "away": "Eintracht Frankfurt",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
