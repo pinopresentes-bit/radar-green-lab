@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 93
+    "future_games": 91
   },
-  "generated_at_utc": "2026-11-26T10:10:48.084733+00:00",
+  "generated_at_utc": "2026-11-26T11:26:01.198846+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -245,20 +245,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401841337",
-      "league": "bra.1",
-      "start": "2026-11-27T23:00Z",
-      "home": "Fluminense",
-      "away": "Cruzeiro",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401912683",
       "league": "bra.2",
       "start": "2026-11-27T23:00Z",
       "home": "Vila Nova",
       "away": "Atlético Goianiense",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401841337",
+      "league": "bra.1",
+      "start": "2026-11-27T23:00Z",
+      "home": "Fluminense",
+      "away": "Cruzeiro",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -767,29 +767,11 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401936413",
-      "league": "arg.1",
-      "start": "2026-11-29T20:00Z",
-      "home": "Instituto (Córdoba)",
-      "away": "River Plate",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401936373",
       "league": "arg.1",
       "start": "2026-11-29T20:00Z",
       "home": "Rosario Central",
       "away": "Barracas Central",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401936353",
-      "league": "arg.1",
-      "start": "2026-11-29T20:00Z",
-      "home": "Vélez Sarsfield",
-      "away": "Independiente",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
