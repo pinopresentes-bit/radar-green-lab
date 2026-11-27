@@ -317,6 +317,20 @@ function renderLiveMatch(g,stats,items,consultedAt){
   :'<p class="live-no-data">'+(currentMinute(g.detail)>80?'Partida nos minutos finais: o radar encerra novas hipóteses depois dos 80 minutos.':'Nenhum mercado passou pelos filtros deste jogo nesta consulta.')+'</p>';
  return '<div class="signalitem"><div class="live-game-title">🔴 '+esc(g.home.name)+' × '+esc(g.away.name)+'</div><div class="live-game-meta">'+score+' · '+esc(g.detail||"Ao vivo")+' · '+esc(g.label)+' · Consultado às '+esc(clock(consultedAt))+'</div><div class="facts">'+esc(statLine)+'</div>'+marketHtml+'<button class="sigbutton" data-sig="'+esc(key)+'">Ver partida</button></div>';
 }
+async function checkFinishedResults(seq){
+ const games=state.games.filter(g=>g.status==="done");
+ const pending=games.filter(g=>liveAlertArchive.some(a=>a.gameId===String(g.id)&&a.type==="corners-total"&&a.status!=="GREEN"&&a.status!=="RED"));
+ const rows=await mapWithLimit(pending,4,async g=>{
+  try{
+   const url="https://site.api.espn.com/apis/site/v2/sports/soccer/"+encodeURIComponent(g.code)+"/summary?event="+encodeURIComponent(g.id);
+   const stats=liveStats(await api(url));
+   return {g,stats};
+  }catch{return {g,stats:null}}
+ });
+ if(seq!==signalSeq)return;
+ const byGame=new Map(rows.map(r=>[r.g,r.stats]));
+ for(const game of games)liveResultCheck(game,byGame.get(game)??null);
+}
 async function checkSignals(){
  const seq=++signalSeq,live=state.games.filter(g=>g.status==="live"),consultedAt=new Date();
  const status=$("signalStatus"),list=$("signalList"),foot=$("signalFoot");
@@ -328,7 +342,8 @@ async function checkSignals(){
   return;
  }
  if(!live.length){
-  for(const game of state.games.filter(g=>g.status==="done"))liveResultCheck(game,null);
+  await checkFinishedResults(seq);
+  if(seq!==signalSeq)return;
   liveQuickResults=[];renderQuickSignals();
   lastLiveSignalAt=Date.now();
   $("liveFreshness").textContent="Consulta às "+clock(new Date())+" · sem partidas ao vivo";
@@ -358,7 +373,8 @@ async function checkSignals(){
  registerLiveAlerts(observed);
  // Match status and fresh total statistics update previously recorded tests.
  for(const row of all)liveResultCheck(row.g,row.stats);
- for(const game of state.games.filter(g=>g.status==="done"))liveResultCheck(game,null);
+ await checkFinishedResults(seq);
+  if(seq!==signalSeq)return;
  const missing=all.filter(x=>!x.stats).length,failed=all.filter(x=>x.failure).length;
  foot.textContent="Consultado às "+clock(new Date())+" · "+live.length+" jogo(s), "+observed.length+" hipótese(s), "+missing+" sem estatísticas completas"+(failed?" ("+failed+" consulta(s) falharam)":"")+". Sem odds verificadas. Apenas com app aberto.";
 }
