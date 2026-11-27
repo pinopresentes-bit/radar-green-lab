@@ -102,8 +102,11 @@ function render(){
  const ct=d?.done?cornerPick(d.hCorners,d.aCorners,"total",[6.5,7.5,8.5,9.5,10.5]):null;
  const cf=d?.done?cornerPick(d.hHalves,d.aHalves,"first",[2.5,3.5,4.5]):null;
  const cornerRow=(label,x,s1,s2)=>{
-  return toRow(label,x?"🟡 "+x.label:d?.done?(s1<5||s2<5?"🔴 AMOSTRA INSUFICIENTE — NÃO VALIDADO":"⚪ CRITÉRIO NÃO ATINGIDO"):"⏳ Consultando registros",
-   x?x.info:d?.done?(s1<5||s2<5?"AMOSTRA INSUFICIENTE — NÃO VALIDADO: "+s1+" e "+s2+" partidas com registros verificáveis, de no mínimo 5 necessárias por equipe. A fonte pode não publicar eventos por período; ausência de dado não é zero.":"Amostra de "+s1+" e "+s2+" jogos: nenhuma linha atingiu o filtro de 75% em cada equipe. NÃO VALIDADO."):"Verificando registros dos últimos jogos.",!!x);
+  const missing=s1===0||s2===0;
+  const insufficient=s1<5||s2<5;
+  const status=missing?"DADOS AUSENTES":insufficient?"AMOSTRA INSUFICIENTE":"CRITÉRIO NÃO ATINGIDO";
+  return toRow(label,x?"🟡 "+x.label:d?.done?((insufficient?"🔴 ":"⚪ ")+status+(insufficient?" — NÃO VALIDADO":"")):"⏳ Consultando registros",
+   x?x.info:d?.done?(insufficient?status+" — NÃO VALIDADO: "+s1+" e "+s2+" partidas com registros verificáveis, de no mínimo 5 necessárias por equipe. A fonte pode não publicar eventos por período; ausência de dado não é zero.":"Amostra de "+s1+" e "+s2+" jogos: nenhuma linha atingiu o filtro de 75% em cada equipe. NÃO VALIDADO."):"Verificando registros dos últimos jogos.",!!x);
  };
  const playerRow=(label,kind)=>{
   const p=pickPlayer(d,r,kind);
