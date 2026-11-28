@@ -6,7 +6,7 @@
     "failed": 0,
     "future_games": 67
   },
-  "generated_at_utc": "2026-11-28T08:28:58.174771+00:00",
+  "generated_at_utc": "2026-11-28T09:24:14.905474+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -110,20 +110,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401878752",
-      "league": "eng.1",
-      "start": "2026-11-28T17:30Z",
-      "home": "Ipswich Town",
-      "away": "Aston Villa",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401882793",
       "league": "esp.1",
       "start": "2026-11-28T17:30Z",
       "home": "Elche",
       "away": "Atlético Madrid",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401878752",
+      "league": "eng.1",
+      "start": "2026-11-28T17:30Z",
+      "home": "Ipswich Town",
+      "away": "Aston Villa",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -335,20 +335,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401876393",
-      "league": "fra.1",
-      "start": "2026-11-29T14:00Z",
-      "home": "AJ Auxerre",
-      "away": "Marseille",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401874992",
       "league": "ita.1",
       "start": "2026-11-29T14:00Z",
       "home": "Sassuolo",
       "away": "Napoli",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401876393",
+      "league": "fra.1",
+      "start": "2026-11-29T14:00Z",
+      "home": "AJ Auxerre",
+      "away": "Marseille",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -479,20 +479,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401876389",
-      "league": "fra.1",
-      "start": "2026-11-29T19:45Z",
-      "home": "Lyon",
-      "away": "AS Monaco",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401874994",
       "league": "ita.1",
       "start": "2026-11-29T19:45Z",
       "home": "Como",
       "away": "Juventus",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401876389",
+      "league": "fra.1",
+      "start": "2026-11-29T19:45Z",
+      "home": "Lyon",
+      "away": "AS Monaco",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
