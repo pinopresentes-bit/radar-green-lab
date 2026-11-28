@@ -6,100 +6,10 @@
     "failed": 0,
     "future_games": 67
   },
-  "generated_at_utc": "2026-11-28T02:48:06.305551+00:00",
+  "generated_at_utc": "2026-11-28T03:51:33.273200+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
-    {
-      "id": "401884720",
-      "league": "ger.1",
-      "start": "2026-11-27T19:30Z",
-      "home": "Werder Bremen",
-      "away": "Borussia Mönchengladbach",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401875004",
-      "league": "ita.1",
-      "start": "2026-11-27T19:45Z",
-      "home": "Venezia",
-      "away": "Bologna",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401876392",
-      "league": "fra.1",
-      "start": "2026-11-27T19:45Z",
-      "home": "Brest",
-      "away": "Paris FC",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401879225",
-      "league": "eng.1",
-      "start": "2026-11-27T20:00Z",
-      "home": "Nottingham Forest",
-      "away": "Chelsea",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401882791",
-      "league": "esp.1",
-      "start": "2026-11-27T20:00Z",
-      "home": "Levante",
-      "away": "Racing Santander",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401841337",
-      "league": "bra.1",
-      "start": "2026-11-27T23:00Z",
-      "home": "Fluminense",
-      "away": "Cruzeiro",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401912683",
-      "league": "bra.2",
-      "start": "2026-11-27T23:00Z",
-      "home": "Vila Nova",
-      "away": "Atlético Goianiense",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401936333",
-      "league": "uru.1",
-      "start": "2026-11-27T23:30Z",
-      "home": "Liverpool",
-      "away": "Racing (Montevideo)",
-      "state": "post",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401933727",
-      "league": "usa.1",
-      "start": "2026-11-28T01:00Z",
-      "home": "Columbus Crew",
-      "away": "Inter Miami CF",
-      "state": "in",
-      "source": "ESPN (não oficial)"
-    },
-    {
-      "id": "401933725",
-      "league": "usa.1",
-      "start": "2026-11-28T03:00Z",
-      "home": "Real Salt Lake",
-      "away": "Vancouver Whitecaps",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
     {
       "id": "401882796",
       "league": "esp.1",
@@ -353,20 +263,20 @@
       "source": "ESPN (não oficial)"
     },
     {
-      "id": "401936413",
-      "league": "arg.1",
-      "start": "2026-11-29T01:00Z",
-      "home": "Instituto (Córdoba)",
-      "away": "River Plate",
-      "state": "pre",
-      "source": "ESPN (não oficial)"
-    },
-    {
       "id": "401931997",
       "league": "mex.1",
       "start": "2026-11-29T01:00Z",
       "home": "Atlas",
       "away": "Toluca",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401936413",
+      "league": "arg.1",
+      "start": "2026-11-29T01:00Z",
+      "home": "Instituto (Córdoba)",
+      "away": "River Plate",
       "state": "pre",
       "source": "ESPN (não oficial)"
     },
@@ -691,6 +601,15 @@
       "start": "2026-11-30T20:00Z",
       "home": "Espanyol",
       "away": "Getafe",
+      "state": "pre",
+      "source": "ESPN (não oficial)"
+    },
+    {
+      "id": "401879221",
+      "league": "eng.1",
+      "start": "2026-12-01T20:00Z",
+      "home": "Coventry City",
+      "away": "Ipswich Town",
       "state": "pre",
       "source": "ESPN (não oficial)"
     }
