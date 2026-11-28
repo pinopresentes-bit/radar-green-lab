@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 66
+    "future_games": 61
   },
-  "generated_at_utc": "2026-11-28T13:36:18.324988+00:00",
+  "generated_at_utc": "2026-11-28T14:45:01.414285+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -25,7 +25,7 @@
       "start": "2026-11-28T14:00Z",
       "home": "Frosinone",
       "away": "Parma",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -34,7 +34,7 @@
       "start": "2026-11-28T14:30Z",
       "home": "FC Cologne",
       "away": "SV Elversberg",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -43,7 +43,7 @@
       "start": "2026-11-28T14:30Z",
       "home": "Hamburg SV",
       "away": "Bayern Munich",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -52,7 +52,7 @@
       "start": "2026-11-28T14:30Z",
       "home": "Mainz",
       "away": "1. FC Union Berlin",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
@@ -61,7 +61,7 @@
       "start": "2026-11-28T14:30Z",
       "home": "SC Paderborn 07",
       "away": "Schalke 04",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
