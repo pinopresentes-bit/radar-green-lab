@@ -4,9 +4,9 @@
     "leagues": 19,
     "requests": 76,
     "failed": 0,
-    "future_games": 68
+    "future_games": 67
   },
-  "generated_at_utc": "2026-11-28T00:22:26.227356+00:00",
+  "generated_at_utc": "2026-11-28T01:50:49.767880+00:00",
   "timezone": "America/Sao_Paulo",
   "source": "ESPN scoreboard (não oficial)",
   "games": [
@@ -61,7 +61,7 @@
       "start": "2026-11-27T23:00Z",
       "home": "Fluminense",
       "away": "Cruzeiro",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -70,7 +70,7 @@
       "start": "2026-11-27T23:00Z",
       "home": "Vila Nova",
       "away": "Atlético Goianiense",
-      "state": "in",
+      "state": "post",
       "source": "ESPN (não oficial)"
     },
     {
@@ -88,7 +88,7 @@
       "start": "2026-11-28T01:00Z",
       "home": "Columbus Crew",
       "away": "Inter Miami CF",
-      "state": "pre",
+      "state": "in",
       "source": "ESPN (não oficial)"
     },
     {
